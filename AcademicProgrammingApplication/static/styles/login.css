@@ -3,90 +3,73 @@ html {
 }
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Poppins, 'Source Sans Pro', serif;
 }
 
 ul, li {
     list-style: none;
 }
 
-input {
-    border: none;
-}
-
 body {
-    width: 144rem;
+    font-size: 1.6rem;
 }
 
-.login-JkN {
-    width: 100%;
+.main {
+    width: 100vw;
     overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: white;
 }
 
-.login-JkN .auto-group-zvrg-3T4 {
-    margin-right: 9.35rem;
-    width: calc(100% - 9.35rem);
+.main .group-form {
     height: 96rem;
     display: flex;
     align-items: center;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .image-AXg {
-    margin-right: 10.9rem;
-    width: 76.9rem;
+.main .group-form .image-clock-tower {
+    width: 77rem;
     height: 96rem;
     position: relative;
-    background-size: 166.45% 100%;
-    background-position: -37.15rem -0rem;
-    background-image: url('../assets/image.png');
+    background-position: -37.2rem -0rem;
+    background-image: url('../assets/clock-tower.png');
     flex-shrink: 0;
 }
 
-.form-login-layout {
-    margin: 21rem 0 28rem 0;
-    width: 47rem;
-    height: calc(100% - 48rem);
+.main .group-form .form-login-layout {
+    width: 50%;
     align-items: center;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa {
-    box-sizing: border-box;
-    padding: 0 0 3.667rem 0.1rem;
-    width: 100%;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-}
-
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .iniciar-sesin-6Zk {
-    margin: 0 0 5rem 0;
-    font-size: 4.8rem;
+.main .group-form .form-login-layout .login-title {
+    margin: 0 0 4rem 0;
+    font-size: 5rem;
     font-weight: 700;
     line-height: 1.5;
     color: #000000;
-    font-family: Poppins, 'Source Sans Pro', serif;
     white-space: nowrap;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok {
-    width: 100%;
+.main .group-form .login-form {
+    box-sizing: border-box;
+    padding: 0 0 3rem 0;
+    align-items: center;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok .nombre-de-usuario-9Y2 {
+.main .group-form .auto-group-jjdc-mGa .login-form .nombre-de-usuario-9Y2 {
     margin-bottom: 0.8858rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -97,7 +80,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ {
+.main .group-form .auto-group-jjdc-mGa .login-form .auto-group-v23p-UKQ {
     margin-left: 0;
     box-sizing: border-box;
     border: 1px solid lightgray;
@@ -112,7 +95,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ {
+.main .group-form .auto-group-jjdc-mGa .login-form .auto-group-v23p-UKQ {
     margin-right: 19.2rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -123,11 +106,7 @@ body {
     flex-shrink: 0;
 }
 
-/*.ingrese-su-nombre-de-usuario-Nfg {*/
-
-/*}*/
-
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ .vector-u9p {
+.main .group-form .auto-group-jjdc-mGa .login-form .auto-group-v23p-UKQ .vector-u9p {
     margin-bottom: 0.1841rem;
     width: 1.4rem;
     height: 1.5961rem;
@@ -136,14 +115,14 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc {
+.main .group-form .contrasea-Cuc {
     width: 100%;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc .contrasea-mC2 {
+.main .group-form .contrasea-Cuc .contrasea-mC2 {
     margin-bottom: 0.8858rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -154,7 +133,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc .auto-group-ozer-VNv {
+.main .group-form .contrasea-Cuc .auto-group-ozer-VNv {
     margin-left: 0.15rem;
     box-sizing: border-box;
     border: 1px solid lightgray;
@@ -169,7 +148,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc .auto-group-ozer-VNv .ingrese-su-contrasea-CYE {
+.main .group-form .contrasea-Cuc .auto-group-ozer-VNv .ingrese-su-contrasea-CYE {
     margin-right: 25.2rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -179,7 +158,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc .auto-group-ozer-VNv .vector-vj8 {
+.main .group-form .contrasea-Cuc .auto-group-ozer-VNv .vector-vj8 {
     margin-bottom: 0.1809rem;
     width: 1.6rem;
     height: 1.8204rem;
@@ -188,7 +167,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-ywan-eQE {
+.main .group-form .auto-group-ywan-eQE {
     box-sizing: border-box;
     padding: 3.667rem 0.05rem 0 0;
     width: 100%;
@@ -198,7 +177,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-ywan-eQE .botn-de-acceso-aHt {
+.main .group-form .auto-group-ywan-eQE .botn-de-acceso-aHt {
     margin-bottom: 3.6524rem;
     width: 100%;
     height: 5.3476rem;
@@ -217,7 +196,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-ywan-eQE .olvid-su-nombre-de-usuario-o-contrasea {
+.main .group-form .auto-group-ywan-eQE .olvid-su-nombre-de-usuario-o-contrasea {
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.5;
@@ -227,15 +206,18 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 {
-    width: 100%;
+.footer {
+    width: 100vw;
     height: 6.4rem;
     position: relative;
     background-color: #ffffff;
     flex-shrink: 0;
+    border: solid 0 #ffffff;
+    box-sizing: border-box;
+    box-shadow: inset 0 0.3rem 0.3rem rgba(0, 0, 0, 0.25);
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .vector-Una {
+.footer .vector-Una {
     width: 1.4167rem;
     height: 1.4167rem;
     position: absolute;
@@ -245,7 +227,7 @@ body {
     vertical-align: top;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .universidad-icesi-c86 {
+.footer .universidad-icesi-c86 {
     width: 12.7rem;
     height: 2.3rem;
     position: absolute;
@@ -259,7 +241,7 @@ body {
     white-space: nowrap;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .vector-K2W {
+.footer .vector-K2W {
     width: 1.6667rem;
     height: 1.225rem;
     position: absolute;
@@ -269,7 +251,7 @@ body {
     vertical-align: top;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .vector-Fgr {
+.footer .vector-Fgr {
     width: 1.6667rem;
     height: 1.7076rem;
     position: absolute;
@@ -279,7 +261,7 @@ body {
     vertical-align: top;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .vector-zuL {
+.footer .vector-zuL {
     width: 1.575rem;
     height: 1.575rem;
     position: absolute;
@@ -289,7 +271,7 @@ body {
     vertical-align: top;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .vector-wZg {
+.footer .vector-wZg {
     width: 1.6667rem;
     height: 1.7456rem;
     position: absolute;
@@ -299,7 +281,7 @@ body {
     vertical-align: top;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .vector-4PQ {
+.footer .vector-4PQ {
     width: 1.425rem;
     height: 1.8375rem;
     position: absolute;
@@ -309,7 +291,7 @@ body {
     vertical-align: top;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .telfono-5552334-ext-4188-CEi {
+.footer .telfono-5552334-ext-4188-CEi {
     width: 19.9rem;
     height: 2.3rem;
     position: absolute;
@@ -323,7 +305,7 @@ body {
     white-space: nowrap;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .vector-HGA {
+.footer .vector-HGA {
     width: 2.1028rem;
     height: 1.7086rem;
     position: absolute;
@@ -333,7 +315,7 @@ body {
     vertical-align: top;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .icesivirtualtilistasicesieduco-d58 {
+.footer .icesivirtualtilistasicesieduco-d58 {
     width: 23.8rem;
     height: 2.3rem;
     position: absolute;
@@ -347,7 +329,7 @@ body {
     white-space: nowrap;
 }
 
-.login-JkN .barra-inferior-completa-Ye2 .vector-8Gn {
+.footer .vector-8Gn {
     width: 2rem;
     height: 2rem;
     position: absolute;
@@ -355,15 +337,4 @@ body {
     top: 2.2rem;
     object-fit: contain;
     vertical-align: top;
-}
-
-.login-JkN .barra-inferior-completa-Ye2 .rectangle-16-sVG {
-    width: 144rem;
-    height: 6.4rem;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border: solid 0 #ffffff;
-    box-sizing: border-box;
-    box-shadow: inset 0 0.3rem 0.3rem rgba(0, 0, 0, 0.25);
 }
