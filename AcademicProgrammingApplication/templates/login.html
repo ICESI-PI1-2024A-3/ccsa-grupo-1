@@ -21,9 +21,9 @@
             <h2 class="login-title">Iniciar sesión</h2>
             <form method="POST" class="login-form">
                 {% csrf_token %} {{form.as_p}}
-                <button>Acceder</button>
+                <button class="access-button">Acceder</button>
             </form>
-            <a href="https://www.icesi.edu.co/pic_usuario_unico/newpass">
+            <a href="https://www.icesi.edu.co/pic_usuario_unico/newpass" class="forget-your-username-or-password">
                 <label>¿Olvidó su nombre de usuario o contraseña?</label>
             </a>
         </section>
