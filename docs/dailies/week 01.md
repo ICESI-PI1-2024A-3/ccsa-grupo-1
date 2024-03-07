@@ -21,7 +21,7 @@
 >**¿Qué voy a hacer hoy?**  
 >*R//* Revisar el repositorio del proyecto, comenzar a trabajar en el HTML de la pantalla de mi Historia de Usuario.  
 >**¿Qué impedimentos tengo?**  
->*R//* Ninguno demomento
+>*R//* Ninguno de momento
 
 ##### David Donneys:
 >**¿Qué hice ayer?**  
@@ -29,7 +29,7 @@
 >**¿Qué voy a hacer hoy?**  
 >*R//* Leer la historia de usuario asignada para el proyecto e iniciar la implementación de la misma.  
 >**¿Qué impedimentos tengo?**  
->*R//* Por elmomento ninguno  
+>*R//* Por el momento ninguno  
 
 ##### Carlos Tafurt:
 >**¿Qué hice ayer?**  

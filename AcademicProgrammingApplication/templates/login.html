@@ -18,35 +18,49 @@
     <div class="auto-group-zvrg-3T4">
         <div class="image-AXg">
         </div>
-        <div class="auto-group-j18i-3rN">
-            <div class="auto-group-jjdc-mGa">
-                <h2 class="iniciar-sesin-6Zk">Iniciar sesión</h2>
-                <div class="usuario-Pok">
-                    <p class="nombre-de-usuario-9Y2">Nombre de usuario</p>
-<!--                    <div class="auto-group-v23p-UKQ">-->
-                        <label>
-                            <input class="auto-group-v23p-UKQ" placeholder="Ingrese su nombre de usuario">
-                        </label>
-<!--                        <img class="vector-u9p" src="{% static '/assets/vector-jrv.png' %}" alt=""/>-->
-<!--                    </div>-->
-                </div>
-            </div>
-            <div class="contrasea-Cuc">
-                <p class="contrasea-mC2">Contraseña</p>
-                <div class="auto-group-ozer-VNv">
-                    <label>
-                        <input class="ingrese-su-contrasea-CYE" placeholder="Ingrese su contraseña">
-                    </label>
-                    <!--                    <img class="vector-vj8" src="{% static '/assets/vector-5J6.png' %}" alt=""/>-->
-                </div>
-            </div>
-            <div class="auto-group-ywan-eQE">
-                <button class="botn-de-acceso-aHt">Acceder</button>
-                <label class="olvid-su-nombre-de-usuario-o-contrasea-eHk">¿Olvidó su nombre de usuario o contraseña?
-                </label>
-            </div>
+
+        <div class="form-login-layout">
+            <h2>Iniciar sesión</h2>
+            <form method="POST">
+                {% csrf_token %} {{form.as_p}}
+                <button>Acceder</button>
+            </form>
+            <a href="https://www.icesi.edu.co/pic_usuario_unico/newpass">
+                <label>¿Olvidó su nombre de usuario o contraseña?</label>
+            </a>
         </div>
+
+        <!--        <div class="auto-group-j18i-3rN">-->
+        <!--            <div class="auto-group-jjdc-mGa">-->
+        <!--                <h2 class="iniciar-sesin-6Zk">Iniciar sesión</h2>-->
+        <!--                <div class="usuario-Pok">-->
+        <!--                    <p class="nombre-de-usuario-9Y2">Nombre de usuario</p>-->
+        <!--                    &lt;!&ndash;                    <div class="auto-group-v23p-UKQ">&ndash;&gt;-->
+        <!--                    <label>-->
+        <!--                        <input class="auto-group-v23p-UKQ" placeholder="Ingrese su nombre de usuario">-->
+        <!--                    </label>-->
+        <!--                    &lt;!&ndash;                        <img class="vector-u9p" src="{% static '/assets/vector-jrv.png' %}" alt=""/>&ndash;&gt;-->
+        <!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="contrasea-Cuc">-->
+        <!--                <p class="contrasea-mC2">Contraseña</p>-->
+        <!--                <div class="auto-group-ozer-VNv">-->
+        <!--                    <label>-->
+        <!--                        <input class="ingrese-su-contrasea-CYE" placeholder="Ingrese su contraseña">-->
+        <!--                    </label>-->
+        <!--                    &lt;!&ndash;                    <img class="vector-vj8" src="{% static '/assets/vector-5J6.png' %}" alt=""/>&ndash;&gt;-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="auto-group-ywan-eQE">-->
+        <!--                <button class="botn-de-acceso-aHt">Acceder</button>-->
+        <!--                <label class="olvid-su-nombre-de-usuario-o-contrasea">¿Olvidó su nombre de usuario o contraseña?-->
+        <!--                </label>-->
+        <!--            </div>-->
+        <!--        </div>-->
     </div>
+
+
     <div class="barra-inferior-completa-Ye2">
         <img class="vector-Una" src="{% static '/assets/vector-yj4.png' %}" alt=""/>
         <p class="universidad-icesi-c86">Universidad Icesi</p>

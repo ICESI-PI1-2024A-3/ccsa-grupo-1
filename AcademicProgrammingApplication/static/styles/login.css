@@ -48,17 +48,17 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN {
-    margin: 20.7rem 0 27.7rem 0;
-    width: 46.85rem;
-    height: calc(100% - 48.4rem);
+.form-login-layout {
+    margin: 21rem 0 28rem 0;
+    width: 47rem;
+    height: calc(100% - 48rem);
     align-items: center;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-jjdc-mGa {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa {
     box-sizing: border-box;
     padding: 0 0 3.667rem 0.1rem;
     width: 100%;
@@ -68,7 +68,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-jjdc-mGa .iniciar-sesin-6Zk {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .iniciar-sesin-6Zk {
     margin: 0 0 5rem 0;
     font-size: 4.8rem;
     font-weight: 700;
@@ -79,14 +79,14 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-jjdc-mGa .usuario-Pok {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok {
     width: 100%;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-jjdc-mGa .usuario-Pok .nombre-de-usuario-9Y2 {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok .nombre-de-usuario-9Y2 {
     margin-bottom: 0.8858rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -97,10 +97,10 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ {
     margin-left: 0;
     box-sizing: border-box;
-    border:  1px solid lightgray;
+    border: 1px solid lightgray;
     border-radius: 5px;
     padding: 1.614rem 2.45rem 1.433rem 0.75rem;
     width: calc(100% - 0.05rem);
@@ -112,7 +112,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ {
     margin-right: 19.2rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -122,11 +122,12 @@ body {
     white-space: nowrap;
     flex-shrink: 0;
 }
+
 /*.ingrese-su-nombre-de-usuario-Nfg {*/
 
 /*}*/
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ .vector-u9p {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-jjdc-mGa .usuario-Pok .auto-group-v23p-UKQ .vector-u9p {
     margin-bottom: 0.1841rem;
     width: 1.4rem;
     height: 1.5961rem;
@@ -135,14 +136,14 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .contrasea-Cuc {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc {
     width: 100%;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .contrasea-Cuc .contrasea-mC2 {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc .contrasea-mC2 {
     margin-bottom: 0.8858rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -153,10 +154,10 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .contrasea-Cuc .auto-group-ozer-VNv {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc .auto-group-ozer-VNv {
     margin-left: 0.15rem;
     box-sizing: border-box;
-    border:  1px solid lightgray;
+    border: 1px solid lightgray;
     border-radius: 5px;
     padding: 1.614rem 2.45rem 1.433rem 0.75rem;
     width: calc(100% - 0.15rem);
@@ -168,7 +169,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .contrasea-Cuc .auto-group-ozer-VNv .ingrese-su-contrasea-CYE {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc .auto-group-ozer-VNv .ingrese-su-contrasea-CYE {
     margin-right: 25.2rem;
     font-size: 1.5rem;
     font-weight: 400;
@@ -178,7 +179,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .contrasea-Cuc .auto-group-ozer-VNv .vector-vj8 {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .contrasea-Cuc .auto-group-ozer-VNv .vector-vj8 {
     margin-bottom: 0.1809rem;
     width: 1.6rem;
     height: 1.8204rem;
@@ -187,7 +188,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-ywan-eQE {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-ywan-eQE {
     box-sizing: border-box;
     padding: 3.667rem 0.05rem 0 0;
     width: 100%;
@@ -197,7 +198,7 @@ body {
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-ywan-eQE .botn-de-acceso-aHt {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-ywan-eQE .botn-de-acceso-aHt {
     margin-bottom: 3.6524rem;
     width: 100%;
     height: 5.3476rem;
@@ -213,11 +214,10 @@ body {
     align-items: center;
     justify-content: center;
     background-size: cover;
-    background: white url('../assets/vector-mdY.png') no-repeat center;
     flex-shrink: 0;
 }
 
-.login-JkN .auto-group-zvrg-3T4 .auto-group-j18i-3rN .auto-group-ywan-eQE .olvid-su-nombre-de-usuario-o-contrasea-eHk {
+.login-JkN .auto-group-zvrg-3T4 .form-login-layout .auto-group-ywan-eQE .olvid-su-nombre-de-usuario-o-contrasea {
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.5;
