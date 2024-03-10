@@ -22,10 +22,13 @@
             </div>
             <div id="form">
                 <form method="POST">
+                    {% csrf_token %}
                     <label>Nombre de usuario</label> <br>
                     <div class="username">
                         <label>
-                            <input id="username-input" type="text" placeholder="Ingrese nombre de usuario">
+                            <!--                            <input id="username-input" name="" type="text"-->
+                            <!--                                   placeholder="Ingrese su nombre de usuario">-->
+                            {{ form.name }}
                         </label>
                         <div class="username-icon" onclick="function activateInput() {
                             const input = document.getElementById('username-input');
@@ -40,7 +43,8 @@
                     </div>
                     <label>Contraseña</label> <br>
                     <label>
-                        <input type="password" placeholder="Ingrese su contraseña">
+                        <!--                        <input type="password" name="" placeholder="Ingrese su contraseña">-->
+                        {{ form.password }}
                     </label>
                     <input type="submit" value="Acceder" id="access">
                 </form>
