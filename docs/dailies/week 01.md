@@ -96,9 +96,53 @@
 ##### Carlos Tafurt:
 
 > **¿Qué hice ayer?**  
-> *R//* Iba a descargar el repositorio para ver si funciona con la actualización de Python.
+> *R//* Iba a descargar el repositorio para ver si funciona con la actualización de Python.  
 > **¿Qué voy a hacer hoy?**  
 > *R//* Hoy revise un vídeo de HTML para poder empezar a diseñar la vista.  
 > **¿Qué impedimentos tengo?**  
 > *R//* No encontré elrepositorio.
+---
+
+## Fecha: 08-03-2024
+
+##### Esteban Gaviria:
+>**¿Qué hice ayer?**  
+>*R//* Avancé el CSS del Login.  
+>**¿Qué voy a hacer hoy?**   
+>*R//* Terminaré el Login y lo dejaré completamente funcional.  
+>**¿Qué impedimentos tengo?**  
+>*R//* Tuve dificultades con el css. No obstante, las he ido solucionando con la práctica.  
+
+##### Juan David Colonia:  
+>**¿Qué hice ayer?**  
+>*R//* Trabajé en la plantilla general de las pantallas del programa.  
+>**¿Qué voy a hacer hoy?**  
+>*R//* Intentaré terminar esa plantilla para empezar con el desarrollo de mi historia de usuario.  
+>**¿Qué impedimentos tengo?**  
+>*R//* Sigo teniendo dificultades con el CSS.  
+
+##### Juan Manuel Diaz:
+>**¿Qué hice ayer?**  
+>*R//* Terminé los tutoriales sobre Django y CSS.  
+>**¿Qué voy a hacer hoy?**  
+>*R//* Continuar con el Template de mi historia de usuario.  
+>**¿Qué impedimentos tengo?**  
+>*R//* Tuve errores constantes cuando trabajé en HTML, lo que me tomo tiempo en buscar soluciones.  
+
+##### David Donneys:
+>**¿Qué hice ayer?**  
+>*R//* Estuve practicando ejercicios de las clases de Django.  
+>**¿Qué voy a hacer hoy?**  
+>*R//* Intente implementar mi historia de usuario para este lunes.  
+>**¿Qué impedimentos tengo?**  
+>*R//* No encuentro el repo.  
+
+##### Carlos Tafurt:
+>**¿Qué hice ayer?**  
+>*R//* Seguí estudiando HTML y revisando viendo como lo iba a implementar.  
+>**¿Qué voy a hacer hoy?**  
+>*R//* Revise las funciones de la vista que estoy realizando.  
+>**¿Qué impedimentos tengo?**  
+>*R//* Ninguno por el momento.  
+
 ---
