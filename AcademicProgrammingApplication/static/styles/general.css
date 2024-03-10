@@ -1,0 +1,136 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Poppins, Source Sans Pro;
+}
+
+p {
+    font-size: .8rem;
+}
+
+#container {
+    height: 95vh;
+    display: flex;
+}
+
+#container-menu {
+	height: 95vh;
+	width: 15vw;
+	display: flex;
+	flex-direction: column;
+	background: rgba(23, 104, 172, 0.9);
+	box-shadow: inset -0.12rem 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.user {
+	height: 10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.user p {
+	font-size: .8rem;
+	font-weight: bold;
+	color: white;
+}
+
+nav{
+	height: 80%;
+	padding-top: 30%;
+}
+
+nav a {
+	display: block;
+	text-decoration: none;
+	padding: 1rem;
+	color: white;
+	transition: all 400ms ease;
+}
+
+nav a:hover {
+	border-left: 5px solid white;
+}
+
+.log-out {
+	height: 10%;
+}
+
+.log-out a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+
+#container-body {
+	height: 95vh;
+	width: 85vw;
+	display: flex;
+}
+
+/*Header*/
+.header {
+	height: 10vh;
+	width: 85vw;
+	display: flex;
+	top: 0;
+	left: 15%;
+}
+
+h1 {
+	font-size: 2rem;
+	align-self: center;
+	padding-left: 2rem;
+}
+
+/*Footer*/
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: .5rem;
+    box-shadow: inset 0 0.12rem 0.12rem rgba(0, 0, 0, 0.25);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#social {
+    width: 6rem;
+}
+
+#university-name {
+    display: flex;
+}
+
+#university-name p {
+    margin-left: .5rem;
+}
+
+#phone-number {
+    display: flex;
+}
+
+#phone-number p {
+    margin-left: .5rem;
+}
+
+#email {
+    display: flex;
+}
+
+#email p {
+    margin-left: .5rem;
+}
+
+#help {
+}
+
+#social-media-group {
+    display: flex;
+    gap: 1.5rem;
+}
