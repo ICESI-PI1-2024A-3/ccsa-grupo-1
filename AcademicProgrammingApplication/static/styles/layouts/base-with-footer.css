@@ -28,7 +28,12 @@ footer {
     width: 6rem;
 }
 
+#social svg {
+    vertical-align: top;
+}
+
 #university-name {
+    padding-top: .5rem;
     display: flex;
 }
 
@@ -42,6 +47,7 @@ footer {
 
 #phone-number p {
     margin-left: .5rem;
+    vertical-align: top;
 }
 
 #email {
@@ -50,12 +56,15 @@ footer {
 
 #email p {
     margin-left: .5rem;
+    vertical-align: top;
 }
 
 #help {
+   padding-top: .2rem;
 }
 
 #social-media-group {
+    padding-top: .5rem;
     display: flex;
     gap: 1.5rem;
 }
