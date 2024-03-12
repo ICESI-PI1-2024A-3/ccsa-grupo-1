@@ -1,5 +1,4 @@
 {% extends "layouts/base-app-pages.html" %}
-
 {% load static %}
 
 {% block main-container-content %}
@@ -14,10 +13,12 @@
 
 <div class="search-bar">
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Buscar profesor" aria-label="Profesor:" aria-describedby="search-btn">
+        <input type="text" class="form-control" placeholder="Buscar profesor" aria-label="Profesor:"
+            aria-describedby="search-btn">
         <button class="btn btn-outline-secondary" type="button" id="search-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
             </svg>
         </button>
     </div>
@@ -26,23 +27,28 @@
 <div class="teacher-info">
     <h5 class="professor-info-heading">Información básica del profesor</h5>
     <div class="form-floating mb-3">
-        <input type="text" readonly class="form-control-plaintext" id="teacher-id" placeholder="Cédula de ciudadanía" value="12345678">
+        <input type="text" readonly class="form-control-plaintext" id="teacher-id" placeholder="Cédula de ciudadanía"
+            value="12345678">
         <label for="teacher-id">Cédula de ciudadanía:</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" readonly class="form-control-plaintext" id="teacher-name" placeholder="Nombre del docente" value="Juan Pérez">
+        <input type="text" readonly class="form-control-plaintext" id="teacher-name" placeholder="Nombre del docente"
+            value="Juan Pérez">
         <label for="teacher-name">Docente:</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" readonly class="form-control-plaintext" id="teacher-city" placeholder="Ciudad" value="Bogotá">
+        <input type="text" readonly class="form-control-plaintext" id="teacher-city" placeholder="Ciudad"
+            value="Bogotá">
         <label for="teacher-city">Ciudad:</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="email" readonly class="form-control-plaintext" id="teacher-email" placeholder="Email" value="juan.perez@example.com">
+        <input type="email" readonly class="form-control-plaintext" id="teacher-email" placeholder="Email"
+            value="juan.perez@example.com">
         <label for="teacher-email">Email:</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="tel" readonly class="form-control-plaintext" id="teacher-phone" placeholder="Celular" value="+573001234567">
+        <input type="tel" readonly class="form-control-plaintext" id="teacher-phone" placeholder="Celular"
+            value="+573001234567">
         <label for="teacher-phone">Celular:</label>
     </div>
 </div>
@@ -71,38 +77,7 @@
     <div class="text-center mt-4">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <button type="reset" class="btn btn-secondary">Cancelar</button>
-      </div>
+    </div>
 </div>
-
-<script>
-    const startHour = 0; // 00:00
-    const endHour = 24; // 24:00
-    const blockDuration = 0.5; // 30 minutos
-    const scheduleBody = document.getElementById('schedule-body');
-
-    for (let hour = startHour; hour < endHour; hour += blockDuration) {
-        let startHourFormatted;
-        if (hour % 1 === 0) {
-            // Si la hora es entera, mostrar solo la hora sin minutos
-            startHourFormatted = hour.toString().padStart(2, '0') + ':00';
-        } else {
-            // Si la hora tiene fracción, convertir a formato HH:MM
-            const hourWithoutFraction = Math.floor(hour);
-            const minutes = (hour - hourWithoutFraction) * 60;
-            startHourFormatted = hourWithoutFraction.toString().padStart(2, '0') + ':' + Math.round(minutes).toString().padStart(2, '0');
-        }
-
-        const row = document.createElement('tr');
-        const hourCell = document.createElement('th');
-        hourCell.textContent = startHourFormatted;
-        row.appendChild(hourCell);
-
-        for (let day = 0; day < 7; day++) {
-            const dayCell = document.createElement('td');
-            row.appendChild(dayCell);
-        }
-
-        scheduleBody.appendChild(row);
-    }
-</script>
+<script src="{% static '/js/assign-teacher.js' %}"></script>
 {% endblock %}

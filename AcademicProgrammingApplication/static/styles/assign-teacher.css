@@ -1,14 +1,17 @@
 /* Estilos para la información de la materia */
 .subject-info {
     width: 70%;
-    height: 1.8%;
     padding-left: 5%;
 }
 
 .search-bar {
     width: 70%;
-    height: 1.5%;
     padding-left: 5%;
+}
+
+#search-btn {
+    background-color: rgba(23, 104, 172, 0.9);
+    fill: white;
 }
 
 label {
@@ -23,14 +26,13 @@ label {
 .teacher-info {
     width: 70%;
     padding-left: 5%;
-    padding-top: 1.3%;
+    display: none;
 }
 
-.form-floating #teacher-id, #teacher-name, #teacher-city, #teacher-email, #teacher-phone{
-}
 /* Estilos para la tabla de horarios */
 .schedule-info {
     padding-top: 1.3%;
+    display: none;
 }
 
 /* Estilos específicos para la tabla responsive */
@@ -42,15 +44,8 @@ label {
 .schedule-info .table-responsive {
     padding-left: 5%;
     width: 95%;
-    height: 20%;
-}
-
-.schedule-info th,
-.schedule-info td {
-    width: 125px;
-    border: 1px solid #ccc;
-    text-align: center;
-    font-size: 16px;
+    height: 60vh;
+    overflow-y: auto;
 }
 
 /* Estilos para el encabezado de la tabla */
@@ -71,7 +66,6 @@ label {
     text-align: center;
     font-size: 16px;
 }
-
 
 /* Estilos para los botones */
 .btn-primary {
@@ -100,4 +94,5 @@ label {
 .text-center {
     text-align: center;
     margin-top: 2%;
+    margin-bottom: 2%;
 }
