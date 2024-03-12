@@ -106,82 +106,194 @@
 ## Fecha: 08-03-2024
 
 ##### Esteban Gaviria:
->**¿Qué hice ayer?**  
->*R//* Avancé el CSS del Login.  
->**¿Qué voy a hacer hoy?**   
->*R//* Terminaré el Login y lo dejaré completamente funcional.  
->**¿Qué impedimentos tengo?**  
->*R//* Tuve dificultades con el css. No obstante, las he ido solucionando con la práctica.  
 
-##### Juan David Colonia:  
->**¿Qué hice ayer?**  
->*R//* Trabajé en la plantilla general de las pantallas del programa.  
->**¿Qué voy a hacer hoy?**  
->*R//* Intentaré terminar esa plantilla para empezar con el desarrollo de mi historia de usuario.  
->**¿Qué impedimentos tengo?**  
->*R//* Sigo teniendo dificultades con el CSS.  
+> **¿Qué hice ayer?**  
+> *R//* Avancé el CSS del Login.  
+> **¿Qué voy a hacer hoy?**   
+> *R//* Terminaré el Login y lo dejaré completamente funcional.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Tuve dificultades con el css. No obstante, las he ido solucionando con la práctica.
+
+##### Juan David Colonia:
+
+> **¿Qué hice ayer?**  
+> *R//* Trabajé en la plantilla general de las pantallas del programa.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Intentaré terminar esa plantilla para empezar con el desarrollo de mi historia de usuario.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Sigo teniendo dificultades con el CSS.
 
 ##### Juan Manuel Diaz:
->**¿Qué hice ayer?**  
->*R//* Terminé los tutoriales sobre Django y CSS.  
->**¿Qué voy a hacer hoy?**  
->*R//* Continuar con el Template de mi historia de usuario.  
->**¿Qué impedimentos tengo?**  
->*R//* Tuve errores constantes cuando trabajé en HTML, lo que me tomo tiempo en buscar soluciones.  
+
+> **¿Qué hice ayer?**  
+> *R//* Terminé los tutoriales sobre Django y CSS.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Continuar con el Template de mi historia de usuario.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Tuve errores constantes cuando trabajé en HTML, lo que me tomo tiempo en buscar soluciones.
 
 ##### David Donneys:
->**¿Qué hice ayer?**  
->*R//* Estuve practicando ejercicios de las clases de Django.  
->**¿Qué voy a hacer hoy?**  
->*R//* Intente implementar mi historia de usuario para este lunes.  
->**¿Qué impedimentos tengo?**  
->*R//* No encuentro el repo.  
+
+> **¿Qué hice ayer?**  
+> *R//* Estuve practicando ejercicios de las clases de Django.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Intente implementar mi historia de usuario para este lunes.  
+> **¿Qué impedimentos tengo?**  
+> *R//* No encuentro el repo.
 
 ##### Carlos Tafurt:
->**¿Qué hice ayer?**  
->*R//* Seguí estudiando HTML y revisando viendo como lo iba a implementar.  
->**¿Qué voy a hacer hoy?**  
->*R//* Revise las funciones de la vista que estoy realizando.  
->**¿Qué impedimentos tengo?**  
->*R//* Ninguno por el momento.  
+
+> **¿Qué hice ayer?**  
+> *R//* Seguí estudiando HTML y revisando viendo como lo iba a implementar.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Revise las funciones de la vista que estoy realizando.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguno por el momento.
 
 ---
 
 ## Fecha: 09-03-2024
 
 ##### Esteban Gaviria:
->**¿Qué hice ayer?**  
->*R//* Terminé la pantalla del Login.  
->**¿Qué voy a hacer hoy?**   
->*R//* Voy a comenzar con el CSS y el HTML de las pantallas de las historias de usuario que me corresponde desarrollar.   
->**¿Qué impedimentos tengo?**  
->*R//* Aún no sé cómo utilizar los datos recibidos por el formulario del Login para saber cuando permitir o denegar el acceso a las personas aptas para ingresar a la aplicación.  
 
-##### Juan David Colonia:  
->**¿Qué hice ayer?**  
->*R//* Terminé la plantilla general del proyecto.  
->**¿Qué voy a hacer hoy?**  
->*R//* Voy a empezar a desarrollar mi historia de usuario.  
->**¿Qué impedimentos tengo?**  
->*R//* Continuo con las dificultades en el CSS, pero voy mejorando.  
+> **¿Qué hice ayer?**  
+> *R//* Terminé la pantalla del Login.  
+> **¿Qué voy a hacer hoy?**   
+> *R//* Voy a comenzar con el CSS y el HTML de las pantallas de las historias de usuario que me corresponde
+> desarrollar.   
+> **¿Qué impedimentos tengo?**  
+> *R//* Aún no sé cómo utilizar los datos recibidos por el formulario del Login para saber cuando permitir o denegar el
+> acceso a las personas aptas para ingresar a la aplicación.
+
+##### Juan David Colonia:
+
+> **¿Qué hice ayer?**  
+> *R//* Terminé la plantilla general del proyecto.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Voy a empezar a desarrollar mi historia de usuario.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Continuo con las dificultades en el CSS, pero voy mejorando.
 
 ##### Juan Manuel Diaz:
->**¿Qué hice ayer?**  
->*R//* Empecé el Template de mi pantalla.  
->**¿Qué voy a hacer hoy?**  
->*R//* Desarrollar los aspectos generales de mis pantallas. (menús, barras, información básica de la pantalla)  
->**¿Qué impedimentos tengo?**  
->*R//* Adaptarme a CSS, aún tengo dificultades.  
+
+> **¿Qué hice ayer?**  
+> *R//* Empecé el Template de mi pantalla.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Desarrollar los aspectos generales de mis pantallas. (menús, barras, información básica de la pantalla)  
+> **¿Qué impedimentos tengo?**  
+> *R//* Adaptarme a CSS, aún tengo dificultades.
 
 ##### David Donneys:
->**¿Qué hice ayer?**  
->*R//* Inicié con mi historia.  
->**¿Qué voy a hacer hoy?**  
->*R//* Sigo con la historia.  
->**¿Qué impedimentos tengo?**  
->*R//* La identación se me sigue complicando pero voy mejorando.  
+
+> **¿Qué hice ayer?**  
+> *R//* Inicié con mi historia.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Sigo con la historia.  
+> **¿Qué impedimentos tengo?**  
+> *R//* La identación se me sigue complicando pero voy mejorando.
 
 ##### Carlos Tafurt:
+
 > ***No se reportó.***
+
+---
+
+## Fecha: 10-03-2024
+
+##### Esteban Gaviria:
+
+> **¿Qué hice ayer?**  
+> *R//* Ajuste la estructura de los documentos HTML de base que se usarán en la creación de cada una de las pantallas y
+> comenzar con el HTML y el diseño en CSS de mis historias de usuario.  
+> **¿Qué voy a hacer hoy?**   
+> *R//* Continuar con el HTML y el diseño en CSS de mis historias de usuario y crear mi rama para continuar trabajando.
+> **¿Qué impedimentos tengo?**  
+> *R//* De momento, ninguno.
+
+##### Juan David Colonia:
+
+> **¿Qué hice ayer?**  
+> *R//* Realicé un Planning para la creación del HTML y CSS de la pantalla de mi historia de usuario.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Trabajar en el HTML y CSS de la pantalla.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Hasta el momento ninguno.
+
+##### Juan Manuel Diaz:
+
+> **¿Qué hice ayer?**  
+> *R//* Con un tutorial de YouTube fui construyendo el Template.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Subir mis cambios hasta el momento a mi rama.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Errores con el código.
+
+##### David Donneys:
+
+> **¿Qué hice ayer?**  
+> *R//* Investigué acerca de la IDE que me recomendó el compañero Esteban.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Planeo seguir con la historia.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Código.
+
+##### Carlos Tafurt:
+
+> **¿Qué hice ayer?**  
+> *R//* Revisión del código hasta el momento.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Clonarlo y empezar a realizar la vista.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguno.
+
+---
+
+## Fecha: 10-03-2024
+
+##### Esteban Gaviria:
+
+> **¿Qué hice ayer?**  
+> *R//* Ajusté la estructura de los documentos HTML de base que se usarán en la creación de cada una de las pantallas y
+> comenzar con el HTML y el diseño en CSS de mis historias de usuario.  
+> **¿Qué voy a hacer hoy?**   
+> *R//* Continuar con el HTML y el diseño en CSS de mis historias de usuario y crear mi rama para continuar trabajando.
+> **¿Qué impedimentos tengo?**  
+> *R//* De momento, ninguno.
+
+##### Juan David Colonia:
+
+> **¿Qué hice ayer?**  
+> *R//* Realicé un Planning para la creación del HTML y CSS de la pantalla de mi historia de usuario.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Trabajar en el HTML y CSS de la pantalla.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Hasta el momento ninguno.
+
+##### Juan Manuel Diaz:
+
+> **¿Qué hice ayer?**  
+> *R//* Con un tutorial de YouTube fui construyendo el Template.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Subir mis cambios hasta el momento a mi rama.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Errores con el código.
+
+##### David Donneys:
+
+> **¿Qué hice ayer?**  
+> *R//* Investigué acerca de la IDE que me recomendó el compañero Esteban.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Planeo seguir con la historia.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Código.
+
+##### Carlos Tafurt:
+
+> **¿Qué hice ayer?**  
+> *R//* Revisión del código hasta el momento.  
+> **¿Qué voy a hacer hoy?**  
+> *R//* Clonarlo y empezar a realizar la vista.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguno.
 
 ---
