@@ -49,7 +49,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- filas de la tabla con la información de cada sesión -->
+                        {% for class in classes %}
+                            <tr>
+                                <td>{{ class.id }}</td>
+                                <td>{{ class.start_date }}</td>
+                                <td>{{ class.ending_date }}</td>
+                                <td>{{ class.teacher.name }}</td> <!-- Asegúrate de que tu modelo Teacher tenga un atributo 'name' -->
+                                <td>{{ class.modality }}</td>
+                                <td>{{ class.classroom }}{{ class.link }}</td> <!-- Mostrará el salón de clase para la modalidad presencial y el enlace para la modalidad virtual -->
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
