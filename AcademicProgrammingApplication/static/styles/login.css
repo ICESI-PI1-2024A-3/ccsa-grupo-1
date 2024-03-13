@@ -50,7 +50,7 @@ input::placeholder {
 
 #form {
     margin-top: 2rem;
-    height: 60%;
+    height: 55%;
     display: flex;
     justify-content: flex-start;
 }
