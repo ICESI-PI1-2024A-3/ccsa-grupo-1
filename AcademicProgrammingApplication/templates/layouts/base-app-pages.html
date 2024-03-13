@@ -77,7 +77,9 @@
         <!-- This line indicates that we will always have to pass the title from the dependencies dictionary to load it on this screen.-->
         <h1>{{ title }}</h1>
     </header>
-    {% block main-container-content %}
-    {% endblock %}
+    <div class="overflow-auto">
+        {% block main-container-content %}
+        {% endblock %}
+    </div>
 </main>
 {% endblock %}
