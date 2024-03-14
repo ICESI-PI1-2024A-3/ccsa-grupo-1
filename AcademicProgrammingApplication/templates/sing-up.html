@@ -1,0 +1,23 @@
+{% extends "layouts/base-with-footer.html" %}
+
+{% load static %}
+
+{% block tittle-container %}
+<title>Sing up</title>
+{% endblock %}
+
+{% block largest-container-content %}
+<!-- Add additional styles for this page only -->
+<!-- Specific styles for the current page -->
+<h1>Sing up</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button>
+        Singup
+    </button>
+</form>
+
+{{ error }}
+
+{% endblock %}
