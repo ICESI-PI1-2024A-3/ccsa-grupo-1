@@ -11,11 +11,15 @@ body {
 }
 
 h1, h2, h3 {
-    text-align: left; /* Títulos a la izquierda */
+    text-align: left; /* Titulos a la izquierda */
 }
 
 h2 {
-    font-size: 1.6em;
+    font-size: 1.7em;
+}
+
+h3 {
+    font-size: 1.4em;
 }
 
 .card {
