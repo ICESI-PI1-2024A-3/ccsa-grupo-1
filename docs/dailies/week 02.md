@@ -95,3 +95,52 @@
 > *R//* Tuve problemas con el cifrado de Django.  
 
 ---
+
+## Fecha: 13-03-2024
+
+##### Esteban Gaviria:
+
+> **¿Qué hice hoy?**  
+> *R//* Terminé los estilos de la pantalla de información de un POSGRADO.  
+> **¿Qué voy a hacer mañana?**  
+> *R//* Hacer el sistema de autentificación.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Modificar el color de los elementos de Bootstrap.  
+
+##### Juan David Colonia:
+
+> **¿Qué hice hoy?**  
+> *R//* rabajé en la conexión de la base de datos con mi pantalla para extraer la información del profesor.  
+> **¿Qué voy a hacer mañana?**  
+> *R//* Terminar la conexión y arreglar el menú lateral.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Hasta el momento ninguna.   
+
+##### Juan Manuel Diaz:
+
+> **¿Qué hice hoy?**  
+> *R//* Terminé la pantalla de mi historia de usuario con los objetivos iniciales que tenía hasta el momento, comencé el README.  
+> **¿Qué voy a hacer mañana?**  
+> *R//* Empezar a revisar los CRUD, terminar el README.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguna de momento.  
+
+##### David Donneys:
+
+> **¿Qué hice hoy?**  
+> *R//* Hice mi pantalla de editar materias.   
+> **¿Qué voy a hacer mañana?**  
+> *R//* ⁠Mañana voy a hacer merge con la rama de Carlos y unificar los métodos.   
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguna por el momento.  
+
+##### Carlos Tafurt:
+
+> **¿Qué hice hoy?**  
+> *R//* Trabajé buscando solución al problema de ayer, al enviar la información no se está reconociendo el metodo del backend. Y leí documentación para buscar una solución.
+> **¿Qué voy a hacer mañana?**  
+> *R//* Terminar de solucionar el problema o buscar ayuda externa.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Problema con el paso de la información.  
+
+---
