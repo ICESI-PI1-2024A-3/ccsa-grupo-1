@@ -18,7 +18,7 @@ def base_screen(request):
      })
 
 def edit_screen(request):
-     return render(request, 'layouts/base-app-pages.html', {
+     return render(request, 'layouts/edit-info-class.html', {
          'user_name': "David",
          'title': 'Editor de materia',
      })

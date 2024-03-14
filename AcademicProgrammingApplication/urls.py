@@ -6,7 +6,7 @@ urlpatterns = [
     # Lines used to see how the base HTML looks like
     path('edit', views.edit_screen, name='edit'),
 
-
 #This will change     
 #   path('editSubject/<int:nrc>',SubjectFormView.edit, name='editSubject'),
+#   path('subject/<int:subject_id>/', views.subject_detail, name='subject_detail'),
 ]

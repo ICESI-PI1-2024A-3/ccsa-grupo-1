@@ -1,61 +1,28 @@
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Poppins, Source Sans Pro, serif;
+    background-color: #f0f0f0;
 }
 
-p {
-    font-size: .8rem;
+.container {
+    padding: 20px;
+    max-width: 100%; /* Contenedor al ancho de la página */
 }
 
-#container {
-    height: 95vh;
-    display: flex;
+h1, h2, h3 {
+    text-align: left; /* Títulos a la izquierda */
 }
 
-/*Footer*/
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding-top: .5rem;
-    box-shadow: inset 0 0.12rem 0.12rem rgba(0, 0, 0, 0.25);
-    padding-left: 1rem;
-    padding-right: 1rem;
+h2 {
+    font-size: 1.6em;
+}
+.card-body {
+    text-align: left; /* Alinea el texto a la izquierda */
 }
 
-#social {
-    width: 6rem;
+.card {
+    border: 1px solid #ddd;
+    font-size: 0.8em;
 }
 
-#university-name {
-    display: flex;
-}
-
-#university-name p {
-    margin-left: .5rem;
-}
-
-#phone-number {
-    display: flex;
-}
-
-#phone-number p {
-    margin-left: .5rem;
-}
-
-#email {
-    display: flex;
-}
-
-#email p {
-    margin-left: .5rem;
-}
-
-#help {
-}
-
-#social-media-group {
-    display: flex;
-    gap: 1.5rem;
-}

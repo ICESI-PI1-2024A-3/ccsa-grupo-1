@@ -70,12 +70,14 @@
 </section>
 
 <main id="container-body">
-    <!--Header-->
-    <header class="header">
-        <!-- This line indicates that we will always have to pass the title from the dependencies dictionary to load it on this screen.-->
-        <h1>{{ title }}</h1>
-    </header>
-    {% block main-container-content %}
-    {% endblock %}
+    
+    <div class="container bg-white p-4">
+        <header>
+            <h1>{{ title }}</h1>
+        </header>
+        
+        {% block main-container-content %}
+        {% endblock %}
+    </div>
 </main>
 {% endblock %}
