@@ -110,7 +110,7 @@
 ##### Juan David Colonia:
 
 > **¿Qué hice hoy?**  
-> *R//* rabajé en la conexión de la base de datos con mi pantalla para extraer la información del profesor.  
+> *R//* Trabajé en la conexión de la base de datos con mi pantalla para extraer la información del profesor.  
 > **¿Qué voy a hacer mañana?**  
 > *R//* Terminar la conexión y arreglar el menú lateral.  
 > **¿Qué impedimentos tengo?**  
@@ -142,5 +142,54 @@
 > *R//* Terminar de solucionar el problema o buscar ayuda externa.  
 > **¿Qué impedimentos tengo?**  
 > *R//* Problema con el paso de la información.  
+
+---
+
+## Fecha: 14-03-2024
+
+##### Esteban Gaviria:
+
+> **¿Qué hice hoy?**  
+> *R//* Implementé la funcionalidad de registro (Sign up) sin aplicar estilos visuales.  
+> **¿Qué voy a hacer mañana?**  
+> *R//* Continuaré trabajando en el sistema de autenticación.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Enfrenté dificultades al manejar las excepciones específicas del proceso de registro (Sign up).  
+
+##### Juan David Colonia:
+
+> **¿Qué hice hoy?**  
+> *R//* Estuve trabajando en la conexión de la base de datos con mi pantalla para extraer la información del profesor y el menú lateral.  
+> **¿Qué voy a hacer mañana?**  
+> *R//* Implementar la funcionalidad de búsqueda de un profesor y añadir eso como una nueva historia en el Jira.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguna por el momento.   
+
+##### Juan Manuel Diaz:
+
+> **¿Qué hice hoy?**  
+> *R//* Realicé el readme del proyecto.  
+> **¿Qué voy a hacer mañana?**  
+> *R//* Compartir con el equipo el documento readme para su aprobación. Consultar y definir como vamos a realizar los CRUD.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguna de momento.  
+
+##### David Donneys:
+
+> **¿Qué hice hoy?**  
+> *R//* Intente acomodar el css de mi pantalla.   
+> **¿Qué voy a hacer mañana?**  
+> *R//* Continuaré con el css y la funcionalidad.    
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguna por el momento.  
+
+##### Carlos Tafurt:
+
+> **¿Qué hice hoy?**  
+> *R//* Pude corregir el error en la transferencia de los datos.  
+> **¿Qué voy a hacer mañana?**  
+> *R//* Subiré lo realizado y modificaré el estilo de la letras y color de la pantalla.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguna por el momento.  
 
 ---
