@@ -19,11 +19,11 @@ Este proyecto tiene como objetivo desarrollar un sistema integral para la gesti�
 
 Las historias de usuario en este proyecto siguen la siguiente convención de identificadores:
 
-1. Identificador de historia de usuario.
+### Identificador de historia de usuario.
 
-- HU: Historia de Usuario
+HU: Historia de Usuario
 
-2. Idenficiador del submódulo.
+### Idenficiador del submódulo.
 
 - GPA: Gestión de Programación Académica
 - GM: Gestión de Materias
@@ -31,9 +31,9 @@ Las historias de usuario en este proyecto siguen la siguiente convención de ide
 - PPA: Propuesta de Planeación Académica
 - GR: Gestión de Roles
 
-3. El número al que pertenece la historia de usuario.
+### Número al que pertenece la historia de usuario.
 
-4. Usario de la historia de usuario.
+### Usario de la historia de usuario.
 
 - LP: Líder de Proceso
 - AS: Asistente de Proceso
@@ -113,4 +113,4 @@ Los nombres de las clases deben seguir la convención CapWords. Los nombres de l
 - Python: 3.12
 - Django: 5.0.3
 - Bootstrap: 5.3.3
-- Otras bibliotecas: 
+- Otras bibliotecas.
