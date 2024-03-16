@@ -3,6 +3,7 @@ from .forms import UserForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.db import IntegrityError
 
 
@@ -51,3 +52,8 @@ def sing_up(request):
             'form': UserCreationForm,
             'error': 'Password does not match!',
         })
+
+
+def logout(request):
+    auth_logout(request)
+    return redirect('login')
