@@ -5,50 +5,45 @@
 <link rel="stylesheet" href="{% static '/styles/assign-teacher.css' %}">
 
 <div class="subject-info">
-    <div class="form-floating mb-3">
-        <input type="text" readonly class="form-control-plaintext" id="subject-input" value="Matemáticas">
+    <div class="form-floating">
+        <input type="text" readonly class="form-control-plaintext" id="subject-input" value="POR DEFINIR">
         <label for="subject-input">Nombre de la materia:</label>
     </div>
 </div>
 
 <div class="search-bar">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Buscar profesor" aria-label="Profesor:"
-            aria-describedby="search-btn">
-        <button class="btn btn-outline-secondary" type="button" id="search-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-search" viewBox="0 0 16 16">
-                <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-            </svg>
-        </button>
-    </div>
+    <form id="search-form" method="get">
+        <div class="input-group mb-3">
+            <input type="search" class="form-control" id="search-input" name="search" placeholder="Buscar profesor">
+            <button class="btn btn-outline-secondary" type="submit" id="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+            </button>
+        </div>
+    </form>
 </div>
 
 <div class="teacher-info">
     <h5 class="professor-info-heading">Información básica del profesor</h5>
-    <div class="form-floating mb-3">
-        <input type="text" readonly class="form-control-plaintext" id="teacher-id" placeholder="Cédula de ciudadanía"
-            value="12345678">
+    <div class="form-floating">
+        <input type="text" readonly class="form-control-plaintext" id="teacher-id" placeholder="Cédula de ciudadanía" value="{{ teacher.id }}">
         <label for="teacher-id">Cédula de ciudadanía:</label>
     </div>
-    <div class="form-floating mb-3">
-        <input type="text" readonly class="form-control-plaintext" id="teacher-name" placeholder="Nombre del docente"
-            value="Juan Pérez">
+    <div class="form-floating">
+        <input type="text" readonly class="form-control-plaintext" id="teacher-name" placeholder="Nombre del docente" value="{{ teacher.name }}">
         <label for="teacher-name">Docente:</label>
     </div>
-    <div class="form-floating mb-3">
-        <input type="text" readonly class="form-control-plaintext" id="teacher-city" placeholder="Ciudad"
-            value="Bogotá">
+    <div class="form-floating">
+        <input type="text" readonly class="form-control-plaintext" id="teacher-city" placeholder="Ciudad" value="{{ teacher.city }}">
         <label for="teacher-city">Ciudad:</label>
     </div>
-    <div class="form-floating mb-3">
-        <input type="email" readonly class="form-control-plaintext" id="teacher-email" placeholder="Email"
-            value="juan.perez@example.com">
+    <div class="form-floating">
+        <input type="email" readonly class="form-control-plaintext" id="teacher-email" placeholder="Email" value="{{ teacher.email }}">
         <label for="teacher-email">Email:</label>
     </div>
-    <div class="form-floating mb-3">
-        <input type="tel" readonly class="form-control-plaintext" id="teacher-phone" placeholder="Celular"
-            value="+573001234567">
+    <div class="form-floating">
+        <input type="tel" readonly class="form-control-plaintext" id="teacher-phone" placeholder="Celular" value="{{ teacher.cellphone }}">
         <label for="teacher-phone">Celular:</label>
     </div>
 </div>
@@ -70,14 +65,34 @@
                 </tr>
             </thead>
             <tbody id="schedule-body">
-                <!-- Las filas se generarán dinámicamente aquí -->
             </tbody>
         </table>
     </div>
-    <div class="text-center mt-4">
+    <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <button type="reset" class="btn btn-secondary">Cancelar</button>
     </div>
 </div>
+
 <script src="{% static '/js/assign-teacher.js' %}"></script>
+<!--  jQuery  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!--  Autosuggestion of teacher in search bar  -->
+<script>
+$(function() {
+    $("#search-input").autocomplete({
+        source: "{% url 'search_teacher' %}",
+        minLength: 2,
+        select: function(event, ui) {
+            $("#search-input").val(ui.item.label);
+            return false;
+        },
+        focus: function(event, ui) {
+            $("#search-input").val(ui.item.label);
+            return false;
+        }
+    });
+});
+</script>
 {% endblock %}

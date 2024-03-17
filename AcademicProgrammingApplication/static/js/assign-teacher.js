@@ -27,23 +27,3 @@ for (let hour = startHour; hour < endHour; hour += blockDuration) {
 
     scheduleBody.appendChild(row);
 }
-
-// Obtener elementos del DOM
-const searchBar = document.querySelector('.search-bar');
-const teacherInfo = document.querySelector('.teacher-info');
-const scheduleInfo = document.querySelector('.schedule-info');
-
-// Agregar evento de clic al botón de búsqueda
-document.getElementById('search-btn').addEventListener('click', function() {
-    // Simular búsqueda (en este caso, siempre se muestra la información del profesor)
-    const teacherFound = true;
-
-    if (teacherFound) {
-        // Mostrar información del profesor
-        teacherInfo.style.display = 'block';
-        scheduleInfo.style.display = 'block';
-    } else {
-        // Mostrar mensaje de alerta si no se encontraron resultados
-        alert('No se encontraron resultados.');
-    }
-});
