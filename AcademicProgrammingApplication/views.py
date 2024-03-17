@@ -37,9 +37,10 @@ def base_screen(request):
 
 
 def academic_management(request):
+    user = request.user
     return render(request, 'academic-management.html', {
-        'user_name': 'Esteban',
-        'title': 'Academic Management',
+        'title': 'Programación académica',
+        'user_name': user.username,
     })
 
 
@@ -49,6 +50,13 @@ def sing_up(request):
             'form': UserCreationForm,
         })
     else:
+        username = request.POST['username']
+        if not username:
+            return render(request, 'sing-up.html', {
+                'form': UserCreationForm,
+                'error': '¡Todos los campos son obligatorios!',
+            })
+
         if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.create_user(username=request.POST['username'],
@@ -59,11 +67,11 @@ def sing_up(request):
             except IntegrityError:
                 return render(request, 'sing-up.html', {
                     'form': UserCreationForm,
-                    'error': 'Username already exists!',
+                    'error': '¡El usuario ya existe!',
                 })
         return render(request, 'sing-up.html', {
             'form': UserCreationForm,
-            'error': 'Password does not match!',
+            'error': '¡Las contraseñas no coinciden!',
         })
 
 
