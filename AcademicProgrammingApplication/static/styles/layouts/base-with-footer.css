@@ -22,6 +22,8 @@ footer {
     box-shadow: inset 0 0.12rem 0.12rem rgba(0, 0, 0, 0.25);
     padding-left: 1rem;
     padding-right: 1rem;
+    position: relative;
+    bottom: 0;
 }
 
 #social {
@@ -50,9 +52,6 @@ footer {
 
 #email p {
     margin-left: .5rem;
-}
-
-#help {
 }
 
 #social-media-group {
