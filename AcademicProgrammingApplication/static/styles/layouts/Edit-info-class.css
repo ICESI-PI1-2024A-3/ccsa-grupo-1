@@ -7,22 +7,37 @@ body {
 
 .container {
     padding: 20px;
-    max-width: 100%; /* Contenedor al ancho de la página */
+    max-width: 100%;
 }
 
 h1, h2, h3 {
-    text-align: left; /* Títulos a la izquierda */
+    text-align: left;
 }
 
 h2 {
     font-size: 1.6em;
 }
-.card-body {
-    text-align: left; /* Alinea el texto a la izquierda */
+
+/* Reduce font size for the entire table */
+.table {
+    font-size: 0.75em; /* Smaller than the original size */
+    background-color: #f0f0f0; /* Gray background for the table */
+    border-collapse: collapse; /* Remove spacing between borders */
 }
 
+/* Style for table cells */
+.table th,
+.table td {
+    border: 1px solid #ddd; /* Add borders to cells */
+    padding: 8px; /* Spacing within cells */
+}
+
+/* Align card body text to the left */
+.card-body {
+    text-align: left;
+}
+
+/* Add a border to cards */
 .card {
     border: 1px solid #ddd;
-    font-size: 0.8em;
 }
-
