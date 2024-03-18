@@ -8,4 +8,7 @@ urlpatterns = [
     # path('base', views.base_screen, name='base'),
     path('home', login_required(views.academic_management), name='home'),
     path('logout', login_required(views.logout), name='logout'),
+    path('assign/', login_required(views.assign_teacher), name='assign_teacher'),
+    path('search/', login_required(views.search_teacher), name='search_teacher'),
+    path('classes/<int:teacher_id>', login_required(views.get_classes), name='get_classes'),
 ]
