@@ -193,3 +193,47 @@
 > *R//* Ninguna por el momento.  
 
 ---
+
+## Fecha: 17-03-2024
+
+##### Esteban Gaviria:
+
+> **¿Qué he hecho?**  
+> *R//* Terminé el sistema de autenticación, implementé el sistema para las rutas protegidas, creé una página de error 404 personalizada para cuando el usuario intente acceder a una página que no existe, realicé ajustes en los estilos de la pantalla base y del login e hice mi primer pull request.  
+> **¿Qué voy a hacer?**  
+> *R//* Voy a desarrollar la funcionalidad del buscador de programas de posgrado para buscar las programaciones académicas asociadas.  
+> **¿Qué impedimentos tengo?**  
+> *R//* No sé cómo lograr que la información mostrada en pantalla cambie dinámicamente cuando se selecciona un programa de posgrado diferente al que ya se había seleccionado en el buscador de programas de posgrado.  
+
+##### Juan David Colonia:
+
+> **¿Qué he hecho?**  
+> *R//* Implementé la funcionalidad de búsqueda de profesores, añadí las rutas protegidas y estoy en proceso de realizar el pull request.  
+> **¿Qué voy a hacer?**  
+> *R//* Implementar la vista del horario con sus clases cargadas y el funcionamiento de los bloques de información.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Tengo problemas para ocultar y aparecer los bloques que contienen la información del profesor y el horario cuando se realiza la búsqueda de un profesor.   
+
+##### Juan Manuel Diaz:
+
+> **¿Qué he hecho?**  
+> *R//* Terminé el readme, revisé el tema de rutas protegidas.  
+> **¿Qué voy a hacer?**  
+> *R//* Comenzar el CRUD de la implementación de mi historia de usuario.  
+> **¿Qué impedimentos tengo?**  
+> *R//* Ninguna de momento.  
+
+##### David Donneys:
+
+> **¿Qué he hecho?**  
+> *R//* Acomodé problemas de diseño con mi pantalla y hice commit de los cambio.   
+> **¿Qué voy a hacer?**  
+> *R//* Intentar que la pantalla quede funcional mi pantalla y mas bonita.    
+> **¿Qué impedimentos tengo?**  
+> *R//* Que quede todo como en Figma.   
+
+##### Carlos Tafurt:
+
+> ***No se reportó.***
+
+---
