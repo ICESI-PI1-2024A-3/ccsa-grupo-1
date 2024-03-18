@@ -25,6 +25,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# The following lines must be changed when moving to production. Don't change them when we're in development or if
+# you don't know what you're doing :).
+
+# DEBUG = False
+# ALLOWED_HOSTS = ['*']
+
 # Application definition
 
 INSTALLED_APPS = [
