@@ -21,3 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AcademicProgrammingApplication.urls')),
 ]
+
+handler404 = 'AcademicProgrammingApplication.views.error_404'
