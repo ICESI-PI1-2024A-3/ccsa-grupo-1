@@ -1,4 +1,4 @@
-document.getElementById('miBoton').addEventListener('click', function() {
+document.getElementById('miBoton').addEventListener('click', function () {
   Swal.fire({
     title: 'Selecciona una fecha y hora',
     html: `
@@ -34,7 +34,7 @@ document.getElementById('miBoton').addEventListener('click', function() {
       };
 
       // Envía los datos al backend de Django
-      
+
       fetch('/dataProcessor_lounge/', {
         method: 'POST',
         headers: {
@@ -51,7 +51,7 @@ document.getElementById('miBoton').addEventListener('click', function() {
       }).catch(error => {
         console.error('Error:', error);
       });
-       
+
     }
   });
 });

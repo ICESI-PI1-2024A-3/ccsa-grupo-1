@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .forms import UserForm
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 # Create your views here.
@@ -24,16 +26,23 @@ def spam(request):
         'title': 'Main page',
     })  
 
+@csrf_exempt
 def data_processor_lounge(request):
     if request.method == 'POST':
         try:
-            # Access data sent from the frontend
-            datos_json = request.POST.get('datos')
+            # Access JSON data sent from the frontend
+            datos_json = json.loads(request.body)
+            
             # Process the data as needed
+            
+            # Return a JSON response indicating success
+            print(datos_json)
+            print(type(datos_json))
             return JsonResponse({'mensaje': 'Datos procesados correctamente'})
         except Exception as e:
             # If any error occurs during data processing,
-            # returns an error message
+            # return an error message
             return JsonResponse({'error': str(e)}, status=500)
     else:
+        # Return a JSON response indicating that the method is not allowed
         return JsonResponse({'error': 'Método no permitido'}, status=405)
