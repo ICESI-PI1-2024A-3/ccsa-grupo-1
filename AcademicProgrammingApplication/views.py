@@ -25,7 +25,7 @@ def login(request):
             })
         else:
             auth_login(request, user)
-            return redirect('academic-management')
+            return redirect('home')
 
 
 # The next lines are only used to see how the base HTML looks like
@@ -63,7 +63,7 @@ def sing_up(request):
                                                 password=request.POST['password1'])
                 user.save()
                 auth_login(request, user)
-                return redirect('academic-management')
+                return redirect('home')
             except IntegrityError:
                 return render(request, 'sing-up.html', {
                     'form': UserCreationForm,
@@ -78,3 +78,9 @@ def sing_up(request):
 def logout(request):
     auth_logout(request)
     return redirect('login')
+
+
+def error_404(request, exception):
+    return render(request, 'error-404.html', {
+        'user': request.user,
+    }, status=404)
