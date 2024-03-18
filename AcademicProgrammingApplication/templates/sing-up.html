@@ -15,39 +15,39 @@ Sing up
 <div class="container">
     <div class="row pt-5">
         <div class="col-md-4 offset-md-4">
-            <div class="card">
-                <a href='/'>
-                    <button class="btn btn-close mb-1">
-                    </button>
-                </a>
-                <form method="POST" class="card card-body border-0">
-                    <h1 class="text-center">Registro</h1>
-                    {% if error is not None %}
-                    <div class="alert alert-primary" role="alert">
-                        {{ error }}
-                    </div>
-                    {% endif %}
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="username">Nombre de usuario</label>
-                        <input type="text" name="username" id="username" class="form-control"
-                               placeholder="Ingrese su nombre de usuario">
-                    </div>
+            <form method="POST" class="card border-0">
+                <h1 class="text-center fw-bold">Registro</h1>
+                <br>
+                {% if error is not None %}
+                <div class="alert alert-primary" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username">Nombre de usuario</label>
+                    <input type="text" name="username" id="username" class="form-control"
+                           placeholder="Ingrese su nombre de usuario">
+                </div>
 
-                    <div class="mb-3">
-                        <label for="password1">Contraseña</label>
-                        <input type="password" name="password1" id="password1" class="form-control"
-                               placeholder="Ingrese su contraseña">
-                        <label for="password2"></label>
-                        <input type="password" name="password2" id="password2"
-                               class="form-control"
-                               placeholder="Confirme su contraseña">
-                    </div>
-                    <button class="btn btn-primary mt-3">
-                        Registrarme
-                    </button>
-                </form>
-            </div>
+                <div class="mb-3">
+                    <label for="password1">Contraseña</label>
+                    <input type="password" name="password1" id="password1" class="form-control"
+                           placeholder="Ingrese su contraseña">
+                    <label for="password2"></label>
+                    <input type="password" name="password2" id="password2"
+                           class="form-control"
+                           placeholder="Confirme su contraseña">
+                </div>
+                <button class="btn btn-primary mt-3">
+                    Registrarme
+                </button>
+            </form>
+            <a href="{% url 'login' %}">
+                <button class="btn btn-outline-secondary w-100 mt-3">
+                    ¡Ya tengo una cuenta!
+                </button>
+            </a>
         </div>
 
     </div>
