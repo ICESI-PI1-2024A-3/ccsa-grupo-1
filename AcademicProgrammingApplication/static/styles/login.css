@@ -50,7 +50,7 @@ input::placeholder {
 
 #form {
     margin-top: 2rem;
-    height: 55%;
+    height: 65%;
     display: flex;
     justify-content: flex-start;
 }
@@ -83,19 +83,25 @@ input[type="password"] {
     align-items: center;
 }
 
-#forgot-password {
+#additional-actions {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    flex-direction: column;
 }
 
-#forgot-password a {
+#additional-actions a {
     text-decoration: none;
     color: black;
 }
 
-#forgot-password a:hover {
+#additional-actions a:hover {
     color: cornflowerblue;
+}
+
+#additional-actions a p {
+    margin-bottom: .2rem;
+    font-size: 1rem;
 }
 
 #access {
@@ -111,7 +117,11 @@ input[type="password"] {
     background-color: lightgray;
 }
 
-#forgot-user {
+#password-container {
+    margin-top: .5rem
+}
+
+#login-error {
+    color: red;
     margin-top: 1rem;
-    font-size: 1rem;
 }

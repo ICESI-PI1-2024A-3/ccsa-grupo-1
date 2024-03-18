@@ -61,11 +61,11 @@ nav a:hover {
 
 /*Header*/
 .header {
-    height: 10vh;
-    width: 85vw;
-    display: flex;
+    height: 12vh;
+    width: 100%;
     top: 0;
     left: 15%;
-    padding-left: 2rem;
-    padding-top: 1.5rem;
+    margin: 2rem 0 0 0;
+    padding-left: 1.5rem;
+    overflow: hidden;
 }
