@@ -92,6 +92,7 @@ def error_404(request, exception):
 
 # This function assigns a teacher to a class.
 def assign_teacher(request):
+    user = request.user
     # Get the value of the 'search' parameter from the GET request
     queryset = request.GET.get('search')
     # Filter teachers who are in the 'Active' state
@@ -103,7 +104,7 @@ def assign_teacher(request):
         ).distinct()
     # Return the 'assign-teacher.html' template with the provided context
     return render(request, 'assign-teacher.html', {
-        'user_name': "Carlos",
+        'user_name': user.username,
         'title': 'Asignar Profesor a Clase',
         'teacher': teachers.first(),
     })
