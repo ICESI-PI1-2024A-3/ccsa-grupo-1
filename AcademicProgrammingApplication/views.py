@@ -21,7 +21,7 @@ def login(request):
         if user is None:
             return render(request, 'login.html', {
                 'form': UserForm(),
-                'error': 'Incorrect username or password',
+                'error': 'Nombre de usuario o contraseña incorrectos.',
             })
         else:
             auth_login(request, user)
@@ -31,7 +31,7 @@ def login(request):
 # The next lines are only used to see how the base HTML looks like
 def base_screen(request):
     return render(request, 'layouts/base-app-pages.html', {
-        'user_name': "Carlos",
+        'user_name': "User",
         'title': 'Main page',
     })
 

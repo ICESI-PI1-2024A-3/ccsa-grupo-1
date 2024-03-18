@@ -38,11 +38,11 @@
                     <!-- Verify if the user is authenticated-->
                     {% if user.is_authenticated %}
                     <!-- If the user is authenticated, redirect to the home page-->
-                    <a class="btn btn-lg btn-primary" href="/home" role="button">Volver a la página
+                    <a class="btn btn-lg btn-primary" href="{% url 'home' %}" role="button">Volver a la página
                         de inicio</a>
                     {% else %}
                     <!-- If user is not authenticated, redirect to log in -->
-                    <a class="btn btn-lg btn-primary" href="/accounts/login" role="button">Volver a la página
+                    <a class="btn btn-lg btn-primary" href="{% url 'login' %}" role="button">Volver a la página
                         de inicio</a>
                     {% endif %}
                 </div><!-- /lc-block -->
