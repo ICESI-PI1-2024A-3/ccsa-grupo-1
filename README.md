@@ -61,7 +61,7 @@ Debe ser uno de los siguientes:
 - **feat**: Una nueva característica
 - **fix**: Una corrección de bug
 - **docs**: Cambios en la documentación
-- **style**: Cambios que no afectan el significado del código o cambios en la estructura y presentación de la implementación del código.
+- **style**: Cambios en los archivos HTML, CSS o JavaScript
 - **refactor**: Un cambio de código que ni arregla un error ni añade una característica
 - **perf**: Un cambio de código que mejora el rendimiento
 - **test**: Añadir pruebas faltantes o corregir pruebas existentes
@@ -113,4 +113,4 @@ Los nombres de las clases deben seguir la convención CapWords. Los nombres de l
 - Python: 3.12
 - Django: 5.0.3
 - Bootstrap: 5.3.3
-- Otras bibliotecas.
+- [Otras bibliotecas.]()
