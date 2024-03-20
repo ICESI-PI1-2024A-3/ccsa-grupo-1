@@ -39,30 +39,33 @@ label {
     padding-left: 5%;
 }
 
-.schedule-info .table-responsive {
-    padding-left: 5%;
-    width: 95%;
-    height: 60vh;
-    overflow-y: auto;
-}
-
-/* Estilos para el encabezado de la tabla */
-.schedule-info th {
-    width: 125px;
-    background-color: rgba(23, 104, 172, 0.9);
-    color: white;
-    border: 1px solid black;
-    text-align: center;
-    font-size: 16px;
-}
-
-/* Estilos para el resto de las celdas */
-.schedule-info td {
-    width: 125px;
-    background-color: white; /* Blanco */
-    border: 1px solid black;
-    text-align: center;
-    font-size: 16px;
+/* Estilos para el contenedor del horario */
+.schedule-table {
+    /* Ajusta el tamaño del contenedor para adaptarse al calendario */
+    width: 100%;
+    height: 600px;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    /* Estilos para el encabezado del calendario y los dias de la semana en la cabecera */
+    .fc-toolbar-title, .fc-col-header-cell-cushion {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: rgba(23, 104, 172, 0.9);
+    }
+    
+    /* Estilos para las celdas de eventos*/
+    .fc-event {
+        background-color: rgba(23, 104, 172, 0.9);
+        color: #ffffff;
+        border-radius: 4px;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.9rem;
+    }
+    
 }
 
 /* Estilos para los botones */
