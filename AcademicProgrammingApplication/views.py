@@ -1,17 +1,18 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.shortcuts import render
-from .forms import UserForm
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .models import Teacher, Class
 from django.db.models import Q
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.shortcuts import render
 
+from .forms import UserForm
 from .models import Subject, Class
+from .models import Teacher
+
 
 # Create your views here.
 def login(request):
@@ -32,10 +33,12 @@ def login(request):
             auth_login(request, user)
             return redirect('home')
 
+
 def subject_detail(request, subject_id):
     subject = Subject.objects.get(code=subject_id)
     classes = Class.objects.filter(subject=subject)  # Obtiene todas las clases relacionadas con la materia
-    return render(request, 'subject_detail.html', {'subject': subject, 'classes': classes, 'title': 'Gestión de MATERIA'})
+    return render(request, 'subject_detail.html',
+                  {'subject': subject, 'classes': classes, 'title': 'Gestión de MATERIA'})
 
 
 # The next lines are only used to see how the base HTML looks like
@@ -136,15 +139,10 @@ def get_classes(_request, teacher_id):
     # Get a list of dictionaries of classes filtered by the teacher's ID
     classes = list(Class.objects.filter(teacher_id=teacher_id).values())
     # If classes are found, return a dictionary with a success message and the classes.
-    if (len(classes) > 0):
+    if len(classes) > 0:
         data = {'messages': "Success", 'clases': classes}
     # If no classes are found, return a dictionary with a not found message.
     else:
         data = {'messages': "Not found"}
     # Return the data as a JSON response
     return JsonResponse(data)
-def base_screen(request):
-    return render(request, 'layouts/base-app-pages.html', {
-        'user_name': "Carlos",
-        'title': 'Main page',
-    })
