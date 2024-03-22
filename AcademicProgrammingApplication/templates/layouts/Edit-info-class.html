@@ -6,52 +6,63 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="{% static 'styles/layouts/edit-info-class.css' %}">
-<h2>Materia - {{ subject.name }}</h2>
-<div class="table-responsive">
-  <table class="table">
-    <tbody>
-      <tr><th>Código:</th><td>{{ subject.code }}</td></tr>
-      <tr><th>NRC:</th><td>{{ subject.nrc }}</td></tr>
-      <tr><th>Créditos:</th><td>{{ subject.credits }}</td></tr>
-      <tr><th>Tipo:</th><td>{{ subject.type }}</td></tr>
-      <tr>
-        <th>Syllabus:</th>
-        <td>{{ subject.syllabus }}</td>
-        <td><button class="button-download"><img src="/static/assets/downicon.png"></button></td>
-      </tr>
-      <tr><th>Sesión:</th><td>{{ subject.num_sessions }}</td></tr>
-      <tr>
-        <th>Fecha de inicio:</th>
-        <td>{{ subject.start_date }}</td>
-        <td><button class="button-calendar-start"><img src="/static/assets/calendaricon.png"></button></td>
-      </tr>
-      <tr>
-        <th>Fecha de fin:</th>
-        <td>{{ subject.ending_date }}</td>
-        <td><button class="button-calendar-end"><img src="/static/assets/calendaricon.png"></button></td>
-      </tr>
-      <tr>
-        <th>Profesor:</th>
-        <td>{{ subject.Profesor }}</td>
-        <td><button class="button-professor"><img src="/static/assets/professoricon.png"></button></td>
-      </tr>
-      <tr>
-        <th>Modalidad:</th>
-        <td>{{ subject.modality }}</td>
-        <td><button class="button-select"><img src="/static/assets/selecticon.png"></button></td>
-      </tr>
-      <tr>
-        <th>Salón:</th>
-        <td>{{ subject.room }}</td>
-        <td><button class="button-room"><img src="/static/assets/roomicon.png"></button></td>
-      </tr>
-    </tbody>
-  </table>
+    <h2>Materia - {{ subject.name }}</h2>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <tbody>
+            <tr><th>Código:</th><td>{{ subject.code }}</td></tr>
+            <tr><th>NRC:</th><td>{{ subject.nrc }}</td></tr>
+            <tr><th>Créditos:</th><td>{{ subject.credits }}</td></tr>
+            <tr><th>Tipo:</th><td>{{ subject.type }}</td></tr>
+            <tr>
+              <th>Syllabus:</th>
+              <td>{{ subject.syllabus }}</td>
+              <td><button class="button-download"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"/></svg></button></td>
+            </tr>
+            <tr><th>Sesión:</th><td>{{ subject.num_sessions }}</td></tr>
+            <tr>
+              <th>Fecha de inicio:</th>
+              <td>{{ subject.start_date }}</td>
+              <td><button class="button-calendar-start"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1V3c0-.6-.4-1-1-1s-1 .4-1 1v1H8V3c0-.6-.4-1-1-1s-1 .4-1 1v1H5C3.3 4 2 5.3 2 7v1h20V7c0-1.7-1.3-3-3-3M2 19c0 1.7 1.3 3 3 3h14c1.7 0 3-1.3 3-3v-9H2zm15-7c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m-5-4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m-5-4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1"/></svg></button></td>
+            </tr>
+            <tr>
+              <th>Fecha de fin:</th>
+              <td>{{ subject.ending_date }}</td>
+              <td><button class="button-calendar-end"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-1V3c0-.6-.4-1-1-1s-1 .4-1 1v1H8V3c0-.6-.4-1-1-1s-1 .4-1 1v1H5C3.3 4 2 5.3 2 7v1h20V7c0-1.7-1.3-3-3-3M2 19c0 1.7 1.3 3 3 3h14c1.7 0 3-1.3 3-3v-9H2zm15-7c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m-5-4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m-5-4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1"/></svg></button></td>
+            </tr>
+            <tr>
+              <th>Profesor:</th>
+              <td>{{ subject.Profesor }}</td>
+              <td><button class="button-professor"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 12c2.5 0 4.5 2 4.5 4.5c0 .88-.25 1.71-.69 2.4l3.08 3.1L21 23.39l-3.12-3.07c-.69.43-1.51.68-2.38.68c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5m0 2a2.5 2.5 0 0 0-2.5 2.5a2.5 2.5 0 0 0 2.5 2.5a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-2.5-2.5M10 4a4 4 0 0 1 4 4c0 .91-.31 1.75-.82 2.43c-.86.32-1.63.83-2.27 1.47L10 12a4 4 0 0 1-4-4a4 4 0 0 1 4-4M2 20v-2c0-2.12 3.31-3.86 7.5-4c-.32.78-.5 1.62-.5 2.5c0 1.29.38 2.5 1 3.5z"/></svg></button></td>
+            </tr>
+            <tr>
+              <th>Modalidad:</th>
+              <td>{{ subject.modality }}</td>
+              <td><button class="button-select"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 40 40"><path fill="currentColor" d="M4.659 11.833h30.682L20 32.167z"/></svg></button></td>
+            </tr>
+            <tr>
+              <th>Salón:</th>
+              <td>{{ subject.room }}</td>
+              <td><button class="button-room"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M6 14.5H1.5v-13h21v13H18m-.5 9.5a10.6 10.6 0 0 1 1.572-5.555l.428-.695v-.25h-15v.25l.428.695A10.6 10.6 0 0 1 6.5 24m9.5-9v-3.5s-1.5-1-4-1s-4 1-4 1V15m3.85-6.5s-1.6-1-1.6-2.25a1.747 1.747 0 1 1 3.496 0c0 1.25-1.596 2.25-1.596 2.25z"/></svg></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div> 
+  <div class="col-md-6">
+     <div class="Empty"></div>
 </div>
+
 <div class="form-actions">
   <button class="btn btn-secondary">Cancelar</button>
   <button class="btn btn-primary">Guardar</button>
 </div>
+
 
 
     
