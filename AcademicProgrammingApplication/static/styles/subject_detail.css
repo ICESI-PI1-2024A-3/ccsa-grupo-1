@@ -32,6 +32,6 @@ h3 {
 }
 
 .table th {
-    background-color: #0c459b;
+    background-color: rgba(23, 104, 172, 0.9);
     color: rgb(255, 255, 255);
 }

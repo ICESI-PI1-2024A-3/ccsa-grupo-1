@@ -17,15 +17,22 @@
                 <h3>Información detallada</h3>
                 <div class="card mb-4">
                     <div class="card-body">
-                        <p><strong>Código:</strong> {{ subject.code }}</p>
-                        <p><strong>NRC:</strong> {{ subject.nrc }}</p>
-                        <p><strong>Créditos:</strong> {{ subject.credits }}</p>
-                        <p><strong>Tipo:</strong> {{ subject.type }}</p>
-                        <p><strong>Syllabus:</strong> {{ subject.syllabus }}</p>
-                        <p><strong>Fecha de inicio:</strong> {{ subject.start_date }}</p>
-                        <p><strong>Fecha de fin:</strong> {{ subject.ending_date }}</p>
-                        <p><strong>Modalidad:</strong> {{ subject.modality }}</p>
-                        <p><strong>Sesiones:</strong> {{ subject.num_sessions }}</p>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p><strong>Código:</strong> {{ subject.code }}</p>
+                                <p><strong>NRC:</strong> {{ subject.nrc }}</p>
+                                <p><strong>Créditos:</strong> {{ subject.credits }}</p>
+                                <p><strong>Tipo:</strong> {{ subject.type }}</p>
+                                <p><strong>Syllabus:</strong> {{ subject.syllabus }}</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p><strong>Fecha de inicio:</strong> {{ subject.start_date }}</p>
+                                <p><strong>Fecha de fin:</strong> {{ subject.ending_date }}</p>
+                                <p><strong>Modalidad:</strong> {{ subject.modality }}</p>
+                                <p><strong>Sesiones:</strong> {{ subject.num_sessions }}</p>
+                                <p><strong>Profesor principal:</strong> {{ subject.num_sessions }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
