@@ -102,11 +102,14 @@ def assign_teacher(request):
         teachers = Teacher.objects.filter(
             Q(name__icontains=queryset)
         ).distinct()
+    # Get the teacher searched
+    teacher = teachers.first()
     # Return the 'assign-teacher.html' template with the provided context
     return render(request, 'assign-teacher.html', {
         'user_name': user.username,
         'title': 'Asignar Profesor a Clase',
-        'teacher': teachers.first(),
+        'teacher': teacher,
+        'classes': get_classes(request, teacher),
     })
 
 
@@ -127,13 +130,15 @@ def search_teacher(request):
 
 # Get the classes associated with a given teacher ID
 def get_classes(_request, teacher_id):
-    # Get a list of dictionaries of classes filtered by the teacher's ID
-    classes = list(Class.objects.filter(teacher_id=teacher_id).values())
-    # If classes are found, return a dictionary with a success message and the classes.
-    if (len(classes) > 0):
-        data = {'messages': "Success", 'clases': classes}
-    # If no classes are found, return a dictionary with a not found message.
-    else:
-        data = {'messages': "Not found"}
-    # Return the data as a JSON response
-    return JsonResponse(data)
+    # Get the classes associated with a given teacher
+    classes = Class.objects.filter(teacher_id=teacher_id).all()
+    # Initialize the array of out
+    out = []
+    # Get the information most important of the classes
+    for session in classes:
+        out.append({
+            'title': session.subject.name,
+            'start': session.start_date.strftime('%Y-%m-%dT%H:%M:%S'),
+            'end': session.ending_date.strftime('%Y-%m-%dT%H:%M:%S')
+        })
+    return out

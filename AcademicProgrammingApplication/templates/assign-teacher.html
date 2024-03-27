@@ -57,14 +57,11 @@
     </div>
 </div>
 
-<script src="{% static '/js/assign-teacher.js' %}"></script>
 <!--  jQuery  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <!--  Full Calendar  -->
-<link rel="stylesheet" href="{% static '/fullcalendar/lib/main.css' %}">
-<script src="{% static '/fullcalendar/lib/main.js' %}"></script>
-<script src="{% static '/fullcalendar/lib/locales-all.js' %}"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 <!--  Autosuggestion of teacher in search bar  -->
 <script>
 $(function() {
@@ -87,39 +84,43 @@ $(function() {
     document.addEventListener('DOMContentLoaded', function() {
         var calendarUI = document.getElementById('schedule');
         var calendar = new FullCalendar.Calendar(calendarUI, {
-            initialView: 'timeGridWeek',
-            locale: 'es',
-            allDaySlot: false,
-            titleFormat: {
+        locale: 'es',
+        initialView: 'timeGridWeek',
+        allDaySlot: false,
+        titleFormat: {
             month: 'long',
             year: 'numeric'
-            },
-            headerToolbar: {
+        },
+        headerToolbar: {
             left: 'prev,next',
             center: 'title',
-            right: 'timeGridWeek,timeGridDay'
+            right: null
+        },
+        dayHeaderFormat: {
+          weekday: 'long',
+          day: 'numeric'
+        },
+        slotLabelFormat: {
+            hour: 'numeric',
+            minute: '2-digit',
+        },
+        slotLabelContent: function(slotInfo) {
+            var hour = slotInfo.date.getHours();
+            var meridiem = hour >= 12 ? 'PM' : 'AM';
+            return hour + ':' + slotInfo.date.getMinutes().toString().padStart(2, '0') + ' ' + meridiem;
+        },
+        events: [
+            {% for class in classes %}
+            {
+                title: '{{ class.title }}',
+                start: '{{ class.start }}',
+                end: '{{ class.end }}',
             },
-            bootstrapFontAwesome: {
-                prev: 'fa-chevron-left',
-                next: 'fa-chevron-right',
-            },
-            slotLabelFormat: {
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true
-            },
-            events: [
-                {% for class in object_list %}
-                {
-                    className: '{{ class.subject.name }}',
-                    start: '{{ class.start_date|date:"Y-m-d\\TH:i:s" }}',
-                    end: '{{ class.ending_date|date:"Y-m-d\\TH:i:s" }}',
-                },
-                {% endfor %}
-            ]
-        });
-        calendar.render();
-        calendar.updateSize();
+            {% endfor %}
+        ]
     });
+    calendar.render();
+    calendar.updateSize();
+  });
 </script>
 {% endblock %}
