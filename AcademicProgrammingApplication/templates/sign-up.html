@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block tittle-container %}
-Sing up
+Sign up
 {% endblock %}
 
 {% block largest-container-content %}
@@ -24,20 +24,33 @@ Sing up
                 </div>
                 {% endif %}
                 {% csrf_token %}
-                <div class="mb-3">
+                <div class="mb-2">
                     <label for="username">Nombre de usuario</label>
                     <input type="text" name="username" id="username" class="form-control"
                            placeholder="Ingrese su nombre de usuario">
                 </div>
+                <div class="mb-2">
+                    <label for="email">Correo electrónico</label>
+                    <input type="text" name="email" id="email" class="form-control"
+                           placeholder="Ingrese su correo electrónico">
+                </div>
 
-                <div class="mb-3">
+                <div class="mb-2">
                     <label for="password1">Contraseña</label>
                     <input type="password" name="password1" id="password1" class="form-control"
                            placeholder="Ingrese su contraseña">
-                    <label for="password2"></label>
+                    <label for="password2" type="hidden"></label>
                     <input type="password" name="password2" id="password2"
                            class="form-control"
                            placeholder="Confirme su contraseña">
+                </div>
+                <div class="mb-2">
+                    <label for="rol">Rol</label>
+                    <select class="form-select form-select-sm" id="rol" name="rol">
+                        <option value="Administrador" selected>Administrador</option>
+                        <option value="Líder de procesos">Líder de procesos</option>
+                        <option value="Asistente de procesos">Asistente de procesos</option>
+                    </select>
                 </div>
                 <button class="btn btn-primary mt-3">
                     Registrarme

@@ -22,7 +22,9 @@ def sign_up(request):
         if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.create_user(username=request.POST['username'],
-                                                password=request.POST['password1'])
+                                                password=request.POST['password1'],
+                                                email=request.POST['email'],
+                                                is_superuser=True if request.POST['rol'] == 'Administrador' else False)
                 user.save()
                 auth_login(request, user)
                 return redirect('home')
