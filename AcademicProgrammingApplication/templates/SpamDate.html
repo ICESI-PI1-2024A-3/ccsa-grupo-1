@@ -11,6 +11,10 @@
     {% csrf_token %}
     <button id="miBoton">Mostrar Alerta</button>
 
+    <form id="sendEmailForm" method="post" action="/send_email/">
+        {% csrf_token %}
+        <button type="submit">Send Email</button>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="static/js/SweetAlert.js"></script>

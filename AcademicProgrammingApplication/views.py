@@ -88,4 +88,4 @@ def send_email(request):
 
         messages.success(request, 'Email sent successfully')
         # You can return an appropriate HTTP response if desired
-        return render(request, 'spam.html')
+        return render(request, 'SpamDate.html')

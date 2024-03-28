@@ -9,5 +9,6 @@ urlpatterns = [
 
 
     # The next line is used to process the data sent from the frontend
-    path('dataProcessor_lounge/', views.data_processor_lounge , name='data_processor_lounge')
+    path('dataProcessor_lounge/', views.data_processor_lounge , name='data_processor_lounge'),
+    path('send_email/', views.send_email, name='send_email')
 ]
