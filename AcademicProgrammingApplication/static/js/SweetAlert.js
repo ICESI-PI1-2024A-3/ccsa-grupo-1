@@ -34,7 +34,6 @@ document.getElementById('miBoton').addEventListener('click', function () {
       };
 
       // Envía los datos al backend de Django
-
       fetch('/dataProcessor_lounge/', {
         method: 'POST',
         headers: {

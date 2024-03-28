@@ -16,7 +16,7 @@ class Semester(models.Model):
 
 
 class Subject(models.Model):
-    # ATRIBUTOS EXISTENTES
+    # ATTRIBUTES
     code = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, null=False, blank=False, verbose_name="Materia")
     nrc = models.CharField(max_length=200, null=False, blank=False, verbose_name="NRC")
@@ -40,21 +40,33 @@ class Subject(models.Model):
                                 verbose_name="Modalidad de la materia")
     num_sessions = models.PositiveIntegerField(null=False, blank=False, verbose_name="Cantidad de sesiones")
 
-    # ATRIBUTOS AGREGADOS
-    subject_group = models.IntegerField(verbose_name="Grupo de la materia")
-    subject_quota = models.IntegerField(verbose_name="Cupo de la materia")
-    number_hours = models.FloatField(verbose_name="Número de horas")
-    scheduled_hours = models.IntegerField(verbose_name="Horas programadas")
-    number_enrolled = models.IntegerField(verbose_name="Número de estudiantes inscritos")
-    ind_session = models.IntegerField(verbose_name="Indicador de sesión")
-    start_time = models.TimeField(verbose_name="Hora de inicio")
-    end_time = models.TimeField(verbose_name="Hora de finalización")
-    code_space = models.CharField(max_length=100, verbose_name="Código de espacio")
-    space_preference = models.CharField(max_length=100, verbose_name="Preferencia de espacio")
+    # ADDED ATTRIBUTES
+    subject_group = models.IntegerField(null=False, blank=False, verbose_name="Grupo de la materia")
+    subject_quota = models.IntegerField(null=False, blank=False, verbose_name="Cupo de la materia")
+    number_hours = models.FloatField(null=False, blank=False, verbose_name="Número de horas")
+    scheduled_hours = models.IntegerField(null=False, blank=False, verbose_name="Horas programadas")
+    number_enrolled = models.IntegerField(null=False, blank=False, verbose_name="Número de estudiantes inscritos")
+    ind_session = models.IntegerField(null=False, blank=False, verbose_name="Indicador de sesión")
+    start_time = models.TimeField(null=False, blank=False, verbose_name="Hora de inicio")
+    end_time = models.TimeField(null=False, blank=False, verbose_name="Hora de finalización")
+    code_space = models.CharField(max_length=100, null=False, blank=False, verbose_name="Código de espacio")
+    space_preference = models.CharField(max_length=100, null=False, blank=False, verbose_name="Preferencia de espacio")
 
     def __str__(self):
         return self.name
 
+
+class Student(models.Model):
+    # Atributos
+    name = models.CharField(max_length=200, null=False, blank=False, verbose_name="Nombre")
+    student_id = models.CharField(primary_key=True, max_length=200, null=False, blank=False, verbose_name="ID del estudiante")
+    id_type = models.CharField(max_length=100, null=False, blank=False, verbose_name="Tipo de ID")
+    email = models.EmailField(null=False, blank=False, verbose_name="Correo electrónico")
+    subject = models.ForeignKey('Subject', on_delete=models.CASCADE, related_name='students', verbose_name="Materia")
+    teacher = models.ForeignKey('Teacher', on_delete=models.CASCADE, related_name='students', verbose_name="Profesor de la materia")
+
+    def __str__(self):
+        return self.name
 
 class Program(models.Model):
     # ATTRIBUTES
@@ -105,6 +117,21 @@ class Teacher(models.Model):
     cellphone = models.CharField(max_length=20, null=False, blank=False, verbose_name="Teléfono celular")
     city = models.CharField(max_length=200, null=False, blank=False, verbose_name="Ciudad")
     picture = models.ImageField(upload_to='pictures/', null=False, blank=False, verbose_name="Foto del profesor")
+
+    # ADDED ATTRIBUTES
+    banner_code = models.IntegerField(null=False, blank=False, verbose_name="Código Banner")
+    document_type = models.CharField(max_length=100, null=False, blank=False, verbose_name="Tipo de documento")
+    gender = models.CharField(max_length=100, null=False, blank=False, verbose_name="Género")
+    civil_status = models.CharField(max_length=100, null=False, blank=False, verbose_name="Estado civil")
+    date_birth = models.DateField(null=False, blank=False, verbose_name="Fecha de nacimiento")
+    Nationality = models.CharField(max_length=100, null=False, blank=False, verbose_name="Nacionalidad")
+    residence_address  = models.CharField(max_length=200, null=False, blank=False, verbose_name="Dirección de residencia")
+    residence_phone = models.IntegerField(null=False, blank=False, verbose_name="Teléfono de residencia")
+    institutional_mail = models.EmailField(null=False, blank=False, verbose_name="Correo institucional")
+    preferred_mail = models.EmailField(null=False, blank=False, verbose_name="Correo preferido")
+    academic_department = models.CharField(max_length=200, null=False, blank=False, verbose_name="Departamento académico")
+    modality = models.CharField(max_length=200, null=False, blank=False, verbose_name="Modalidad")
+    educational_model = models.CharField(max_length=200, null=False, blank=False, verbose_name="Modelo educativo")
 
     def __str__(self):
         return self.name
