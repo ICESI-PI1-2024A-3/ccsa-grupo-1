@@ -11,6 +11,10 @@ Login
 <!-- Specific styles for the current page -->
 <link rel="stylesheet" href="{% static '/styles/login.css' %}">
 
+{% if request.user.is_authenticated %}
+<p>Estas logueado</p>
+<a href="{% url 'logout' %}">Salir</a>
+{% else %}
 <div id="clock-tower-photo"></div>
 <div id="login-form">
     <div id="form-elements">
@@ -51,13 +55,14 @@ Login
             </form>
         </div>
         <div id="additional-actions">
-            <a href="{% url 'sign-up' %}">
+            <a href="{% url 'sign_up' %}">
                 <p>¿Aún no tienes una cuenta? Regístrate</p>
             </a>
-            <a href="https://www.icesi.edu.co/pic_usuario_unico/newpass">
+            <a href="{% url 'password_reset' %}">
                 <p>¿Olvidó su nombre de usuario o contraseña?</p>
             </a>
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock %}

@@ -6,4 +6,3 @@ from .academic_management import *
 from .assign_teacher import *
 from .base_screen import *
 from .subject_detail import *
-from .forgot_password import *
