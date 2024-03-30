@@ -1,6 +1,7 @@
 # Import necessary modules
-from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.shortcuts import render, redirect
+
 from AcademicProgrammingApplication.models import Semester, Program
 
 
@@ -62,4 +63,46 @@ def delete_academic_program(request, program_id):
     program.delete()
 
     # Redirect the user to the home page
+    return redirect('home')
+
+
+def academic_program_edition(request, program_id):
+    # Retrieve the authenticated user
+    user = request.user
+    program = Program.objects.get(id=program_id)
+    modalities = Program.objects.values_list('modality', flat=True).distinct()
+    types = Program.objects.values_list('type', flat=True).distinct()
+
+    return render(request, 'academic-program-edition.html', {
+        'title': 'Programación académica',
+        'user_name': user.username,
+        "program": program,
+        "modalities": modalities,
+        "types": types,
+    })
+
+
+def edit_academic_program(request, program_id):
+    print(request.POST)
+    name = request.POST.get('name')
+    program_type = request.POST.get('type')
+    faculty = request.POST.get('faculty')
+    modality = request.POST.get('modality')
+    program_manager = request.POST.get('program_manager')
+    duration = request.POST.get('duration')
+    cost = request.POST.get('cost')
+    curriculum = request.POST.get('curriculum')
+
+    program = Program.objects.get(id=program_id)
+    program.name = name
+    program.type = program_type
+    program.faculty = faculty
+    program.modality = modality
+    program.director = program_manager
+    program.duration = int(duration)
+    program.cost = cost
+    if curriculum:
+        program.curriculum = curriculum
+    program.save()
+
     return redirect('home')
