@@ -1,5 +1,5 @@
 from .login import *
-from .signup import *
+from .sign_up import *
 from .logout import *
 from .error_404 import *
 from .academic_management import *
