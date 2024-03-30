@@ -83,26 +83,31 @@ def academic_program_edition(request, program_id):
 
 
 def edit_academic_program(request, program_id):
-    print(request.POST)
-    name = request.POST.get('name')
-    program_type = request.POST.get('type')
-    faculty = request.POST.get('faculty')
-    modality = request.POST.get('modality')
-    program_manager = request.POST.get('program_manager')
-    duration = request.POST.get('duration')
-    cost = request.POST.get('cost')
-    curriculum = request.FILES.get('curriculum')
+    # return redirect('home')
+    try:
+        # print(request.POST)
+        name = request.POST.get('name')
+        program_type = request.POST.get('type')
+        faculty = request.POST.get('faculty')
+        modality = request.POST.get('modality')
+        program_manager = request.POST.get('program_manager')
+        duration = request.POST.get('duration')
+        cost = request.POST.get('cost')
+        curriculum = request.FILES.get('curriculum')
 
-    program = Program.objects.get(id=program_id)
-    program.name = name
-    program.type = program_type
-    program.faculty = faculty
-    program.modality = modality
-    program.director = program_manager
-    program.duration = int(duration)
-    program.cost = cost
-    if curriculum:
-        program.curriculum = request.FILES['curriculum']
-    program.save()
+        program = Program.objects.get(id=program_id)
+        program.name = name
+        program.type = program_type
+        program.faculty = faculty
+        program.modality = modality
+        program.director = program_manager
+        program.duration = int(duration)
+        program.cost = cost
+        if curriculum:
+            program.curriculum = request.FILES['curriculum']
+        program.save()
 
+    except Exception as e:
+        # In case of error, it sends a failure response.
+        print(e)
     return redirect('home')
