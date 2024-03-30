@@ -91,7 +91,7 @@ def edit_academic_program(request, program_id):
     program_manager = request.POST.get('program_manager')
     duration = request.POST.get('duration')
     cost = request.POST.get('cost')
-    curriculum = request.POST.get('curriculum')
+    curriculum = request.FILES.get('curriculum')
 
     program = Program.objects.get(id=program_id)
     program.name = name
@@ -102,7 +102,7 @@ def edit_academic_program(request, program_id):
     program.duration = int(duration)
     program.cost = cost
     if curriculum:
-        program.curriculum = curriculum
+        program.curriculum = request.FILES['curriculum']
     program.save()
 
     return redirect('home')

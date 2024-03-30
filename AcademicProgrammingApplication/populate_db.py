@@ -126,10 +126,10 @@ class ProgramFactory(factory.django.DjangoModelFactory):
             for subject in extracted['subjects']:
                 self.subjects.add(subject)
         else:
-            # Add semesters and subjects randomly from the database.
+            # Adds semesters and subjects from the database.
             semesters = Semester.objects.all()
             subjects = Subject.objects.all()
-            self.semesters.add(*random.sample(list(semesters), random.randint(1, 4)))
+            self.semesters.add(*semesters)  # Associate all available semesters
             self.subjects.add(*random.sample(list(subjects), random.randint(2, 6)))  # Add between 2 and 6 subjects
 
 
