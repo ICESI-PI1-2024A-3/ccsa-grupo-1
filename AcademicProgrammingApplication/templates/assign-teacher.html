@@ -6,7 +6,7 @@
 
 <div class="subject-info">
     <div class="form-floating">
-        <input type="text" readonly class="form-control-plaintext" id="subject-input" value="POR DEFINIR">
+        <input type="text" readonly class="form-control-plaintext" id="subject-input" value="{{ new_class.title }}">
         <label for="subject-input">Nombre de la materia:</label>
     </div>
 </div>
@@ -23,6 +23,16 @@
         </div>
     </form>
 </div>
+
+<!-- Alert of overlap of classes -->
+{% if overlap_alert %}
+<div class="alert-container">
+    <div class="alert alert-warning" role="alert">
+        No es posible asignar esta clase al profesor en este horario debido a un solapamiento con otra clase existente.
+    </div>
+</div>
+{% endif %}
+
 
 <div class="teacher-info">
     <h5 class="professor-info-heading">Información básica del profesor</h5>
@@ -110,13 +120,24 @@ $(function() {
             return hour + ':' + slotInfo.date.getMinutes().toString().padStart(2, '0') + ' ' + meridiem;
         },
         events: [
+            // Existing classes
             {% for class in classes %}
             {
                 title: '{{ class.title }}',
                 start: '{{ class.start }}',
                 end: '{{ class.end }}',
+                classNames: ['existing-class-event']
             },
             {% endfor %}
+            // New class
+            {% if new_class %}
+            {
+                title: '{{ new_class.title }}',
+                start: '{{ new_class.start }}',
+                end: '{{ new_class.end }}',
+                classNames: ['new-class-event']
+            },
+            {% endif %}
         ]
     });
     calendar.render();

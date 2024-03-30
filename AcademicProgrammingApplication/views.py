@@ -91,8 +91,17 @@ def error_404(request, exception):
 
 
 # This function assigns a teacher to a class.
-def assign_teacher(request):
+from django.db.models import Q
+
+def assign_teacher(request, class_id):
     user = request.user
+    # Get the class to assign
+    new_class = Class.objects.filter(id=class_id).first()
+    new_class_formatted = {
+        'title': new_class.subject.name,
+        'start': new_class.start_date.strftime('%Y-%m-%dT%H:%M:%S'),
+        'end': new_class.ending_date.strftime('%Y-%m-%dT%H:%M:%S')
+    }
     # Get the value of the 'search' parameter from the GET request
     queryset = request.GET.get('search')
     # Filter teachers who are in the 'Active' state
@@ -104,13 +113,32 @@ def assign_teacher(request):
         ).distinct()
     # Get the teacher searched
     teacher = teachers.first()
-    # Return the 'assign-teacher.html' template with the provided context
-    return render(request, 'assign-teacher.html', {
-        'user_name': user.username,
-        'title': 'Asignar Profesor a Clase',
-        'teacher': teacher,
-        'classes': get_classes(request, teacher),
-    })
+    # Check for overlapping classes
+    overlapping_classes = Class.objects.filter(
+        teacher=teacher,
+        start_date__lt=new_class.ending_date,
+        ending_date__gt=new_class.start_date
+    )
+    # If there are overlapping classes, show an alert
+    if overlapping_classes.exists():
+        return render(request, 'assign-teacher.html', {
+            'user_name': user.username,
+            'title': 'Asignar Profesor a Clase',
+            'teacher': teacher,
+            'classes': get_classes(request, teacher),
+            'new_class': new_class_formatted,
+            'overlap_alert': True,
+        })
+    # If there are no overlapping classes, proceed with assigning the class
+    else:
+        return render(request, 'assign-teacher.html', {
+            'user_name': user.username,
+            'title': 'Asignar Profesor a Clase',
+            'teacher': teacher,
+            'classes': get_classes(request, teacher),
+            'new_class': new_class_formatted,
+        })
+
 
 
 # Function to search for teachers based on an entered term.

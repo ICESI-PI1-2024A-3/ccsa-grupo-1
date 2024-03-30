@@ -18,6 +18,21 @@ label {
     font-weight: bold;
 }
 
+/* Estilos para la alerta de solapamiento de clases */
+.alert-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert {
+    width: 80%;
+    border: 1px solid transparent;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
 /* Estilos para la información del profesor */
 .professor-info-heading {
     font-weight: bolder;
@@ -75,8 +90,14 @@ label {
         opacity: 1;
     }
 
+    /* Estilos para los eventos de la nueva clase */
+    .new-class-event {
+        background-color: grey !important;
+        border: black !important;
+    }
+
     /* Estilos generales para los eventos */
-    .fc-event-main {
+    .existing-class-event {
         background-color: rgba(23, 104, 172, 0.9);
         color: white;
     }
