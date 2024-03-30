@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from AcademicProgrammingApplication.models import Semester, Program
 
@@ -34,3 +34,9 @@ def academic_management(request):
         'semester': semester,
         'subjects': subjects,
     })
+
+
+def delete_academic_program(request, program_id):
+    program = Program.objects.get(id=program_id)
+    program.delete()
+    return redirect('home')
