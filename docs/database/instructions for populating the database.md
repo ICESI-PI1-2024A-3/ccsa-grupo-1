@@ -1,18 +1,28 @@
 ## Instrucciones para poblar la base de datos utilizando la clase `populate_db.py`
 
-1. Abre una consola e ingresa el siguiente comando:
+**IMPORTANTE:** El paso 1 solo debe realizarse si es la primera vez que va a utilizar la biblioteca `factory-boy` en el
+proyecto.
+
+1. Abre la carpeta del proyecto en tu explorador de archivos y luego abre una terminal. En esa terminal, introduce el
+   siguiente comando para instalar la biblioteca utilizada en la simulación de datos:
+
+``` Shell
+pip install factory-boy
+```
+
+2. Abre una consola e ingresa el siguiente comando:
 
 ``` Shell
    python manage.py shell
 ```
 
-2. Importa todas las fábricas desde la clase de fábrica con el siguiente comando:
+3. Importa todas las fábricas desde la clase de fábrica con el siguiente comando:
 
 ``` Python
 from AcademicProgrammingApplication.populate_db import SemesterFactory, SubjectFactory, ProgramFactory, TeacherFactory, ClassFactory, ContractFactory, ViaticFactory
 ```
 
-3. Crea las instancias con sus respectivas fábricas según sea necesario. Por ejemplo, para poblar la base de datos con
+4. Crea las instancias con sus respectivas fábricas según sea necesario. Por ejemplo, para poblar la base de datos con
    10 profesores:
 
 ``` Python
