@@ -1,7 +1,11 @@
-.custom-width {
-    width: 5%; /* o cualquier otro valor que desees */
+.container {
+    padding: 20px;
+    max-width: 100%;
 }
 
+h1, h2, h3 {
+    text-align: left;
+}
 
 /* Estilo para los iconos */
 .button-download,
