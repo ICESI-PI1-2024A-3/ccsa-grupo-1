@@ -6,7 +6,7 @@
 
 <div class="subject-info">
     <div class="form-floating">
-        <input type="text" readonly class="form-control-plaintext" id="subject-input" value="POR DEFINIR">
+        <input type="text" readonly class="form-control-plaintext" id="subject-input" value="{{ new_class.title }}">
         <label for="subject-input">Nombre de la materia:</label>
     </div>
 </div>
@@ -23,6 +23,16 @@
         </div>
     </form>
 </div>
+
+<!-- Alert of overlap of classes -->
+{% if overlap_alert %}
+<div class="alert-container">
+    <div class="alert alert-warning" role="alert">
+        No es posible asignar esta clase al profesor en este horario debido a un solapamiento con otra clase existente.
+    </div>
+</div>
+{% endif %}
+
 
 <div class="teacher-info">
     <h5 class="professor-info-heading">Información básica del profesor</h5>
@@ -50,34 +60,18 @@
 
 <div class="schedule-info">
     <h5 class="schedule-heading">Horario de clases del profesor</h5>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Hora</th>
-                    <th>Lunes</th>
-                    <th>Martes</th>
-                    <th>Miércoles</th>
-                    <th>Jueves</th>
-                    <th>Viernes</th>
-                    <th>Sábado</th>
-                    <th>Domingo</th>
-                </tr>
-            </thead>
-            <tbody id="schedule-body">
-            </tbody>
-        </table>
-    </div>
+    <div class="schedule-table" id="schedule"></div>
     <div class="text-center">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <button type="reset" class="btn btn-secondary">Cancelar</button>
     </div>
 </div>
 
-<script src="{% static '/js/assign-teacher.js' %}"></script>
 <!--  jQuery  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!--  Full Calendar  -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 <!--  Autosuggestion of teacher in search bar  -->
 <script>
 $(function() {
@@ -94,5 +88,60 @@ $(function() {
         }
     });
 });
+</script>
+<!-- Schedule of classes  -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarUI = document.getElementById('schedule');
+        var calendar = new FullCalendar.Calendar(calendarUI, {
+        locale: 'es',
+        initialView: 'timeGridWeek',
+        allDaySlot: false,
+        titleFormat: {
+            month: 'long',
+            year: 'numeric'
+        },
+        headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: null
+        },
+        dayHeaderFormat: {
+          weekday: 'long',
+          day: 'numeric'
+        },
+        slotLabelFormat: {
+            hour: 'numeric',
+            minute: '2-digit',
+        },
+        slotLabelContent: function(slotInfo) {
+            var hour = slotInfo.date.getHours();
+            var meridiem = hour >= 12 ? 'PM' : 'AM';
+            return hour + ':' + slotInfo.date.getMinutes().toString().padStart(2, '0') + ' ' + meridiem;
+        },
+        events: [
+            // Existing classes
+            {% for class in classes %}
+            {
+                title: '{{ class.title }}',
+                start: '{{ class.start }}',
+                end: '{{ class.end }}',
+                classNames: ['existing-class-event']
+            },
+            {% endfor %}
+            // New class
+            {% if new_class %}
+            {
+                title: '{{ new_class.title }}',
+                start: '{{ new_class.start }}',
+                end: '{{ new_class.end }}',
+                classNames: ['new-class-event']
+            },
+            {% endif %}
+        ]
+    });
+    calendar.render();
+    calendar.updateSize();
+  });
 </script>
 {% endblock %}
