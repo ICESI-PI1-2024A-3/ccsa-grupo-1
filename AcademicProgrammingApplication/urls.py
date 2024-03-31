@@ -6,7 +6,6 @@ urlpatterns = [
     path('', views.login, name='login'),
 
     # Lines used to see how the base HTML looks like
-    path('edit', views.edit_screen, name='edit'),
 
 #This will change     
 #   path('editSubject/<int:nrc>',SubjectFormView.edit, name='editSubject'),
@@ -20,6 +19,7 @@ urlpatterns = [
     path('search/', login_required(views.search_teacher), name='search_teacher'),
     path('classes/<int:teacher_id>', login_required(views.get_classes), name='get_classes'),
     path('subject/<int:subject_id>/', views.subject_detail, name='subject_detail'),
+    path('edit/<int:class_id>', views.edit_info_class, name='edit_info_class'),
     # Lines used to see how the base HTML looks like
     path('base', views.base_screen, name='base'),
 ]
