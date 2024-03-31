@@ -7,6 +7,15 @@ from AcademicProgrammingApplication.models import Semester, Program
 
 # Define a view function for managing academic programming
 def academic_management(request):
+    """
+    View function for managing academic programming.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered HTML page displaying academic management information.
+    """
     # Retrieve the authenticated user
     user = request.user
 
@@ -58,6 +67,16 @@ def academic_management(request):
 
 # Define a view function for deleting an academic program
 def delete_academic_program(request, program_id):
+    """
+    Deletes an academic program.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+        program_id (int): The ID of the program to be deleted.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the home page.
+    """
     # Retrieve the program instance to be deleted
     program = Program.objects.get(id=program_id)
 
@@ -69,6 +88,16 @@ def delete_academic_program(request, program_id):
 
 
 def academic_program_edition(request, program_id):
+    """
+    Renders a page for editing an academic program.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+        program_id (int): The ID of the program to be edited.
+
+    Returns:
+        HttpResponse: Rendered HTML page for program editing.
+    """
     # Retrieve the authenticated user
     user = request.user
     program = Program.objects.get(id=program_id)
@@ -85,9 +114,17 @@ def academic_program_edition(request, program_id):
 
 
 def edit_academic_program(request, program_id):
-    # return redirect('home')
+    """
+    Handles the editing of an academic program.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+        program_id (int): The ID of the program to be edited.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the previous page.
+    """
     try:
-        # print(request.POST)
         name = request.POST.get('name')
         program_type = request.POST.get('type')
         faculty = request.POST.get('faculty')
