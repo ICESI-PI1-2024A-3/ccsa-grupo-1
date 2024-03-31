@@ -149,3 +149,4 @@ def base_screen(request):
         'user_name': "Carlos",
         'title': 'Main page',
     })
+
