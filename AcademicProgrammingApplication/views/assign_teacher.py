@@ -5,8 +5,15 @@ from AcademicProgrammingApplication.models import Class, Teacher
 
 
 # This function assigns a teacher to a class.
-def assign_teacher(request):
+def assign_teacher(request, class_id):
     user = request.user
+    # Get the class to assign
+    new_class = Class.objects.filter(id=class_id).first()
+    new_class_formatted = {
+        'title': new_class.subject.name,
+        'start': new_class.start_date.strftime('%Y-%m-%dT%H:%M:%S'),
+        'end': new_class.ending_date.strftime('%Y-%m-%dT%H:%M:%S')
+    }
     # Get the value of the 'search' parameter from the GET request
     queryset = request.GET.get('search')
     # Filter teachers who are in the 'Active' state
@@ -16,12 +23,33 @@ def assign_teacher(request):
         teachers = Teacher.objects.filter(
             Q(name__icontains=queryset)
         ).distinct()
-    # Return the 'assign-teacher.html' template with the provided context
-    return render(request, 'assign-teacher.html', {
-        'user_name': user.username,
-        'title': 'Asignar Profesor a Clase',
-        'teacher': teachers.first(),
-    })
+    # Get the teacher searched
+    teacher = teachers.first()
+    # Check for overlapping classes
+    overlapping_classes = Class.objects.filter(
+        teacher=teacher,
+        start_date__lt=new_class.ending_date,
+        ending_date__gt=new_class.start_date
+    )
+    # If there are overlapping classes, show an alert
+    if overlapping_classes.exists():
+        return render(request, 'assign-teacher.html', {
+            'user_name': user.username,
+            'title': 'Asignar Profesor a Clase',
+            'teacher': teacher,
+            'classes': get_classes(request, teacher),
+            'new_class': new_class_formatted,
+            'overlap_alert': True,
+        })
+    # If there are no overlapping classes, proceed with assigning the class
+    else:
+        return render(request, 'assign-teacher.html', {
+            'user_name': user.username,
+            'title': 'Asignar Profesor a Clase',
+            'teacher': teacher,
+            'classes': get_classes(request, teacher),
+            'new_class': new_class_formatted,
+        })
 
 
 # Function to search for teachers based on an entered term.
@@ -41,13 +69,15 @@ def search_teacher(request):
 
 # Get the classes associated with a given teacher ID
 def get_classes(_request, teacher_id):
-    # Get a list of dictionaries of classes filtered by the teacher's ID
-    classes = list(Class.objects.filter(teacher_id=teacher_id).values())
-    # If classes are found, return a dictionary with a success message and the classes.
-    if len(classes) > 0:
-        data = {'messages': "Success", 'clases': classes}
-    # If no classes are found, return a dictionary with a not found message.
-    else:
-        data = {'messages': "Not found"}
-    # Return the data as a JSON response
-    return JsonResponse(data)
+    # Get the classes associated with a given teacher
+    classes = Class.objects.filter(teacher_id=teacher_id).all()
+    # Initialize the array of out
+    out = []
+    # Get the information most important of the classes
+    for session in classes:
+        out.append({
+            'title': session.subject.name,
+            'start': session.start_date.strftime('%Y-%m-%dT%H:%M:%S'),
+            'end': session.ending_date.strftime('%Y-%m-%dT%H:%M:%S')
+        })
+    return out

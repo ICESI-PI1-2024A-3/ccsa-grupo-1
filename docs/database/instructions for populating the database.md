@@ -38,7 +38,7 @@ SemesterFactory.create_batch(9)
 SubjectFactory.create_batch(20)
 ProgramFactory.create_batch(5)
 TeacherFactory.create_batch(10)
-ClassFactory.create_batch(40) 
+ClassFactory.create_batch(200) 
 ContractFactory.create_batch(10)
 ViaticFactory.create_batch(10)
 ```
