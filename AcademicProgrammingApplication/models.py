@@ -77,8 +77,8 @@ class Program(models.Model):
     cost = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False,
                                verbose_name="Costo de matricula")
     TYPE_CHOICES = [
-        ('ESPECIALIZACION', 'Especialización'),
-        ('MAESTRIA', 'Maestría'),
+        ('ESPECIALIZACIÓN', 'Especialización'),
+        ('MAESTRÍA', 'Maestría'),
         ('DOCTORADO', 'Doctorado'),
     ]
     type = models.CharField(max_length=200, choices=TYPE_CHOICES, null=False, blank=False,
@@ -97,12 +97,9 @@ class Program(models.Model):
 
     # RELATIONS
     semesters = models.ManyToManyField(Semester,
-                                       verbose_name="Semestres asociados")  # A program can be associated with many
-    # semesters and a semester can be related to many programs
+                                       verbose_name="Semestres asociados")  # A program can be associated with many semesters and a semester can be related to many programs
     subjects = models.ManyToManyField(Subject,
-                                      verbose_name="Materias de programas")  # A program can be associated with many
-
-    # subjects and a subject can be related to many programs
+                                      verbose_name="Materias de programas")  # A program can be associated with many subjects and a subject can be related to many programs
 
     def __str__(self):
         return self.name
@@ -116,6 +113,12 @@ class Teacher(models.Model):
     email = models.EmailField(null=False, blank=False, verbose_name="Correo electrónico")
     cellphone = models.CharField(max_length=20, null=False, blank=False, verbose_name="Teléfono celular")
     city = models.CharField(max_length=200, null=False, blank=False, verbose_name="Ciudad")
+    STATES_CHOICES = [
+        ('ACTIVO', 'Activo'),
+        ('INACTIVO', 'Inactivo'),
+    ]
+    state = models.CharField(max_length=200, choices=STATES_CHOICES, default='Activo', null=False, blank=False,
+                             verbose_name="Estado")
     picture = models.ImageField(upload_to='pictures/', null=False, blank=False, verbose_name="Foto del profesor")
 
     # ADDED ATTRIBUTES
@@ -153,12 +156,9 @@ class Class(models.Model):
 
     # RELATIONS
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE,
-                                verbose_name="Materia asociada")  # A subject is related to many classes, but a class
-    # only to one subject
+                                verbose_name="Materia asociada")  # A subject is related to many classes, but a class only to one subject
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,
-                                verbose_name="Profesor asociado")  # A teacher can teach many classes, but a class
-
-    # can only have one teacher
+                                verbose_name="Profesor asociado")  # A teacher can teach many classes, but a class can only have one teacher
 
     def save(self, *args, **kwargs):
         if self.modality == 'PRESENCIAL':
@@ -187,9 +187,7 @@ class Contract(models.Model):
 
     # RELATIONS
     id_teacher = models.OneToOneField(Teacher, on_delete=models.CASCADE, primary_key=True, null=False, blank=False,
-                                      verbose_name="Profesor asociado")  # A teacher must have a contract and a
-
-    # contract must be associated with a teacher
+                                      verbose_name="Profesor asociado")  # A teacher must have a contract and a contract must be associated with a teacher
 
     def __str__(self):
         return self.id
@@ -203,9 +201,7 @@ class Viatic(models.Model):
 
     # RELATIONS
     id_teacher = models.OneToOneField(Teacher, on_delete=models.CASCADE, primary_key=True, null=False, blank=False,
-                                      verbose_name="Profesor asociado")  # A teacher can have per diem associated
-
-    # with it and a per diem must be associated with a teacher
+                                      verbose_name="Profesor asociado")  # A teacher can have per diem associated with it and a per diem must be associated with a teacher
 
     def __str__(self):
         transport = "Sí" if self.transport else "No"

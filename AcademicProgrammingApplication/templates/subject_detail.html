@@ -1,0 +1,67 @@
+{% extends "layouts/base-app-pages.html" %}
+{% load static %}
+
+{% block title-container %}
+<title>{{title}}</title>
+{% endblock %}
+
+{% block main-container-content %}
+<div class="bootstrap-container">
+    
+    <link rel="stylesheet" href="{% static '/styles/subject_detail.css' %}">
+
+    <div class="container bg-white p-4">
+        <h2>Materia - {{ subject.name }}</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Información detallada</h3>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p><strong>Código:</strong> {{ subject.code }}</p>
+                        <p><strong>NRC:</strong> {{ subject.nrc }}</p>
+                        <p><strong>Créditos:</strong> {{ subject.credits }}</p>
+                        <p><strong>Tipo:</strong> {{ subject.type }}</p>
+                        <p><strong>Syllabus:</strong> {{ subject.syllabus }}</p>
+                        <p><strong>Fecha de inicio:</strong> {{ subject.start_date }}</p>
+                        <p><strong>Fecha de fin:</strong> {{ subject.ending_date }}</p>
+                        <p><strong>Modalidad:</strong> {{ subject.modality }}</p>
+                        <p><strong>Sesiones:</strong> {{ subject.num_sessions }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Sesiones</h3>
+                <div class="table-responsive mb-4">
+                    <table class="table table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>SESIÓN</th>
+                                <th>FECHA DE INICIO</th>
+                                <th>FECHA DE FIN</th>
+                                <th>PROFESOR</th>
+                                <th>MODALIDAD</th>
+                                <th>ESPACIO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for class in classes %}
+                                <tr>
+                                    <td>{{ class.id }}</td>
+                                    <td>{{ class.start_date }}</td>
+                                    <td>{{ class.ending_date }}</td>
+                                    <td>{{ class.teacher.name }}</td>
+                                    <td>{{ class.modality }}</td>
+                                    <td>{{ class.classroom }}{{ class.link }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

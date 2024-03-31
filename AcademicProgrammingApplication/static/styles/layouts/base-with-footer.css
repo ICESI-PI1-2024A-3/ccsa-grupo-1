@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Poppins, Source Sans Pro, serif;
+    overflow: hidden;
 }
 
 p {
@@ -10,7 +11,7 @@ p {
 }
 
 #container {
-    height: 95vh;
+    height: 93vh;
     display: flex;
 }
 

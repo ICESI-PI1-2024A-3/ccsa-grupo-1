@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    padding: 20px;
+    max-width: 100%; /* Contenedor al ancho de la página */
+}
+
+h1, h2, h3 {
+    text-align: left; /* Titulos a la izquierda */
+}
+
+h2 {
+    font-size: 1.7em;
+}
+
+h3 {
+    font-size: 1.4em;
+}
+
+.card {
+    border: 1px solid #ddd;
+    font-size: 0.8em;
+}
+
+.table {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
+}
+
+.table th {
+    background-color: #0c459b;
+    color: rgb(255, 255, 255);
+}
