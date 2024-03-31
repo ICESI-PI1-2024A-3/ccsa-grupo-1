@@ -27,5 +27,6 @@ urlpatterns = [
          name='academic_program_edition'),
     path('home/edit_academic_program/<int:program_id>/', views.edit_academic_program,
          name='edit_academic_program'),
+    path('edit_class/<int:class_id>/', views.edit_info_class, name='edit_info_class'),
     path('request_classroom', views.request_classroom, name='request_classroom'),
 ]
