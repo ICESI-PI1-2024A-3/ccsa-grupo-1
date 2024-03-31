@@ -1,23 +1,14 @@
 .container {
     padding: 20px;
-    max-width: 100%; /* Contenedor al ancho de la página */
+    max-width: 100%; /* Container to page width */
 }
 
 h1, h2, h3 {
-    text-align: left; /* Titulos a la izquierda */
-}
-
-h2 {
-    font-size: 1.7em;
-}
-
-h3 {
-    font-size: 1.4em;
+    text-align: left; /* Titles on the left */
 }
 
 .card {
     border: 1px solid #ddd;
-    font-size: 0.8em;
 }
 
 .table {

@@ -44,6 +44,8 @@ def academic_management(request):
                          'verifica que la información ingresada sea correcta e intentalo nuevamente.',
             })
 
+    request.session['program_search_url'] = request.build_absolute_uri()
+
     # Render the academic management page with necessary context data
     return render(request, 'academic-management.html', {
         'title': 'Programación académica',
@@ -106,8 +108,8 @@ def edit_academic_program(request, program_id):
         if curriculum:
             program.curriculum = request.FILES['curriculum']
         program.save()
-
+        return redirect(request.session.get('program_search_url', 'home'))
     except Exception as e:
         # In case of error, it sends a failure response.
         print(e)
-    return redirect('home')
+        return redirect('home')

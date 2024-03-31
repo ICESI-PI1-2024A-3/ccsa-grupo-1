@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from AcademicProgrammingApplication.models import Class
 
+
 def edit_info_class(request, class_id):
     user = request.user
     # Get the class
@@ -9,4 +10,4 @@ def edit_info_class(request, class_id):
         'user_name': user.username,
         'title': 'Gestión de clases',
         'class': edit_class,
-     })
+    })
