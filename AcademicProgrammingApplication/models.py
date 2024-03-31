@@ -53,8 +53,8 @@ class Program(models.Model):
     cost = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False,
                                verbose_name="Costo de matricula")
     TYPE_CHOICES = [
-        ('ESPECIALIZACION', 'Especialización'),
-        ('MAESTRIA', 'Maestría'),
+        ('ESPECIALIZACIÓN', 'Especialización'),
+        ('MAESTRÍA', 'Maestría'),
         ('DOCTORADO', 'Doctorado'),
     ]
     type = models.CharField(max_length=200, choices=TYPE_CHOICES, null=False, blank=False,

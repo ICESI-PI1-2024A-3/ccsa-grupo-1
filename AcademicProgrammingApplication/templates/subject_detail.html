@@ -17,15 +17,23 @@
                 <h3>Información detallada</h3>
                 <div class="card mb-4">
                     <div class="card-body">
-                        <p><strong>Código:</strong> {{ subject.code }}</p>
-                        <p><strong>NRC:</strong> {{ subject.nrc }}</p>
-                        <p><strong>Créditos:</strong> {{ subject.credits }}</p>
-                        <p><strong>Tipo:</strong> {{ subject.type }}</p>
-                        <p><strong>Syllabus:</strong> {{ subject.syllabus }}</p>
-                        <p><strong>Fecha de inicio:</strong> {{ subject.start_date }}</p>
-                        <p><strong>Fecha de fin:</strong> {{ subject.ending_date }}</p>
-                        <p><strong>Modalidad:</strong> {{ subject.modality }}</p>
-                        <p><strong>Sesiones:</strong> {{ subject.num_sessions }}</p>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="info-detallada">
+                                    <dl>
+                                        <dt>Código:</dt><dd>{{ subject.code }}</dd>
+                                        <dt>NRC:</dt><dd>{{ subject.nrc }}</dd>
+                                        <dt>Créditos:</dt><dd>{{ subject.credits }}</dd>
+                                        <dt>Tipo:</dt><dd>{{ subject.type }}</dd>
+                                        <dt>Syllabus:</dt><dd>{{ subject.syllabus }}</dd>
+                                        <dt>Fecha de inicio:</dt><dd>{{ subject.start_date }}</dd>
+                                        <dt>Fecha de fin:</dt><dd>{{ subject.ending_date }}</dd>
+                                        <dt>Modalidad:</dt><dd>{{ subject.modality }}</dd>
+                                        <dt>Sesiones:</dt><dd>{{ subject.num_sessions }}</dd>
+                                    </dl>
+                                </div>                                       
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
