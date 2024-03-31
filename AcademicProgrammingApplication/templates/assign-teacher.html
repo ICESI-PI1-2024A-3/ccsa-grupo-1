@@ -61,10 +61,14 @@
 <div class="schedule-info">
     <h5 class="schedule-heading">Horario de clases del profesor</h5>
     <div class="schedule-table" id="schedule"></div>
-    <div class="text-center">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <button type="reset" class="btn btn-secondary">Cancelar</button>
-    </div>
+    <form id="assign-form" method="post" action="{% url 'assign_teacher' new_class.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="teacher_id" value="{{ teacher.id }}">
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" {% if overlap_alert %} disabled {% endif %}>Guardar</button>
+            <a href="{% url 'edit_info_class' new_class.id %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>    
 </div>
 
 <!--  jQuery  -->
