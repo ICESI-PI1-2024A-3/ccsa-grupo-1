@@ -7,7 +7,3 @@ def base_screen(request):
         'user_name': "User",
         'title': 'Main page',
     })
-
-
-def request_classroom(request):
-    return render(request, 'request-classroom.html')
