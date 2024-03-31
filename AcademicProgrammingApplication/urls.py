@@ -27,5 +27,5 @@ urlpatterns = [
          name='academic_program_edition'),
     path('home/edit_academic_program/<int:program_id>/', views.edit_academic_program,
          name='edit_academic_program'),
-    path('request_classroom', views.request_classroom, name='spam'),
+    path('request_classroom', views.request_classroom, name='request_classroom'),
 ]
