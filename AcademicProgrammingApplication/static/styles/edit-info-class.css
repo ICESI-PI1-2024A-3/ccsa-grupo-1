@@ -1,0 +1,33 @@
+.container {
+    padding: 20px;
+    max-width: 100%;
+}
+
+h1, h2, h3 {
+    text-align: left;
+}
+
+/* Estilo para los iconos */
+.button-download,
+.button-calendar-start,
+.button-calendar-end,
+.button-professor,
+.button-select,
+.button-room {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Estilo para el botón de guardar y cancelar */
+.btn-primary {
+    background-color: rgba(23, 104, 172, 0.9);
+    color: white;
+    border-color: rgba(23, 104, 172, 0.9);
+}
+
+.btn-secondary {
+    background-color: rgba(108, 117, 125);
+    color: white;
+    border-color: rgba(108, 117, 125);
+}
