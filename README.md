@@ -114,15 +114,19 @@ Los nombres de las clases deben seguir la convención CapWords. Los nombres de l
 
 Para ejecutar las pruebas de una prueba específica en el proyecto de Django, utiliza el siguiente comando en la terminal, ubicandote en la carpeta raíz del proyecto:
 
+```bash
 python manage.py test <ruta_de_la_prueba>
+```
 
-Reemplaza <ruta_de_la_prueba> con la ruta a la prueba que deseas ejecutar. 
+Reemplaza '<ruta_de_la_prueba>' con la ruta a la prueba que deseas ejecutar. 
 
 Por ejemplo:
 
+```bash
 python manage.py test AcademicProgrammingApplication.tests.views.test_assign_teacher
+```
 
-Este comando ejecutará la prueba test_assign_teacher ubicada en el archivo test_assign_teacher.py dentro del directorio views de tests en la aplicación AcademicProgrammingApplication.
+Este comando ejecutará la prueba 'test_assign_teacher' ubicada en el archivo 'test_assign_teacher.py' dentro del directorio views de tests en la aplicación AcademicProgrammingApplication.
 
 ## Enlaces de Interés
 - Jira: [Programación Académica - Grupo 1](https://proyecto-integrador1-grupo1.atlassian.net/jira/software/projects/PAG1/boards/2?atlOrigin=eyJpIjoiMmJlZWRiMDk1NmVmNDc1ZDkwNTY3Yjc3YjU5Y2I0NjciLCJwIjoiaiJ9)
