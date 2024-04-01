@@ -90,16 +90,3 @@ def send_email(request):
         # You can return an appropriate HTTP response if desired
         return render(request, 'edit-info-class.html')
 
-@csrf_exempt
-def virtual_class(request):
-    if request.method == 'POST':
-        # Check if the form for the virtual class has been submitted
-        if request.POST.get('action') == 'class_virtual':
-            # Perform actions related to the virtual class
-            # For example, display an alert or process received data
-
-            #Return a JSON response (optional)
-            return JsonResponse({'message': 'Clase virtual solicitada'})
-
-    # Handle other cases or return a default response
-    return JsonResponse({'message': 'Petición no válida'})
