@@ -159,8 +159,11 @@ class ClassFactory(factory.django.DjangoModelFactory):
     classroom = factory.Faker('random_element',
                               elements=['Classroom A', 'Classroom B', 'Classroom C', 'Classroom D', 'Classroom E'])
     link = factory.Faker('url')
-    subject = factory.SubFactory(SubjectFactory)
-    teacher = factory.SubFactory(TeacherFactory)
+    # Selecting an existing instance of Subject from the database
+    subject = factory.LazyAttribute(lambda _: random.choice(Subject.objects.all()))
+
+    # Selecting an existing Teacher instance from the database
+    teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
 
 
 class ContractFactory(factory.django.DjangoModelFactory):
@@ -170,7 +173,7 @@ class ContractFactory(factory.django.DjangoModelFactory):
     # Generate fake data for contracts
     contract_status = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
     contact_preparation_date = factory.Faker('date')
-    id_teacher = factory.SubFactory(TeacherFactory)
+    id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
 
 
 class ViaticFactory(factory.django.DjangoModelFactory):
@@ -181,4 +184,4 @@ class ViaticFactory(factory.django.DjangoModelFactory):
     transport = factory.Faker('boolean')
     accommodation = factory.Faker('boolean')
     viatic = factory.Faker('boolean')
-    id_teacher = factory.SubFactory(TeacherFactory)
+    id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
