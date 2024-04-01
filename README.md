@@ -15,6 +15,9 @@
 
 Este proyecto tiene como objetivo desarrollar un sistema integral para la gestión académica de posgrados en la universidad Icesi. El sistema permitirá a los usuarios realizar diversas tareas relacionadas con la programación académica, la gestión de materias, la gestión de profesores, la propuesta de planeación académica y la gestión de roles. Este módulo ha sido diseñado con un enfoque en la facilidad de uso y la eficiencia para los usuarios.
 
+> [!IMPORTANT]
+> Para garantizar el correcto funcionamiento del programa, es crucial ejecutar previamente los comandos destinados a poblar la base de datos. Encuentra el paso a paso detallado para realizar esta tarea [aquí](docs/database/instructions%20for%20populating%20the%20database.md).
+
 ## Historias de Usuario
 
 Las historias de usuario en este proyecto siguen la siguiente convención de identificadores:
@@ -113,4 +116,4 @@ Los nombres de las clases deben seguir la convención CapWords. Los nombres de l
 - Python: 3.12
 - Django: 5.0.3
 - Bootstrap: 5.3.3
-- [Otras bibliotecas.]()
+- Otras bibliotecas.
