@@ -3,8 +3,9 @@
 {% load static %}  <!-- Loads static files such as CSS and JavaScript -->
 {% load my_filters %}  <!-- Loads custom template filters -->
 
-{% block tittle-container %}  <!-- Defines a block for the title container -->
-Editar detalles del programa {{ program.name }}  <!-- Displays the title, including the program name -->
+<!-- Defines a block for the title container -->
+{% block tittle-container %}
+Editar detalles del programa {{ program.name }}
 {% endblock %}
 
 {% block main-container-content %}  <!-- Defines a block for the main content of the page -->
