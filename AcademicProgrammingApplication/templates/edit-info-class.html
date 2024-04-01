@@ -166,8 +166,11 @@
     <div class="container">
         <br>
         <div class="align-items-center">
-            <button href="#" onclick="history.back();" class="btn btn-secondary">Cancelar</button>
-            <button class="btn btn-primary">Guardar</button>
+            <form method="post" action="{% url 'edit_info_class' class.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary" name="action" value="save">Guardar</button>
+                <button type="submit" class="btn btn-secondary" name="action" value="cancel">Cancelar</button>
+            </form>
         </div>
     </div>
 
