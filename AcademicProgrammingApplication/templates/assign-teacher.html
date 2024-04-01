@@ -38,7 +38,7 @@
 
 <div class="teacher-info">
     <!-- Display basic teacher information -->
-    <h5 class="professor-info-heading">Basic Teacher Information</h5>
+    <h5 class="professor-info-heading">Información básica del profesor</h5>
     <div class="form-floating">
         <input type="text" readonly class="form-control-plaintext" id="teacher-id" placeholder="Cédula de ciudadanía" value="{{ teacher.id }}">
         <label for="teacher-id">Cédula de ciudadanía:</label>
@@ -63,7 +63,7 @@
 
 <div class="schedule-info">
     <!-- Display teacher's class schedule -->
-    <h5 class="schedule-heading">Teacher's Class Schedule</h5>
+    <h5 class="schedule-heading">Horario de clases del profesor</h5>
     <div class="schedule-table" id="schedule"></div>
     <form id="assign-form" method="post" action="{% url 'assign_teacher' new_class.id %}">
         {% csrf_token %}
