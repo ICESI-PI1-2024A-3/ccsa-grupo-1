@@ -26,6 +26,7 @@ Academic programming
                     <!-- Dropdown for selecting academic semester -->
                     <div class="form-floating">
                         <select class="form-select" id="floatingSelectGrid" name="semester">
+                            <!-- Options for selecting academic semesters -->
                             <option value="2024-1" selected>2024-1</option>
                             <option value="2023-2">2023-2</option>
                             <option value="2023-1">2023-1</option>
@@ -220,6 +221,7 @@ Academic programming
         <table class="table">
             <thead>
             <tr>
+                <!-- Table headers -->
                 <th scope="col">CÓDIGO</th>
                 <th scope="col">MATERIA</th>
                 <th scope="col">NRC</th>
@@ -229,8 +231,10 @@ Academic programming
             </tr>
             </thead>
             <tbody>
+            <!-- Loop through subjects -->
             {% for subject in subjects %}
             <tr>
+                <!-- Table data -->
                 <th scope="row">{{ subject.code }}</th>
                 <!-- Link to subject detail page -->
                 <td><a href="{% url 'subject_detail' subject.code %}"

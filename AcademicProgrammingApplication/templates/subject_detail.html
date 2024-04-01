@@ -4,25 +4,33 @@
 {% load my_filters %}
 
 {% block title-container %}
+<!-- Define the title of the page -->
 <title>{{title}}</title>
 {% endblock %}
 
 {% block main-container-content %}
+<!-- Start of main content container -->
 <div class="bootstrap-container">
 
+    <!-- Import custom CSS for styling -->
     <link rel="stylesheet" href="{% static '/styles/subject_detail.css' %}">
 
+    <!-- Container for displaying subject details -->
     <div class="container bg-white p-4">
+        <!-- Title for the subject -->
         <h2>Materia - {{ subject.name }}</h2>
         <div class="row">
             <div class="col-lg-12">
+                <!-- Subtitle for detailed information -->
                 <h3>Información detallada</h3>
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
+                                <!-- Detailed information about the subject -->
                                 <div class="info-detallada">
                                     <dl>
+                                        <!-- Display subject details -->
                                         <dt>Código:</dt>
                                         <dd>{{ subject.code }}</dd>
                                         <dt>NRC:</dt>
@@ -51,9 +59,12 @@
             </div>
         </div>
 
+        <!-- Display sessions related to the subject -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Subtitle for sessions -->
                 <h3>Sesiones</h3>
+                <!-- Table for displaying session details -->
                 <div class="table-responsive mb-4">
                     <table class="table table-striped w-100">
                         <thead>
@@ -67,6 +78,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <!-- Loop through each class and display session details -->
                             {% for class in classes %}
                                 <tr>
                                     <td><a href="{% url 'edit_info_class' class.id %}"

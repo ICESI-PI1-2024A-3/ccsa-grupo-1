@@ -1,21 +1,22 @@
-{% extends "layouts/base-app-pages.html" %}
+{% extends "layouts/base-app-pages.html" %}  <!-- Extends a base template -->
 
-{% load static %}
-{% load my_filters %}
+{% load static %}  <!-- Loads static files such as CSS and JavaScript -->
+{% load my_filters %}  <!-- Loads custom template filters -->
 
-{% block tittle-container %}
-Editar detalles del programa {{ program.name }}
+{% block tittle-container %}  <!-- Defines a block for the title container -->
+Editar detalles del programa {{ program.name }}  <!-- Displays the title, including the program name -->
 {% endblock %}
 
-{% block main-container-content %}
+{% block main-container-content %}  <!-- Defines a block for the main content of the page -->
 <div class="container">
     <div class="container text-center">
         <h3 class="text-lg-start">Editar Información Básica del Programa</h3>
+        <!-- Heading for editing program information -->
         <br><br>
         <!-- Display program information -->
         <form id="editForm" action="{% url 'edit_academic_program' program.id %}" method="POST"
-              enctype="multipart/form-data">
-            {% csrf_token %}
+              enctype="multipart/form-data">  <!-- Form for editing program information -->
+            {% csrf_token %}  <!-- Adds CSRF token for security -->
             <div class="container text-lg-start">
                 <div class="row gx-5">
                     <!-- Display program name -->
@@ -23,7 +24,7 @@ Editar detalles del programa {{ program.name }}
                         <label for="name" class="p-1">Nombre del programa:</label>
                     </div>
                     <div class="col mb-3">
-                        <!-- Edit the program name -->
+                        <!-- Textarea for editing the program name -->
                         <textarea name="name" id="name" class="form-control p-1" rows="3">{{ program.name }}</textarea>
                     </div>
                     <!-- Edit the program type -->
@@ -31,8 +32,10 @@ Editar detalles del programa {{ program.name }}
                         <label class="p-1">Tipo:</label>
                     </div>
                     <div class="col">
+                        <!-- Dropdown for selecting the program type -->
                         <select class="form-select" aria-label="" name="type">
                             <option selected value="{{ program.type }}">{{ program.type }}</option>
+                            <!-- Iterates over program types -->
                             {% for type in types %}
                             {% if program.type != type %}
                             <option value="{{ type }}">{{ type }}</option>
@@ -43,19 +46,24 @@ Editar detalles del programa {{ program.name }}
                 </div>
                 <!-- Display other program details -->
                 <div class="row gx-5">
+                    <!-- Display faculty -->
                     <div class="col">
                         <label for="faculty" class="p-1">Facultad:</label>
                     </div>
                     <div class="col mb-3">
+                        <!-- Textarea for editing faculty -->
                         <textarea id="faculty" class="form-control p-1" rows="3"
                                   name="faculty">{{ program.faculty }}</textarea>
                     </div>
+                    <!-- Display program modality -->
                     <div class="col">
                         <label for="modality" class="p-1">Modalidad:</label>
                     </div>
                     <div class="col">
+                        <!-- Dropdown for selecting program modality -->
                         <select id="modality" name="modality" class="form-select" aria-label="Default select example">
                             <option selected value="{{ program.modality }}">{{ program.modality }}</option>
+                            <!-- Iterates over program modalities -->
                             {% for modality in modalities %}
                             {% if program.modality != modality %}
                             <option value="{{ modality }}">{{ modality }}</option>
@@ -66,10 +74,12 @@ Editar detalles del programa {{ program.name }}
                 </div>
                 <!-- Display additional program details -->
                 <div class="row gx-5">
+                    <!-- Display program manager -->
                     <div class="col">
                         <label for="program_manager" class="p-1">Director de programa:</label>
                     </div>
                     <div class="col">
+                        <!-- Input field for editing program manager -->
                         <input type="text" id="program_manager" name="program_manager" value="{{ program.director }}"
                                class="form-control">
                     </div>
@@ -78,6 +88,7 @@ Editar detalles del programa {{ program.name }}
                     </div>
                     <div class="col">
                         <div class="input-group mb-3">
+                            <!-- Input field for editing program duration -->
                             <span class="input-group-text"># Semestres:</span>
                             <input type="text" class="form-control text-center" aria-label="Amount" name="duration"
                                    value="{{ program.duration }}">
@@ -91,6 +102,7 @@ Editar detalles del programa {{ program.name }}
                     </div>
                     <div class="col">
                         <div class="input-group mb-3">
+                            <!-- Input field for editing program cost -->
                             <span class="input-group-text">$</span>
                             <input type="text" class="form-control" aria-label="Amount" name="cost"
                                    value="{{ program.cost }}">
@@ -100,18 +112,22 @@ Editar detalles del programa {{ program.name }}
                         <label class="p-1">Malla curricular:</label>
                     </div>
                     <div class="col d-flex">
+                        <!-- Input field for uploading program curriculum -->
                         <input type="file" id="curriculum" name="curriculum" accept=".pdf, .doc, .docx">
                     </div>
                 </div>
             </div>
         </form>
         <br>
+        <!-- Button for canceling the edit -->
         <a href="#" onclick="history.back();" type="button" class="btn btn-secondary">Cancelar</a>
+        <!-- Button for saving the edit -->
         <a id="editButton" type="button" class="btn btn-primary">Guardar</a>
     </div>
 </div>
 
 <script>
+    // JavaScript to submit the form when the edit button is clicked
     document.getElementById('editButton').addEventListener('click', function () {
         document.getElementById('editForm').submit();
     });
