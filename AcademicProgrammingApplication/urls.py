@@ -13,7 +13,6 @@ urlpatterns = [
     path('logout', login_required(views.logout), name='logout'),
     path('assign/<str:class_id>/', login_required(views.assign_teacher), name='assign_teacher'),
     path('search/', login_required(views.search_teacher), name='search_teacher'),
-    path('classes/<int:teacher_id>', login_required(views.get_classes), name='get_classes'),
     path('subject/<str:subject_id>/', views.subject_detail, name='subject_detail'),
     path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('accounts/reset_password_sent', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
