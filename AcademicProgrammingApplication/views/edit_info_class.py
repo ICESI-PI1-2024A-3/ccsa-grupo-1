@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from AcademicProgrammingApplication.models import Class
 
 
@@ -17,6 +17,14 @@ def edit_info_class(request, class_id):
     user = request.user
     # Get the class
     edit_class = Class.objects.filter(id=class_id).first()
+    # Save changes within the class
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'save':
+            edit_class.save()
+            return redirect('subject_detail', subject_id=edit_class.subject.code)
+        elif action == 'cancel':
+            return redirect('subject_detail', subject_id=edit_class.subject.code)
     # Render the edit-info-class page with necessary context data
     return render(request, 'edit-info-class.html', {
         'user_name': user.username,
