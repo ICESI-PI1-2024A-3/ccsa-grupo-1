@@ -186,44 +186,8 @@
 
 </div>
 
-<<<<<<< HEAD
-<div>
-    <button id="miBoton">Mostrar Alerta</button>
-    <button id="class_virtual">Mostrar Alerta clase virtual</button>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{% static '/js/request_classroom.js' %}"></script>
-    <script src="{% static '/js/request_classroom_virtual.js' %}"></script>
-=======
 <!-- Script for SweetAlert2 and classroom selection -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{% static '/js/request_classroom.js' %}"></script>
->>>>>>> 78a099f08022db4bdb75a7fa0bb4bc24e0a4ddab
 
-    <form id="sendEmailForm" method="post" action="/send_email/">
-        {% csrf_token %}
-        <button id="sendEmailButton" type="submit" disabled>Send Email</button>
-    </form>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get reference to first button
-            var primerBoton = document.getElementById('miBoton');
-            // Get reference to second button
-            var segundoBoton = document.getElementById('sendEmailButton');
-            // Get reference to last button
-            var ultimoBoton = document.getElementById('class_virtual');
-
-            // Function to enable the second button
-            function habilitarSegundoBoton() {
-                // Enable second button after clicking first or last
-                segundoBoton.disabled = false;
-            }
-
-            // Add a click event to the first button
-            primerBoton.addEventListener('click', habilitarSegundoBoton);
-            // Add a click event to the last button
-            ultimoBoton.addEventListener('click', habilitarSegundoBoton);
-        });
-    </script>
-</div>
 {% endblock %}
