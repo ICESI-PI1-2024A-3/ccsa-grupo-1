@@ -44,7 +44,7 @@ def academic_management(request):
             else:
                 subjects = program_information.subjects.all()
 
-        except AttributeError:
+        except Exception:
             # Render error message if program or semester is not found
             return render(request, 'academic-management.html', {
                 'title': 'Programación académica',
