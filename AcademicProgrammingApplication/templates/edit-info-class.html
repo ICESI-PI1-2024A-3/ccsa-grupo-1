@@ -6,10 +6,10 @@
 {% block main-container-content %}
 <link rel="stylesheet" href="{% static 'styles/edit-info-class.css' %}" />
 <div class="container">
-
     <h2 class="text-lg-start">Clase - {{ class.subject.name }}</h2>
 
     <div class="container text-lg-start">
+        <!-- Display class information -->
         <div class="row gx-5 align-items-center">
             <div class="col-2">
                 <div class="p-1">Código:</div>
@@ -50,6 +50,7 @@
                 <div class="p-1">{{ class.subject.syllabus.name|basename }}</div>
             </div>
             <div class="col">
+                <!-- Button to download syllabus -->
                 <a href="{{ class.subject.syllabus.url }}" download class="button-download">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
@@ -74,6 +75,7 @@
                 <div class="p-1">{{ class.start_date }}</div>
             </div>
             <div class="col">
+                <!-- Button for start date calendar -->
                 <button class="button-calendar-start">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
@@ -90,6 +92,7 @@
                 <div class="p-1">{{ class.ending_date }}</div>
             </div>
             <div class="col">
+                <!-- Button for end date calendar -->
                 <button class="button-calendar-end">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
@@ -106,6 +109,8 @@
                 <div class="p-1">{{ class.teacher.name }}</div>
             </div>
             <div class="col">
+
+                <!-- Button to assign teacher -->
                 <a href="{% url 'assign_teacher' class.id %}" class="button-professor">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
@@ -122,6 +127,7 @@
                 <div class="p-1">{{ class.modality }}</div>
             </div>
             <div class="col">
+                <!-- Button for modal selection -->
                 <button class="button-select">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 40 40">
                         <path fill="currentColor" d="M4.659 11.833h30.682L20 32.167z" />
@@ -129,6 +135,7 @@
                 </button>
             </div>
         </div>
+        <!-- Display classroom or link based on modality -->
         <div class="row gx-5 align-items-center">
             {% if class.modality == "PRESENCIAL" %}
             <div class="col-2">
@@ -138,6 +145,7 @@
                 <div class="p-1">{{ class.classroom }}</div>
             </div>
             <div class="col">
+                <!-- Button for classroom selection -->
                 <button class="button-room" id="button-room">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
@@ -153,6 +161,7 @@
                 <div class="p-1">{{ class.link }}</div>
             </div>
             <div class="col">
+                <!-- Button for virtual room -->
                 <button class="button-room">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
@@ -163,22 +172,32 @@
             {% endif %}
         </div>
     </div>
+    <!-- Buttons for saving or canceling changes -->
     <div class="container">
         <br>
         <div class="align-items-center">
-            <button href="#" onclick="history.back();" class="btn btn-secondary">Cancelar</button>
-            <button class="btn btn-primary">Guardar</button>
+            <form method="post" action="{% url 'edit_info_class' class.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary" name="action" value="save">Guardar</button>
+                <button type="submit" class="btn btn-secondary" name="action" value="cancel">Cancelar</button>
+            </form>
         </div>
     </div>
 
 </div>
 
+<<<<<<< HEAD
 <div>
     <button id="miBoton">Mostrar Alerta</button>
     <button id="class_virtual">Mostrar Alerta clase virtual</button>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{% static '/js/request_classroom.js' %}"></script>
     <script src="{% static '/js/request_classroom_virtual.js' %}"></script>
+=======
+<!-- Script for SweetAlert2 and classroom selection -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static '/js/request_classroom.js' %}"></script>
+>>>>>>> 78a099f08022db4bdb75a7fa0bb4bc24e0a4ddab
 
     <form id="sendEmailForm" method="post" action="/send_email/">
         {% csrf_token %}

@@ -3,26 +3,34 @@
 {% load static %}
 {% load my_filters %}
 
+<!-- Define the title of the page -->
 {% block title-container %}
-<title>{{title}}</title>
+{{title}}
 {% endblock %}
 
 {% block main-container-content %}
+<!-- Start of main content container -->
 <div class="bootstrap-container">
 
+    <!-- Import custom CSS for styling -->
     <link rel="stylesheet" href="{% static '/styles/subject_detail.css' %}">
 
+    <!-- Container for displaying subject details -->
     <div class="container bg-white p-4">
+        <!-- Title for the subject -->
         <h2>Materia - {{ subject.name }}</h2>
         <div class="row">
             <div class="col-lg-12">
+                <!-- Subtitle for detailed information -->
                 <h3>Información detallada</h3>
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-4">
+                                <!-- Detailed information about the subject -->
                                 <div class="info-detallada">
                                     <dl>
+                                        <!-- Display subject details -->
                                         <dt>Código:</dt>
                                         <dd>{{ subject.code }}</dd>
                                         <dt>NRC:</dt>
@@ -51,9 +59,12 @@
             </div>
         </div>
 
+        <!-- Display sessions related to the subject -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Subtitle for sessions -->
                 <h3>Sesiones</h3>
+                <!-- Table for displaying session details -->
                 <div class="table-responsive mb-4">
                     <table class="table table-striped w-100">
                         <thead>
@@ -67,18 +78,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {% for class in classes %}
-                                <tr>
-                                    <td><a href="{% url 'edit_info_class' class.id %}"
-                                        class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                                     {{ class.id }}</a></td>
-                                    <td>{{ class.start_date }}</td>
-                                    <td>{{ class.ending_date }}</td>
-                                    <td>{{ class.teacher.name }}</td>
-                                    <td>{{ class.modality }}</td>
-                                    <td>{{ class.classroom }}{{ class.link }}</td>
-                                </tr>
-                            {% endfor %}
+                        <!-- Loop through each class and display session details -->
+                        {% for class in classes %}
+                        <tr>
+                            <td><a href="{% url 'edit_info_class' class.id %}"
+                                   class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                                {{ class.id }}</a></td>
+                            <td>{{ class.start_date }}</td>
+                            <td>{{ class.ending_date }}</td>
+                            <td>{{ class.teacher.name }}</td>
+                            <td>{{ class.modality }}</td>
+                            <td>{{ class.classroom }}{{ class.link }}</td>
+                        </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

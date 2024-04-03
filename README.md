@@ -15,6 +15,9 @@
 
 Este proyecto tiene como objetivo desarrollar un sistema integral para la gestión académica de posgrados en la universidad Icesi. El sistema permitirá a los usuarios realizar diversas tareas relacionadas con la programación académica, la gestión de materias, la gestión de profesores, la propuesta de planeación académica y la gestión de roles. Este módulo ha sido diseñado con un enfoque en la facilidad de uso y la eficiencia para los usuarios.
 
+> [!IMPORTANT]
+> Para garantizar el correcto funcionamiento del programa, es crucial ejecutar previamente los comandos destinados a poblar la base de datos. Encuentra el paso a paso detallado para realizar esta tarea [aquí](docs/database/instructions%20for%20populating%20the%20database.md).
+
 ## Historias de Usuario
 
 Las historias de usuario en este proyecto siguen la siguiente convención de identificadores:
@@ -105,6 +108,26 @@ Los comentarios deben ser completos y claros.
 ### Convenciones de nombres
 Los nombres de las clases deben seguir la convención CapWords. Los nombres de las funciones y variables deben ser en minúsculas con palabras separadas por guiones bajos. Los nombres de las constantes deben estar en mayúsculas con palabras separadas.
 
+## Comandos de ejecución
+
+### Ejecución de las pruebas
+
+Para ejecutar las pruebas de una prueba específica en el proyecto de Django, utiliza el siguiente comando en la terminal, ubicandote en la carpeta raíz del proyecto:
+
+```bash
+python manage.py test <ruta_de_la_prueba>
+```
+
+Reemplaza '<ruta_de_la_prueba>' con la ruta a la prueba que deseas ejecutar. 
+
+Por ejemplo:
+
+```bash
+python manage.py test AcademicProgrammingApplication.tests.views.test_assign_teacher
+```
+
+Este comando ejecutará la prueba 'test_assign_teacher' ubicada en el archivo 'test_assign_teacher.py' dentro del directorio views de tests en la aplicación AcademicProgrammingApplication.
+
 ## Enlaces de Interés
 - Jira: [Programación Académica - Grupo 1](https://proyecto-integrador1-grupo1.atlassian.net/jira/software/projects/PAG1/boards/2?atlOrigin=eyJpIjoiMmJlZWRiMDk1NmVmNDc1ZDkwNTY3Yjc3YjU5Y2I0NjciLCJwIjoiaiJ9)
 - Figma: [Sistema de Gestión Académica Universitaria](https://www.figma.com/file/MPOI5adiUuFcOHoO57z14f/Untitled?type=design&node-id=0%3A1&mode=design&t=Woirb5n8iWCGw96L-1)
@@ -113,4 +136,4 @@ Los nombres de las clases deben seguir la convención CapWords. Los nombres de l
 - Python: 3.12
 - Django: 5.0.3
 - Bootstrap: 5.3.3
-- [Otras bibliotecas.]()
+- Otras bibliotecas.

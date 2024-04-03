@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from AcademicProgrammingApplication.models import Class, Teacher
 
 
@@ -10,12 +10,14 @@ def assign_teacher(request, class_id):
     # Get the class to assign
     new_class = Class.objects.filter(id=class_id).first()
     new_class_formatted = {
+        'id': new_class.id,
         'title': new_class.subject.name,
         'start': new_class.start_date.strftime('%Y-%m-%dT%H:%M:%S'),
         'end': new_class.ending_date.strftime('%Y-%m-%dT%H:%M:%S')
     }
     # Get the value of the 'search' parameter from the GET request
     queryset = request.GET.get('search')
+    teacher = new_class.teacher if new_class.teacher else None
     # Filter teachers who are in the 'Active' state
     teachers = Teacher.objects.filter(state='Activo')
     # If there's a queryset, reassign 'teachers' to filter by name containing 'queryset'
@@ -31,6 +33,14 @@ def assign_teacher(request, class_id):
         start_date__lt=new_class.ending_date,
         ending_date__gt=new_class.start_date
     )
+    if request.method == 'POST':
+        teacher_id = request.POST.get('teacher_id')
+        teacher = Teacher.objects.get(id=teacher_id)
+        # Asignar la clase al profesor
+        new_class.teacher = teacher
+        new_class.save()
+        # Redireccionar a la página de edit_info_class
+        return redirect('edit_info_class', class_id=new_class.id)
     # If there are overlapping classes, show an alert
     if overlapping_classes.exists():
         return render(request, 'assign-teacher.html', {
@@ -42,14 +52,13 @@ def assign_teacher(request, class_id):
             'overlap_alert': True,
         })
     # If there are no overlapping classes, proceed with assigning the class
-    else:
-        return render(request, 'assign-teacher.html', {
-            'user_name': user.username,
-            'title': 'Asignar Profesor a Clase',
-            'teacher': teacher,
-            'classes': get_classes(request, teacher),
-            'new_class': new_class_formatted,
-        })
+    return render(request, 'assign-teacher.html', {
+        'user_name': user.username,
+        'title': 'Asignar Profesor a Clase',
+        'teacher': teacher,
+        'classes': get_classes(request, teacher),
+        'new_class': new_class_formatted,
+    })
 
 
 # Function to search for teachers based on an entered term.
@@ -69,11 +78,17 @@ def search_teacher(request):
 
 # Get the classes associated with a given teacher ID
 def get_classes(_request, teacher_id):
+    """
+    Get the classes associated with a given teacher ID.
+
+    Returns:
+        list: List of dictionaries containing class information.
+    """
     # Get the classes associated with a given teacher
     classes = Class.objects.filter(teacher_id=teacher_id).all()
     # Initialize the array of out
     out = []
-    # Get the information most important of the classes
+    # Get the most important information of the classes
     for session in classes:
         out.append({
             'title': session.subject.name,
