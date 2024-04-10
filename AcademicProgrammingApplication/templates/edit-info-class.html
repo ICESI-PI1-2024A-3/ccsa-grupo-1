@@ -127,12 +127,20 @@
                 <div class="p-1">{{ class.modality }}</div>
             </div>
             <div class="col">
-                <!-- Button for modal selection -->
-                <button class="button-select">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 40 40">
-                        <path fill="currentColor" d="M4.659 11.833h30.682L20 32.167z" />
-                    </svg>
-                </button>
+                <!-- Button for modal selection lugar onde va el nuevo button  -->
+
+                <select id="tipoClase" class="button-select">
+
+                    <option><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 40 40">
+                            <path fill="currentColor" d="M4.659 11.833h30.682L20 32.167z" />
+                        </svg>
+
+                    </option>
+                    <option value="presencial">Clase presencial</option>
+                    <script src="{% static '/js/request_classroom.js' %}"></script>
+                    <option value="virtual">Clase virtual</option>
+                    <script src="{% static '/js/request_classroom_virtual.js' %}"></script>
+                </select>
             </div>
         </div>
         <!-- Display classroom or link based on modality -->
@@ -185,6 +193,8 @@
     </div>
 
 </div>
+
+row gx-5 align-items-center
 
 <!-- Script for SweetAlert2 and classroom selection -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
