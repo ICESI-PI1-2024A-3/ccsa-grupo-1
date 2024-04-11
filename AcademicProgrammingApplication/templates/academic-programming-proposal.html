@@ -1,0 +1,119 @@
+<!-- This is the HTML that contains the sidebar (which is common to all screens), a title (which changes depending on the screen you are in) and a container that must be filled with the things that each screen in the application has inside. -->
+
+{% extends "layouts/base-app-pages.html" %}
+{% load static %}
+
+{% block main-container-content %}
+<!-- Add additional styles for this page only -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'styles/academic-programming-proposal.css' %}"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <input type="text" class="typeahead form-control" placeholder="Buscar...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="container">
+        <div class="row mb-4">
+            <!-- empty -->
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <!-- empty -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+         <div class="row">
+                <div class="col-12 col-md-6">
+                    <!-- table with bootstrap -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Path</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>admin</td>
+                                    <td>xx/xx/xxxx</td>
+                                    <td>planeacion_base_PA_xx/xx.xlsx</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>        
+            <!-- Down  -->
+        </div>
+        <div class="container">
+            <div class="row mb-4">
+                <!-- empty -->
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <!-- empty -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>Profesor</td>
+                        <td>Materia</td>
+                        <td>Fecha Inicio</td>
+                        <td>Usuario que Modificó</td>
+                        <td>Comentario</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>data</td>
+                        <td>data</td>
+                        <td>data</td>
+                        <td>data</td>
+                        <td>data</td>
+                        <td>data</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </div>
+    
+    <div class="container">
+        <br>
+        <div class="align-items-center">
+                <button type="submit" class="btn btn-primary" name="action" value="save">Actualizar Archivo</button>
+                <button type="submit" class="btn btn-secondary" name="action" value="cancel">Descargar Archivo</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS files (jQuery and Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Script to toggle sidebar -->
+</body>
+</html>
+{% endblock %}
