@@ -136,10 +136,12 @@
                         </svg>
 
                     </option>
-                    <option value="presencial">Clase presencial</option>
+                    <!-- quiero que aqui se envie  {{ class.subject.id }} al backend como lo hago  -->
+                    <option value="presencial" data-class_id="{{ class.id }}">Clase presencial</option>
                     <script src="{% static '/js/request_classroom.js' %}"></script>
-                    <option value="virtual">Clase virtual</option>
-                    <script src="{% static '/js/request_classroom_virtual.js' %}"></script>
+                    <option value="virtual" data-class_id="{{ class.id }}">Clase virtual</option>
+                    <script src=" {% static '/js/request_classroom_virtual.js' %}">
+                    </script>
                 </select>
             </div>
         </div>
