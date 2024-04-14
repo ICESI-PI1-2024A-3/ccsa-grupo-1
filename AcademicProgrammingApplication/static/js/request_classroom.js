@@ -1,8 +1,24 @@
+
+// this is a global variable that will be used to store the value of class.subject.code
+var valorHTML;
+
+//create a new instance of the class, in class user the function import is called
+document.addEventListener("DOMContentLoaded", function () {
+    // get the value of class.subject.code from the HTML
+    valorHTML = document.getElementById("valor").textContent;
+
+    // user the value as you wish
+    console.log("El valor de class.subject.code es:", valorHTML);
+});
+
+
+
+
 document.getElementById('tipoClase').addEventListener('change', function () {
     const selectedOption = this.value;
 
     if (selectedOption === 'presencial') {
-        // Lógica para la clase presencial
+        //logic for the classroom class
         Swal.fire({
             html: `
                 <!-- Bootstrap style sheet for CSS-->
@@ -45,6 +61,7 @@ document.getElementById('tipoClase').addEventListener('change', function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 const data = {
+
                     datetime1: result.value.datetime1,
                     datetime2: result.value.datetime2,
                     salon: result.value.salon
@@ -70,7 +87,7 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                 }).then(response => {
                     if (response.ok) {
                         // If the request was successful, you can take additional actions here
-                        console.log('Datos enviados correctamente');
+                        console.log('Datos enviados correctamente   ');
                     } else {
                         console.error('Error al enviar datos al servidor');
                     }
@@ -83,7 +100,7 @@ document.getElementById('tipoClase').addEventListener('change', function () {
         });
 
     } else if (selectedOption === 'virtual') {
-        // Lógica para la clase virtual
+        //logic for the virtual class
         Swal.fire({
             html: `
                 <!-- Bootstrap style sheet for CSS-->
