@@ -12,10 +12,20 @@
         <!-- Display class information -->
         <div class="row gx-5 align-items-center">
             <div class="col-2">
-                <div class="p-1">Código:</div>
+                <div class="p-1">Código materia:</div>
             </div>
             <div class="col-3">
-                <div class="p-1">{{ class.subject.code }}</div>
+                <div class="p-1" id="valor_clase">{{ class.id }}</div>
+                <script src="{% static '/js/request_classroom.js' %}"></script>
+            </div>
+        </div>
+        <div class="row gx-5 align-items-center">
+            <div class="col-2">
+                <div class="p-1">Código clase:</div>
+            </div>
+            <div class="col-3">
+                <div class="p-1" id="valor">{{ class.subject.code }}</div>
+                <script src="{% static '/js/request_classroom.js' %}"></script>
             </div>
         </div>
         <div class="row gx-5 align-items-center">
@@ -137,9 +147,9 @@
 
                     </option>
                     <!-- quiero que aqui se envie  {{ class.subject.id }} al backend como lo hago  -->
-                    <option value="presencial" data-class_id="{{ class.id }}">Clase presencial</option>
+                    <option value="presencial">Clase presencial</option>
                     <script src="{% static '/js/request_classroom.js' %}"></script>
-                    <option value="virtual" data-class_id="{{ class.id }}">Clase virtual</option>
+                    <option value="virtual">Clase virtual</option>
                     <script src=" {% static '/js/request_classroom_virtual.js' %}">
                     </script>
                 </select>

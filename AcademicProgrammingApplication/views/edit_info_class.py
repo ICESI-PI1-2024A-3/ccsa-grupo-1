@@ -5,7 +5,11 @@ from django.http import JsonResponse
 import json
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
+from datetime import datetime
+from django.shortcuts import get_object_or_404
+import pytz
+from celery import shared_task
 
 
 def edit_info_class(request, class_id):
@@ -39,6 +43,7 @@ def edit_info_class(request, class_id):
     })
 
 processed_message = None
+data_class_email=[]
 @csrf_exempt
 def data_processor_lounge(request):
     global processed_message
@@ -48,6 +53,47 @@ def data_processor_lounge(request):
             data_json = json.loads(request.body)
             
             # Process the data as needed
+            code_materia = data_json['code_materia']
+            code_clase = data_json['code_clase']
+            datetime1 = data_json['datetime1']
+            datetime2 = data_json['datetime2']
+            if len(data_json) == 5:
+                salon = data_json['salon']
+            
+
+            # Obtener la instancia de la clase que se actualizará
+            clase = get_object_or_404(Class, id=code_clase)
+
+            # Obtener la zona horaria de Colombia
+            tz = pytz.timezone('America/Bogota')
+
+
+            
+            fecha_inicio = tz.localize(datetime.fromisoformat(datetime1))
+            fecha_fin = tz.localize(datetime.fromisoformat(datetime2))
+            print(fecha_inicio)
+            print(fecha_fin)
+            print(code_clase)
+
+
+            #into to email
+            data_class_email.append(code_materia)
+            data_class_email.append(code_clase)
+            data_class_email.append(datetime1)
+            data_class_email.append(datetime2)
+            if len(data_json) == 5:
+                data_class_email.append(salon)
+            
+                
+
+
+            # Actualizar las fechas de inicio y fin de la clase
+            try:
+                clase.start_date = fecha_inicio
+                clase.ending_date = fecha_fin
+                clase.save()
+            except Exception as e:
+                return JsonResponse({'mensaje': 'Error al actualizar la clase'}, status=500)
             
             # Return a JSON response indicating success
             print(data_json)
@@ -62,13 +108,18 @@ def data_processor_lounge(request):
         # Return a JSON response indicating that the method is not allowed
         return JsonResponse({'error': 'Método no permitido'}, status=405)
     
+
+
+
+
+    
 def send_email(request):
     if processed_message is not None:
-        if len(processed_message) == 3:
+        if len(processed_message) == 5:
 
-            email_mensseje = "la nueva fecha de la clase: inicio " + str(processed_message.get('datetime1')) + " y final " + str(processed_message.get('datetime2')) + " y será en salón: " + str(processed_message.get('salon'))
-        elif len(processed_message) == 2:
-            email_mensseje = "la nueva fecha de la clase virrtual sera: inicio " + str(processed_message.get('datetime1')) + " y final " + str(processed_message.get('datetime2'))
+            email_mensseje = "la nueva fecha de la clase: inicio " + data_class_email[2] + " y finaliza " + data_class_email[3] + " y será en salón: " + data_class_email[4]
+        elif len(processed_message) == 4:
+            email_mensseje = "la nueva fecha de la clase: inicio " + data_class_email[2] + " y finaliza " + data_class_email[3]
     else:
         email_mensseje = "Mensaje de correo no disponible"
     print(email_mensseje)
@@ -78,7 +129,7 @@ def send_email(request):
         subject_id = request.POST.get('code')  
         
         # Query all students related to the subject
-        #students = Student.objects.filter(subject__code=subject_id)
+        students = Student.objects.filter(subject__code=subject_id)
         
         # Build the email content
         subject = 'Subject of the Email'

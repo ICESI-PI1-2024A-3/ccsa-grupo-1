@@ -1,14 +1,16 @@
 
 // this is a global variable that will be used to store the value of class.subject.code
-var valorHTML;
+var code_clase;
+var code_materia;
 
 //create a new instance of the class, in class user the function import is called
 document.addEventListener("DOMContentLoaded", function () {
     // get the value of class.subject.code from the HTML
-    valorHTML = document.getElementById("valor").textContent;
+    code_materia = document.getElementById("valor").textContent;
+    code_clase = document.getElementById("valor_clase").textContent;
 
     // user the value as you wish
-    console.log("El valor de class.subject.code es:", valorHTML);
+    console.log("El valor de class.subject.code es:", code_materia, "El valor de class.code es:", code_clase);
 });
 
 
@@ -56,12 +58,13 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                 if (!datetime1 || !datetime2 || !salon) {
                     Swal.showValidationMessage('Debes seleccionar tanto las fechas como las horas, así como también especificar el tipo de salón.');
                 }
-                return { datetime1: datetime1, datetime2: datetime2, salon: salon };
+                return { datetime1: datetime1, datetime2: datetime2, salon: salon, code_materia: code_materia, code_clase: code_clase };
             }
         }).then((result) => {
             if (result.isConfirmed) {
                 const data = {
-
+                    code_materia: result.value.code_materia,
+                    code_clase: result.value.code_clase,
                     datetime1: result.value.datetime1,
                     datetime2: result.value.datetime2,
                     salon: result.value.salon
@@ -129,11 +132,13 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                 if (!datetime1 || !datetime2) {
                     Swal.showValidationMessage('Debes seleccionar tanto las fechas como las horas.');
                 }
-                return { datetime1: datetime1, datetime2: datetime2 };
+                return { datetime1: datetime1, datetime2: datetime2, code_materia: code_materia, code_clase: code_clase };
             }
         }).then((result) => {
             if (result.isConfirmed) {
                 const data = {
+                    code_materia: result.value.code_materia,
+                    code_clase: result.value.code_clase,
                     datetime1: result.value.datetime1,
                     datetime2: result.value.datetime2
                 };
