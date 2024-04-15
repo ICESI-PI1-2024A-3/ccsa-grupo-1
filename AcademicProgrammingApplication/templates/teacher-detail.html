@@ -1,0 +1,123 @@
+{% extends "layouts/base-app-pages.html" %}
+
+{% load static %}
+
+<!-- Define the title of the page -->
+{% block title-container %}
+{{title}}
+{% endblock %}
+
+{% block main-container-content %}
+<!-- Start of main content container -->
+
+<!-- Import custom CSS for styling -->
+<link rel="stylesheet" href="{% static '/styles/teacher-detail.css' %}">
+
+<!-- Container for displaying subject details -->
+<div class="info-detallada">
+    <!-- Subtitle for teacher information -->
+    <h3>Información del profesor</h3>
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="col-4">
+                <!-- Detailed information about the teacher -->
+                <dl>
+                    <!-- Display teacher details -->
+                    <dt>Cédula de ciudadanía:</dt>
+                    <dd>{{ teacher.id }}</dd>
+                    <dt>Docente:</dt>
+                    <dd>{{ teacher.name }}</dd>
+                    <dt>Ciudad:</dt>
+                    <dd>{{ teacher.city }}</dd>
+                    <dt>Email:</dt>
+                    <dd>{{ teacher.email }}</dd>
+                    <dt>Celular:</dt>
+                    <dd>{{ teacher.cellphone }}</dd>
+                    <dt>Contrato:</dt>
+                    <dd>{{ teacher.contract.id }}</dd>
+                    <dt>Estado del contrato:</dt>
+                    <dd>{{ teacher.contract.contract_status }}</dd>
+                    {% if teacher.contract.contract_status %}
+                    <dt>Fecha de elaboración del contrato:</dt>
+                    <dd>{{ teacher.contract.contact_preparation_date }}</dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Display schedule of classes of teacher and viatics -->
+{% if teacher.contract.contract_status %}
+<div class="schedule-info">
+    <!-- Display teacher's class schedule -->
+    <h5 class="schedule-heading">Horario de clases del profesor</h5>
+    <div class="schedule-table" id="schedule"></div>
+</div>
+<div class="viatics">
+    <!-- Show the professor's per diem request -->
+    <div class="viatics-header">
+        <h5 class="viatic-heading">Solicitud de viáticos</h5>
+        <button class="viatics-button">Solicitar</button>
+      </div>
+    <div class="viatics-info" id="info-viatics">
+        <div class="col-4">
+            <dl>
+                <!-- Display viatics details -->
+                <dt>Estado de solicitud:</dt>
+                {% if teacher.contract.contract_status %}
+                    <dd>"Enviada"</dd>
+                {% else %}
+                    <dd>"Ninguna"</dd>
+                {% endif %}
+            </dl>
+        </div>
+    </div>
+  </div>
+{% endif %}
+<!-- Full Calendar -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarUI = document.getElementById('schedule');
+        var calendar = new FullCalendar.Calendar(calendarUI, {
+            locale: 'es',
+            initialView: 'timeGridWeek',
+            allDaySlot: false,
+            titleFormat: {
+                month: 'long',
+                year: 'numeric'
+            },
+            headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: null
+            },
+            dayHeaderFormat: {
+                weekday: 'long',
+                day: 'numeric'
+            },
+            slotLabelFormat: {
+                hour: 'numeric',
+                minute: '2-digit',
+            },
+            slotLabelContent: function (slotInfo) {
+                var hour = slotInfo.date.getHours();
+                var meridiem = hour >= 12 ? 'PM' : 'AM';
+                return hour + ':' + slotInfo.date.getMinutes().toString().padStart(2, '0') + ' ' + meridiem;
+            },
+            events: [
+                {% for class in classes %}
+            {
+                title: '{{ class.title }}',
+                start: '{{ class.start }}',
+                end: '{{ class.end }}',
+            },
+            {% endfor %}
+        ]
+    });
+    calendar.render();
+    calendar.updateSize();
+  });
+</script>
+{% endblock %}

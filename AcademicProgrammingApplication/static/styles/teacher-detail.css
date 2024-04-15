@@ -1,0 +1,11 @@
+.viatics-header {
+    display: flex;
+    align-items: center;
+}
+
+.viatics-button {
+    margin-left: auto;
+    background-color: rgba(23, 104, 172, 0.9);
+    color: white;
+    cursor: pointer;
+}

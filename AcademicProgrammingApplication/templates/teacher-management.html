@@ -47,7 +47,10 @@
             <tr>
                 <!-- Table data -->
                 <td>{{ teacher.id }}</td>
-                <td>{{ teacher.name }}</td>
+                <!-- Link to teacher detail page -->
+                <td><a href="{% url 'teacher_detail' teacher.id %}"
+                       class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    {{ teacher.name }}</a></td>
                 <td>{{ teacher.state }}</td>
                 <td>{{ teacher.email }}</td>
                 <td>{{ teacher.cellphone }}</td>
