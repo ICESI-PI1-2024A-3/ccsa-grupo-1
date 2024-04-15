@@ -9,7 +9,7 @@ from django.core.mail import EmailMessage, send_mail
 from datetime import datetime
 from django.shortcuts import get_object_or_404
 import pytz
-from celery import shared_task
+#from celery import shared_task
 
 
 def edit_info_class(request, class_id):
