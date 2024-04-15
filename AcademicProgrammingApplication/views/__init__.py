@@ -7,3 +7,4 @@ from .assign_teacher import *
 from .base_screen import *
 from .subject_detail import *
 from .edit_info_class import *
+from .role_management import *

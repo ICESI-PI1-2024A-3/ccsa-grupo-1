@@ -27,4 +27,5 @@ urlpatterns = [
     path('home/edit_academic_program/<int:program_id>/', login_required(views.edit_academic_program),
          name='edit_academic_program'),
     path('edit_class/<str:class_id>/', login_required(views.edit_info_class), name='edit_info_class'),
+    path('role_management', views.role_management, name='role_management'),
 ]
