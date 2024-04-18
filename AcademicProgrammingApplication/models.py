@@ -153,7 +153,6 @@ class Contract(models.Model):
     def __str__(self):
         return self.id
 
-
 class Viatic(models.Model):
     # ATTRIBUTES
     transport = models.BooleanField(null=False, blank=False, verbose_name="Transporte")
