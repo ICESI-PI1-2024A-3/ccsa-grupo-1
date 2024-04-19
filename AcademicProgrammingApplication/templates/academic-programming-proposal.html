@@ -1,4 +1,4 @@
-<!-- This is the HTML that contains the sidebar (which is common to all screens), a title (which changes depending on the screen you are in) and a container that must be filled with the things that each screen in the application has inside. -->
+<!-- academic-programming-proposal.html -->
 
 {% extends "layouts/base-app-pages.html" %}
 {% load static %}
@@ -7,7 +7,6 @@
 <!-- Add additional styles for this page only -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{% static 'styles/academic-programming-proposal.css' %}"/>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <body>
     <div class="container">
@@ -16,10 +15,20 @@
                 <div class="input-group">
                     <input type="text" class="typeahead form-control" placeholder="Buscar...">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-primary">
-                            <i class="bi bi-search"></i> Buscar
-                        </button>
+                        <select class="custom-select">
+                            <option selected>Selecciona un periodo</option>
+                            <option value="1">2024-1</option>
+                            <option value="2">2024-2</option>
+                            <option value="3">2025-1</option>
+                            <option value="4">2025-2</option>
+                            <option value="5">2026-1</option>
+                            <option value="6">2026-2</option>
+                            <option value="7">2027-1</option>
+                            <option value="8">2027-2</option>
+                        </select>
                     </div>
+                    <button type="button" class="btn btn-primary"> Buscar
+                    </button>
                 </div>
             </div>
         </div>
@@ -35,9 +44,10 @@
     </div>
     
     <div class="container">
-         <div class="row">
+        <div class="row">
                 <div class="col-12 col-md-6">
                     <!-- table with bootstrap -->
+                    Historial de Cambios
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -49,12 +59,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for archivo in archivos %}
                                 <tr>
-                                    <td>1</td>
-                                    <td>admin</td>
-                                    <td>xx/xx/xxxx</td>
-                                    <td>planeacion_base_PA_xx/xx.xlsx</td>
+                                    <td>{{ archivo.id }}</td>
+                                    <td>{{ archivo.usuario }}</td>
+                                    <td>{{ archivo.fecha }}</td>
+                                    <td>{{ archivo.nombre_archivo }}</td>
                                 </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -73,6 +85,7 @@
             </div>
         </div>
         <div class="container">
+            Cambios en la planeacion
             <table class="table">
                 <thead>
                     <tr>
@@ -97,16 +110,18 @@
             </table>
             
         </div>
-        
     </div>
     
     <div class="container">
         <br>
         <div class="align-items-center">
+            <form method="post" action="{% url 'planning_proposal' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="archivo" required>
                 <button type="submit" class="btn btn-primary" name="action" value="save">Actualizar Archivo</button>
-                <button type="submit" class="btn btn-secondary" name="action" value="cancel">Descargar Archivo</button>
+                <button type="submit" class="btn btn-secondary" name="action" value="download">Descargar Archivo</button>
+              </div>
             </form>
-        </div>
     </div>
     
     <!-- Bootstrap JS files (jQuery and Popper.js) -->

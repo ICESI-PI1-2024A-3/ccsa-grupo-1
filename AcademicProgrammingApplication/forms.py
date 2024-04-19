@@ -11,3 +11,7 @@ class UserForm(forms.Form):
                                widget=forms.PasswordInput(
                                    attrs={'placeholder': 'Ingrese su contraseña'})
                                )
+
+#class to upload file with pandas in a database before
+class UploadFileForm(forms.Form):
+    archivo = forms.FileField()

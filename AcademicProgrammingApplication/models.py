@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.forms import ValidationError
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Semester(models.Model):
@@ -169,3 +169,12 @@ class Viatic(models.Model):
         accommodation = "Sí" if self.accommodation else "No"
         viatic = "Sí" if self.viatic else "No"
         return f'Transporte: {transport}, Alojamiento: {accommodation}, Viático: {viatic}'
+    
+
+class Archivo(models.Model):
+    nombre_archivo = models.CharField(max_length=255)
+    fecha = models.DateField(auto_now_add=True)
+    path = models.FileField(upload_to='archivos/',default= 'ProgramacionBase.xlsx')
+
+    def __str__(self):
+        return self.nombre_archivo
