@@ -1,5 +1,5 @@
 import factory
-from .models import Semester, Subject, Program, Teacher, Class, Contract, Viatic
+from .models import Semester, Subject, Program, Teacher, Class, Contract, Viatic, Student
 from django.core.files.uploadedfile import SimpleUploadedFile
 from datetime import datetime
 import random
@@ -185,3 +185,23 @@ class ViaticFactory(factory.django.DjangoModelFactory):
     accommodation = factory.Faker('boolean')
     viatic = factory.Faker('boolean')
     id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
+
+
+class ClassFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Class
+
+    # Resto del código
+
+    @factory.post_generation
+    def students(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for student in extracted:
+                self.students.add(student)
+        else:
+            students = Student.objects.all()
+            self.students.add(*random.sample(list(students), random.randint(1, 10)))  # Agrega entre 1 y 10 estudiantes a la clase
+
