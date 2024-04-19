@@ -141,3 +141,10 @@ EMAIL_HOST_PASSWORD = 'nhmutssrvwwqvhbh'
 # Settings to save emails to files
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+
+
+
+# Configuración del broker de mensajes (ejemplo con RabbitMQ)
+CELERY_BROKER_URL = 'amqp://localhost'
+
+
