@@ -169,3 +169,52 @@ def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, sta
     now = datetime.now()
     if now < start_time_minus_12h:
         enviar_correo_programado.apply_async((subject, message, student_email), eta=start_time_minus_12h)
+
+
+def edit_class_date_information(request):
+    
+    if request.method == 'POST':
+        try:
+            # Access JSON data sent from the frontend
+            data_json = json.loads(request.body)
+            
+            # Process the data as needed
+            code_materia = data_json['code_materia']
+            code_clase = data_json['code_clase']
+            datetime1 = data_json['datetime1']
+            datetime2 = data_json['datetime2']
+            if len(data_json) == 5:
+                salon = data_json['salon']
+            
+            # Obtener la instancia de la clase que se actualizará
+            clase = get_object_or_404(Class, id=code_clase)
+
+            # Obtener la zona horaria de Colombia
+            tz = pytz.timezone('America/Bogota')
+
+            fecha_inicio = tz.localize(datetime.fromisoformat(datetime1))
+            fecha_fin = tz.localize(datetime.fromisoformat(datetime2))
+            
+    
+            print('actualice fecha de clase')
+            
+            # Actualizar las fechas de inicio y fin de la clase
+            try:
+                clase.start_date = fecha_inicio
+                clase.ending_date = fecha_fin
+                clase.send_email = True
+                clase.save()
+            except ValidationError as e:
+                return JsonResponse({'mensaje': 'Error al actualizar la clase: {}'.format(str(e))}, status=500)
+            
+            # Return a JSON response indicating success
+            
+            return JsonResponse({'mensaje': 'Datos actualizados cotrectamente'})
+        except Exception as e:
+            # If any error occurs during data processing,
+            # return an error message
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        # Return a JSON response indicating that the method is not allowed
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
+    
