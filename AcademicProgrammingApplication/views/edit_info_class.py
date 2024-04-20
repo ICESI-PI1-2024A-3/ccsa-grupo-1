@@ -171,6 +171,9 @@ def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, sta
         enviar_correo_programado.apply_async((subject, message, student_email), eta=start_time_minus_12h)
 
 
+
+
+@csrf_exempt
 def edit_class_date_information(request):
     
     if request.method == 'POST':
@@ -182,9 +185,7 @@ def edit_class_date_information(request):
             code_materia = data_json['code_materia']
             code_clase = data_json['code_clase']
             datetime1 = data_json['datetime1']
-            datetime2 = data_json['datetime2']
-            if len(data_json) == 5:
-                salon = data_json['salon']
+            
             
             # Obtener la instancia de la clase que se actualizará
             clase = get_object_or_404(Class, id=code_clase)
@@ -193,7 +194,6 @@ def edit_class_date_information(request):
             tz = pytz.timezone('America/Bogota')
 
             fecha_inicio = tz.localize(datetime.fromisoformat(datetime1))
-            fecha_fin = tz.localize(datetime.fromisoformat(datetime2))
             
     
             print('actualice fecha de clase')
@@ -201,7 +201,6 @@ def edit_class_date_information(request):
             # Actualizar las fechas de inicio y fin de la clase
             try:
                 clase.start_date = fecha_inicio
-                clase.ending_date = fecha_fin
                 clase.send_email = True
                 clase.save()
             except ValidationError as e:
