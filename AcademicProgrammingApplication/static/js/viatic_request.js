@@ -1,5 +1,21 @@
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 (function () {
-    // Cuando se hace clic en el botón "Solicitar viático", se muestra el modal
+    
     document.getElementById('solicitar-viatico-btn').addEventListener('click', function () {
         Swal.fire({
             html: `
@@ -48,72 +64,33 @@
             }
             }).then((result) => {
                 if (result.isConfirmed) {
+
+                    const urlParts = window.location.pathname.split('/');
+                    const teacherId = urlParts[urlParts.length - 2];
+
                     const data = {
                         tiquetes: result.value.tiquetes,
                         hotel: result.value.hotel,
-                        viatico: result.value.viatico
+                        viatico: result.value.viatico,
+                        id_teacher: teacherId
                     };
-            
-                    $.ajax({
-                        url: '/ruta/a/tu/vista/',  // Actualiza esto con la ruta a tu vista
+
+                    fetch('/save_viatic/', {
                         method: 'POST',
-                        data: {
-                            'transport': data.tiquetes,
-                            'accommodation': data.hotel,
-                            'viatic': data.viatico,
-                            'teacher_id': id_del_profesor,  // Actualiza esto con el ID del profesor
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken')  
                         },
-                        success: function (response) {
-                            if (response.status === 'success') {
-                                Swal.fire({
-                                    html: `
-                                    <!-- Bootstrap style sheet for CSS-->
-                                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                                    <div class="p-1">Recibirá un correo de confirmación cuando su solicitud sea aprobada.</div>
-                                    `,
-                                    titleText: "Solicitud enviada",
-                                    icon: "success",
-                                    confirmButtonText: "Aceptar",
-                                    confirmButtonColor: 'rgba(23, 104, 172, 0.9)'
-                                });
-                            } else {
-                                Swal.fire('¡Error!', 'Hubo un error al guardar la solicitud de viáticos.', 'error');
-                            }
-                        },
+                        body: JSON.stringify(data)
+                    }).then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            Swal.fire('Éxito', data.message, 'success');
+                        } else if (data.error) {
+                            Swal.fire('Error', data.error, 'error');
+                        }
                     });
                 }
             });            
     });        
-
-    // Cuando se hace clic en el botón "Aceptar" dentro del modal, se muestra un mensaje de confirmación
-    document.getElementById('solicitar-viatico-confirm-btn').addEventListener('click', function () {
-        const tiquetes = document.getElementById('tiquetes-select').value;
-        const hotel = document.getElementById('hotel-select').value;
-        const viatico = document.getElementById('viatico-select').value;
-
-        if (!tiquetes || !hotel || !viatico) {
-            Swal.showValidationMessage('Debes seleccionar tanto los tiquetes, el hotel y el viático.');
-        } else {
-            const data = {
-                tiquetes: tiquetes,
-                hotel: hotel,
-                viatico: viatico
-            };
-
-            Swal.fire({
-                html: `
-                <!-- Bootstrap style sheet for CSS-->
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                <div class="p-1">Recibirá un correo de confirmación cuando su solicitud sea aprobada.</div>
-                `,
-                titleText: "Solicitud enviada",
-                icon: "success",
-                confirmButtonText: "Aceptar",
-                confirmButtonColor: 'rgba(23, 104, 172, 0.9)'
-            });
-
-            var viaticRequestModal = bootstrap.Modal.getInstance(document.getElementById('viatic-request-modal'));
-            viaticRequestModal.hide();
-        }
-    });
 })();

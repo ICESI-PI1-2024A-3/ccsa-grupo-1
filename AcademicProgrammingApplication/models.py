@@ -160,8 +160,8 @@ class Viatic(models.Model):
     viatic = models.BooleanField(null=False, blank=False, verbose_name="Viático")
 
     # RELATIONS
-    id_teacher = models.OneToOneField(Teacher, on_delete=models.CASCADE, primary_key=True, null=False, blank=False,
-                                      verbose_name="Profesor asociado")  # A teacher can have per diem associated with it and a per diem must be associated with a teacher
+    id_teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=False, blank=False,
+                                   verbose_name="Profesor asociado")
 
     def __str__(self):
         transport = "Sí" if self.transport else "No"
