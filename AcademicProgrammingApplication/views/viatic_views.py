@@ -12,6 +12,7 @@ def save_viatic(request):
             transport=data['tiquetes'] == 'Si',
             accommodation=data['hotel'] == 'Si',
             viatic=data['viatico'] == 'Si',
+            viatic_status='ENVIADA',
             id_teacher=teacher
         )
         return JsonResponse({'message': 'Viatico creado exitosamente'}, status=201)
