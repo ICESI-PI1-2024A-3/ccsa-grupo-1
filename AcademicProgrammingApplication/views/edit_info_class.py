@@ -71,6 +71,19 @@ def data_processor_lounge(request):
             # Obtener la instancia de la clase que se actualizará
             clase = get_object_or_404(Class, id=code_clase)
 
+            # actualizar modalidad de clase
+            if len(data_json) == 5:
+                new_modality = 'PRESENCIAL'  # Puedes asignar la modalidad que desees aquí
+                if new_modality not in [choice[0] for choice in Class.MODALITY_CHOICES]:
+                    print ({'mensaje': 'Modalidad no válida'}, status=400)
+                clase.modality = new_modality
+            elif len(data_json) == 4:
+                new_modality = 'VIRTUAL'  # Puedes asignar la modalidad que desees aquí
+                if new_modality not in [choice[0] for choice in Class.MODALITY_CHOICES]:
+                    print({'mensaje': 'Modalidad no válida'}, status=400)
+                clase.modality = new_modality
+
+
             # Obtener la zona horaria de Colombia
             tz = pytz.timezone('America/Bogota')
 

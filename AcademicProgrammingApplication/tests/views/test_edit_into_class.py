@@ -48,12 +48,35 @@ class DataProcessorLoungeTest(TestCase):
         self.user = User.objects.create_user(username='user', password='pass')
         self.client.login(username='user', password='pass')
         
-        # Crear una clase de prueba
+        # Crear una materia de prueba
         self.subject = Subject.objects.create(name='Materia de Prueba', code='123')
+        
+        # Crear una clase de prueba asociada a la materia de prueba
         self.edit_class = Class.objects.create(id='001', subject=self.subject)
         
-    def test_data_processor_lounge_post_success(self):
-        # Simular una solicitud POST exitosa al procesar datos para actualizar la clase
+    def test_data_processor_lounge_post_success_presencial(self):
+        # Simular una solicitud POST exitosa al procesar datos para actualizar la clase (modalidad presencial)
+        data = {
+            'code_materia': '123',
+            'code_clase': '001',
+            'datetime1': '2024-04-25T08:00:00',
+            'datetime2': '2024-04-25T10:00:00',
+            'salon': '101D'
+        }
+        response = self.client.post(reverse('data_processor_lounge'), json.dumps(data), content_type='application/json')
+        
+        # Verificar que la respuesta sea exitosa
+        self.assertEqual(response.status_code, 200)
+        
+        # Verificar que los datos se procesaron correctamente
+        self.assertJSONEqual(response.content, {'mensaje': 'Datos procesados correctamente'})
+        
+        # Verificar que la modalidad de la clase se haya actualizado correctamente a presencial
+        updated_class = Class.objects.get(id='001')
+        self.assertEqual(updated_class.modality, 'PRESENCIAL')
+        
+    def test_data_processor_lounge_post_success_virtual(self):
+        # Simular una solicitud POST exitosa al procesar datos para actualizar la clase (modalidad virtual)
         data = {
             'code_materia': '123',
             'code_clase': '001',
@@ -67,11 +90,21 @@ class DataProcessorLoungeTest(TestCase):
         
         # Verificar que los datos se procesaron correctamente
         self.assertJSONEqual(response.content, {'mensaje': 'Datos procesados correctamente'})
+        
+        # Verificar que la modalidad de la clase se haya actualizado correctamente a virtual
+        updated_class = Class.objects.get(id='001')
+        self.assertEqual(updated_class.modality, 'VIRTUAL')
 
-    def test_data_processor_lounge_post_error(self):
-        # Simular una solicitud POST con error al procesar datos para actualizar la clase
-        data = {}
+    def test_data_processor_lounge_post_invalid_modality(self):
+        # Simular una solicitud POST con una modalidad inválida
+        data = {
+            'code_materia': '123',
+            'code_clase': '001',
+            'datetime1': '2024-04-25T08:00:00',
+            'datetime2': '2024-04-25T10:00:00',
+            'salon': '101D'
+        }
         response = self.client.post(reverse('data_processor_lounge'), json.dumps(data), content_type='application/json')
         
         # Verificar que la solicitud devuelve un error
-        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.status_code, 400)
