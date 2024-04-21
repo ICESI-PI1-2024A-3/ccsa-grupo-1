@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import redirect
+from AcademicProgrammingApplication.models import User, Role
 
 
 def sign_up(request):
@@ -32,10 +32,12 @@ def sign_up(request):
 
         if request.POST['password1'] == request.POST['password2']:
             try:
+                role = Role.objects.get(name=request.POST['role'])
                 # Create a new user with the provided information
                 user = User.objects.create_user(username=request.POST['username'],
                                                 password=request.POST['password1'],
-                                                email=request.POST['email'])
+                                                email=request.POST['email'],
+                                                role=role)
                 user.save()
                 # Log in the new user and redirect to the home page
                 auth_login(request, user)
