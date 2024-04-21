@@ -15,6 +15,14 @@ def create_roles(apps, schema_editor):
     Role.objects.create(name='Asistente de procesos')
 
 
+def create_admin_user(apps, schema_editor):
+    User = apps.get_model('AcademicProgrammingApplication', 'User')
+    admin_user = User.objects.create_superuser(username='admin', email='admin@example.com', password='admin',
+                                               role=apps.get_model('AcademicProgrammingApplication',
+                                                                   'Role').objects.get(name='Administrador'),
+                                               is_superuser=True)
+
+
 class Migration(migrations.Migration):
     initial = True
 
@@ -188,4 +196,5 @@ class Migration(migrations.Migration):
                 ('objects', django.contrib.auth.models.UserManager()),
             ],
         ),
+        migrations.RunPython(create_admin_user),
     ]
