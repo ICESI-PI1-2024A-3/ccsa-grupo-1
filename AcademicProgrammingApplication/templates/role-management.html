@@ -8,5 +8,64 @@ Gestión de Roles
 {% endblock %}
 
 {% block main-container-content %}
+<div class="container">
+    <div class="p-1">
+        En la siguiente tabla encontrarás el listado de trabajadores del Centro Compartido de Servicios Académicos. En
+        esta
+        lista, podrás ver el proceso en el que actualmente están trabajando y el rol que desempeñan. Desde aquí, puedes
+        filtrar a los trabajadores por proceso, cambiar su proceso y modificar su rol.
+    </div>
 
+    <div class="input-group mb-2">
+        <label class="input-group-text">Filtrar</label>
+        <select class="form-select" aria-label="Process filter">
+            <option value="Programación Académica" selected>Programación Académica</option>
+            <option value="Gestión Contable">Gestión Contable</option>
+            <option value="Apoyo logístico">Apoyo logístico</option>
+            <option value="Acompañamiento a profesores">Acompañamiento a profesores</option>
+        </select>
+        <button class="btn btn-outline-secondary">Aplicar</button>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Proceso</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Rol Actual</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>
+                <select class="form-select" aria-label="Process searcher">
+                    <option value="Programación Académica" selected>Programación Académica</option>
+                    <option value="Gestión Contable">Gestión Contable</option>
+                    <option value="Apoyo logístico">Apoyo logístico</option>
+                    <option value="Acompañamiento a profesores">Acompañamiento a profesores</option>
+                </select>
+            </td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="Líder de Procesos" selected>Líder de Procesos</option>
+                    <option value="Asistente de Procesos">Asistente de Procesos</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-secondary">
+        Cancelar
+    </button>
+    <!-- Button to submit registration form -->
+    <button class="btn btn-primary">
+        Guardar
+    </button>
+</div>
 {% endblock %}

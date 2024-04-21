@@ -35,8 +35,7 @@ def sign_up(request):
                 # Create a new user with the provided information
                 user = User.objects.create_user(username=request.POST['username'],
                                                 password=request.POST['password1'],
-                                                email=request.POST['email'],
-                                                is_superuser=True if request.POST['rol'] == 'Administrador' else False)
+                                                email=request.POST['email'])
                 user.save()
                 # Log in the new user and redirect to the home page
                 auth_login(request, user)
