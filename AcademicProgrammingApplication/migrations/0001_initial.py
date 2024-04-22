@@ -6,6 +6,7 @@ import django.core.validators
 import django.db.models.deletion
 import django.utils.timezone
 from django.db import migrations, models
+from django.contrib.auth.models import Group
 
 
 def create_roles(apps, schema_editor):
@@ -17,10 +18,10 @@ def create_roles(apps, schema_editor):
 
 def create_admin_user(apps, schema_editor):
     User = apps.get_model('AcademicProgrammingApplication', 'User')
-    admin_user = User.objects.create_superuser(username='admin', email='admin@example.com', password='admin',
-                                               role=apps.get_model('AcademicProgrammingApplication',
-                                                                   'Role').objects.get(name='Administrador'),
-                                               is_superuser=True)
+    User.objects.create_user(username='admin', email='admin@example.com', password='admin',
+                             role=apps.get_model('AcademicProgrammingApplication',
+                                                 'Role').objects.get(name='Administrador'))
+    Group.objects.get_or_create(name='Administrador')
 
 
 class Migration(migrations.Migration):
