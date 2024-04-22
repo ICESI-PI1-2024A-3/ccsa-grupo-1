@@ -60,21 +60,6 @@
         <div class="viatics-header">
             <h3>Solicitud de viáticos</h3>
             <button id="solicitar-viatico-btn" class="btn btn-primary">Solicitar</button>
-        </div>
-        <div class="viatics-info" id="info-viatics">
-            <div class="info-detailed m-3">
-                <div class="col-4">
-                    <dl>
-                        <!-- Display viatics details -->
-                        <dt>Estado de solicitud:</dt>
-                        {% if viatic.viatic_status == 'ENVIADO' %}
-                        <dd>Enviada</dd>
-                        {% else %}
-                        <dd>No Enviada</dd>
-                        {% endif %}
-                    </dl>
-                </div>
-            </div>
         </div>        
     </div>
 </div>
