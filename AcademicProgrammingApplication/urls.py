@@ -28,4 +28,5 @@ urlpatterns = [
          name='edit_academic_program'),
     path('edit_class/<str:class_id>/', login_required(views.edit_info_class), name='edit_info_class'),
     path('teacher_management/', login_required(views.teacher_management), name='teacher_management'),
+    path('teacher/<str:teacher_id>/', login_required(views.teacher_detail), name='teacher_detail'),
 ]

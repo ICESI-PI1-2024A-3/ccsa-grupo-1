@@ -8,3 +8,4 @@ from .base_screen import *
 from .subject_detail import *
 from .edit_info_class import *
 from .teacher_management import *
+from .teacher_detail import *
