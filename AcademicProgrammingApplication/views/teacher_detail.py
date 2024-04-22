@@ -8,7 +8,7 @@ def teacher_detail(request, teacher_id):
     teacher = Teacher.objects.get(id=teacher_id)
     # Render the teacher management page with necessary context data
     return render(request, 'teacher-detail.html', {
-        'title': 'Gestión de Profesores',
+        'title': 'Gestión de PROFESORES',
         'user_name': user.username,
         'teacher': teacher,
         'classes': get_classes(teacher),

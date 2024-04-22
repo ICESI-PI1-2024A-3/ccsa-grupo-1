@@ -1,10 +1,10 @@
 .container {
     padding: 20px;
-    max-width: 100%; /* Container to page width */
+    max-width: 100%;
 }
 
 h1, h2, h3 {
-    text-align: left; /* Titles on the left */
+    text-align: left;
 }
 
 .card {
@@ -27,19 +27,15 @@ h1, h2, h3 {
     margin: 0;
 }
 
-.schedule-info {
-    padding-top: 1.3%;
-}
-
-/* Estilos para el contenedor del horario */
+/* Styles for the schedule container */
 .schedule-table {
-    /* Ajusta el tamaño del contenedor para adaptarse al calendario */
+    /* Adjust the size of the container to fit the calendar */
     width: 100%;
     height: 600px;
     padding: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    /* Estilos para el encabezado del calendario y los dias de la semana en la cabecera */
+    /* Styles for the calendar header and days of the week in the header */
     .fc-toolbar-title,
     .fc-col-header-cell-cushion {
         font-weight: bold;
@@ -47,27 +43,33 @@ h1, h2, h3 {
         color: rgba(23, 104, 172, 0.9);
     }
 
-    /* Estilo para el botón "Prev" */
+    /* Style for the "Prev" button */
     .fc-prev-button {
         background-color: black;
         color: white;
         border: black;
     }
 
-    /* Estilo para el botón "Next" */
+    /* Style for the "Next" button */
     .fc-next-button {
         background-color: black;
         color: white;
         border: black;
     }
 
-    /* Estilo adicional para ambos botones */
+    /* Additional style for both buttons */
     .fc-prev-button:hover,
     .fc-next-button:hover {
         opacity: 1;
     }
 
-    /* Estilos generales para los eventos */
+    /* Styles for the events of the new class */
+    .new-class-event {
+        background-color: grey !important;
+        border: black !important;
+    }
+
+    /* General styles for events */
     .existing-class-event {
         background-color: rgba(23, 104, 172, 0.9);
         color: white;
@@ -90,12 +92,4 @@ h1, h2, h3 {
     color: white;
     border-color: rgba(23, 104, 172, 0.9);
     cursor: pointer;
-}
-
-.btn-primary:hover {
-    opacity: 0.8;
-}
-
-.btn-primary:focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
