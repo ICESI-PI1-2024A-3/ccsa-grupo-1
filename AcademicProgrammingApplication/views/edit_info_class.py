@@ -37,7 +37,7 @@ def edit_info_class(request, class_id):
             # Check if email should be sent
             if edit_class.send_email:
                 # Call the function to send email
-                send_email(request)
+                data_processor_lounge(request)
             
             return redirect('subject_detail', subject_id=edit_class.subject.code)
         elif action == 'cancel':
@@ -54,105 +54,85 @@ data_class_email = []
 
 @csrf_exempt
 def data_processor_lounge(request):
-    global processed_message
     if request.method == 'POST':
         try:
-            # Access JSON data sent from the frontend
             data_json = json.loads(request.body)
-            
-            # Process the data as needed
-            code_materia = data_json['code_materia']
-            code_clase = data_json['code_clase']
-            datetime1 = data_json['datetime1']
-            datetime2 = data_json['datetime2']
-            if len(data_json) == 5:
-                salon = data_json['salon']
-            
-            # Obtener la instancia de la clase que se actualizará
-            clase = get_object_or_404(Class, id=code_clase)
+            print(data_json)
+            print(len(data_json))
+            print(type(data_json))
+            process_data(data_json)
+            update_class_schedule(data_json)
+            send_email_after_update(data_json)
 
-            # actualizar modalidad de clase
-            if len(data_json) == 5:
-                new_modality = 'PRESENCIAL'  # Puedes asignar la modalidad que desees aquí
-                if new_modality not in [choice[0] for choice in Class.MODALITY_CHOICES]:
-                    print ({'mensaje': 'Modalidad no válida'}, status=400)
-                clase.modality = new_modality
-            elif len(data_json) == 4:
-                new_modality = 'VIRTUAL'  # Puedes asignar la modalidad que desees aquí
-                if new_modality not in [choice[0] for choice in Class.MODALITY_CHOICES]:
-                    print({'mensaje': 'Modalidad no válida'}, status=400)
-                clase.modality = new_modality
-
-
-            # Obtener la zona horaria de Colombia
-            tz = pytz.timezone('America/Bogota')
-
-            fecha_inicio = tz.localize(datetime.fromisoformat(datetime1))
-            fecha_fin = tz.localize(datetime.fromisoformat(datetime2))
-            
-            # into to email
-            data_class_email.append(code_materia)
-            data_class_email.append(code_clase)
-            data_class_email.append(datetime1)
-            data_class_email.append(datetime2)
-            if len(data_json) == 5:
-                data_class_email.append(salon)
-
-            print(data_class_email)
-            print("entree a")
-            # Actualizar las fechas de inicio y fin de la clase
-            try:
-                clase.start_date = fecha_inicio
-                clase.ending_date = fecha_fin
-                
-                # Modificar el atributo send_email según sea necesario
-                if clase.send_email:  # Si send_email es True
-                    clase.send_email = False  # No se enviará correo electrónico después de actualizar
-                else:
-                    clase.send_email = True  # Se enviará correo electrónico después de actualizar
-                    
-                clase.save()
-            except ValidationError as e:
-                return JsonResponse({'mensaje': 'Error al actualizar la clase: {}'.format(str(e))}, status=500)
-            
-            # Return a JSON response indicating success
-            processed_message = data_json
             return JsonResponse({'mensaje': 'Datos procesados correctamente'})
         except Exception as e:
-            # If any error occurs during data processing,
-            # return an error message
             return JsonResponse({'error': str(e)}, status=500)
     else:
-        # Return a JSON response indicating that the method is not allowed
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
+def process_data(data_json):
+    global data_class_email
+    code_materia = data_json['code_materia']
+    code_clase = data_json['code_clase']
+    datetime1 = data_json['datetime1']
+    datetime2 = data_json['datetime2']
+    salon = data_json.get('salon', None)
+    modality = data_json.get('modality')
 
+    data_class_email = [code_materia, code_clase, datetime1, datetime2, salon, modality]
+    print(data_class_email)
 
+def update_class_schedule(data_json):
+    code_clase = data_json['code_clase']
+    clase = get_object_or_404(Class, id=code_clase)
+
+    new_modality = 'PRESENCIAL' if len(data_json) == 5 else 'VIRTUAL'
+    if new_modality not in [choice[0] for choice in Class.MODALITY_CHOICES]:
+        raise ValueError('Modalidad no válida')
+    clase.modality = new_modality
+
+    tz = pytz.timezone('America/Bogota')
+    fecha_inicio = tz.localize(datetime.fromisoformat(data_json['datetime1']))
+    fecha_fin = tz.localize(datetime.fromisoformat(data_json['datetime2']))
+
+    clase.start_date = fecha_inicio
+    clase.ending_date = fecha_fin
 
     
-def send_email(request):
-    global processed_message, data_class_email
-    if processed_message is not None:
-        if len(processed_message) == 5:
-            email_mensaje = "la nueva fecha de la clase: inicio " + data_class_email[2] + " y finaliza " + data_class_email[3] + " y será en salón: " + data_class_email[4]
-        elif len(processed_message) == 4:
-            email_mensaje = "la nueva fecha de la clase: inicio " + data_class_email[2] + " y finaliza " + data_class_email[3]
+    clase.send_email = False
 
-        # Get the subject_id
+    if len(data_json) == 6:
+        clase.modality = 'PRESENCIAL'
+        print('clase presencial')
+    elif len(data_json) == 5:
+        clase.modality = 'VIRTUAL'
+        clase.classroom= None
+        clase.link = 'https://zoom.us/j/1234567890'
+        print('clase virtual')
+
+    print(clase.modality)
+    
+
+    clase.save()
+
+def send_email_after_update(data_json):
+    global data_class_email
+    if data_json is not None:
+        if len(data_json) == 6:
+            email_mensaje = f"la nueva fecha de la clase: inicio {data_class_email[2]} y finaliza {data_class_email[3]} y será en salón: {data_class_email[4]}"
+        elif len(data_json) == 5:
+            email_mensaje = f"la nueva fecha de la clase: inicio {data_class_email[2]} y finaliza {data_class_email[3]}"
+        else:
+            email_mensaje = "Mensaje de correo no disponible"
+
         subject_id = data_class_email[0]
-
-        # Query all students related to the subject
         students = Student.objects.filter(subject__code=subject_id)
-
-        # Construct the email content
         subject = 'Subject of the Email'
         message = ""
         for student in students:
             message += f"Para {student.name},\n\n"
             message += f"Nuevo horario de clase: {email_mensaje}.\n\n"
             message += "Regards,\nYour Name\n\n"
-
-        # Set the new date to send the email
         fecha_inicio = datetime.fromisoformat(data_class_email[2])
         enviar_correo_12h_antes_de_inicio_clase.delay(subject, message, students, fecha_inicio)
     else:
@@ -171,8 +151,8 @@ def enviar_correo_programado(subject, message, student_email):
     email = EmailMessage(
         subject,
         message,
-        settings.EMAIL_HOST_USER,  # Dirección de correo electrónico del remitente
-        [student_email]  # Lista de destinatarios, en este caso, el correo electrónico del estudiante
+        settings.EMAIL_HOST_USER,  # Sender email address
+        [student_email]  # Recipient list, in this case the student's email
     )
     email.send()
 
@@ -182,7 +162,6 @@ def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, sta
     now = datetime.now()
     if now < start_time_minus_12h:
         enviar_correo_programado.apply_async((subject, message, student_email), eta=start_time_minus_12h)
-
 
 
 
@@ -200,10 +179,10 @@ def edit_class_date_information(request):
             datetime1 = data_json['datetime1']
             
             
-            # Obtener la instancia de la clase que se actualizará
+            # Get the instance of the class to be updated
             clase = get_object_or_404(Class, id=code_clase)
 
-            # Obtener la zona horaria de Colombia
+            # Get Colombia time zone
             tz = pytz.timezone('America/Bogota')
 
             fecha_inicio = tz.localize(datetime.fromisoformat(datetime1))
@@ -211,7 +190,7 @@ def edit_class_date_information(request):
     
             print('actualice fecha de clase')
             
-            # Actualizar las fechas de inicio y fin de la clase
+            # Update class start and end dates
             try:
                 clase.start_date = fecha_inicio
                 clase.send_email = True

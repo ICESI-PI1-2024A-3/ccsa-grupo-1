@@ -2,15 +2,17 @@
 // this is a global variable that will be used to store the value of class.subject.code
 var code_clase;
 var code_materia;
+var modality_class;
 
 //create a new instance of the class, in class user the function import is called
 document.addEventListener("DOMContentLoaded", function () {
     // get the value of class.subject.code from the HTML
     code_materia = document.getElementById("valor").textContent;
     code_clase = document.getElementById("valor_clase").textContent;
+    modality_class = document.getElementById("valor_modality").textContent;
 
     // user the value as you wish
-    console.log("El valor de class.subject.code es:", code_materia, "El valor de class.code es:", code_clase);
+    console.log("El valor de class.subject.code es:", code_materia, "El valor de class.code es:", code_clase, "La modalidad de la clase es:", modality_class);
 });
 
 
@@ -58,7 +60,7 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                 if (!datetime1 || !datetime2 || !salon) {
                     Swal.showValidationMessage('Debes seleccionar tanto las fechas como las horas, así como también especificar el tipo de salón.');
                 }
-                return { datetime1: datetime1, datetime2: datetime2, salon: salon, code_materia: code_materia, code_clase: code_clase };
+                return { datetime1: datetime1, datetime2: datetime2, salon: salon, code_materia: code_materia, code_clase: code_clase, modality: modality_class };
             }
         }).then((result) => {
             if (result.isConfirmed) {
@@ -67,7 +69,8 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                     code_clase: result.value.code_clase,
                     datetime1: result.value.datetime1,
                     datetime2: result.value.datetime2,
-                    salon: result.value.salon
+                    salon: result.value.salon,
+                    modality: result.value.modality
                 };
                 Swal.fire({
                     html: `
@@ -97,6 +100,8 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                 }).catch(error => {
                     console.error('Error:', error);
                 });
+
+                data = {};
 
             }
 
@@ -132,7 +137,7 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                 if (!datetime1 || !datetime2) {
                     Swal.showValidationMessage('Debes seleccionar tanto las fechas como las horas.');
                 }
-                return { datetime1: datetime1, datetime2: datetime2, code_materia: code_materia, code_clase: code_clase };
+                return { datetime1: datetime1, datetime2: datetime2, code_materia: code_materia, code_clase: code_clase, modality: modality_class };
             }
         }).then((result) => {
             if (result.isConfirmed) {
@@ -140,7 +145,8 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                     code_materia: result.value.code_materia,
                     code_clase: result.value.code_clase,
                     datetime1: result.value.datetime1,
-                    datetime2: result.value.datetime2
+                    datetime2: result.value.datetime2,
+                    modality: result.value.modality
                 };
                 Swal.fire({
                     html: `
@@ -170,10 +176,12 @@ document.getElementById('tipoClase').addEventListener('change', function () {
                 }).catch(error => {
                     console.error('Error:', error);
                 });
+                data = {};
 
             }
 
         });
 
     }
+
 });
