@@ -59,26 +59,12 @@
         <!-- Show the professor's per diem request -->
         <div class="viatics-header">
             <h3>Solicitud de viáticos</h3>
-            <button class="btn btn-primary">Solicitar</button>
-        </div>
-        <div class="viatics-info" id="info-viatics">
-            <div class="info-detailed m-3">
-                <div class="col-4">
-                    <dl>
-                        <!-- Display viatics details -->
-                        <dt>Estado de solicitud:</dt>
-                        {% if teacher.contract.contract_status %}
-                        <dd>Enviada</dd>
-                        {% else %}
-                        <dd>Ninguna</dd>
-                        {% endif %}
-                    </dl>
-                </div>
-            </div>
-        </div>
+            <button id="solicitar-viatico-btn" class="btn btn-primary">Solicitar</button>
+        </div>        
     </div>
 </div>
 {% endif %}
+
 <!-- Full Calendar -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 <script>
@@ -124,5 +110,11 @@
     calendar.render();
     calendar.updateSize();
   });
+
 </script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/viatic_request.js' %}"></script>
+
 {% endblock %}
