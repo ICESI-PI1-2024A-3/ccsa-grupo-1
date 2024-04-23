@@ -1,0 +1,83 @@
+{% extends "layouts/base-with-footer.html" %}
+
+{% load static %}
+
+<!-- Title of the page -->
+{% block tittle-container %}
+Sign up
+{% endblock %}
+
+{% block largest-container-content %}
+<!-- Import Bootstrap CSS for styling -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+<!-- Form for user registration -->
+<div class="col-md-4 offset-md-4 pt-5">
+    <h2 class="text-center">Registro - Programación Académica</h2>
+    <form id="registrationForm" method="POST" class="card border-0">
+        <br>
+        <!-- Display error message if applicable -->
+        {% if error is not None %}
+        <div class="alert alert-primary" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        <!-- CSRF token for security -->
+        {% csrf_token %}
+        <!-- Input field for username -->
+        <div class="mb-2">
+            <label for="username">Nombre de usuario</label>
+            <input type="text" name="username" id="username" class="form-control"
+                   placeholder="Ingrese su nombre de usuario">
+        </div>
+        <!-- Input field for email -->
+        <div class="mb-2">
+            <label for="email">Correo electrónico</label>
+            <input type="text" name="email" id="email" class="form-control"
+                   placeholder="Ingrese su correo electrónico">
+        </div>
+        <!-- Input fields for password -->
+        <div class="mb-2">
+            <label>Contraseña</label>
+            <div class="input-group mb-2">
+                <input type="password" name="password1" class="form-control" placeholder="Ingrese su contraseña"
+                       aria-label="Username">
+                <input type="password" name="password2" class="form-control" placeholder="Confirme su contraseña"
+                       aria-label="Server">
+            </div>
+        </div>
+        <!-- Dropdown for selecting user role -->
+        <div class="input-group mb-2">
+            <label for="rol" class="input-group-text">Rol</label>
+            <select class="form-control form-select form-select-sm" id="rol" name="rol">
+                <option value="Administrador" selected>Administrador</option>
+                <option value="Líder de procesos">Líder de procesos</option>
+                <option value="Asistente de procesos">Asistente de procesos</option>
+            </select>
+        </div>
+    </form>
+    <!-- Buttons for login and registration -->
+    <div class="row align-items-start text-center mt-4">
+        <!-- Button to navigate to login page -->
+        <div class="col"><a href="{% url 'login' %}">
+            <button class="btn btn-secondary w-100">
+                Ya tengo una cuenta
+            </button>
+        </a>
+        </div>
+        <!-- Button to submit registration form -->
+        <div class="col">
+            <button id="registrationButton" class="btn btn-primary w-100">
+                Registrarme
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Script to submit registration form when 'Sign up' button is clicked -->
+<script>
+    document.getElementById('registrationButton').addEventListener('click', function () {
+        document.getElementById('registrationForm').submit();
+    });
+</script>
+
+{% endblock %}

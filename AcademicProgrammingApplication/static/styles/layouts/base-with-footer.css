@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, Source Sans Pro, serif;
+}
+
+p {
+    font-size: .8rem;
+}
+
+#container {
+    height: 93vh;
+    display: flex;
+    overflow: hidden;
+}
+
+/*Footer*/
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: .5rem;
+    box-shadow: inset 0 0.12rem 0.12rem rgba(0, 0, 0, 0.25);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow: hidden;
+}
+
+#social {
+    width: 6rem;
+}
+
+#social svg {
+    vertical-align: top;
+}
+
+#university-name {
+    padding-top: .5rem;
+    display: flex;
+}
+
+#university-name p {
+    margin-left: .5rem;
+}
+
+#phone-number {
+    display: flex;
+}
+
+#phone-number p {
+    margin-left: .5rem;
+    vertical-align: top;
+}
+
+#email {
+    display: flex;
+}
+
+#email p {
+    margin-left: .5rem;
+    vertical-align: top;
+}
+
+#help {
+    padding-top: .3rem;
+}
+
+#social-media-group {
+    padding-top: .5rem;
+    display: flex;
+    gap: 1.5rem;
+}

@@ -1,0 +1,37 @@
+.container {
+    padding: 20px;
+    max-width: 100%; /* Container to page width */
+}
+
+h1, h2, h3 {
+    text-align: left; /* Titles on the left */
+}
+
+.card {
+    border: 1px solid #ddd;
+}
+
+.table {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
+}
+
+.table th {
+    background-color: rgba(23, 104, 172, 0.9);
+    color: rgb(255, 255, 255);
+}
+
+.info-detallada dl {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+}
+
+.info-detallada dt {
+    grid-column: 1;
+    font-weight: bold;
+}
+
+.info-detallada dd {
+    grid-column: 2;
+    margin: 0;
+}
