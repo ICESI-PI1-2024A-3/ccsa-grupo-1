@@ -58,6 +58,7 @@ def academic_management(request):
     # Render the academic management page with necessary context data
     return render(request, 'academic-management.html', {
         'title': 'Programación académica',
+        'delete_program_permission': user.has_perm('AcademicProgrammingApplication.delete_program'),
         'user_name': user.username,
         'program_information': program_information,
         'semester': semester,

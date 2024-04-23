@@ -6,7 +6,6 @@ import django.core.validators
 import django.db.models.deletion
 import django.utils.timezone
 from django.db import migrations, models
-from django.contrib.auth.models import Group
 
 
 def create_roles(apps, schema_editor):
@@ -16,12 +15,23 @@ def create_roles(apps, schema_editor):
     Role.objects.create(name='Asistente de procesos')
 
 
+def create_groups(apps, schema_editor):
+    group = apps.get_model('auth', 'Group')
+
+    # Create groups and assign roles
+    admin_group, _ = group.objects.get_or_create(name='Administrador')
+    leader_group, _ = group.objects.get_or_create(name='Líder de procesos')
+    assistant_group, _ = group.objects.get_or_create(name='Asistente de procesos')
+
+
 def create_admin_user(apps, schema_editor):
+    group = apps.get_model('auth', 'Group')
     User = apps.get_model('AcademicProgrammingApplication', 'User')
-    User.objects.create_user(username='admin', email='admin@example.com', password='admin',
-                             role=apps.get_model('AcademicProgrammingApplication',
-                                                 'Role').objects.get(name='Administrador'))
-    Group.objects.get_or_create(name='Administrador')
+    admin = User.objects.create_user(username='admin', email='admin@example.com', password='admin',
+                                     role=apps.get_model('AcademicProgrammingApplication',
+                                                         'Role').objects.get(name='Administrador'))
+
+    admin.groups.add(group.objects.get(name='Administrador'))
 
 
 class Migration(migrations.Migration):
@@ -52,7 +62,6 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255, primary_key=True, serialize=False)),
             ],
         ),
-        migrations.RunPython(create_roles),
         migrations.CreateModel(
             name='Semester',
             fields=[
@@ -197,5 +206,7 @@ class Migration(migrations.Migration):
                 ('objects', django.contrib.auth.models.UserManager()),
             ],
         ),
+        migrations.RunPython(create_groups),
+        migrations.RunPython(create_roles),
         migrations.RunPython(create_admin_user),
     ]

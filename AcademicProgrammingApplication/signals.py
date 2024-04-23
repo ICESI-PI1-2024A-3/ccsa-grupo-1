@@ -9,5 +9,5 @@ def assign_group(sender, instance, created, **kwargs):
     if created:
         if instance.role:
             group_name = f'{instance.role}'
-            group, created_group = Group.objects.get_or_create(name=group_name)
+            group = Group.objects.get(name=group_name)
             instance.groups.add(group)
