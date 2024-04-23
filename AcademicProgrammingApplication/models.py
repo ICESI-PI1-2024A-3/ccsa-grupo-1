@@ -174,7 +174,7 @@ class Viatic(models.Model):
 class Archivo(models.Model):
     nombre_archivo = models.CharField(max_length=255)
     fecha = models.DateField(auto_now_add=True)
-    path = models.FileField(upload_to='archivos/',default= 'ProgramacionBase.xlsx')
+    path = models.FileField(upload_to='archivos/', default='BaseProgramming.xlsx')
 
     def __str__(self):
         return self.nombre_archivo

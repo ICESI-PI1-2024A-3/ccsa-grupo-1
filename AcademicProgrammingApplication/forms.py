@@ -15,3 +15,4 @@ class UserForm(forms.Form):
 #class to upload file with pandas in a database before
 class UploadFileForm(forms.Form):
     archivo = forms.FileField()
+
