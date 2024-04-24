@@ -171,10 +171,11 @@ class Viatic(models.Model):
         return f'Transporte: {transport}, Alojamiento: {accommodation}, Viático: {viatic}'
     
 
-class Archivo(models.Model):
-    nombre_archivo = models.CharField(max_length=255)
-    fecha = models.DateField(auto_now_add=True)
+class File(models.Model):
+    id = models.AutoField(primary_key=True)
+    name_file = models.CharField(max_length=255)
+    date = models.DateField(auto_now_add=True)
     path = models.FileField(upload_to='archivos/', default='BaseProgramming.xlsx')
 
     def __str__(self):
-        return self.nombre_archivo
+        return self.name_file
