@@ -51,9 +51,9 @@ document.getElementById('start_date_class').addEventListener('click', function (
                 html: `
                 <!-- Bootstrap style sheet for CSS-->
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                <div class="p-1">Se le notificará por correo electrónico una vez la Oficina de Planeación Académica apruebe su solicitud.</div>
+                <div class="p-1">Se le notificará por correo electrónico</div>
                 `,
-                titleText: "cambio de fehca exitoso",
+                titleText: "cambio de fecha exitoso",
                 icon: "success",
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: 'rgba(23, 104, 172, 0.9)',
@@ -119,9 +119,9 @@ document.getElementById('end_date_class').addEventListener('click', function () 
                 html: `
                 <!-- Bootstrap style sheet for CSS-->
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                <div class="p-1">Se le notificará por correo electrónico una vez la Oficina de Planeación Académica apruebe su solicitud.</div>
+                <div class="p-1">Se le notificará por correo electrónico.</div>
                 `,
-                titleText: "cambio de fehca exitoso",
+                titleText: "cambio de fecha exitoso",
                 icon: "success",
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: 'rgba(23, 104, 172, 0.9)',

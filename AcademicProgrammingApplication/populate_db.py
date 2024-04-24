@@ -146,6 +146,16 @@ class TeacherFactory(factory.django.DjangoModelFactory):
     state = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
     picture = factory.LazyAttribute(lambda _: SimpleUploadedFile('picture.jpg', b'jpg_content'))
 
+class StudentFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Student
+
+    # Generate fake data for students
+    name = factory.Faker('name')
+    student_id = factory.Sequence(lambda n: f'ST{n}')
+    id_type = factory.Faker('random_element', elements=['CC', 'TI', 'CE'])  # Assuming Colombian ID types
+    email = factory.Faker('email')
+
 
 class ClassFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -159,11 +169,25 @@ class ClassFactory(factory.django.DjangoModelFactory):
     classroom = factory.Faker('random_element',
                               elements=['Classroom A', 'Classroom B', 'Classroom C', 'Classroom D', 'Classroom E'])
     link = factory.Faker('url')
+    send_email = factory.Faker('boolean')
+
     # Selecting an existing instance of Subject from the database
     subject = factory.LazyAttribute(lambda _: random.choice(Subject.objects.all()))
 
     # Selecting an existing Teacher instance from the database
     teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
+
+    @factory.post_generation
+    def students(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for student in extracted:
+                self.students.add(student)
+        else:
+            students = Student.objects.all()
+            self.students.add(*random.sample(list(students), random.randint(1, 10)))  # Add between 1 and 10 students to the class
 
 
 class ContractFactory(factory.django.DjangoModelFactory):

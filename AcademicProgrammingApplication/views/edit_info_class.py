@@ -92,11 +92,11 @@ def update_class_schedule(data_json):
     clase.modality = new_modality
 
     tz = pytz.timezone('America/Bogota')
-    fecha_inicio = tz.localize(datetime.fromisoformat(data_json['datetime1']))
-    fecha_fin = tz.localize(datetime.fromisoformat(data_json['datetime2']))
+    start_date = tz.localize(datetime.fromisoformat(data_json['datetime1']))
+    end_date = tz.localize(datetime.fromisoformat(data_json['datetime2']))
 
-    clase.start_date = fecha_inicio
-    clase.ending_date = fecha_fin
+    clase.start_date = start_date
+    clase.ending_date = end_date
 
     
     clase.send_email = False
@@ -147,7 +147,7 @@ def send_email_after_update(data_json):
 
 # tasks to send email
 @shared_task
-def enviar_correo_programado(subject, message, student_email):
+def send_scheduled_mail(subject, message, student_email):
     email = EmailMessage(
         subject,
         message,
@@ -161,7 +161,8 @@ def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, sta
     start_time_minus_12h = start_time - timedelta(hours=12)
     now = datetime.now()
     if now < start_time_minus_12h:
-        enviar_correo_programado.apply_async((subject, message, student_email), eta=start_time_minus_12h)
+        
+        send_scheduled_mail.apply_async((subject, message, student_email), eta=start_time_minus_12h)
 
 
 
