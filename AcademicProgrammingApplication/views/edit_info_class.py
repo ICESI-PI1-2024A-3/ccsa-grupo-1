@@ -134,7 +134,7 @@ def send_email_after_update(data_json):
             message += f"Nuevo horario de clase: {email_mensaje}.\n\n"
             message += "Regards,\nYour Name\n\n"
         fecha_inicio = datetime.fromisoformat(data_class_email[2])
-        enviar_correo_12h_antes_de_inicio_clase.delay(subject, message, students, fecha_inicio)
+        send_mail_12h_before_start_class.delay(subject, message, students, fecha_inicio)
     else:
         email_mensaje = "Mensaje de correo no disponible"
     
@@ -156,8 +156,8 @@ def send_scheduled_mail(subject, message, student_email):
     )
     email.send()
 
-@shared_task
-def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, start_time):
+@shared_task #send_mail_12h_before_start_class
+def send_mail_12h_before_start_class(subject, message, student_email, start_time):
     start_time_minus_12h = start_time - timedelta(hours=12)
     now = datetime.now()
     if now < start_time_minus_12h:
