@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.forms import ValidationError
-from django.contrib.auth.models import User
+from django.contrib.auth import models as django_models
 
 # Create your models here.
 class Semester(models.Model):
@@ -173,9 +173,11 @@ class Viatic(models.Model):
 
 class File(models.Model):
     id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=255, default="none")
     name_file = models.CharField(max_length=255)
     date = models.DateField(auto_now_add=True)
     path = models.FileField(upload_to='archivos/', default='BaseProgramming.xlsx')
+
 
     def __str__(self):
         return self.name_file

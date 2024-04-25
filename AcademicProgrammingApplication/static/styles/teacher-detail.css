@@ -1,0 +1,95 @@
+.container {
+    padding: 20px;
+    max-width: 100%;
+}
+
+h1, h2, h3 {
+    text-align: left;
+}
+
+.card {
+    border: 1px solid #ddd;
+}
+
+.info-detailed dl {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+}
+
+.info-detailed dt {
+    grid-column: 1;
+    font-weight: bold;
+}
+
+.info-detailed dd {
+    grid-column: 2;
+    margin: 0;
+}
+
+/* Styles for the schedule container */
+.schedule-table {
+    /* Adjust the size of the container to fit the calendar */
+    width: 100%;
+    height: 600px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* Styles for the calendar header and days of the week in the header */
+    .fc-toolbar-title,
+    .fc-col-header-cell-cushion {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: rgba(23, 104, 172, 0.9);
+    }
+
+    /* Style for the "Prev" button */
+    .fc-prev-button {
+        background-color: black;
+        color: white;
+        border: black;
+    }
+
+    /* Style for the "Next" button */
+    .fc-next-button {
+        background-color: black;
+        color: white;
+        border: black;
+    }
+
+    /* Additional style for both buttons */
+    .fc-prev-button:hover,
+    .fc-next-button:hover {
+        opacity: 1;
+    }
+
+    /* Styles for the events of the new class */
+    .new-class-event {
+        background-color: grey !important;
+        border: black !important;
+    }
+
+    /* General styles for events */
+    .existing-class-event {
+        background-color: rgba(23, 104, 172, 0.9);
+        color: white;
+    }
+
+}
+
+.viatics {
+    padding-top: 1.3%;
+}
+
+.viatics-header {
+    display: flex;
+    align-items: center;
+}
+
+.btn-primary {
+    margin-left: 5%;
+    background-color: rgba(23, 104, 172, 0.9);
+    color: white;
+    border-color: rgba(23, 104, 172, 0.9);
+    cursor: pointer;
+}

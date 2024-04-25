@@ -62,8 +62,8 @@
                                 {% for file in files %}
                                 <tr>
                                     <td>{{ file.id }}</td>
-                                    <td>yo</td>
-                                    <td>{{ file.date }}</td>
+                                    <td>{{ file.username}}</td>
+                                    <td>{{ file.date}}</td>
                                     <td>{{ file.name_file }}</td>
                                 </tr>
                                 {%endfor%}
@@ -104,7 +104,7 @@
                         <td>{{ row.Nombre_Profesor }}</td>
                         <td>{{ row.Nombre_Materia }}</td>
                         <td>{{ row.Fecha_Inicio }}</td>
-                        <td>yo</td>
+                        <td>{{ row.Usuario }}</td>
                         <td>{{ row.Comentario }}</td>
                     </tr>
                     {% endfor %}
@@ -121,9 +121,22 @@
                 {% csrf_token %}
                 <input type="file" name="file" required>
                 <button type="submit" class="btn btn-primary" name="action" value="save">Actualizar Archivo</button>
-                <button type="submit" class="btn btn-secondary" name="action" value="download">Descargar Archivo</button>
               </div>
             </form>
+            <form method="get" action="{% url 'planning_proposal' %}">
+                <input type="hidden" name="action" value="download">
+                <button type="submit" class="btn btn-secondary">Descargar Archivo</button>
+            </form>
+    </div>
+    <div class="container">
+        <div class="row mb-4">
+            <!-- empty -->
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <!-- empty -->
+            </div>
+        </div>
     </div>
     
     <!-- Bootstrap JS files (jQuery and Popper.js) -->
