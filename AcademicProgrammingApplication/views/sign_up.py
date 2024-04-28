@@ -35,8 +35,10 @@ def sign_up(request):
                 role = Role.objects.get(name=request.POST['role'])
                 # Create a new user with the provided information
                 user = User.objects.create_user(username=request.POST['username'],
-                                                password=request.POST['password1'],
+                                                first_name=request.POST['first_name'],
+                                                last_name=request.POST['last_name'],
                                                 email=request.POST['email'],
+                                                password=request.POST['password1'],
                                                 role=role)
                 user.save()
                 # Log in the new user and redirect to the home page
