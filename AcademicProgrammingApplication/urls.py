@@ -28,6 +28,6 @@ urlpatterns = [
          name='edit_academic_program'),
     path('edit_class/<str:class_id>/', login_required(views.edit_info_class), name='edit_info_class'),
          path('dataProcessor_lounge/', views.data_processor_lounge, name='data_processor_lounge'),
-     path('dateCLass/',views.edit_class_date_information, name='edit_class_date_information')
+     path('dateCLass/',views.edit_class_date_information, name='edit_class_date_information'),
      
 ]    

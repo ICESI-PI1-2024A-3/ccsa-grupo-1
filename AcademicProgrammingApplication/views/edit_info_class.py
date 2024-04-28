@@ -33,11 +33,29 @@ def edit_info_class(request, class_id):
         action = request.POST.get('action')
         if action == 'save':
             edit_class.save()
+            email_content = generate_class_email_content(edit_class)
+            message = f"Dear {edit_class.teacher},\n\n"
+            message += f"Here are the details for the upcoming class:\n\n{email_content}\n\n"
+            message += "Regards,\nYour Name"
             
             # Check if email should be sent
             if edit_class.send_email:
                 # Call the function to send email
                 data_processor_lounge(request)
+
+             # Envía el correo electrónico
+            try:
+                print('enviando correo exitosamente')
+                email = EmailMessage(
+                    'Class Information',
+                    message,
+                    settings.EMAIL_HOST_USER,  # Dirección de correo electrónico del remitente
+                    [edit_class.teacher.email],  # Lista de destinatarios, en este caso, el correo electrónico del profesor
+                )
+                email.send()
+                messages.success(request, 'Email sent successfully')
+            except Exception as e:
+                messages.error(request, f'Failed to send email: {str(e)}')
             
             return redirect('subject_detail', subject_id=edit_class.subject.code)
         elif action == 'cancel':
@@ -63,6 +81,7 @@ def data_processor_lounge(request):
             process_data(data_json)
             update_class_schedule(data_json)
             send_email_after_update(data_json)
+            send_email(request, data_json)
 
             return JsonResponse({'mensaje': 'Datos procesados correctamente'})
         except Exception as e:
@@ -210,3 +229,23 @@ def edit_class_date_information(request):
         # Return a JSON response indicating that the method is not allowed
         return JsonResponse({'error': 'Método no permitido'}, status=405)
     
+
+        
+def generate_class_email_content(class_instance):
+    """
+    Generates the email content with class information.
+    """
+    email_content = ""
+    email_content += f"Session Number: {class_instance.id}\n"
+    email_content += f"Start Date: {class_instance.start_date}\n"
+    email_content += f"Ending Date: {class_instance.ending_date}\n"
+    email_content += f"Modality: {class_instance.modality}\n"
+    email_content += f"Classroom: {class_instance.classroom}\n"
+    email_content += f"Virtual Platform Link: {class_instance.link}\n"
+    email_content += f"Send Email: {class_instance.send_email}\n"
+    email_content += f"Associated Subject: {class_instance.subject}\n"
+    email_content += f"Associated Teacher: {class_instance.teacher}\n"
+    
+    return email_content
+
+  
