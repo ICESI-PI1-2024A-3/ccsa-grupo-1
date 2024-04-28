@@ -1,0 +1,33 @@
+.container {
+    padding: 20px;
+    max-width: 100%;
+}
+
+.search-bar {
+    width: 70%;
+
+}
+
+#search-btn {
+    background-color: rgba(23, 104, 172, 0.9);
+    fill: white;
+}
+
+/* Estilos para la alerta de profesores no encontrados */
+.alert-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert {
+    border: 1px solid transparent;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.table th {
+    background-color: rgba(23, 104, 172, 0.9);
+    color: rgb(255, 255, 255);
+}
