@@ -41,9 +41,7 @@ def sign_up(request):
                                                 password=request.POST['password1'],
                                                 role=role)
                 user.save()
-                # Log in the new user and redirect to the home page
-                auth_login(request, user)
-                return redirect('home')
+                return redirect('role_management')
             except IntegrityError:
                 # If the username already exists, render the sign-up page with an error message
                 return render(request, 'sign-up.html', {
