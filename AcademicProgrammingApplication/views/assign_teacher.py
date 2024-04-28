@@ -3,9 +3,18 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from AcademicProgrammingApplication.models import Class, Teacher
 
-
-# This function assigns a teacher to a class.
 def assign_teacher(request, class_id):
+    """
+    Assigns a teacher to a class.
+    
+    Parameters:
+        request: HttpRequest object.
+        class_id (str): The ID of the class to assign a teacher to.
+        
+    Returns:
+        HttpResponse: Rendered template with assigned teacher information.
+    """
+    # Retrieve the authenticated user
     user = request.user
     # Get the class to assign
     new_class = Class.objects.filter(id=class_id).first()
@@ -17,76 +26,79 @@ def assign_teacher(request, class_id):
     }
     # Get the value of the 'search' parameter from the GET request
     queryset = request.GET.get('search')
+    # Get the teacher assigned to the class
     teacher = new_class.teacher if new_class.teacher else None
-    # Filter teachers who are in the 'Active' state
-    teachers = Teacher.objects.filter(state='Activo')
     # If there's a queryset, reassign 'teachers' to filter by name containing 'queryset'
     if queryset:
         teachers = Teacher.objects.filter(
-            Q(name__icontains=queryset)
+            state='ACTIVO',
+            name__istartswith=queryset
         ).distinct()
-    # Get the teacher searched
-    teacher = teachers.first()
+        # Get the teacher searched
+        teacher = teachers.first()
     # Check for overlapping classes
-    overlapping_classes = Class.objects.filter(
+    overlap_alert = Class.objects.filter(
         teacher=teacher,
         start_date__lt=new_class.ending_date,
         ending_date__gt=new_class.start_date
-    )
+    ).exclude(id=class_id).exists()
+    # Save the teacher's assignment
     if request.method == 'POST':
         teacher_id = request.POST.get('teacher_id')
         teacher = Teacher.objects.get(id=teacher_id)
-        # Asignar la clase al profesor
+        # Assign the class to the teacher
         new_class.teacher = teacher
         new_class.save()
-        # Redireccionar a la página de edit_info_class
+        # Redirect to the edit_info_class page
         return redirect('edit_info_class', class_id=new_class.id)
-    # If there are overlapping classes, show an alert
-    if overlapping_classes.exists():
-        return render(request, 'assign-teacher.html', {
-            'user_name': user.username,
-            'title': 'Asignar Profesor a Clase',
-            'teacher': teacher,
-            'classes': get_classes(request, teacher),
-            'new_class': new_class_formatted,
-            'overlap_alert': True,
-        })
-    # If there are no overlapping classes, proceed with assigning the class
+    
     return render(request, 'assign-teacher.html', {
         'user_name': user.username,
         'title': 'Asignar Profesor a Clase',
         'teacher': teacher,
-        'classes': get_classes(request, teacher),
+        'classes': get_classes(teacher, new_class),
         'new_class': new_class_formatted,
+        'overlap_alert': overlap_alert,
     })
 
 
-# Function to search for teachers based on an entered term.
 def search_teacher(request):
+    """
+    Searches for teachers based on the entered term.
+    
+    Parameters:
+        request: HttpRequest object.
+        
+    Returns:
+        JsonResponse: JSON response containing search results.
+    """
     # Get the value of the 'term' parameter from the GET request
     queryset = request.GET.get('term')
     # Filter teachers whose names contain the value of 'queryset'
     teachers = Teacher.objects.filter(
-        name__icontains=queryset,
-        state='Activo'
+        name__istartswith=queryset,
+        state='ACTIVO'
     ).distinct().values_list('id', 'name')
     # Create a list of results in JSON format
     results = [{'value': teacher[0], 'label': teacher[1]} for teacher in teachers]
-    # Returns the results as a JSON response
+    # Return the results as a JSON response
     return JsonResponse(results, safe=False)
 
 
-# Get the classes associated with a given teacher ID
-def get_classes(_request, teacher_id):
+def get_classes(teacher, new_class=None):
     """
     Get the classes associated with a given teacher ID.
-
+    
+    Parameters:
+        teacher (Teacher): The teacher object.
+        new_class (Class, optional): The new class object. Defaults to None.
+        
     Returns:
         list: List of dictionaries containing class information.
     """
     # Get the classes associated with a given teacher
-    classes = Class.objects.filter(teacher_id=teacher_id).all()
-    # Initialize the array of out
+    classes = Class.objects.filter(teacher=teacher).exclude(id=new_class.id if new_class else None)
+    # Initialize the array of output
     out = []
     # Get the most important information of the classes
     for session in classes:

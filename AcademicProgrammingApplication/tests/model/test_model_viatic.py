@@ -21,6 +21,7 @@ class ViaticModelTest(TestCase):  # Defining a test case class for Viatic model
             transport=True,
             accommodation=False,
             viatic=True,
+            viatic_status='NO_ENVIADA',
             id_teacher=self.teacher,
         )
         # Verifying that the Viatic object is created successfully
@@ -32,10 +33,11 @@ class ViaticModelTest(TestCase):  # Defining a test case class for Viatic model
             transport=True,
             accommodation=False,
             viatic=True,
+            viatic_status='NO_ENVIADA',
             id_teacher=self.teacher,
         )
         # Verifying that the __str__ method of Viatic model works correctly
-        self.assertEqual(str(viatic_obj), 'Transporte: Sí, Alojamiento: No, Viático: Sí')
+        self.assertEqual(str(viatic_obj), 'Transporte: Sí, Alojamiento: No, Viático: Sí, Estado del viático: No Enviada')
 
     def test_viatic_attributes(self):  # Test for attributes of Viatic model
         # Creating a Viatic object for testing
@@ -43,10 +45,12 @@ class ViaticModelTest(TestCase):  # Defining a test case class for Viatic model
             transport=True,
             accommodation=False,
             viatic=True,
+            viatic_status='NO_ENVIADA',
             id_teacher=self.teacher,
         )
         # Verifying that the attributes of Viatic model are correct
         self.assertEqual(viatic_obj.transport, True)
         self.assertEqual(viatic_obj.accommodation, False)
         self.assertEqual(viatic_obj.viatic, True)
+        self.assertEqual(viatic_obj.viatic_status, 'NO_ENVIADA')
         self.assertEqual(viatic_obj.id_teacher, self.teacher)
