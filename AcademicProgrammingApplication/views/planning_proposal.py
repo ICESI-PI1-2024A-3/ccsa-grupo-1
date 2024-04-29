@@ -45,7 +45,14 @@ def planning_proposal(request):
             df['id'] = range(1, len(df) + 1)
             file_selected = df.to_dict(orient='records')
 
-    files = PlanningProposal.objects.all()
+
+    search_query = request.GET.get('search_query')
+
+
+    if search_query:
+        files = PlanningProposal.objects.filter(username=search_query).order_by('-id')
+    else:
+        files = PlanningProposal.objects.all()
 
     if request.method == 'GET' and request.GET.get('action') == 'download':
         file_instance = PlanningProposal.objects.last()
@@ -66,4 +73,5 @@ def planning_proposal(request):
         'title': 'Propuesta Programacion Academica',
         'files': files,
         'file_selected': file_selected,
+        'search_query': search_query,
     })
