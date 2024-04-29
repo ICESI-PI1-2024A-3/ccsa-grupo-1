@@ -9,4 +9,5 @@ from .subject_detail import *
 from .edit_info_class import *
 from .teacher_management import *
 from .teacher_detail import *
+from .planning_proposal import *
 from .role_management import *
