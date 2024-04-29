@@ -13,7 +13,7 @@ def create_user():
     user = User.objects.create(username=username, password=make_password(password))
     return user, password
 
-class TeacherManagementTest(StaticLiveServerTestCase):
+class TeacherDeatilTest(StaticLiveServerTestCase):
     databases = {'default': 'test', 'test': 'test'}
     
     @classmethod

@@ -5,7 +5,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 from django.contrib.auth.hashers import make_password
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys  # Importa Keys
+from selenium.webdriver.common.keys import Keys
 
 def create_user():
     username = 'admin'
