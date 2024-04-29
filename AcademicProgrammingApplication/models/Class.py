@@ -22,9 +22,11 @@ class Class(models.Model):
 
     # RELATIONS
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE,
-                                verbose_name="Materia asociada")  # A subject is related to many classes, but a class only to one subject
+                                verbose_name="Materia asociada")  # A subject is related to many classes, but a class
+    # only to one subject
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,
-                                verbose_name="Profesor asociado")  # A teacher can teach many classes, but a class can only have one teacher
+                                verbose_name="Profesor asociado")  # A teacher can teach many classes, but a class
+    # can only have one teacher
     students = models.ManyToManyField(Student, related_name='classes', verbose_name="Estudiantes")
 
     def save(self, *args, **kwargs):

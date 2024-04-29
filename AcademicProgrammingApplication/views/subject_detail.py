@@ -27,5 +27,5 @@ def subject_detail(request, subject_id):
                       'subject': subject,
                       'classes': classes,
                       'title': 'Gestión de MATERIA',
-                      'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role')
+                      'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
                   })

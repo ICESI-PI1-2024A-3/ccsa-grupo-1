@@ -1,4 +1,3 @@
-from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from AcademicProgrammingApplication.models import Class, Teacher
