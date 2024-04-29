@@ -1,11 +1,12 @@
-from django.http import FileResponse, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 import pandas as pd
 from datetime import datetime
-from AcademicProgrammingApplication.models import File
+from AcademicProgrammingApplication.models import PlanningProposal
 from django.conf import settings
 import os
 from openpyxl import load_workbook
+
 
 def planning_proposal(request):
     user = request.user
@@ -14,9 +15,9 @@ def planning_proposal(request):
     if request.method == 'POST' and request.FILES.get('file'):
         updated_file = request.FILES['file']
         new_name = f"Programacion_{datetime.now().strftime('%d-%m-%Y_%H%M%S')}.xlsx"
-        updated_file.name = new_name  
+        updated_file.name = new_name
 
-        File.objects.create(username=user.username, name_file=new_name, path=updated_file)
+        PlanningProposal.objects.create(username=user.username, name_file=new_name, path=updated_file)
 
         df = pd.read_excel(updated_file)
         df = df[df['Comentario'].notna()]
@@ -24,9 +25,9 @@ def planning_proposal(request):
         df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia']]
         df['id'] = range(1, len(df) + 1)
         file_selected = df.to_dict(orient='records')
-    
+
     else:
-        file_instance = File.objects.last()
+        file_instance = PlanningProposal.objects.last()
         if file_instance:
             full_file_path = os.path.join(settings.MEDIA_ROOT, str(file_instance.path))
             file_path_with_backslashes = full_file_path.replace('\\', '/')
@@ -44,10 +45,10 @@ def planning_proposal(request):
             df['id'] = range(1, len(df) + 1)
             file_selected = df.to_dict(orient='records')
 
-    files = File.objects.all()
+    files = PlanningProposal.objects.all()
 
     if request.method == 'GET' and request.GET.get('action') == 'download':
-        file_instance = File.objects.last()
+        file_instance = PlanningProposal.objects.last()
         if file_instance:
             full_file_path = os.path.join(settings.MEDIA_ROOT, str(file_instance.path))
             file_path_with_backslashes = full_file_path.replace('\\', '/')
