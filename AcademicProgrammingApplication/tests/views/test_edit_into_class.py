@@ -2,23 +2,11 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 from datetime import datetime, timedelta
-from AcademicProgrammingApplication.models import Class, Student, Subject, Teacher
+from AcademicProgrammingApplication.models import User, Class, Student, Subject, Teacher
 from django.test import TestCase
 from django.urls import reverse
 from AcademicProgrammingApplication.views.edit_info_class import process_data
 
-from django.contrib.auth.models import User
-
-from django.test import TestCase
-from django.urls import reverse
-from django.utils import timezone
-from datetime import datetime, timedelta
-from AcademicProgrammingApplication.models import Class, Student, Subject, Teacher
-from django.test import TestCase
-from django.urls import reverse
-from AcademicProgrammingApplication.views.edit_info_class import process_data
-
-from django.contrib.auth.models import User
 
 
 class EditInfoClassViewTestCase(TestCase):

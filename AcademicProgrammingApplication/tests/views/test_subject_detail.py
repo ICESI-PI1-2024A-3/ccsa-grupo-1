@@ -2,8 +2,8 @@
 from django.test import TestCase, Client
 from django.utils import timezone
 from django.urls import reverse
-from django.contrib.auth.models import User
-from AcademicProgrammingApplication.models import Semester, Program, Class, Teacher, Subject
+from AcademicProgrammingApplication.models import User, Semester, Program, Class, Teacher, Subject
+
 
 class SubjectDetailTest(TestCase):  # Defining a test case class for subject detail view
     def setUp(self):  # Setting up initial conditions for each test
@@ -13,12 +13,13 @@ class SubjectDetailTest(TestCase):  # Defining a test case class for subject det
 
         start_date = timezone.now()  # Getting current time
         ending_date = start_date + timezone.timedelta(days=90)  # Creating an ending date 90 days after start
-        self.semester = Semester.objects.create(period='Semestre de prueba', start_date=start_date,  # Creating a semester
-                                                 ending_date=ending_date)
+        self.semester = Semester.objects.create(period='Semestre de prueba', start_date=start_date,
+                                                # Creating a semester
+                                                ending_date=ending_date)
 
         self.program = Program.objects.create(name='Programa de prueba', cost=1000, duration=4,  # Creating a program
-                                               faculty='Facultad de prueba', modality='Modalidad de prueba',
-                                               type='Tipo de prueba', director='Director de prueba')
+                                              faculty='Facultad de prueba', modality='Modalidad de prueba',
+                                              type='Tipo de prueba', director='Director de prueba')
 
         # Creating a subject
         self.subject = Subject.objects.create(

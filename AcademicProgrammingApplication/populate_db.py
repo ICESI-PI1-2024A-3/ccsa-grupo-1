@@ -2,6 +2,7 @@ import factory
 from .models import Semester, Subject, Program, Teacher, Class, Contract, Viatic, Student
 from django.core.files.uploadedfile import SimpleUploadedFile
 from datetime import datetime
+from itertools import cycle
 import random
 
 
@@ -190,6 +191,9 @@ class ClassFactory(factory.django.DjangoModelFactory):
             self.students.add(*random.sample(list(students), random.randint(1, 10)))  # Add between 1 and 10 students to the class
 
 
+teacher_cycle = cycle(Teacher.objects.all())
+
+
 class ContractFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Contract
@@ -197,7 +201,7 @@ class ContractFactory(factory.django.DjangoModelFactory):
     # Generate fake data for contracts
     contract_status = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
     contact_preparation_date = factory.Faker('date')
-    id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
+    id_teacher = factory.LazyAttribute(lambda _: next(teacher_cycle))
 
 
 class ViaticFactory(factory.django.DjangoModelFactory):
