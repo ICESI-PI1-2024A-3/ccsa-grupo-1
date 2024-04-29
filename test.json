@@ -1,0 +1,79 @@
+[
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 1,
+        "fields": {
+            "id": "1",
+            "name": "Miguel Campos",
+            "email": "test1@example.com",
+            "cellphone": "123456789",
+            "city": "Test City",
+            "state": "ACTIVO"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 2,
+        "fields": {
+            "id": "2",
+            "name": "Rosa Crespo",
+            "email": "test2@example.com",
+            "cellphone": "987654321",
+            "city": "Test City",
+            "state": "ACTIVO"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 3,
+        "fields": {
+            "id": "3",
+            "name": "David Hidalgo",
+            "email": "test@example.com",
+            "cellphone": "234567890",
+            "city": "Test City",
+            "state": "ACTIVO"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Subject",
+        "pk": 1,
+        "fields": {
+            "code": 1,
+            "name": "Test Subject",
+            "nrc": "123456",
+            "credits": 3,
+            "type": "CURRICULAR",
+            "start_date": "2024-04-28",
+            "ending_date": "2024-07-27",
+            "modality": "PRESENCIAL",
+            "num_sessions": 10
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Class",
+        "pk": 1,
+        "fields": {
+            "id": "1",
+            "start_date": "2024-04-28T12:00:00Z",
+            "ending_date": "2024-04-28T14:00:00Z",
+            "modality": "PRESENCIAL",
+            "subject": 1,
+            "teacher": 1,
+            "classroom": "Test Classroom"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.class",
+        "pk": 2,
+        "fields": {
+            "id": "2",
+            "start_date": "2024-04-28T16:00:00Z",
+            "ending_date": "2024-04-28T18:00:00Z",
+            "modality": "PRESENCIAL",
+            "subject": 1,
+            "teacher": 1,
+            "classroom": "Test Classroom"
+        }
+    }
+]
