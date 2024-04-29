@@ -6,6 +6,8 @@ from django.core.management import call_command
 from django.contrib.auth.hashers import make_password
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def create_user():
     username = 'admin'
@@ -51,3 +53,11 @@ class TeacherManagementTest(StaticLiveServerTestCase):
         search_input = self.driver.find_element(By.ID, "search-input")
         search_input.send_keys("Miguel Campos")
         search_input.send_keys(Keys.RETURN)
+        
+        # Espera hasta que el elemento esté presente
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//td/a[contains(text(), 'Miguel Campos')]"))
+        )
+        
+        search_result = self.driver.find_element(By.XPATH, "//td/a[contains(text(), 'Miguel Campos')]")
+        self.assertTrue(search_result.is_displayed())
