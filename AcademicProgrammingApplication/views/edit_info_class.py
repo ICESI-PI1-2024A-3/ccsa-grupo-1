@@ -40,10 +40,17 @@ def edit_info_class(request, class_id):
             
             # Check if email should be sent
             if edit_class.send_email:
-                # Call the function to send email
-                data_processor_lounge(request)
+                data_json = {
+                    'code_materia': edit_class.subject.code,
+                    'code_clase': edit_class.id,
+                    'datetime1': edit_class.start_date.isoformat(),
+                    'datetime2': edit_class.ending_date.isoformat(),
+                    'salon': edit_class.classroom,
+                    'modality': edit_class.modality
+                }
+                process_data(data_json)
 
-             # Envía el correo electrónico
+            # Envía el correo electrónico
             try:
                 print('enviando correo exitosamente')
                 email = EmailMessage(
@@ -67,9 +74,6 @@ def edit_info_class(request, class_id):
         'class': edit_class,
     })
 
-processed_message = None
-data_class_email = []
-
 @csrf_exempt
 def data_processor_lounge(request):
     if request.method == 'POST':
@@ -81,7 +85,6 @@ def data_processor_lounge(request):
             process_data(data_json)
             update_class_schedule(data_json)
             send_email_after_update(data_json)
-            send_email(request, data_json)
 
             return JsonResponse({'mensaje': 'Datos procesados correctamente'})
         except Exception as e:
@@ -90,7 +93,6 @@ def data_processor_lounge(request):
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 def process_data(data_json):
-    global data_class_email
     code_materia = data_json['code_materia']
     code_clase = data_json['code_clase']
     datetime1 = data_json['datetime1']
@@ -98,8 +100,9 @@ def process_data(data_json):
     salon = data_json.get('salon', None)
     modality = data_json.get('modality')
 
-    data_class_email = [code_materia, code_clase, datetime1, datetime2, salon, modality]
-    print(data_class_email)
+    processed_data = [code_materia, code_clase, datetime1, datetime2, salon, modality]
+    print(processed_data)
+    return processed_data
 
 def update_class_schedule(data_json):
     code_clase = data_json['code_clase']
@@ -117,7 +120,6 @@ def update_class_schedule(data_json):
     clase.start_date = start_date
     clase.ending_date = end_date
 
-    
     clase.send_email = False
 
     if len(data_json) == 6:
@@ -130,21 +132,19 @@ def update_class_schedule(data_json):
         print('clase virtual')
 
     print(clase.modality)
-    
 
     clase.save()
 
 def send_email_after_update(data_json):
-    global data_class_email
     if data_json is not None:
         if len(data_json) == 6:
-            email_mensaje = f"la nueva fecha de la clase: inicio {data_class_email[2]} y finaliza {data_class_email[3]} y será en salón: {data_class_email[4]}"
+            email_mensaje = f"la nueva fecha de la clase: inicio {data_json['datetime1']} y finaliza {data_json['datetime2']} y será en salón: {data_json['salon']}"
         elif len(data_json) == 5:
-            email_mensaje = f"la nueva fecha de la clase: inicio {data_class_email[2]} y finaliza {data_class_email[3]}"
+            email_mensaje = f"la nueva fecha de la clase: inicio {data_json['datetime1']} y finaliza {data_json['datetime2']}"
         else:
             email_mensaje = "Mensaje de correo no disponible"
 
-        subject_id = data_class_email[0]
+        subject_id = data_json['code_materia']
         students = Student.objects.filter(subject__code=subject_id)
         subject = 'Subject of the Email'
         message = ""
@@ -152,17 +152,10 @@ def send_email_after_update(data_json):
             message += f"Para {student.name},\n\n"
             message += f"Nuevo horario de clase: {email_mensaje}.\n\n"
             message += "Regards,\nYour Name\n\n"
-        fecha_inicio = datetime.fromisoformat(data_class_email[2])
+        fecha_inicio = datetime.fromisoformat(data_json['datetime1'])
         enviar_correo_12h_antes_de_inicio_clase.delay(subject, message, students, fecha_inicio)
     else:
         email_mensaje = "Mensaje de correo no disponible"
-    
-    
-
-    
-
-
-
 
 # tasks to send email
 @shared_task
@@ -180,10 +173,7 @@ def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, sta
     start_time_minus_12h = start_time - timedelta(hours=12)
     now = datetime.now()
     if now < start_time_minus_12h:
-        
         send_scheduled_mail.apply_async((subject, message, student_email), eta=start_time_minus_12h)
-
-
 
 @csrf_exempt
 def edit_class_date_information(request):
@@ -197,7 +187,6 @@ def edit_class_date_information(request):
             code_materia = data_json['code_materia']
             code_clase = data_json['code_clase']
             datetime1 = data_json['datetime1']
-            
             
             # Get the instance of the class to be updated
             clase = get_object_or_404(Class, id=code_clase)
@@ -220,7 +209,7 @@ def edit_class_date_information(request):
             
             # Return a JSON response indicating success
             
-            return JsonResponse({'mensaje': 'Datos actualizados cotrectamente'})
+            return JsonResponse({'mensaje': 'Datos actualizados correctamente'})
         except Exception as e:
             # If any error occurs during data processing,
             # return an error message
@@ -228,8 +217,6 @@ def edit_class_date_information(request):
     else:
         # Return a JSON response indicating that the method is not allowed
         return JsonResponse({'error': 'Método no permitido'}, status=405)
-    
-
         
 def generate_class_email_content(class_instance):
     """
@@ -247,5 +234,3 @@ def generate_class_email_content(class_instance):
     email_content += f"Associated Teacher: {class_instance.teacher}\n"
     
     return email_content
-
-  
