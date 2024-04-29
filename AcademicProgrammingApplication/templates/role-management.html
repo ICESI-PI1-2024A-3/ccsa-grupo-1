@@ -8,6 +8,8 @@ Gestión de Roles
 {% endblock %}
 
 {% block main-container-content %}
+<link rel="stylesheet" href="{% static '/styles/role-management.css' %}">
+
 <div class="container" style="padding: 0 20px 40px 20px;">
     <div class="p-1">
         En la siguiente sección, encontrarás el listado de trabajadores del Centro Compartido de Servicios Académicos
@@ -64,17 +66,17 @@ Gestión de Roles
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nombre de usuario</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Correo electrónico</th>
+                <th scope="col">NOMBRE DE USUARIO</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">APELLIDOS</th>
+                <th scope="col">ROL</th>
+                <th scope="col">CORREO ELECTRÓNICO</th>
             </tr>
             </thead>
             <tbody>
             {% for user in users %}
             <tr>
-                <th scope="row">{{ forloop.counter }}</th>
+                <td><b>{{ forloop.counter }}</b></td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.first_name }}</td>
                 <td>{{ user.last_name }}</td>
