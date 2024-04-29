@@ -2,3 +2,20 @@
     background-color: rgba(23, 104, 172, 0.9);
     color: rgb(255, 255, 255);
 }
+
+.btn-primary {
+    background-color: rgba(23, 104, 172, 0.9);
+    color: white;
+    border-color: rgba(23, 104, 172, 0.9);
+}
+
+.btn-secondary {
+    background-color: rgba(108, 117, 125);
+    color: white;
+    border-color: rgba(108, 117, 125);
+}
+
+#search-btn {
+    background-color: rgba(23, 104, 172, 0.9);
+    fill: white;
+}
