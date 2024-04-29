@@ -8,7 +8,8 @@
             "email": "test1@example.com",
             "cellphone": "123456789",
             "city": "Test City",
-            "state": "ACTIVO"
+            "state": "ACTIVO",
+            "picture": "pictures/miguel_campos.jpg"
         }
     },
     {
@@ -20,7 +21,8 @@
             "email": "test2@example.com",
             "cellphone": "987654321",
             "city": "Test City",
-            "state": "ACTIVO"
+            "state": "INACTIVO",
+            "picture": "pictures/rosa_crespo.jpg"
         }
     },
     {
@@ -32,7 +34,47 @@
             "email": "test@example.com",
             "cellphone": "234567890",
             "city": "Test City",
-            "state": "ACTIVO"
+            "state": "ACTIVO",
+            "picture": "pictures/david_hidalgo.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 4,
+        "fields": {
+            "id": "4",
+            "name": "Carlos Perez",
+            "email": "test4@example.com",
+            "cellphone": "345678901",
+            "city": "Test City",
+            "state": "ACTIVO",
+            "picture": "pictures/carlos_perez.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 5,
+        "fields": {
+            "id": "5",
+            "name": "Ana Gomez",
+            "email": "test5@example.com",
+            "cellphone": "456789012",
+            "city": "Test City",
+            "state": "ACTIVO",
+            "picture": "pictures/ana_gomez.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 6,
+        "fields": {
+            "id": "6",
+            "name": "Luis Rodriguez",
+            "email": "test6@example.com",
+            "cellphone": "567890123",
+            "city": "Test City",
+            "state": "ACTIVO",
+            "picture": "pictures/luis_rodriguez.jpg"
         }
     },
     {
@@ -47,7 +89,24 @@
             "start_date": "2024-04-28",
             "ending_date": "2024-07-27",
             "modality": "PRESENCIAL",
-            "num_sessions": 10
+            "num_sessions": 10,
+            "syllabus": "syllabuses/test_subject_syllabus.pdf"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Subject",
+        "pk": 2,
+        "fields": {
+            "code": 2,
+            "name": "Test Subject 2",
+            "nrc": "234567",
+            "credits": 3,
+            "type": "CURRICULAR",
+            "start_date": "2024-04-28",
+            "ending_date": "2024-07-27",
+            "modality": "PRESENCIAL",
+            "num_sessions": 10,
+            "syllabus": "syllabuses/test_subject2_syllabus.pdf"
         }
     },
     {
@@ -64,7 +123,7 @@
         }
     },
     {
-        "model": "AcademicProgrammingApplication.class",
+        "model": "AcademicProgrammingApplication.Class",
         "pk": 2,
         "fields": {
             "id": "2",
@@ -75,5 +134,84 @@
             "teacher": 1,
             "classroom": "Test Classroom"
         }
-    }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Class",
+        "pk": 3,
+        "fields": {
+            "id": "3",
+            "start_date": "2024-04-28T08:00:00Z",
+            "ending_date": "2024-04-28T10:00:00Z",
+            "modality": "PRESENCIAL",
+            "subject": 2,
+            "teacher": 4,
+            "classroom": "Test Classroom"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2024-1",
+        "fields": {
+            "period": "2024-1",
+            "start_date": "2024-01-01",
+            "ending_date": "2024-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2024-2",
+        "fields": {
+            "period": "2024-2",
+            "start_date": "2024-07-01",
+            "ending_date": "2024-12-31"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Program",
+        "pk": 1,
+        "fields": {
+            "id": "1",
+            "name": "Master en Ingeniería de Software",
+            "faculty": "Facultad de Ingeniería",
+            "director": "Juan Pérez",
+            "cost": 15000000.00,
+            "type": "MAESTRÍA",
+            "modality": "VIRTUAL",
+            "duration": "2 años",
+            "semesters": [
+                "2024-1"
+            ],
+            "subjects": [
+                1, 2
+            ]
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Contract",
+        "pk": 1,
+        "fields": {
+            "contract_status": "ACTIVO",
+            "contact_preparation_date": "2024-01-15",
+            "id_teacher": "1"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Contract",
+        "pk": 2,
+        "fields": {
+            "contract_status": "INACTIVO",
+            "contact_preparation_date": "2024-01-15",
+            "id_teacher": "2"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Viatic",
+        "pk": 1,
+        "fields": {
+            "id_teacher": "1",
+            "transport": true,
+            "accommodation": false,
+            "viatic": true
+        }
+    }    
 ]
