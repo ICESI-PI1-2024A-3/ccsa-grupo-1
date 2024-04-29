@@ -36,8 +36,8 @@ Los valores recomendados para poblar la base de datos son los siguientes:
 ``` Python
 SemesterFactory.create_batch(9)
 SubjectFactory.create_batch(20)
-ProgramFactory.create_batch(5)
-TeacherFactory.create_batch(10)
+ProgramFactory.create_batch(8)
+TeacherFactory.create_batch(20)
 ClassFactory.create_batch(200) 
 ContractFactory.create_batch(10)
 ViaticFactory.create_batch(10)
