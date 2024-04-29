@@ -16,23 +16,48 @@ Gestión de Roles
         desempeñan actualmente. También tendrás la opción de modificar su rol o eliminarlos del sistema. Además, podrás
         agregar usuarios al sistema.
     </div>
-    <br>
-    <div class="input-group mb-2">
-        <span class="input-group-text">Buscador de usuarios</span>
-        <input type="text" class="form-control" aria-label=""
-               placeholder="Ingrese el nombre de usuario, el nombre o el apellido del usuario">
-        <button class="btn btn-outline-secondary">Buscar</button>
+    <!-- Display message if no teachers found -->
+    {% if not users and not query %}
+    <div class="alert alert-primary text-center" role="alert">
+        No hay usuarios registrados en el sistema.
     </div>
-    <div class="d-flex justify-content-end">
-        <a href="{% url 'sign_up' %}" class="btn btn-primary removal-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"/>
-            </svg>
-            Agregar usuario
-        </a>
-    </div>
+    <!-- Display table with teachers -->
+    {% else %}
+    <!--    User search engine-->
     <br>
+    <form method="GET">
+        <div class="input-group mb-2">
+            <span class="input-group-text">Buscador de usuarios</span>
+            <label for="user_search_engine"></label><input type="search" class="form-control" id="user_search_engine"
+                                                           placeholder="Ingrese el nombre de usuario, el nombre o el apellido del usuario"
+                                                           name="user_search_engine">
 
+            {% if not show_all %}
+            <button class="btn btn-outline-secondary" value="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M10 19h4v-2h-4zm-4-6h12v-2H6zM3 5v2h18V5z"/>
+                </svg>
+                Mostrar todos
+            </button>
+            {% endif %}
+            <button class="btn btn-outline-secondary">Buscar</button>
+        </div>
+        <div class="d-flex justify-content-end">
+            <a href="{% url 'sign_up' %}" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"/>
+                </svg>
+                Agregar usuario
+            </a>
+        </div>
+        <br>
+    </form>
+
+    {% if not users and query %}
+    <div class="alert alert-primary text-center" role="alert">
+        No se encontraron coincidencias. Inténtelo nuevamente.
+    </div>
+    {% else %}
     <form id="updateForm" method="POST">
         {% csrf_token %}
         <table class="table">
@@ -96,9 +121,11 @@ Gestión de Roles
         </a>
         <!-- Button to submit registration form -->
         <button class="btn btn-primary" id="saveBtn">
-            Guardar
+            Guardar Cambios
         </button>
     </div>
+    {% endif %}
+    {% endif %}
 </div>
 <script>
     document.getElementById('saveBtn').addEventListener('click', function () {
