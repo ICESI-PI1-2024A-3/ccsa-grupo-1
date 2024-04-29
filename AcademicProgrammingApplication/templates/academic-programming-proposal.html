@@ -1,0 +1,149 @@
+<!-- academic-programming-proposal.html -->
+
+{% extends "layouts/base-app-pages.html" %}
+{% load static %}
+
+{% block main-container-content %}
+<!-- Add additional styles for this page only -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'styles/academic-programming-proposal.css' %}"/>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <input type="text" class="typeahead form-control" placeholder="Buscar...">
+                    <div class="input-group-append">
+                        <select class="custom-select">
+                            <option selected>Selecciona un periodo</option>
+                            <option value="1">2024-1</option>
+                            <option value="2">2024-2</option>
+                            <option value="3">2025-1</option>
+                            <option value="4">2025-2</option>
+                            <option value="5">2026-1</option>
+                            <option value="6">2026-2</option>
+                            <option value="7">2027-1</option>
+                            <option value="8">2027-2</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary">Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+    <div class="container">
+        <div class="row mb-4">
+            <!-- empty -->
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <!-- empty -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+                <div class="col-12 col-md-6">
+                    <!-- table with bootstrap -->
+                    Historial de Cambios
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Path</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in files %}
+                                <tr>
+                                    <td>{{ file.id }}</td>
+                                    <td>{{ file.username}}</td>
+                                    <td>{{ file.date}}</td>
+                                    <td>{{ file.name_file }}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>        
+            <!-- Down  -->
+        </div>
+        <div class="container">
+            <div class="row mb-4">
+                <!-- empty -->
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <!-- empty -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            Cambios en la planeación
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>Profesor</td>
+                        <td>Materia</td>
+                        <td>Fecha Inicio</td>
+                        <td>Usuario que Modificó</td>
+                        <td>Comentario</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in file_selected %}
+                    <tr>
+                        <td>{{ row.id }} </td>
+                        <td>{{ row.Nombre_Profesor }}</td>
+                        <td>{{ row.Nombre_Materia }}</td>
+                        <td>{{ row.Fecha_Inicio }}</td>
+                        <td>{{ row.Usuario }}</td>
+                        <td>{{ row.Comentario }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    
+    <div class="container">
+        <br>
+        <div class="align-items-center">
+            <form method="post" action="{% url 'planning_proposal' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="file" required>
+                <button type="submit" class="btn btn-primary" name="action" value="save">Actualizar Archivo</button>
+              </div>
+            </form>
+            <form method="get" action="{% url 'planning_proposal' %}">
+                <input type="hidden" name="action" value="download">
+                <button type="submit" class="btn btn-secondary">Descargar Archivo</button>
+            </form>
+    </div>
+    <div class="container">
+        <div class="row mb-4">
+            <!-- empty -->
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <!-- empty -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS files (jQuery and Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Script to toggle sidebar -->
+</body>
+</html>
+{% endblock %}
