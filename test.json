@@ -79,6 +79,7 @@
             "nrc": "123456",
             "credits": 3,
             "type": "CURRICULAR",
+            "syllabus": "syllabuses/syllabus_dNDyNLf.pdf",
             "start_date": "2024-04-28",
             "ending_date": "2024-07-27",
             "modality": "PRESENCIAL",
@@ -93,6 +94,7 @@
             "nrc": "234567",
             "credits": 3,
             "type": "CURRICULAR",
+            "syllabus": "syllabuses/syllabus_dNDyNLh.pdf",
             "start_date": "2024-04-28",
             "ending_date": "2024-07-27",
             "modality": "PRESENCIAL",
@@ -100,7 +102,7 @@
         }
     },
     {
-        "model": "AcademicProgrammingApplication.Program",
+        "model": "AcademicProgrammingApplication.program",
         "pk": 1,
         "fields": {
             "name": "Maestría en Mercadeo",
