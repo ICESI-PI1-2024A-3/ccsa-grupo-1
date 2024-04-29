@@ -21,4 +21,11 @@ def subject_detail(request, subject_id):
     classes = Class.objects.filter(subject=subject)
     # Render the subject_detail page with necessary context data
     return render(request, 'subject_detail.html',
-                  {'user_name': user.username, 'subject': subject, 'classes': classes, 'title': 'Gestión de MATERIA'})
+                  {
+                      'user_name': user.username,
+                      'user_role': user.role,
+                      'subject': subject,
+                      'classes': classes,
+                      'title': 'Gestión de MATERIA',
+                      'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role')
+                  })

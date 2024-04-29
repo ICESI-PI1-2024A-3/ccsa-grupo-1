@@ -28,6 +28,8 @@ def edit_info_class(request, class_id):
     # Render the edit-info-class page with necessary context data
     return render(request, 'edit-info-class.html', {
         'user_name': user.username,
+        'user_role': user.role,
         'title': 'Gestión de clases',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'class': edit_class,
     })

@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from AcademicProgrammingApplication.models import Viatic, Teacher
 
+
 @csrf_exempt
 def save_viatic(request):
     if request.method == 'POST':

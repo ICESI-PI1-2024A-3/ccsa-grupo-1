@@ -63,7 +63,9 @@ def planning_proposal(request):
 
     return render(request, 'academic-programming-proposal.html', {
         'user_name': user.username,
+        'user_role': user.role,
         'title': 'Propuesta Programacion Academica',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'files': files,
         'file_selected': file_selected,
     })

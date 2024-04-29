@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from AcademicProgrammingApplication.models import User, Role
 from django.db.models import Q
+from django.contrib.auth.decorators import permission_required
 
 
+@permission_required('AcademicProgrammingApplication.change_role', raise_exception=True)
 def role_management(request):
     user = request.user
     current_user_id = request.user.id
@@ -25,10 +27,12 @@ def role_management(request):
             role = Role.objects.get(name=request.POST[f'role{i + 1}'])
             user.role = role
             user.save()
-
+    # print(user.get_all_permissions())
     return render(request, 'role-management.html', {
         'title': 'Gestión de roles',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'user_name': user.username,
+        'user_role': user.role,
         'users': filtered_users,
         'show_all': show_all,
         'query': query,

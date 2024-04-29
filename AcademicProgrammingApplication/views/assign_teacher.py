@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from AcademicProgrammingApplication.models import Class, Teacher
 
+
 def assign_teacher(request, class_id):
     """
     Assigns a teacher to a class.
@@ -51,10 +52,12 @@ def assign_teacher(request, class_id):
         new_class.save()
         # Redirect to the edit_info_class page
         return redirect('edit_info_class', class_id=new_class.id)
-    
+
     return render(request, 'assign-teacher.html', {
         'user_name': user.username,
+        'user_role': user.role,
         'title': 'Asignar Profesor a Clase',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'teacher': teacher,
         'classes': get_classes(teacher, new_class),
         'new_class': new_class_formatted,

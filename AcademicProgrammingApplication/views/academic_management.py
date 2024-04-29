@@ -48,7 +48,9 @@ def academic_management(request):
             # Render error message if program or semester is not found
             return render(request, 'academic-management.html', {
                 'title': 'Programación académica',
+                'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
                 'user_name': user.username,
+                'user_role': user.role,
                 'error': 'Lo sentimos, no fue posible encontrar el programa o semestre que estás buscando. Por favor, '
                          'verifica que la información ingresada sea correcta e intentalo nuevamente.',
             })
@@ -58,8 +60,10 @@ def academic_management(request):
     # Render the academic management page with necessary context data
     return render(request, 'academic-management.html', {
         'title': 'Programación académica',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'delete_program_permission': user.has_perm('AcademicProgrammingApplication.delete_program'),
         'user_name': user.username,
+        'user_role': user.role,
         'program_information': program_information,
         'semester': semester,
         'subjects': subjects,
@@ -107,7 +111,9 @@ def academic_program_edition(request, program_id):
 
     return render(request, 'academic-program-edition.html', {
         'title': 'Programación académica',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'user_name': user.username,
+        'user_role': user.role,
         "program": program,
         "modalities": modalities,
         "types": types,
