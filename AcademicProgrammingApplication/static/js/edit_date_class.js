@@ -53,7 +53,7 @@ document.getElementById('start_date_class').addEventListener('click', function (
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
                 <div class="p-1">Se le notificará por correo electrónico</div>
                 `,
-                titleText: "cambio de fecha exitoso",
+                titleText: "Cambio de fecha exitoso",
                 icon: "success",
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: 'rgba(23, 104, 172, 0.9)',

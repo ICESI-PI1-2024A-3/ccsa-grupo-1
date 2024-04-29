@@ -34,9 +34,9 @@ def edit_info_class(request, class_id):
         if action == 'save':
             edit_class.save()
             email_content = generate_class_email_content(edit_class)
-            message = f"Dear {edit_class.teacher},\n\n"
-            message += f"Here are the details for the upcoming class:\n\n{email_content}\n\n"
-            message += "Regards,\nYour Name"
+            mensaje = f"Estimado {edit_class.teacher},\n\n"
+            mensaje += f"Aquí están los detalles para la próxima clase:\n\n{email_content}\n\n"
+            mensaje += "Saludos,\nTu Nombre"
             
             # Check if email should be sent
             if edit_class.send_email:
@@ -55,7 +55,7 @@ def edit_info_class(request, class_id):
                 print('enviando correo exitosamente')
                 email = EmailMessage(
                     'Class Information',
-                    message,
+                    mensaje,
                     settings.EMAIL_HOST_USER,  # Dirección de correo electrónico del remitente
                     [edit_class.teacher.email],  # Lista de destinatarios, en este caso, el correo electrónico del profesor
                 )
@@ -78,6 +78,7 @@ def edit_info_class(request, class_id):
 def data_processor_lounge(request):
     if request.method == 'POST':
         try:
+            print('entre a procesar los datos')
             data_json = json.loads(request.body)
             print(data_json)
             print(len(data_json))
@@ -108,6 +109,8 @@ def update_class_schedule(data_json):
     code_clase = data_json['code_clase']
     clase = get_object_or_404(Class, id=code_clase)
 
+    print('entre a actualizar la modalidad de la clase')
+
     new_modality = 'PRESENCIAL' if len(data_json) == 5 else 'VIRTUAL'
     if new_modality not in [choice[0] for choice in Class.MODALITY_CHOICES]:
         raise ValueError('Modalidad no válida')
@@ -124,12 +127,15 @@ def update_class_schedule(data_json):
 
     if len(data_json) == 6:
         clase.modality = 'PRESENCIAL'
+        clase.link = None
+        clase.classroom = 'c202'
         print('clase presencial')
     elif len(data_json) == 5:
         clase.modality = 'VIRTUAL'
         clase.classroom= None
         clase.link = 'https://zoom.us/j/1234567890'
         print('clase virtual')
+
 
     print(clase.modality)
 
@@ -223,14 +229,14 @@ def generate_class_email_content(class_instance):
     Generates the email content with class information.
     """
     email_content = ""
-    email_content += f"Session Number: {class_instance.id}\n"
-    email_content += f"Start Date: {class_instance.start_date}\n"
-    email_content += f"Ending Date: {class_instance.ending_date}\n"
-    email_content += f"Modality: {class_instance.modality}\n"
-    email_content += f"Classroom: {class_instance.classroom}\n"
-    email_content += f"Virtual Platform Link: {class_instance.link}\n"
-    email_content += f"Send Email: {class_instance.send_email}\n"
-    email_content += f"Associated Subject: {class_instance.subject}\n"
-    email_content += f"Associated Teacher: {class_instance.teacher}\n"
+    email_content += f"Número de Sesión: {class_instance.id}\n"
+    email_content += f"Fecha de Inicio: {class_instance.start_date}\n"
+    email_content += f"Fecha de Finalización: {class_instance.ending_date}\n"
+    email_content += f"Modalidad: {class_instance.modality}\n"
+    email_content += f"Aula: {class_instance.classroom}\n"
+    email_content += f"Enlace de Plataforma Virtual: {class_instance.link}\n"
+    email_content += f"Enviar Email: {class_instance.send_email}\n"
+    email_content += f"Asignatura Asociada: {class_instance.subject}\n"
+    email_content += f"Profesor Asociado: {class_instance.teacher}\n"
     
     return email_content
