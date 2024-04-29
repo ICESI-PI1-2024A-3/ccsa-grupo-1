@@ -22,7 +22,7 @@ def planning_proposal(request):
         df = pd.read_excel(updated_file)
         df = df[df['Comentario'].notna()]
         df['Usuario'] = user.username
-        df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia']]
+        df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia','Usuario_que_notifica']]
         df['id'] = range(1, len(df) + 1)
         file_selected = df.to_dict(orient='records')
 
