@@ -1,10 +1,10 @@
 # Import necessary modules and functions
 from django.test import TestCase, RequestFactory
-from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime, timedelta
-from AcademicProgrammingApplication.models import Teacher, Class, Subject
+from AcademicProgrammingApplication.models import User, Teacher, Class, Subject
 from AcademicProgrammingApplication.views import assign_teacher
+
 
 # Define a test class inheriting from Django's TestCase class
 class AssignTeacherViewTest(TestCase):
