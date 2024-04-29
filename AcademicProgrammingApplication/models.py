@@ -173,9 +173,8 @@ class Viatic(models.Model):
         transport = "Sí" if self.transport else "No"
         accommodation = "Sí" if self.accommodation else "No"
         viatic = "Sí" if self.viatic else "No"
-<<<<<<< HEAD
-        return f'Transporte: {transport}, Alojamiento: {accommodation}, Viático: {viatic}'
-    
+        return f'Transporte: {transport}, Alojamiento: {accommodation}, Viático: {viatic}, Estado del viático: {self.get_viatic_status_display()}'
+
 
 class File(models.Model):
     id = models.AutoField(primary_key=True)
@@ -184,9 +183,5 @@ class File(models.Model):
     date = models.DateField(auto_now_add=True)
     path = models.FileField(upload_to='archivos/', default='BaseProgramming.xlsx')
 
-
     def __str__(self):
         return self.name_file
-=======
-        return f'Transporte: {transport}, Alojamiento: {accommodation}, Viático: {viatic}, Estado del viático: {self.get_viatic_status_display()}'
->>>>>>> 6c8d271d600ab75c6e70c4f529c9fa69aa3ce15c
