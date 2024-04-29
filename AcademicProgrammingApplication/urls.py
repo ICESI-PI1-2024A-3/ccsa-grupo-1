@@ -28,14 +28,8 @@ urlpatterns = [
     path('home/edit_academic_program/<int:program_id>/', login_required(views.edit_academic_program),
          name='edit_academic_program'),
     path('edit_class/<str:class_id>/', login_required(views.edit_info_class), name='edit_info_class'),
-<<<<<<< HEAD
-     
-    path('planning_proposal/', views.planning_proposal, name='planning_proposal'),
-    
-]
-=======
     path('teacher_management/', login_required(views.teacher_management), name='teacher_management'),
     path('teacher/<str:teacher_id>/', login_required(views.teacher_detail), name='teacher_detail'),
     path('save_viatic/', login_required(save_viatic), name='save_viatic'),
+    path('planning_proposal/', views.planning_proposal, name='planning_proposal'),
 ]
->>>>>>> 6c8d271d600ab75c6e70c4f529c9fa69aa3ce15c
