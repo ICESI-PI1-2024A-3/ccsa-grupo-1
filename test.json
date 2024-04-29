@@ -1,9 +1,166 @@
 [
     {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2020-1",
+        "fields": {
+            "start_date": "2020-02-01",
+            "ending_date": "2020-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2020-2",
+        "fields": {
+            "start_date": "2020-08-01",
+            "ending_date": "2020-11-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2021-1",
+        "fields": {
+            "start_date": "2021-02-01",
+            "ending_date": "2021-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2021-2",
+        "fields": {
+            "start_date": "2021-08-01",
+            "ending_date": "2021-11-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2022-1",
+        "fields": {
+            "start_date": "2022-02-01",
+            "ending_date": "2022-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2022-2",
+        "fields": {
+            "start_date": "2022-08-01",
+            "ending_date": "2022-11-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2023-1",
+        "fields": {
+            "start_date": "2023-02-01",
+            "ending_date": "2023-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2023-2",
+        "fields": {
+            "start_date": "2023-08-01",
+            "ending_date": "2023-11-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2024-1",
+        "fields": {
+            "start_date": "2024-02-01",
+            "ending_date": "2024-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Subject",
+        "pk": 1,
+        "fields": {
+            "name": "Test Subject",
+            "nrc": "123456",
+            "credits": 3,
+            "type": "CURRICULAR",
+            "start_date": "2024-04-28",
+            "ending_date": "2024-07-27",
+            "modality": "PRESENCIAL",
+            "num_sessions": 10
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Subject",
+        "pk": 2,
+        "fields": {
+            "name": "Test Subject 2",
+            "nrc": "234567",
+            "credits": 3,
+            "type": "CURRICULAR",
+            "start_date": "2024-04-28",
+            "ending_date": "2024-07-27",
+            "modality": "PRESENCIAL",
+            "num_sessions": 10
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Program",
+        "pk": 1,
+        "fields": {
+            "name": "Maestría en Mercadeo",
+            "faculty": "Facultad de Ciencias Administrativas y Económicas",
+            "director": "Jenna Garcia",
+            "cost": "24932044.00",
+            "type": "MAESTRÍA",
+            "modality": "PRESENCIAL",
+            "duration": "2",
+            "curriculum": "curriculums/curriculum_nNXHEiK.pdf",
+            "semesters": [
+                "2020-1",
+                "2020-2",
+                "2021-1",
+                "2021-2",
+                "2022-1",
+                "2022-2",
+                "2023-1",
+                "2023-2",
+                "2024-1"
+            ],
+            "subjects": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Program",
+        "pk": 3,
+        "fields": {
+            "name": "Global MBA",
+            "faculty": "Facultad de Ciencias Administrativas y Económicas",
+            "director": "Nicholas Murray",
+            "cost": "25066618.00",
+            "type": "ESPECIALIZACIÓN",
+            "modality": "VIRTUAL",
+            "duration": "3",
+            "curriculum": "curriculums/curriculum_F8IwAuZ.pdf",
+            "semesters": [
+                "2020-1",
+                "2020-2",
+                "2021-1",
+                "2021-2",
+                "2022-1",
+                "2022-2",
+                "2023-1",
+                "2023-2",
+                "2024-1"
+            ],
+            "subjects": [
+                1,
+                2
+            ]
+        }
+    },
+    {
         "model": "AcademicProgrammingApplication.Teacher",
         "pk": 1,
         "fields": {
-            "id": "1",
             "name": "Miguel Campos",
             "email": "test1@example.com",
             "cellphone": "123456789",
@@ -16,7 +173,6 @@
         "model": "AcademicProgrammingApplication.Teacher",
         "pk": 2,
         "fields": {
-            "id": "2",
             "name": "Rosa Crespo",
             "email": "test2@example.com",
             "cellphone": "987654321",
@@ -29,7 +185,6 @@
         "model": "AcademicProgrammingApplication.Teacher",
         "pk": 3,
         "fields": {
-            "id": "3",
             "name": "David Hidalgo",
             "email": "test@example.com",
             "cellphone": "234567890",
@@ -42,7 +197,6 @@
         "model": "AcademicProgrammingApplication.Teacher",
         "pk": 4,
         "fields": {
-            "id": "4",
             "name": "Carlos Perez",
             "email": "test4@example.com",
             "cellphone": "345678901",
@@ -55,7 +209,6 @@
         "model": "AcademicProgrammingApplication.Teacher",
         "pk": 5,
         "fields": {
-            "id": "5",
             "name": "Ana Gomez",
             "email": "test5@example.com",
             "cellphone": "456789012",
@@ -68,7 +221,6 @@
         "model": "AcademicProgrammingApplication.Teacher",
         "pk": 6,
         "fields": {
-            "id": "6",
             "name": "Luis Rodriguez",
             "email": "test6@example.com",
             "cellphone": "567890123",
@@ -78,112 +230,42 @@
         }
     },
     {
-        "model": "AcademicProgrammingApplication.Subject",
-        "pk": 1,
-        "fields": {
-            "code": 1,
-            "name": "Test Subject",
-            "nrc": "123456",
-            "credits": 3,
-            "type": "CURRICULAR",
-            "start_date": "2024-04-28",
-            "ending_date": "2024-07-27",
-            "modality": "PRESENCIAL",
-            "num_sessions": 10,
-            "syllabus": "syllabuses/test_subject_syllabus.pdf"
-        }
-    },
-    {
-        "model": "AcademicProgrammingApplication.Subject",
-        "pk": 2,
-        "fields": {
-            "code": 2,
-            "name": "Test Subject 2",
-            "nrc": "234567",
-            "credits": 3,
-            "type": "CURRICULAR",
-            "start_date": "2024-04-28",
-            "ending_date": "2024-07-27",
-            "modality": "PRESENCIAL",
-            "num_sessions": 10,
-            "syllabus": "syllabuses/test_subject2_syllabus.pdf"
-        }
-    },
-    {
         "model": "AcademicProgrammingApplication.Class",
         "pk": 1,
         "fields": {
-            "id": "1",
             "start_date": "2024-04-28T12:00:00Z",
             "ending_date": "2024-04-28T14:00:00Z",
             "modality": "PRESENCIAL",
+            "classroom": "Test Classroom",
+            "link": "",
             "subject": 1,
-            "teacher": 1,
-            "classroom": "Test Classroom"
+            "teacher": 1
         }
     },
     {
         "model": "AcademicProgrammingApplication.Class",
         "pk": 2,
         "fields": {
-            "id": "2",
             "start_date": "2024-04-28T16:00:00Z",
             "ending_date": "2024-04-28T18:00:00Z",
             "modality": "PRESENCIAL",
+            "classroom": "Test Classroom",
+            "link": "",
             "subject": 1,
-            "teacher": 1,
-            "classroom": "Test Classroom"
+            "teacher": 1
         }
     },
     {
         "model": "AcademicProgrammingApplication.Class",
         "pk": 3,
         "fields": {
-            "id": "3",
             "start_date": "2024-04-28T08:00:00Z",
             "ending_date": "2024-04-28T10:00:00Z",
             "modality": "PRESENCIAL",
+            "classroom": "Test Classroom",
+            "link": "",
             "subject": 2,
-            "teacher": 4,
-            "classroom": "Test Classroom"
-        }
-    },
-    {
-        "model": "AcademicProgrammingApplication.Semester",
-        "pk": "2024-1",
-        "fields": {
-            "period": "2024-1",
-            "start_date": "2024-01-01",
-            "ending_date": "2024-06-30"
-        }
-    },
-    {
-        "model": "AcademicProgrammingApplication.Semester",
-        "pk": "2024-2",
-        "fields": {
-            "period": "2024-2",
-            "start_date": "2024-07-01",
-            "ending_date": "2024-12-31"
-        }
-    },
-    {
-        "model": "AcademicProgrammingApplication.Program",
-        "pk": 1,
-        "fields": {
-            "id": "1",
-            "name": "Master en Ingeniería de Software",
-            "faculty": "Facultad de Ingeniería",
-            "director": "Juan Pérez",
-            "cost": 15000000.00,
-            "type": "MAESTRÍA",
-            "modality": "VIRTUAL",
-            "duration": "2 años",
-            "semesters": [
-                "2024-1"
-            ],
-            "subjects": [
-                1, 2
-            ]
+            "teacher": 4
         }
     },
     {
@@ -213,5 +295,5 @@
             "accommodation": false,
             "viatic": true
         }
-    }    
+    } 
 ]

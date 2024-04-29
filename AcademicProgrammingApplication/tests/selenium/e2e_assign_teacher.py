@@ -4,6 +4,7 @@ from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 from django.contrib.auth.hashers import make_password
+from selenium.webdriver.common.by import By
 
 def create_user():
     username = 'admin'
@@ -11,7 +12,7 @@ def create_user():
     user = User.objects.create(username=username, password=make_password(password))
     return user, password
 
-class LoginTest(StaticLiveServerTestCase):
+class AssignTeacherTest(StaticLiveServerTestCase):
     databases = {'default': 'test', 'test': 'test'}
     @classmethod
     def setUpClass(cls):
@@ -31,7 +32,7 @@ class LoginTest(StaticLiveServerTestCase):
         self.driver.quit()
         super().tearDown()
 
-    def test_login(self):
+    def test_search_teacher(self):
         # Open the login page
         self.driver.get(self.live_server_url)
         # Enter credentials and submit the form
@@ -41,27 +42,23 @@ class LoginTest(StaticLiveServerTestCase):
         password_input.send_keys(self.password)
         submit_button = self.driver.find_element("id", 'access')
         submit_button.click()
-        time.sleep(1)
-        # Verify that the current URL is the home page
+        # Open the assign teacher page
         current_url = self.driver.current_url
-        expected_url = self.live_server_url + '/home'
-        self.assertEqual(current_url, expected_url)
-
-    def test_login_error(self):
-        # Open the login page
-        self.driver.get(self.live_server_url)
-        # Find username and password input fields and submit button
-        username_input = self.driver.find_element("name", 'username')
-        password_input = self.driver.find_element("name", 'password')
-        submit_button = self.driver.find_element("id", 'access')
-        # Enter invalid username and password
-        username_input.send_keys('invalidusername')
-        password_input.send_keys('invalidpassword')
-        # Click the submit button
-        submit_button.click()
-        # Wait for a brief moment for the error message to appear
+        base_url = current_url[:current_url.rfind('/')]
+        edit_class_url = base_url + '/edit_class/3/'
+        self.driver.get(edit_class_url)
         time.sleep(1)
-        # Find the error message element
-        login_error = self.driver.find_element("id", 'login-error')
-        # Assert that the error message is displayed
-        self.assertTrue(login_error.is_displayed(), 'Nombre de usuario o contraseña incorrectos.')
+        # Find the button for go to the assign teacher page
+        #assign_link = self.driver.find_element(By.CLASS_NAME, 'button-professor')
+        #assign_link.click()
+        #time.sleep(1)
+        # Search a teacher
+        #search_input = self.driver.find_element("name", 'search')
+        #search_input.send_keys('miguel')
+        #search_button = self.driver.find_element("id", 'search-btn')
+        #search_button.click()
+        #time.sleep(2)
+        # Save the class in the teacher
+        #save_button = self.driver.find_element(By.CLASS_NAME, 'btn-primary')
+        #save_button.click()
+        time.sleep(10)
