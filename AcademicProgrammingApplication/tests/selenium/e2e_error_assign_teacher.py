@@ -12,7 +12,7 @@ def create_user():
     user = User.objects.create(username=username, password=make_password(password))
     return user, password
 
-class AssignTeacherTest(StaticLiveServerTestCase):
+class ErrorAssignTeacherTest(StaticLiveServerTestCase):
     databases = {'default': 'test', 'test': 'test'}
     @classmethod
     def setUpClass(cls):
@@ -31,8 +31,8 @@ class AssignTeacherTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.driver.quit()
         super().tearDown()
-        
-    def test_assign_teacher(self):
+
+    def test_alert_assign_teacher(self):
         # Open the login page
         self.driver.get(self.live_server_url)
         # Enter credentials and submit the form
@@ -46,9 +46,9 @@ class AssignTeacherTest(StaticLiveServerTestCase):
         # Open the assign teacher page
         current_url = self.driver.current_url
         base_url = current_url[:current_url.rfind('/')]
-        edit_class_url = base_url + '/edit_class/3/'
+        edit_class_url = base_url + '/edit_class/4/'
         self.driver.get(edit_class_url)
-        time.sleep(1)
+        time.sleep(2)
         # Find the button for go to the assign teacher page
         assign_link = self.driver.find_element(By.CLASS_NAME, 'button-professor')
         assign_link.click()
@@ -59,10 +59,6 @@ class AssignTeacherTest(StaticLiveServerTestCase):
         search_button = self.driver.find_element("id", 'search-btn')
         search_button.click()
         time.sleep(1)
-        # Save the class in the teacher
-        save_button = self.driver.find_element(By.CLASS_NAME, 'btn-primary')
-        save_button.click()
-        time.sleep(1)
-        # Verify the change of teacher in the class
-        teacher_name_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'Miguel Campos')]")
-        self.assertTrue(teacher_name_element.is_displayed(), "El nombre del profesor no se muestra correctamente")
+        # Verify that the alert is show
+        alert = self.driver.find_element(By.CLASS_NAME, 'alert-warning')
+        self.assertTrue(alert.is_displayed(), 'La alerta no se muestra correctamente')

@@ -11,7 +11,7 @@ def create_user():
     user = User.objects.create(username=username, password=make_password(password))
     return user, password
 
-class LoginTest(StaticLiveServerTestCase):
+class ErrorLoginTest(StaticLiveServerTestCase):
     databases = {'default': 'test', 'test': 'test'}
     @classmethod
     def setUpClass(cls):
@@ -31,18 +31,21 @@ class LoginTest(StaticLiveServerTestCase):
         self.driver.quit()
         super().tearDown()
 
-    def test_login(self):
+    def test_login_error(self):
         # Open the login page
         self.driver.get(self.live_server_url)
-        # Enter credentials and submit the form
+        # Find username and password input fields and submit button
         username_input = self.driver.find_element("name", 'username')
         password_input = self.driver.find_element("name", 'password')
-        username_input.send_keys(self.user.username)
-        password_input.send_keys(self.password)
         submit_button = self.driver.find_element("id", 'access')
+        # Enter invalid username and password
+        username_input.send_keys('invalidusername')
+        password_input.send_keys('invalidpassword')
+        # Click the submit button
         submit_button.click()
+        # Wait for a brief moment for the error message to appear
         time.sleep(1)
-        # Verify that the current URL is the home page
-        current_url = self.driver.current_url
-        expected_url = self.live_server_url + '/home'
-        self.assertEqual(current_url, expected_url)
+        # Find the error message element
+        login_error = self.driver.find_element("id", 'login-error')
+        # Assert that the error message is displayed
+        self.assertTrue(login_error.is_displayed(), 'Nombre de usuario o contraseña incorrectos.')

@@ -1,4 +1,3 @@
-import json
 import time
 from django.contrib.auth.models import User
 from selenium import webdriver
@@ -7,8 +6,6 @@ from django.core.management import call_command
 from django.contrib.auth.hashers import make_password
 from selenium.webdriver.common.by import By
 
-from AcademicProgrammingApplication.models import Program, Semester, Subject
-
 def create_user():
     username = 'admin'
     password = 'admin'
@@ -16,28 +13,12 @@ def create_user():
     return user, password
 
 class AcademicManagementTest(StaticLiveServerTestCase):
-    databases = {'default': 'test', 'test': 'test'}
+    databases = {'default': 'test'}
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls): 
         super().setUpClass()
         cls.user, cls.password = create_user()
         call_command('loaddata', 'test.json')
-        with open('test.json', 'r', encoding='utf-8') as file:
-            data = json.load(file)
-            program_data = next((item for item in data if item['model'] == 'AcademicProgrammingApplication.Program'), None)
-            if program_data:
-                program_pk = program_data['pk']
-                program = Program.objects.get(pk=program_pk)
-                semester_ids = program_data['fields']['semesters']
-                semesters = Semester.objects.filter(period__in=semester_ids)
-                program.semesters.set(semesters)
-                subject_ids = program_data['fields']['subjects']
-                subjects = Subject.objects.filter(pk__in=subject_ids)
-                program.subjects.set(subjects)
-                print(f"Programa: {program.name}")
-                print(f"Semestres: {', '.join(str(semester) for semester in program.semesters.all())}")
-                print(f"Materias: {', '.join(str(subject) for subject in program.subjects.all())}")
-
 
     @classmethod
     def tearDownClass(cls):
@@ -61,7 +42,39 @@ class AcademicManagementTest(StaticLiveServerTestCase):
         password_input.send_keys(self.password)
         submit_button = self.driver.find_element("id", 'access')
         submit_button.click()
+        time.sleep(1)
         # Find the search bar
         search_input = self.driver.find_element("id", 'floatingInputGrid')
-        search_input.send_keys("Global")
-        time.sleep(120)
+        search_input.send_keys("global")
+        search_input.submit()
+        time.sleep(1)
+        # Verify the information of the postgraduate
+        program_name_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'Global MBA')]")
+        self.assertTrue(program_name_element.is_displayed(), "El nombre del programa no se muestra correctamente")
+
+        program_type_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'ESPECIALIZACIÓN')]")
+        self.assertTrue(program_type_element.is_displayed(), "El tipo del programa no se muestra correctamente")
+
+        program_faculty_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'Facultad de Ciencias Administrativas y Económicas')]")
+        self.assertTrue(program_faculty_element.is_displayed(), "La facultad del programa no se muestra correctamente")
+
+        program_modality_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'VIRTUAL')]")
+        self.assertTrue(program_modality_element.is_displayed(), "La modalidad del programa no se muestra correctamente")
+
+        program_director_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'Nicholas Murray')]")
+        self.assertTrue(program_director_element.is_displayed(), "El director del programa no se muestra correctamente")
+
+        program_duration_element = self.driver.find_element(By.XPATH, "//div[contains(text(), '3 semestres')]")
+        self.assertTrue(program_duration_element.is_displayed(), "La duración del programa no se muestra correctamente")
+
+        program_cost_element = self.driver.find_element(By.XPATH, "//div[contains(text(), '25066618.00')]")
+        self.assertTrue(program_cost_element.is_displayed(), "El costo del programa no se muestra correctamente")
+
+        program_curriculum_element = self.driver.find_element(By.XPATH, "//div/a[contains(text(), 'curriculum_F8IwAuZ.pdf')]")
+        self.assertTrue(program_curriculum_element.is_displayed(), "La malla curricular del programa no se muestra correctamente")
+        # Verify the information of the semester
+        semester_start_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'Feb. 1, 2024')]")
+        self.assertTrue(semester_start_element.is_displayed(), "El inicio del semester no se muestra correctamente")
+
+        semester_ending_element = self.driver.find_element(By.XPATH, "//div[contains(text(), 'June 30, 2024')]")
+        self.assertTrue(semester_ending_element.is_displayed(), "El final del semester no se muestra correctamente")

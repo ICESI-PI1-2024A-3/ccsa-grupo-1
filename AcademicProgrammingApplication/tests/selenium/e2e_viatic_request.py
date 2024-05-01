@@ -35,32 +35,32 @@ class ViaticRequestTest(StaticLiveServerTestCase):
         super().tearDown()
 
     def test_viatic_request(self):
-
-        self.driver.get(self.live_server_url + '/')
-        username_input = self.driver.find_element(By.NAME, 'username')
-        password_input = self.driver.find_element(By.NAME, 'password')
+        # Open the login page
+        self.driver.get(self.live_server_url)
+        # Enter credentials and submit the form
+        username_input = self.driver.find_element("name", 'username')
+        password_input = self.driver.find_element("name", 'password')
         username_input.send_keys(self.user.username)
         password_input.send_keys(self.password)
-        submit_button = self.driver.find_element(By.ID, 'access')
+        submit_button = self.driver.find_element("id", 'access')
         submit_button.click()
         time.sleep(1)
-
+        # Go to the teacher information page
         self.driver.get(self.live_server_url + '/teacher/1/')
-
-        solicitar_viatico_button = self.driver.find_element(By.ID, 'solicitar-viatico-btn')
-        solicitar_viatico_button.click()
         time.sleep(1)
-
+        # Request a viatic
+        request_viatic_button = self.driver.find_element(By.ID, 'solicitar-viatico-btn')
+        request_viatic_button.click()
+        time.sleep(1)
         tiquetes_select = self.driver.find_element(By.ID, 'tiquetes-select')
         tiquetes_select.send_keys("Si")
         hotel_select = self.driver.find_element(By.ID, 'hotel-select')
         hotel_select.send_keys("No")
         viatico_select = self.driver.find_element(By.ID, 'viatico-select')
         viatico_select.send_keys("Si")
-
-        aceptar_button = self.driver.find_element(By.XPATH, "//button[text()='Aceptar']")
-        aceptar_button.click()
+        accept_button = self.driver.find_element(By.XPATH, "//button[text()='Aceptar']")
+        accept_button.click()
         time.sleep(1)
-
+        # Verification
         success_message = self.driver.find_element(By.CSS_SELECTOR, '.swal2-title').text
         self.assertEqual(success_message, 'Éxito')

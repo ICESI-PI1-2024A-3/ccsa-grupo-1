@@ -36,28 +36,28 @@ class TeacherManagementTest(StaticLiveServerTestCase):
         super().tearDown()
 
     def test_teacher_management(self):
-        
-        self.driver.get(self.live_server_url + '/')
-
-        username_input = self.driver.find_element(By.NAME, 'username')
-
-        password_input = self.driver.find_element(By.NAME, 'password')
+        # Open the login page
+        self.driver.get(self.live_server_url)
+        # Enter credentials and submit the form
+        username_input = self.driver.find_element("name", 'username')
+        password_input = self.driver.find_element("name", 'password')
         username_input.send_keys(self.user.username)
         password_input.send_keys(self.password)
-        submit_button = self.driver.find_element(By.ID, 'access')
+        submit_button = self.driver.find_element("id", 'access')
         submit_button.click()
         time.sleep(1)
-
+        # Go to the teacheer page
         self.driver.get(self.live_server_url + '/teacher_management')
-
+        time.sleep(1)
+        # Search a teacher
         search_input = self.driver.find_element(By.ID, "search-input")
         search_input.send_keys("Miguel Campos")
         search_input.send_keys(Keys.RETURN)
-        
+        time.sleep(1)
         # Espera hasta que el elemento esté presente
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//td/a[contains(text(), 'Miguel Campos')]"))
         )
-        
+        # Verification
         search_result = self.driver.find_element(By.XPATH, "//td/a[contains(text(), 'Miguel Campos')]")
         self.assertTrue(search_result.is_displayed())
