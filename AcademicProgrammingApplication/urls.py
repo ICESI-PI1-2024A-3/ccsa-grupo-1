@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 from . import views
-from .views.viatic_views import save_viatic
+from .views.viatic_views import ViaticView
 
 urlpatterns = [
     # Lines used to see how the base HTML looks like
@@ -33,7 +33,7 @@ urlpatterns = [
      
     path('teacher_management/', login_required(views.teacher_management), name='teacher_management'),
     path('teacher/<str:teacher_id>/', login_required(views.teacher_detail), name='teacher_detail'),
-    path('save_viatic/', login_required(save_viatic), name='save_viatic'),
+    path('save_viatic/', login_required(ViaticView.save_viatic), name='save_viatic'),
     path('planning_proposal/', views.planning_proposal, name='planning_proposal'),
     path('role_management/', views.role_management, name='role_management'),
 ]
