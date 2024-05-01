@@ -1,7 +1,6 @@
 import json
 from django.test import TestCase, Client
-from django.contrib.auth.models import User
-from AcademicProgrammingApplication.models import Teacher, Viatic
+from AcademicProgrammingApplication.models import User, Teacher, Viatic
 
 class SaveViaticTest(TestCase):
     def setUp(self):

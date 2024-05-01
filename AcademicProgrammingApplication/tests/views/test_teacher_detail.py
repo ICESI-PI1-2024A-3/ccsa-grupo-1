@@ -1,13 +1,12 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
 from django.utils import timezone
-from AcademicProgrammingApplication.models import Teacher, Contract, Class, Subject
+from AcademicProgrammingApplication.models import User, Teacher, Contract, Class, Subject
 
 class TeacherDetailViewTestCase(TestCase):
     def setUp(self):
         
-        self.user = User.objects.create(username='testuser')
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.client.force_login(self.user)
 
         self.teacher = Teacher.objects.create(id='123', name='Test Teacher', email='test@example.com',

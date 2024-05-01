@@ -1,6 +1,5 @@
 from django.test import TestCase, Client
-from django.contrib.auth.models import User
-from AcademicProgrammingApplication.models import Teacher, Contract
+from AcademicProgrammingApplication.models import User, Teacher, Contract
 
 class TeacherManagementTest(TestCase):
     def setUp(self):
