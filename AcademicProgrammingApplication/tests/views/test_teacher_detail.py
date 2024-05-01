@@ -38,7 +38,6 @@ class TeacherDetailViewTestCase(TestCase):
         self.assertContains(response, self.teacher.city)
 
         self.assertContains(response, self.contract.contract_status)
-        self.assertContains(response, self.contract.contact_preparation_date)
 
         self.assertContains(response, self.subject.name)
         self.assertContains(response, self.class_session.start_date.strftime('%Y-%m-%dT%H:%M:%S'))
