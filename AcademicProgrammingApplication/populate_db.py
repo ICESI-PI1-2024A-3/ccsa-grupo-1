@@ -1,7 +1,8 @@
 import factory
-from .models import Semester, Subject, Program, Teacher, Class, Contract, Viatic
+from .models import Semester, Subject, Program, Teacher, Class, Contract, Viatic, Student
 from django.core.files.uploadedfile import SimpleUploadedFile
 from datetime import datetime
+from itertools import cycle
 import random
 
 
@@ -147,6 +148,75 @@ class TeacherFactory(factory.django.DjangoModelFactory):
     picture = factory.LazyAttribute(lambda _: SimpleUploadedFile('picture.jpg', b'jpg_content'))
 
 
+class StudentFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Student
+
+    # Generate fake data for students
+    name = factory.Faker('name')
+    student_id = factory.Sequence(lambda n: f'ST{n}')
+    id_type = factory.Faker('random_element', elements=['CC', 'TI', 'CE'])  # Assuming Colombian ID types
+    email = factory.Faker('email')
+
+
+class ClassFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Class
+
+    # Generate fake data for classes
+    id = factory.Sequence(lambda n: f'C{n}')
+    start_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
+    ending_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
+    modality = factory.Faker('random_element', elements=['PRESENCIAL', 'VIRTUAL'])
+    classroom = factory.Faker('random_element',
+                              elements=['Classroom A', 'Classroom B', 'Classroom C', 'Classroom D', 'Classroom E'])
+    link = factory.Faker('url')
+    send_email = factory.Faker('boolean')
+
+    # Selecting an existing instance of Subject from the database
+    subject = factory.LazyAttribute(lambda _: random.choice(Subject.objects.all()))
+
+    # Selecting an existing Teacher instance from the database
+    teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
+
+    @factory.post_generation
+    def students(self, create, extracted, **kwargs):
+        if not create:
+            return
+
+        if extracted:
+            for student in extracted:
+                self.students.add(student)
+        else:
+            students = Student.objects.all()
+            self.students.add(
+                *random.sample(list(students), random.randint(1, 10)))  # Add between 1 and 10 students to the class
+
+
+teacher_cycle = cycle(Teacher.objects.all())
+
+
+class ContractFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Contract
+
+    # Generate fake data for contracts
+    contract_status = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
+    contact_preparation_date = factory.Faker('date')
+    id_teacher = factory.LazyAttribute(lambda _: next(teacher_cycle))
+
+
+class ViaticFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Viatic
+
+    # Generate fake data for viatics
+    transport = factory.Faker('boolean')
+    accommodation = factory.Faker('boolean')
+    viatic = factory.Faker('boolean')
+    id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
+
+
 class ClassFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Class
@@ -165,23 +235,15 @@ class ClassFactory(factory.django.DjangoModelFactory):
     # Selecting an existing Teacher instance from the database
     teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
 
+    @factory.post_generation
+    def students(self, create, extracted, **kwargs):
+        if not create:
+            return
 
-class ContractFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Contract
-
-    # Generate fake data for contracts
-    contract_status = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
-    contact_preparation_date = factory.Faker('date')
-    id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
-
-
-class ViaticFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Viatic
-
-    # Generate fake data for viatics
-    transport = factory.Faker('boolean')
-    accommodation = factory.Faker('boolean')
-    viatic = factory.Faker('boolean')
-    id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
+        if extracted:
+            for student in extracted:
+                self.students.add(student)
+        else:
+            students = Student.objects.all()
+            self.students.add(
+                *random.sample(list(students), random.randint(1, 10)))  # Agrega entre 1 y 10 estudiantes a la clase

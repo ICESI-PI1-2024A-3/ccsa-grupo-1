@@ -35,13 +35,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'AcademicProgrammingApplication',
+    'AcademicProgrammingApplication.apps.AcademicProgrammingApplicationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_pandas',
 ]
 
 MIDDLEWARE = [
@@ -114,9 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'es-col'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
 
@@ -137,5 +138,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+AUTH_USER_MODEL = 'AcademicProgrammingApplication.User'
+
+# SMTP settings to send emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ccsaintegrador@gmail.com'
+EMAIL_HOST_PASSWORD = 'nhmutssrvwwqvhbh'
+
+# Settings to save emails to files
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+
+
+
+# Configuración del broker de mensajes (ejemplo con RabbitMQ)
+CELERY_BROKER_URL = 'amqp://localhost'
+
+
