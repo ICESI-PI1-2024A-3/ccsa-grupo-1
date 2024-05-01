@@ -1,26 +1,17 @@
 import time
-from django.contrib.auth.models import User
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
-from django.contrib.auth.hashers import make_password
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-def create_user():
-    username = 'admin'
-    password = 'admin'
-    user = User.objects.create(username=username, password=make_password(password))
-    return user, password
-
 class TeacherManagementTest(StaticLiveServerTestCase):
-    databases = {'default': 'test', 'test': 'test'}
+    databases = {'default': 'test'}
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.user, cls.password = create_user()
         call_command('loaddata', 'test.json', verbosity=0)
 
     @classmethod
@@ -30,6 +21,7 @@ class TeacherManagementTest(StaticLiveServerTestCase):
     def setUp(self):
         super().setUp()
         self.driver = webdriver.Chrome()
+        self.driver.maximize_window()
 
     def tearDown(self):
         self.driver.quit()
@@ -41,8 +33,8 @@ class TeacherManagementTest(StaticLiveServerTestCase):
         # Enter credentials and submit the form
         username_input = self.driver.find_element("name", 'username')
         password_input = self.driver.find_element("name", 'password')
-        username_input.send_keys(self.user.username)
-        password_input.send_keys(self.password)
+        username_input.send_keys('admin')
+        password_input.send_keys('admin')
         submit_button = self.driver.find_element("id", 'access')
         submit_button.click()
         time.sleep(1)

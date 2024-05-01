@@ -1,23 +1,15 @@
-import time
-from django.contrib.auth.models import User
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
-from django.contrib.auth.hashers import make_password
 from selenium.webdriver.common.by import By
-
-def create_user():
-    username = 'admin'
-    password = 'admin'
-    user = User.objects.create(username=username, password=make_password(password))
-    return user, password
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class ErrorAcademicManagementTest(StaticLiveServerTestCase):
     databases = {'default': 'test'}
     @classmethod
     def setUpClass(cls): 
         super().setUpClass()
-        cls.user, cls.password = create_user()
         call_command('loaddata', 'test.json')
 
     @classmethod
@@ -27,6 +19,7 @@ class ErrorAcademicManagementTest(StaticLiveServerTestCase):
     def setUp(self):
         super().setUp()
         self.driver = webdriver.Chrome()
+        self.driver.maximize_window()
 
     def tearDown(self):
         self.driver.quit()
@@ -38,16 +31,18 @@ class ErrorAcademicManagementTest(StaticLiveServerTestCase):
         # Enter credentials and submit the form
         username_input = self.driver.find_element("name", 'username')
         password_input = self.driver.find_element("name", 'password')
-        username_input.send_keys(self.user.username)
-        password_input.send_keys(self.password)
+        username_input.send_keys('admin')
+        password_input.send_keys('admin')
         submit_button = self.driver.find_element("id", 'access')
         submit_button.click()
-        time.sleep(1)
         # Find the search bar
-        search_input = self.driver.find_element("id", 'floatingInputGrid')
+        search_input = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, 'floatingInputGrid'))
+        )
         search_input.send_keys("marketing")
         search_input.submit()
-        time.sleep(1)
-        # Verify that the alert is show
-        alert = self.driver.find_element(By.CLASS_NAME, 'alert-primary')
+        # Verify that the alert is show    
+        alert = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "alert-primary"))
+        )
         self.assertTrue(alert.is_displayed(), 'La alerta no se muestra correctamente')

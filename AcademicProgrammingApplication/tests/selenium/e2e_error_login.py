@@ -1,22 +1,13 @@
 import time
-from django.contrib.auth.models import User
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
-from django.contrib.auth.hashers import make_password
-
-def create_user():
-    username = 'admin'
-    password = 'admin'
-    user = User.objects.create(username=username, password=make_password(password))
-    return user, password
 
 class ErrorLoginTest(StaticLiveServerTestCase):
-    databases = {'default': 'test', 'test': 'test'}
+    databases = {'default': 'test'}
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.user, cls.password = create_user()
         call_command('loaddata', 'test.json')
 
     @classmethod
@@ -26,6 +17,7 @@ class ErrorLoginTest(StaticLiveServerTestCase):
     def setUp(self):
         super().setUp()
         self.driver = webdriver.Chrome()
+        self.driver.maximize_window()
 
     def tearDown(self):
         self.driver.quit()
