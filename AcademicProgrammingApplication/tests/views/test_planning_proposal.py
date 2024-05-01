@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from AcademicProgrammingApplication.models import PlanningProposal
+from AcademicProgrammingApplication.models import User, PlanningProposal
 from io import BytesIO
 import pandas as pd
 from datetime import datetime
@@ -22,6 +22,8 @@ class PlanningProposalTest(TestCase):
     #     self.assertTemplateUsed(response, 'academic-programming-proposal.html')
 
     def test_post_request_with_file(self):
+        user = User.objects.create_user('username', 'password')
+        self.client.force_login(user)
         # Create a test file
         test_file_data = {
             'Nombre_Profesor': ['Profesor 1', 'Profesor 2'],
@@ -43,11 +45,11 @@ class PlanningProposalTest(TestCase):
         # Check if the file_selected context variable is not None
         self.assertIsNotNone(response.context['file_selected'])
 
-    # def test_post_request_without_file(self):
-    #     # Create a POST request without a file
-    #     response = self.client.post(self.url, {})
-    #     # Check if the response is successful
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'academic-programming-proposal.html')
-    #     # Check if the file_selected context variable is None
-    #     self.assertIsNone(response.context['file_selected'])
+# def test_post_request_without_file(self):
+#     # Create a POST request without a file
+#     response = self.client.post(self.url, {})
+#     # Check if the response is successful
+#     self.assertEqual(response.status_code, 200)
+#     self.assertTemplateUsed(response, 'academic-programming-proposal.html')
+#     # Check if the file_selected context variable is None
+#     self.assertIsNone(response.context['file_selected'])

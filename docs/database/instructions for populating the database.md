@@ -13,7 +13,7 @@ pip install factory-boy
 2. Abre una consola e ingresa el siguiente comando:
 
 ``` Shell
-   python manage.py shell
+python manage.py shell
 ```
 
 3. Importa todas las fábricas desde la clase de fábrica con el siguiente comando:

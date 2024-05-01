@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
 from django.db import IntegrityError
 from django.shortcuts import redirect
 from AcademicProgrammingApplication.models import User, Role
+from django.contrib.auth.decorators import permission_required
 
 
+@permission_required('AcademicProgrammingApplication.change_role', raise_exception=True)
 def sign_up(request):
     """
     Handles user sign-up process.

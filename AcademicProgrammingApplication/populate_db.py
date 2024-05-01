@@ -147,6 +147,7 @@ class TeacherFactory(factory.django.DjangoModelFactory):
     state = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
     picture = factory.LazyAttribute(lambda _: SimpleUploadedFile('picture.jpg', b'jpg_content'))
 
+
 class StudentFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Student
@@ -188,7 +189,8 @@ class ClassFactory(factory.django.DjangoModelFactory):
                 self.students.add(student)
         else:
             students = Student.objects.all()
-            self.students.add(*random.sample(list(students), random.randint(1, 10)))  # Add between 1 and 10 students to the class
+            self.students.add(
+                *random.sample(list(students), random.randint(1, 10)))  # Add between 1 and 10 students to the class
 
 
 teacher_cycle = cycle(Teacher.objects.all())
@@ -219,7 +221,19 @@ class ClassFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Class
 
-    # Resto del código
+    # Generate fake data for classes
+    id = factory.Sequence(lambda n: f'C{n}')
+    start_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
+    ending_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
+    modality = factory.Faker('random_element', elements=['PRESENCIAL', 'VIRTUAL'])
+    classroom = factory.Faker('random_element',
+                              elements=['Classroom A', 'Classroom B', 'Classroom C', 'Classroom D', 'Classroom E'])
+    link = factory.Faker('url')
+    # Selecting an existing instance of Subject from the database
+    subject = factory.LazyAttribute(lambda _: random.choice(Subject.objects.all()))
+
+    # Selecting an existing Teacher instance from the database
+    teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
 
     @factory.post_generation
     def students(self, create, extracted, **kwargs):
@@ -231,5 +245,5 @@ class ClassFactory(factory.django.DjangoModelFactory):
                 self.students.add(student)
         else:
             students = Student.objects.all()
-            self.students.add(*random.sample(list(students), random.randint(1, 10)))  # Agrega entre 1 y 10 estudiantes a la clase
-
+            self.students.add(
+                *random.sample(list(students), random.randint(1, 10)))  # Agrega entre 1 y 10 estudiantes a la clase
