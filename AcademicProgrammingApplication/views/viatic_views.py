@@ -1,21 +1,34 @@
-import json
-from django.http import JsonResponse
+from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
-from AcademicProgrammingApplication.models import Viatic, Teacher
+from django.http import JsonResponse
+import json
+from AcademicProgrammingApplication.models import Teacher, Viatic
 
+class ViaticView:
+    @staticmethod
+    @csrf_exempt
+    def save_viatic(request):
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            teacher = Teacher.objects.get(id=data['id_teacher'])
+            viatico = Viatic.objects.create(
+                transport=data['tiquetes'] == 'Si',
+                accommodation=data['hotel'] == 'Si',
+                viatic=data['viatico'] == 'Si',
+                viatic_status='ENVIADA',
+                id_teacher=teacher
+            )
 
-@csrf_exempt
-def save_viatic(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        teacher = Teacher.objects.get(id=data['id_teacher'])
-        viatico = Viatic.objects.create(
-            transport=data['tiquetes'] == 'Si',
-            accommodation=data['hotel'] == 'Si',
-            viatic=data['viatico'] == 'Si',
-            viatic_status='ENVIADA',
-            id_teacher=teacher
-        )
-        return JsonResponse({'message': 'Viatico creado exitosamente'}, status=201)
-    else:
-        return JsonResponse({'error': 'Invalid method'}, status=400)
+            ViaticView.send_email_after_update(teacher, viatico)
+
+            return JsonResponse({'message': 'Viatico creado exitosamente'}, status=201)
+        else:
+            return JsonResponse({'error': 'Invalid method'}, status=400)
+
+    @staticmethod
+    def send_email_after_update(teacher, viatico):
+        subject = 'Solicitud de viático'
+        message = f"Se ha solicitado un viático para el profesor {teacher.name}. Esperamos pronta revisión y procesamiento de esta solicitud.\n\nResumen:\n- Tiquetes: {'Sí' if viatico.transport else 'No'}\n- Hotel: {'Sí' if viatico.accommodation else 'No'}\n- Viáticos: {'Sí' if viatico.viatic else 'No'}"
+        from_email = 'programacion_academica@example.com'
+        to_emails = ['mipus2005@gmail.com']
+        send_mail(subject, message, from_email, to_emails)
