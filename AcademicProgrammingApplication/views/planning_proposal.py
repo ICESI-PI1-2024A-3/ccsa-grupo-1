@@ -41,7 +41,7 @@ def planning_proposal(request):
             df = pd.read_excel(full_file_path)
             df = df[df['Comentario'].notna()]
             df['Usuario'] = user.username
-            df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia']]
+            df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia','Usuario_que_notifica']]
             df['id'] = range(1, len(df) + 1)
             file_selected = df.to_dict(orient='records')
 
@@ -51,8 +51,13 @@ def planning_proposal(request):
 
     if search_query:
         files = PlanningProposal.objects.filter(username=search_query).order_by('-id')
+        if file_selected:
+            df = pd.DataFrame(file_selected)
+            df = df[df['Usuario_que_notifica'] == search_query] 
+            file_selected = df.to_dict(orient='records')
     else:
         files = PlanningProposal.objects.all()
+
 
     if request.method == 'GET' and request.GET.get('action') == 'download':
         file_instance = PlanningProposal.objects.last()
