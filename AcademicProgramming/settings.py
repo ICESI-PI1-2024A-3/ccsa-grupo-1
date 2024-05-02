@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,12 +20,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(ny#(o!nc7=$3l0)n3j@)t&&p@551j3w7v+kj7sx!qvz9+las!'
+# SECRET_KEY = 'django-insecure-(ny#(o!nc7=$3l0)n3j@)t&&p@551j3w7v+kj7sx!qvz9+las!'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # The following lines must be changed when moving to production. Don't change them when we're in development or if
 # you don't know what you're doing :).
@@ -80,7 +84,7 @@ WSGI_APPLICATION = 'AcademicProgramming.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# Especifica el archivo de fixtures que deseas cargar en las pruebas
+# Specify the fixtures file to load the tests
 FIXTURES = ['test.json']
 
 DATABASES = {
@@ -93,6 +97,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'test_db.sqlite3',
     }
 }
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -153,8 +159,5 @@ EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 
-
-# Configuración del broker de mensajes (ejemplo con RabbitMQ)
+# Message broker configuration (example with RabbitMQ)
 CELERY_BROKER_URL = 'amqp://localhost'
-
-
