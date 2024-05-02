@@ -8,6 +8,7 @@ def teacher_detail(request, teacher_id):
     # Get the teacher based on the provided teacher_id
     teacher = Teacher.objects.get(id=teacher_id)
     # Render the teacher management page with necessary context data
+    print(teacher.contract.contract_status)
     return render(request, 'teacher-detail.html', {
         'title': 'Gestión de PROFESORES',
         'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
