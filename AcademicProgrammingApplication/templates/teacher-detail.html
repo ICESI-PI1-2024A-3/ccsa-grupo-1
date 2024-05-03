@@ -38,7 +38,7 @@
                         <dd>{{ teacher.contract.id }}</dd>
                         <dt>Estado del contrato:</dt>
                         <dd>{{ teacher.contract.contract_status }}</dd>
-                        {% if teacher.contract.contract_status %}
+                        {% if teacher.contract.contract_status == 'ACTIVO' %}
                         <dt>Fecha de elaboración del contrato:</dt>
                         <dd>{{ teacher.contract.contact_preparation_date }}</dd>
                         {% endif %}
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Display schedule of classes of teacher and viatics -->
-    {% if teacher.contract.contract_status %}
+    {% if teacher.contract.contract_status == 'ACTIVO' %}
     <div class="schedule-info">
         <!-- Display teacher's class schedule -->
         <h3 class="schedule-heading">Horario de clases del profesor</h3>

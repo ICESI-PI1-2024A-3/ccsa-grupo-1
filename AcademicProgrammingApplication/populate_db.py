@@ -1,7 +1,8 @@
 import factory
+import pytz
 from .models import Semester, Subject, Program, Teacher, Class, Contract, Viatic, Student
 from django.core.files.uploadedfile import SimpleUploadedFile
-from datetime import datetime
+from datetime import datetime, timedelta
 from itertools import cycle
 import random
 
@@ -52,8 +53,8 @@ class SubjectFactory(factory.django.DjangoModelFactory):
     credits = factory.Faker('random_int', min=1, max=5)
     type = factory.Faker('random_element', elements=['CURRICULAR', 'ELECTIVA'])
     syllabus = factory.LazyAttribute(lambda _: SimpleUploadedFile('syllabus.pdf', b'pdf_content'))
-    start_date = factory.Faker('date')
-    ending_date = factory.Faker('date')
+    start_date = factory.Faker('date_between_dates', date_start=datetime(2024, 1, 1), date_end=datetime(2025, 6, 1))
+    ending_date = factory.Faker('date_between_dates', date_start=factory.SelfAttribute('..start_date'), date_end=datetime(2025, 6, 1))
     modality = factory.Faker('random_element', elements=['PRESENCIAL', 'VIRTUAL'])
     num_sessions = factory.Faker('random_int', min=1, max=20)
 
@@ -134,6 +135,19 @@ class ProgramFactory(factory.django.DjangoModelFactory):
             self.subjects.add(*random.sample(list(subjects), random.randint(2, 6)))  # Add between 2 and 6 subjects
 
 
+def generate_random_date(start_date, end_date):
+    """
+    Función para generar una fecha aleatoria entre dos fechas dadas
+    """
+    # Calculate the difference between the dates
+    delta = end_date - start_date
+    # Generate a random number of days within the range
+    random_days = random.randint(0, delta.days)
+    # Add random days to the start date
+    random_date = start_date + timedelta(days=random_days)
+    return random_date
+
+
 class TeacherFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Teacher
@@ -147,6 +161,23 @@ class TeacherFactory(factory.django.DjangoModelFactory):
     state = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
     picture = factory.LazyAttribute(lambda _: SimpleUploadedFile('picture.jpg', b'jpg_content'))
 
+    # Create a contract with the same state as the teacher
+    @factory.post_generation
+    def create_contract(self, create, extracted, **kwargs):
+        if not create:
+            return
+        # Define the start and end date for the generation of random dates
+        date_start = datetime(2010, 1, 1)
+        date_end = datetime(2024, 1, 1)
+        # Generate a random date between date_start and date_end
+        contact_preparation_date = generate_random_date(date_start, date_end)
+        Contract.objects.create(
+            id=f'Contract-{self.id}',
+            contract_status=self.state,
+            contact_preparation_date=contact_preparation_date,
+            id_teacher=self
+        )
+
 
 class StudentFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -159,14 +190,41 @@ class StudentFactory(factory.django.DjangoModelFactory):
     email = factory.Faker('email')
 
 
+def round_to_nearest_half_hour(datetime_obj):
+    """
+    Auxiliary function to round a date to the nearest half hour
+    """
+    minutes = datetime_obj.minute
+    if minutes < 30:
+        datetime_obj = datetime_obj.replace(minute=0, second=0, microsecond=0)
+    else:
+        datetime_obj = datetime_obj.replace(minute=30, second=0, microsecond=0)
+    return datetime_obj
+
+
 class ClassFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Class
 
     # Generate fake data for classes
     id = factory.Sequence(lambda n: f'C{n}')
-    start_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
-    ending_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
+
+    @factory.lazy_attribute
+    def start_date(self):
+        # Generate a random date between January 1, 2024, and June 1, 2025
+        start_of_year = datetime(2024, 1, 1, tzinfo=pytz.UTC)
+        end_of_year = datetime(2025, 6, 1, tzinfo=pytz.UTC)
+        random_date = start_of_year + timedelta(seconds=random.randint(0, int((end_of_year - start_of_year).total_seconds())))
+        rounded_date = round_to_nearest_half_hour(random_date)
+        return rounded_date
+
+    @factory.lazy_attribute
+    def ending_date(self):
+        # Generate an end date that is 2 or 3 hours after the start date
+        start_date = self.start_date
+        duration = random.choice([timedelta(hours=2), timedelta(hours=3)])
+        return start_date + duration
+    
     modality = factory.Faker('random_element', elements=['PRESENCIAL', 'VIRTUAL'])
     classroom = factory.Faker('random_element',
                               elements=['Classroom A', 'Classroom B', 'Classroom C', 'Classroom D', 'Classroom E'])
@@ -177,13 +235,19 @@ class ClassFactory(factory.django.DjangoModelFactory):
     subject = factory.LazyAttribute(lambda _: random.choice(Subject.objects.all()))
 
     # Selecting an existing Teacher instance from the database
-    teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
+    @factory.lazy_attribute
+    def teacher(self):
+        # Get a teacher that does not have overlapping classes during the new class' start and end dates
+        teachers = Teacher.objects.exclude(
+            class__start_date__range=(self.start_date, self.ending_date),
+            class__ending_date__range=(self.start_date, self.ending_date)
+        ).distinct()
+        return random.choice(teachers)
 
     @factory.post_generation
     def students(self, create, extracted, **kwargs):
         if not create:
             return
-
         if extracted:
             for student in extracted:
                 self.students.add(student)
@@ -191,19 +255,6 @@ class ClassFactory(factory.django.DjangoModelFactory):
             students = Student.objects.all()
             self.students.add(
                 *random.sample(list(students), random.randint(1, 10)))  # Add between 1 and 10 students to the class
-
-
-teacher_cycle = cycle(Teacher.objects.all())
-
-
-class ContractFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Contract
-
-    # Generate fake data for contracts
-    contract_status = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
-    contact_preparation_date = factory.Faker('date')
-    id_teacher = factory.LazyAttribute(lambda _: next(teacher_cycle))
 
 
 class ViaticFactory(factory.django.DjangoModelFactory):
@@ -215,35 +266,3 @@ class ViaticFactory(factory.django.DjangoModelFactory):
     accommodation = factory.Faker('boolean')
     viatic = factory.Faker('boolean')
     id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
-
-
-class ClassFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Class
-
-    # Generate fake data for classes
-    id = factory.Sequence(lambda n: f'C{n}')
-    start_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
-    ending_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
-    modality = factory.Faker('random_element', elements=['PRESENCIAL', 'VIRTUAL'])
-    classroom = factory.Faker('random_element',
-                              elements=['Classroom A', 'Classroom B', 'Classroom C', 'Classroom D', 'Classroom E'])
-    link = factory.Faker('url')
-    # Selecting an existing instance of Subject from the database
-    subject = factory.LazyAttribute(lambda _: random.choice(Subject.objects.all()))
-
-    # Selecting an existing Teacher instance from the database
-    teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
-
-    @factory.post_generation
-    def students(self, create, extracted, **kwargs):
-        if not create:
-            return
-
-        if extracted:
-            for student in extracted:
-                self.students.add(student)
-        else:
-            students = Student.objects.all()
-            self.students.add(
-                *random.sample(list(students), random.randint(1, 10)))  # Agrega entre 1 y 10 estudiantes a la clase
