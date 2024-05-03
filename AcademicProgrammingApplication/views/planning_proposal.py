@@ -75,7 +75,7 @@ def planning_proposal(request):
 
     return render(request, 'academic-programming-proposal.html', {
         'user_name': user.username,
-        'title': 'Propuesta Programacion Academica',
+        'title': 'Propuesta Programación Académica',
         'files': files,
         'file_selected': file_selected,
         'search_query': search_query,
