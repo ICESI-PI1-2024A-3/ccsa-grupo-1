@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("El valor de class.subject.code es:", code_materia, "El valor de class.code es:", code_clase);
 });
 
-document.getElementById('start_date_class').addEventListener('click', function () {
+
+document.getElementById('end_date_class').addEventListener('click', function () {
     Swal.fire({
         html: `
             <!-- Bootstrap style sheet for CSS-->
@@ -24,7 +25,7 @@ document.getElementById('start_date_class').addEventListener('click', function (
             </div>
             
         `,
-        title: 'Editar fecha inicio de clase',
+        title: 'Editar fecha fin de clase',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
         cancelButtonColor: 'rgba(108, 117, 125)',
@@ -51,9 +52,9 @@ document.getElementById('start_date_class').addEventListener('click', function (
                 html: `
                 <!-- Bootstrap style sheet for CSS-->
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                <div class="p-1">Se le notificará por correo electrónico</div>
+                <div class="p-1">Se le notificará por correo electrónico.</div>
                 `,
-                titleText: "Cambio de fecha exitoso",
+                titleText: "cambio de fecha exitoso",
                 icon: "success",
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: 'rgba(23, 104, 172, 0.9)',
@@ -62,7 +63,7 @@ document.getElementById('start_date_class').addEventListener('click', function (
                 window.location.reload(); // Replace '/' with your desired URL
             });
             // Send data to Django backend
-            fetch('/dateCLass/', {
+            fetch('/dateCLass_date_end/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -80,9 +81,6 @@ document.getElementById('start_date_class').addEventListener('click', function (
             });
 
         }
-        window.location.reload();
+
     });
 });
-
-
-

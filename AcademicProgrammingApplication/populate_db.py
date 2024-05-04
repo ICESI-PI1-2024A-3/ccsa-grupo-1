@@ -217,33 +217,3 @@ class ViaticFactory(factory.django.DjangoModelFactory):
     id_teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
 
 
-class ClassFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Class
-
-    # Generate fake data for classes
-    id = factory.Sequence(lambda n: f'C{n}')
-    start_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
-    ending_date = factory.Faker('date_time', tzinfo=datetime.now().astimezone().tzinfo)
-    modality = factory.Faker('random_element', elements=['PRESENCIAL', 'VIRTUAL'])
-    classroom = factory.Faker('random_element',
-                              elements=['Classroom A', 'Classroom B', 'Classroom C', 'Classroom D', 'Classroom E'])
-    link = factory.Faker('url')
-    # Selecting an existing instance of Subject from the database
-    subject = factory.LazyAttribute(lambda _: random.choice(Subject.objects.all()))
-
-    # Selecting an existing Teacher instance from the database
-    teacher = factory.LazyAttribute(lambda _: random.choice(Teacher.objects.all()))
-
-    @factory.post_generation
-    def students(self, create, extracted, **kwargs):
-        if not create:
-            return
-
-        if extracted:
-            for student in extracted:
-                self.students.add(student)
-        else:
-            students = Student.objects.all()
-            self.students.add(
-                *random.sample(list(students), random.randint(1, 10)))  # Agrega entre 1 y 10 estudiantes a la clase

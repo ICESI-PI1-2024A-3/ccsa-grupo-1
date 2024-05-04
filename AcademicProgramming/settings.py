@@ -158,3 +158,5 @@ EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 CELERY_BROKER_URL = 'amqp://localhost'
 
 
+USE_TZ = False
+
