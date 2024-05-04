@@ -13,7 +13,7 @@ class AcademicManagementTest(TestCase):  # Defining a test case class
 
         start_date = timezone.now()  # Getting current time
         ending_date = start_date + timezone.timedelta(days=90)  # Creating an ending date 90 days after start
-        self.semester = Semester.objects.create(period='Semestre de prueba', start_date=start_date,
+        self.semester = Semester.objects.create(period='2024-1', start_date=start_date,
                                                 ending_date=ending_date)  # Creating a semester
 
         # Creating a program
@@ -22,7 +22,7 @@ class AcademicManagementTest(TestCase):  # Defining a test case class
                                               type='Tipo de prueba', director='Director de prueba')
 
     def test_academic_management(self):  # Test case for academic management
-        response = self.client.get(reverse('home'), {'program': 'Programa de prueba', 'semester': 'Semestre de prueba',
+        response = self.client.get(reverse('home'), {'program': 'Programa de prueba', 'semester': '2024-1',
                                                      'subject_search': 'Asignatura de prueba'})
         self.assertEqual(response.status_code, 200)  # Checking if response status code is 200
         self.assertContains(response,
