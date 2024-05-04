@@ -107,12 +107,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Contract',
             fields=[
+                ('id', models.CharField(max_length=200, primary_key=True, serialize=False,
+                                        verbose_name='Identificador del contrato')),
                 ('contract_status',
                  models.CharField(choices=[('ACTIVO', 'Activo'), ('INACTIVO', 'Inactivo')], max_length=200,
                                   verbose_name='Estado del contrato')),
                 ('contact_preparation_date', models.DateField(verbose_name='Fecha de elaboración')),
                 ('id_teacher',
-                 models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False,
+                 models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, serialize=False,
                                       to='AcademicProgrammingApplication.teacher', verbose_name='Profesor asociado')),
             ],
         ),
