@@ -35,4 +35,5 @@ urlpatterns = [
     path('save_viatic/', login_required(ViaticView.save_viatic), name='save_viatic'),
     path('planning_proposal/', views.planning_proposal, name='planning_proposal'),
     path('role_management/', views.role_management, name='role_management'),
+    path('dateCLass_date_end/', views.update_end_date_class, name='update_end_date_class'),
 ]
