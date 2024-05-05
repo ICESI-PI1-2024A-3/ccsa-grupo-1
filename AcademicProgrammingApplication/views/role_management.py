@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.models import Group
 from AcademicProgrammingApplication.models import User, Role
 from django.db.models import Q
 from django.contrib.auth.decorators import permission_required
@@ -25,7 +26,11 @@ def role_management(request):
         for i in range(0, len(filtered_users)):
             user_in_list = filtered_users[i]
             user_role = Role.objects.get(name=request.POST[f'role{i + 1}'])
+            user_group = Group.objects.get(name=request.POST[f'role{i + 1}'])
+            user_in_list.groups.clear()
+            user_in_list.groups.add(user_group)
             user_in_list.role = user_role
+            # print(user_in_list.groups.all())
             user_in_list.save()
 
     return render(request, 'role-management.html', {
