@@ -8,7 +8,7 @@ class AcademicManagementTest(TestCase):  # Defining a test case class
 
     def setUp(self):  # Setting up initial conditions for each test
         self.client = Client()  # Creating a test client
-        self.user = User.objects.create_user(username='user', password='pass')  # Creating a user
+        self.user = User.objects.create_superuser(username='user', password='pass')  # Creating a user
         self.client.login(username='user', password='pass')  # Logging in as the created user
 
         start_date = timezone.now()  # Getting current time
