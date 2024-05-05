@@ -52,7 +52,6 @@ def edit_info_class(request, class_id):
 
             # Envía el correo electrónico
             try:
-                print('enviando correo exitosamente')
                 email = EmailMessage(
                     'Class Information',
                     mensaje,
@@ -82,11 +81,7 @@ def edit_info_class(request, class_id):
 def data_processor_lounge(request):
     if request.method == 'POST':
         try:
-            print('entre a procesar los datos')
             data_json = json.loads(request.body)
-            print(data_json)
-            print(len(data_json))
-            print(type(data_json))
             process_data(data_json)
             update_class_schedule(data_json)
             send_email_after_update(data_json)
@@ -107,15 +102,12 @@ def process_data(data_json):
     modality = data_json.get('modality')
 
     processed_data = [code_materia, code_clase, datetime1, datetime2, salon, modality]
-    print(processed_data)
     return processed_data
 
 
 def update_class_schedule(data_json):
     code_clase = data_json['code_clase']
     clase = get_object_or_404(Class, id=code_clase)
-
-    print('entre a actualizar la modalidad de la clase')
 
     new_modality = 'PRESENCIAL' if len(data_json) == 5 else 'VIRTUAL'
     if new_modality not in [choice[0] for choice in Class.MODALITY_CHOICES]:
@@ -135,14 +127,10 @@ def update_class_schedule(data_json):
         clase.modality = 'PRESENCIAL'
         clase.link = None
         clase.classroom = 'c202'
-        print('clase presencial')
     elif len(data_json) == 5:
         clase.modality = 'VIRTUAL'
         clase.classroom = None
         clase.link = 'https://zoom.us/j/1234567890'
-        print('clase virtual')
-
-    print(clase.modality)
 
     clase.save()
 
@@ -170,14 +158,13 @@ def send_email_after_update(data_json):
         email_mensaje = "Mensaje de correo no disponible"
 
 
-# tasks to send email
 @shared_task
 def send_scheduled_mail(subject, message, student_email):
     email = EmailMessage(
         subject,
         message,
-        settings.EMAIL_HOST_USER,  # Sender email address
-        [student_email]  # Recipient list, in this case the student's email
+        settings.EMAIL_HOST_USER,
+        [student_email]
     )
     email.send()
 
@@ -194,41 +181,50 @@ def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, sta
 def edit_class_date_information(request):
     if request.method == 'POST':
         try:
-            # Access JSON data sent from the frontend
             data_json = json.loads(request.body)
-
-            # Process the data as needed
-            code_materia = data_json['code_materia']
             code_clase = data_json['code_clase']
             datetime1 = data_json['datetime1']
-
-            # Get the instance of the class to be updated
             clase = get_object_or_404(Class, id=code_clase)
-
-            # Get Colombia time zone
-            tz = pytz.timezone('America/Bogota')
-
-            fecha_inicio = tz.localize(datetime.fromisoformat(datetime1))
-
-            print('Actualice fecha de clase')
-
-            # Update class start and end dates
+            fecha_inicio = datetime.fromisoformat(datetime1)
+            fecha_inicio = fecha_inicio.replace(tzinfo=pytz.UTC)
+            
             try:
-                clase.start_date = fecha_inicio
+                clase.start_date = fecha_inicio 
+                clase.send_email = True
+                clase.save()
+                
+            except ValidationError as e:
+                return JsonResponse({'mensaje': 'Error al actualizar la clase: {}'.format(str(e))}, status=500)
+
+            return JsonResponse({'mensaje': 'Datos actualizados correctamente'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+
+@csrf_exempt
+def update_end_date_class(request):
+    if request.method == 'POST':
+        try:
+            data_json = json.loads(request.body)
+            code_clase = data_json['code_clase']
+            datetime1 = data_json['datetime1']
+            clase = get_object_or_404(Class, id=code_clase)
+            fecha_inicio = datetime.fromisoformat(datetime1)
+            fecha_inicio = fecha_inicio.replace(tzinfo=pytz.UTC)
+            
+            try:
+                clase.ending_date = fecha_inicio
                 clase.send_email = True
                 clase.save()
             except ValidationError as e:
                 return JsonResponse({'mensaje': 'Error al actualizar la clase: {}'.format(str(e))}, status=500)
 
-            # Return a JSON response indicating success
-
             return JsonResponse({'mensaje': 'Datos actualizados correctamente'})
         except Exception as e:
-            # If any error occurs during data processing,
-            # return an error message
             return JsonResponse({'error': str(e)}, status=500)
     else:
-        # Return a JSON response indicating that the method is not allowed
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 
