@@ -3,8 +3,8 @@ import pytz
 from .models import Semester, Subject, Program, Teacher, Class, Contract, Viatic, Student
 from django.core.files.uploadedfile import SimpleUploadedFile
 from datetime import datetime, timedelta
-from itertools import cycle
 import random
+from faker import Faker
 
 
 class SemesterFactory(factory.django.DjangoModelFactory):
@@ -54,7 +54,8 @@ class SubjectFactory(factory.django.DjangoModelFactory):
     type = factory.Faker('random_element', elements=['CURRICULAR', 'ELECTIVA'])
     syllabus = factory.LazyAttribute(lambda _: SimpleUploadedFile('syllabus.pdf', b'pdf_content'))
     start_date = factory.Faker('date_between_dates', date_start=datetime(2024, 1, 1), date_end=datetime(2025, 6, 1))
-    ending_date = factory.Faker('date_between_dates', date_start=factory.SelfAttribute('..start_date'), date_end=datetime(2025, 6, 1))
+    ending_date = factory.Faker('date_between_dates', date_start=factory.SelfAttribute('..start_date'),
+                                date_end=datetime(2025, 6, 1))
     modality = factory.Faker('random_element', elements=['PRESENCIAL', 'VIRTUAL'])
     num_sessions = factory.Faker('random_int', min=1, max=20)
 
@@ -148,6 +149,14 @@ def generate_random_date(start_date, end_date):
     return random_date
 
 
+fake = Faker('es_CO')
+
+
+def generate_phone_number():
+    number = fake.phone_number()
+    return number[:20]
+
+
 class TeacherFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Teacher
@@ -156,7 +165,7 @@ class TeacherFactory(factory.django.DjangoModelFactory):
     id = factory.Sequence(lambda n: f'T{n}')
     name = factory.Faker('name')
     email = factory.Faker('email')
-    cellphone = factory.Faker('phone_number')
+    cellphone = factory.LazyFunction(generate_phone_number)
     city = factory.Faker('city')
     state = factory.Faker('random_element', elements=['ACTIVO', 'INACTIVO'])
     picture = factory.LazyAttribute(lambda _: SimpleUploadedFile('picture.jpg', b'jpg_content'))
@@ -214,7 +223,8 @@ class ClassFactory(factory.django.DjangoModelFactory):
         # Generate a random date between January 1, 2024, and June 1, 2025
         start_of_year = datetime(2024, 1, 1, tzinfo=pytz.UTC)
         end_of_year = datetime(2025, 6, 1, tzinfo=pytz.UTC)
-        random_date = start_of_year + timedelta(seconds=random.randint(0, int((end_of_year - start_of_year).total_seconds())))
+        random_date = start_of_year + timedelta(
+            seconds=random.randint(0, int((end_of_year - start_of_year).total_seconds())))
         rounded_date = round_to_nearest_half_hour(random_date)
         return rounded_date
 
@@ -224,7 +234,7 @@ class ClassFactory(factory.django.DjangoModelFactory):
         start_date = self.start_date
         duration = random.choice([timedelta(hours=2), timedelta(hours=3)])
         return start_date + duration
-    
+
     modality = factory.Faker('random_element', elements=['PRESENCIAL', 'VIRTUAL'])
     classroom = factory.Faker('random_element',
                               elements=['Classroom A', 'Classroom B', 'Classroom C', 'Classroom D', 'Classroom E'])
