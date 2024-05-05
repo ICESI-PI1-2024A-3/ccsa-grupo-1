@@ -28,9 +28,8 @@ urlpatterns = [
     path('home/edit_academic_program/<int:program_id>/', login_required(views.edit_academic_program),
          name='edit_academic_program'),
     path('edit_class/<str:class_id>/', login_required(views.edit_info_class), name='edit_info_class'),
-         path('dataProcessor_lounge/', views.data_processor_lounge, name='data_processor_lounge'),
-     path('dateCLass/',views.edit_class_date_information, name='edit_class_date_information'),
-     
+    path('dataProcessor_lounge/', views.data_processor_lounge, name='data_processor_lounge'),
+    path('dateCLass/', views.edit_class_date_information, name='edit_class_date_information'),
     path('teacher_management/', login_required(views.teacher_management), name='teacher_management'),
     path('teacher/<str:teacher_id>/', login_required(views.teacher_detail), name='teacher_detail'),
     path('save_viatic/', login_required(ViaticView.save_viatic), name='save_viatic'),
@@ -38,4 +37,3 @@ urlpatterns = [
     path('role_management/', views.role_management, name='role_management'),
     path('dateCLass_date_end/', views.update_end_date_class, name='update_end_date_class'),
 ]
-    

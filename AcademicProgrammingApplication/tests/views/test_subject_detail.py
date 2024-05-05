@@ -64,5 +64,5 @@ class SubjectDetailTest(TestCase):  # Defining a test case class for subject det
         self.assertContains(response, 'PRESENCIAL')
         self.assertContains(response, '15')
         self.assertContains(response, '101D')
-        self.assertContains(response, 'March 18, 2024')
-        self.assertContains(response, 'March 18, 2024')
+        self.assertContains(response, '18 de marzo de 2024 a las 08:00')
+        self.assertContains(response, '18 de marzo de 2024 a las 10:00')

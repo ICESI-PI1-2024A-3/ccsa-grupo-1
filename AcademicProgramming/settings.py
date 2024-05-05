@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-# LANGUAGE_CODE = 'es-col'
+LANGUAGE_CODE = 'es-col'
 
 # TIME_ZONE = 'America/Bogota'
 
@@ -153,9 +153,5 @@ EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 
-
 # Configuración del broker de mensajes (ejemplo con RabbitMQ)
 CELERY_BROKER_URL = 'amqp://localhost'
-
-
-
