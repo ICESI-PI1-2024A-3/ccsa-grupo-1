@@ -1,11 +1,13 @@
 # Importing necessary modules
 from django.test import TestCase, Client
-from django.contrib.auth.models import User
+from AcademicProgrammingApplication.models import User
+
 
 class LogoutViewTest(TestCase):  # Defining a test case class for logout view
     def setUp(self):  # Setting up initial conditions for each test
         self.client = Client()  # Creating a test client
-        self.test_user = User.objects.create_user(username='testuser', password='testpassword123')  # Creating a test user
+        self.test_user = User.objects.create_user(username='testuser',
+                                                  password='testpassword123')  # Creating a test user
 
     def test_logout_view(self):  # Test for logout view
         # Log in the user

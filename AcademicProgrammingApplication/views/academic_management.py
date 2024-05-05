@@ -1,8 +1,8 @@
 # Import necessary modules
 from django.db.models import Q
 from django.shortcuts import render, redirect
-
 from AcademicProgrammingApplication.models import Semester, Program
+from django.contrib.auth.decorators import permission_required
 
 
 # Define a view function for managing academic programming
@@ -48,7 +48,9 @@ def academic_management(request):
             # Render error message if program or semester is not found
             return render(request, 'academic-management.html', {
                 'title': 'Programación académica',
+                'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
                 'user_name': user.username,
+                'user_role': user.role,
                 'error': 'Lo sentimos, no fue posible encontrar el programa o semestre que estás buscando. Por favor, '
                          'verifica que la información ingresada sea correcta e intentalo nuevamente.',
             })
@@ -58,13 +60,18 @@ def academic_management(request):
     # Render the academic management page with necessary context data
     return render(request, 'academic-management.html', {
         'title': 'Programación académica',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
+        'delete_program_permission': user.has_perm('AcademicProgrammingApplication.delete_program'),
+        'change_program_permission': user.has_perm('AcademicProgrammingApplication.change_program'),
         'user_name': user.username,
+        'user_role': user.role,
         'program_information': program_information,
         'semester': semester,
         'subjects': subjects,
     })
 
 
+@permission_required('AcademicProgrammingApplication.delete_program', raise_exception=True)
 # Define a view function for deleting an academic program
 def delete_academic_program(request, program_id):
     """
@@ -87,6 +94,7 @@ def delete_academic_program(request, program_id):
     return redirect('home')
 
 
+@permission_required('AcademicProgrammingApplication.change_program', raise_exception=True)
 def academic_program_edition(request, program_id):
     """
     Renders a page for editing an academic program.
@@ -106,13 +114,16 @@ def academic_program_edition(request, program_id):
 
     return render(request, 'academic-program-edition.html', {
         'title': 'Programación académica',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'user_name': user.username,
+        'user_role': user.role,
         "program": program,
         "modalities": modalities,
         "types": types,
     })
 
 
+@permission_required('AcademicProgrammingApplication.change_program', raise_exception=True)
 def edit_academic_program(request, program_id):
     """
     Handles the editing of an academic program.

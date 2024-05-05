@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from AcademicProgrammingApplication.models import Teacher, Contract
 
+
 def teacher_management(request):
     # Retrieve the authenticated user
     user = request.user
@@ -14,6 +15,8 @@ def teacher_management(request):
     # Render the teacher management page with necessary context data
     return render(request, 'teacher-management.html', {
         'title': 'Gestión de Profesores',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'user_name': user.username,
+        'user_role': user.role,
         'teachers': teachers
     })

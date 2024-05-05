@@ -1,6 +1,7 @@
 from django.test import TestCase
 from AcademicProgrammingApplication.forms import UserForm
 
+
 class UserFormTest(TestCase):
     # Test case to check form validation with valid data
     def test_form_with_valid_data(self):
