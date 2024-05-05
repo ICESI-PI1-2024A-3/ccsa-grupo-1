@@ -1,0 +1,314 @@
+[
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2020-1",
+        "fields": {
+            "start_date": "2020-02-01",
+            "ending_date": "2020-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2020-2",
+        "fields": {
+            "start_date": "2020-08-01",
+            "ending_date": "2020-11-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2021-1",
+        "fields": {
+            "start_date": "2021-02-01",
+            "ending_date": "2021-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2021-2",
+        "fields": {
+            "start_date": "2021-08-01",
+            "ending_date": "2021-11-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2022-1",
+        "fields": {
+            "start_date": "2022-02-01",
+            "ending_date": "2022-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2022-2",
+        "fields": {
+            "start_date": "2022-08-01",
+            "ending_date": "2022-11-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2023-1",
+        "fields": {
+            "start_date": "2023-02-01",
+            "ending_date": "2023-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2023-2",
+        "fields": {
+            "start_date": "2023-08-01",
+            "ending_date": "2023-11-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Semester",
+        "pk": "2024-1",
+        "fields": {
+            "start_date": "2024-02-01",
+            "ending_date": "2024-06-30"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Subject",
+        "pk": 1,
+        "fields": {
+            "name": "Test Subject",
+            "nrc": "123456",
+            "credits": 3,
+            "type": "CURRICULAR",
+            "syllabus": "syllabuses/syllabus_dNDyNLf.pdf",
+            "start_date": "2024-04-28",
+            "ending_date": "2024-07-27",
+            "modality": "PRESENCIAL",
+            "num_sessions": 10
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Subject",
+        "pk": 2,
+        "fields": {
+            "name": "Test Subject 2",
+            "nrc": "234567",
+            "credits": 3,
+            "type": "CURRICULAR",
+            "syllabus": "syllabuses/syllabus_dNDyNLh.pdf",
+            "start_date": "2024-04-28",
+            "ending_date": "2024-07-27",
+            "modality": "PRESENCIAL",
+            "num_sessions": 10
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.program",
+        "pk": 1,
+        "fields": {
+            "name": "Maestría en Mercadeo",
+            "faculty": "Facultad de Ciencias Administrativas y Económicas",
+            "director": "Jenna Garcia",
+            "cost": "24932044.00",
+            "type": "MAESTRÍA",
+            "modality": "PRESENCIAL",
+            "duration": "2",
+            "curriculum": "curriculums/curriculum_nNXHEiK.pdf",
+            "semesters": [
+                "2020-1",
+                "2020-2",
+                "2021-1",
+                "2021-2",
+                "2022-1",
+                "2022-2",
+                "2023-1",
+                "2023-2",
+                "2024-1"
+            ],
+            "subjects": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Program",
+        "pk": 3,
+        "fields": {
+            "name": "Global MBA",
+            "faculty": "Facultad de Ciencias Administrativas y Económicas",
+            "director": "Nicholas Murray",
+            "cost": "25066618.00",
+            "type": "ESPECIALIZACIÓN",
+            "modality": "VIRTUAL",
+            "duration": "3",
+            "curriculum": "curriculums/curriculum_F8IwAuZ.pdf",
+            "semesters": [
+                "2020-1",
+                "2020-2",
+                "2021-1",
+                "2021-2",
+                "2022-1",
+                "2022-2",
+                "2023-1",
+                "2023-2",
+                "2024-1"
+            ],
+            "subjects": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 1,
+        "fields": {
+            "name": "Miguel Campos",
+            "email": "test1@example.com",
+            "cellphone": "123456789",
+            "city": "Test City",
+            "state": "ACTIVO",
+            "picture": "pictures/miguel_campos.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 2,
+        "fields": {
+            "name": "Rosa Crespo",
+            "email": "test2@example.com",
+            "cellphone": "987654321",
+            "city": "Test City",
+            "state": "INACTIVO",
+            "picture": "pictures/rosa_crespo.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 3,
+        "fields": {
+            "name": "David Hidalgo",
+            "email": "test@example.com",
+            "cellphone": "234567890",
+            "city": "Test City",
+            "state": "ACTIVO",
+            "picture": "pictures/david_hidalgo.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 4,
+        "fields": {
+            "name": "Carlos Perez",
+            "email": "test4@example.com",
+            "cellphone": "345678901",
+            "city": "Test City",
+            "state": "ACTIVO",
+            "picture": "pictures/carlos_perez.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 5,
+        "fields": {
+            "name": "Ana Gomez",
+            "email": "test5@example.com",
+            "cellphone": "456789012",
+            "city": "Test City",
+            "state": "ACTIVO",
+            "picture": "pictures/ana_gomez.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Teacher",
+        "pk": 6,
+        "fields": {
+            "name": "Luis Rodriguez",
+            "email": "test6@example.com",
+            "cellphone": "567890123",
+            "city": "Test City",
+            "state": "ACTIVO",
+            "picture": "pictures/luis_rodriguez.jpg"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Class",
+        "pk": 1,
+        "fields": {
+            "start_date": "2024-04-28T13:00:00Z",
+            "ending_date": "2024-04-28T14:00:00Z",
+            "modality": "PRESENCIAL",
+            "classroom": "Test Classroom",
+            "link": "",
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Class",
+        "pk": 2,
+        "fields": {
+            "start_date": "2024-04-28T16:00:00Z",
+            "ending_date": "2024-04-28T18:00:00Z",
+            "modality": "PRESENCIAL",
+            "classroom": "Test Classroom",
+            "link": "",
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Class",
+        "pk": 3,
+        "fields": {
+            "start_date": "2024-04-28T08:00:00Z",
+            "ending_date": "2024-04-28T10:00:00Z",
+            "modality": "PRESENCIAL",
+            "classroom": "Test Classroom",
+            "link": "",
+            "subject": 2,
+            "teacher": 4
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Class",
+        "pk": 4,
+        "fields": {
+            "start_date": "2024-04-28T17:00:00Z",
+            "ending_date": "2024-04-28T20:00:00Z",
+            "modality": "PRESENCIAL",
+            "classroom": "Test Classroom",
+            "link": "",
+            "subject": 2,
+            "teacher": 4
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Contract",
+        "pk": 1,
+        "fields": {
+            "contract_status": "ACTIVO",
+            "contact_preparation_date": "2024-01-15",
+            "id_teacher": "1"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Contract",
+        "pk": 2,
+        "fields": {
+            "contract_status": "INACTIVO",
+            "contact_preparation_date": "2024-01-15",
+            "id_teacher": "2"
+        }
+    },
+    {
+        "model": "AcademicProgrammingApplication.Viatic",
+        "pk": 1,
+        "fields": {
+            "id_teacher": "1",
+            "transport": true,
+            "accommodation": false,
+            "viatic": true
+        }
+    } 
+]

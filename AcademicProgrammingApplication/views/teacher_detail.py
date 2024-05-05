@@ -1,18 +1,23 @@
 from django.shortcuts import render
 from AcademicProgrammingApplication.models import Teacher, Contract, Class
 
+
 def teacher_detail(request, teacher_id):
     # Retrieve the authenticated user
     user = request.user
     # Get the teacher based on the provided teacher_id
     teacher = Teacher.objects.get(id=teacher_id)
     # Render the teacher management page with necessary context data
+    print(teacher.contract.contract_status)
     return render(request, 'teacher-detail.html', {
         'title': 'Gestión de PROFESORES',
+        'change_role_permission': user.has_perm('AcademicProgrammingApplication.change_role'),
         'user_name': user.username,
+        'user_role': user.role,
         'teacher': teacher,
         'classes': get_classes(teacher),
     })
+
 
 # Get the classes associated with a given teacher ID
 def get_classes(teacher_id):

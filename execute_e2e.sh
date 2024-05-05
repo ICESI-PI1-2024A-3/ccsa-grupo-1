@@ -1,0 +1,13 @@
+# Execute the next command in a bash terminal: bash execute_e2e.sh
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_edit_info_class
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_academic_management
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_assign_teacher
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_academic_management
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_assign_teacher
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_login
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_login
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_logout
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_subject_detail
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_teacher_detail
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_teacher_management
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_viatic_request

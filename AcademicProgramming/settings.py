@@ -80,10 +80,17 @@ WSGI_APPLICATION = 'AcademicProgramming.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Especifica el archivo de fixtures que deseas cargar en las pruebas
+FIXTURES = ['test.json']
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'test': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'test_db.sqlite3',
     }
 }
 
@@ -133,5 +140,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'AcademicProgrammingApplication.User'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# SMTP settings to send emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ccsaintegrador@gmail.com'
+EMAIL_HOST_PASSWORD = 'nhmutssrvwwqvhbh'
+
+# Settings to save emails to files
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+
+
+
+# Configuración del broker de mensajes (ejemplo con RabbitMQ)
+CELERY_BROKER_URL = 'amqp://localhost'
+
+
