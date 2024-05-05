@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load my_filters %}
+{% load date_filters %}
 
 {% block main-container-content %}
 <link rel="stylesheet" href="{% static 'styles/edit-info-class.css' %}" />
@@ -82,7 +83,7 @@
                 <div class="p-1">Fecha de inicio:</div>
             </div>
             <div class="col-3">
-                <div class="p-1">{{ class.start_date }}</div>
+                <div class="p-1">{{ class.start_date|convert_to_database_timezone }}</div>
             </div>
             <!-- editar  -->
             <div class="col">
@@ -101,7 +102,7 @@
                 <div class="p-1">Fecha de fin:</div>
             </div>
             <div class="col-3">
-                <div class="p-1">{{ class.ending_date }}</div>
+                <div class="p-1">{{ class.ending_date|convert_to_database_timezone }}</div>
             </div>
             <div class="col">
                 <!-- Button for end date calendar -->

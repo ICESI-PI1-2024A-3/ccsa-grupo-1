@@ -186,11 +186,13 @@ def edit_class_date_information(request):
             datetime1 = data_json['datetime1']
             clase = get_object_or_404(Class, id=code_clase)
             fecha_inicio = datetime.fromisoformat(datetime1)
-
+            fecha_inicio = fecha_inicio.replace(tzinfo=pytz.UTC)
+            
             try:
-                clase.start_date = fecha_inicio
+                clase.start_date = fecha_inicio 
                 clase.send_email = True
                 clase.save()
+                
             except ValidationError as e:
                 return JsonResponse({'mensaje': 'Error al actualizar la clase: {}'.format(str(e))}, status=500)
 
@@ -210,7 +212,8 @@ def update_end_date_class(request):
             datetime1 = data_json['datetime1']
             clase = get_object_or_404(Class, id=code_clase)
             fecha_inicio = datetime.fromisoformat(datetime1)
-
+            fecha_inicio = fecha_inicio.replace(tzinfo=pytz.UTC)
+            
             try:
                 clase.ending_date = fecha_inicio
                 clase.send_email = True

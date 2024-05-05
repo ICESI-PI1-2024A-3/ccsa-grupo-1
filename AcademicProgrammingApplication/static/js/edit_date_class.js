@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     code_clase = document.getElementById("valor_clase").textContent;
 
     // user the value as you wish
-    console.log("El valor de class.subject.code es:", code_materia, "El valor de class.code es:", code_clase);
+    //console.log("El valor de class.subject.code es:", code_materia, "El valor de class.code es:", code_clase);
 });
 
 document.getElementById('start_date_class').addEventListener('click', function () {
