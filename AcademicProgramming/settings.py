@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,11 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-(ny#(o!nc7=$3l0)n3j@)t&&p@551j3w7v+kj7sx!qvz9+las!'
+# SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+# DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = "ccsa-grupo-1.onrender.com localhost 127.0.0.1".split(" ")
 
 # The following lines must be changed when moving to production. Don't change them when we're in development or if
 # you don't know what you're doing :).
@@ -36,6 +40,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'AcademicProgrammingApplication.apps.AcademicProgrammingApplicationConfig',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,7 +86,7 @@ WSGI_APPLICATION = 'AcademicProgramming.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# Especifica el archivo de fixtures que deseas cargar en las pruebas
+# Specify the fixtures file to load the tests
 FIXTURES = ['test.json']
 
 DATABASES = {
@@ -93,6 +99,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'test_db.sqlite3',
     }
 }
+if not DEBUG:
+    DATABASES['default'] = dj_database_url.parse(
+        "postgres://academic_programming_ccmg_user:K8RVERoSwYe9rTTtAuuFFy7d934pqvce@dpg-corsjunsc6pc73dt8vl0-a.oregon"
+        "-postgres.render.com/academic_programming_ccmg")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -126,8 +136,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/AcademicProgrammingApplication/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'AcademicProgrammingApplication/static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -153,8 +163,5 @@ EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 
-
-# Configuración del broker de mensajes (ejemplo con RabbitMQ)
+# Message broker configuration (example with RabbitMQ)
 CELERY_BROKER_URL = 'amqp://localhost'
-
-
