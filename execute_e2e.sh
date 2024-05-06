@@ -6,10 +6,13 @@ python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_assign_t
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_academic_management
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_assign_teacher
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_login
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_password_register_user
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_register_user
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_search_user
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_login
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_logout
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_planning_proposal
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_register_user
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_role_management
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_search_user
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_subject_detail
