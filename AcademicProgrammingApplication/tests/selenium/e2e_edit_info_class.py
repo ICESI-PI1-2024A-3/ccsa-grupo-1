@@ -11,6 +11,7 @@ class EditClassTest(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         call_command('loaddata', 'test.json')
+        call_command('loaddata', 'permissions.json')
 
     @classmethod
     def tearDownClass(cls):
@@ -25,7 +26,7 @@ class EditClassTest(StaticLiveServerTestCase):
         self.driver.quit()
         super().tearDown()
 
-    def test_subject_detail(self):
+    def test_edit_info_detail(self):
         # Open the login page
         self.driver.get(self.live_server_url)
         # Enter credentials and submit the form
@@ -70,16 +71,6 @@ class EditClassTest(StaticLiveServerTestCase):
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'syllabus_dNDyNLf.pdf')]"))
         )
         self.assertTrue(class_syllabus_element.is_displayed(), "El syllabus de la clase no se muestra correctamente")
-
-        #class_start_element = WebDriverWait(self.driver, 10).until(
-        #    EC.presence_of_element_located(By.XPATH, "//div[contains(text(), 'April 28, 2024, 1 p.m.')]")
-        #)
-        #self.assertTrue(class_start_element.is_displayed(), "La fecha de inicio de la clase no se muestra correctamente")
-
-        #class_ending_element = WebDriverWait(self.driver, 10).until(
-        #    EC.presence_of_element_located(By.XPATH, "//div[contains(text(), 'April 28, 2024, 2 p.m.')]")
-        #)
-        #self.assertTrue(class_ending_element.is_displayed(), "La fecha de fin de la clase no se muestra correctamente")
 
         class_teacher_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Miguel Campos')]"))

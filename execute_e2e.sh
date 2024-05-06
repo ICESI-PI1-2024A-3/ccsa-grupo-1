@@ -1,6 +1,7 @@
 # Execute the next command in a bash terminal: bash execute_e2e.sh
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_edit_info_class
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_academic_management
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_academic_management_edition
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_assign_teacher
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_academic_management
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_assign_teacher

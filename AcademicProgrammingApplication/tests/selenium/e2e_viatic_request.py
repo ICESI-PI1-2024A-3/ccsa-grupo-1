@@ -10,6 +10,7 @@ class ViaticRequestTest(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         call_command('loaddata', 'test.json', verbosity=0)
+        call_command('loaddata', 'permissions.json')
 
     @classmethod
     def tearDownClass(cls):
