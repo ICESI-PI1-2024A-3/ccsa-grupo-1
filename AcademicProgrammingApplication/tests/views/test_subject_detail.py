@@ -13,7 +13,7 @@ class SubjectDetailTest(TestCase):  # Defining a test case class for subject det
 
         start_date = timezone.now()  # Getting current time
         ending_date = start_date + timezone.timedelta(days=90)  # Creating an ending date 90 days after start
-        self.semester = Semester.objects.create(period='Semestre de prueba', start_date=start_date,
+        self.semester = Semester.objects.create(period='2024-1', start_date=start_date,
                                                 # Creating a semester
                                                 ending_date=ending_date)
 
@@ -64,5 +64,5 @@ class SubjectDetailTest(TestCase):  # Defining a test case class for subject det
         self.assertContains(response, 'PRESENCIAL')
         self.assertContains(response, '15')
         self.assertContains(response, '101D')
-        self.assertContains(response, 'March 18, 2024')
-        self.assertContains(response, 'March 18, 2024')
+        self.assertContains(response, '18 de marzo de 2024 a las 08:00')
+        self.assertContains(response, '18 de marzo de 2024 a las 10:00')
