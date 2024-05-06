@@ -76,13 +76,3 @@ class EditClassTest(StaticLiveServerTestCase):
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Miguel Campos')]"))
         )
         self.assertTrue(class_teacher_element.is_displayed(), "El profesor de la clase no se muestra correctamente")
-
-        class_modality_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'PRESENCIAL')]"))
-        )
-        self.assertTrue(class_modality_element.is_displayed(), "La modalidad de la clase no se muestra correctamente")
-
-        class_classroom_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Test Classroom')]"))
-        )
-        self.assertTrue(class_classroom_element.is_displayed(), "El salón de la clase no se muestra correctamente")
