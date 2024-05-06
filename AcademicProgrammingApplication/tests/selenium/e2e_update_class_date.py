@@ -1,0 +1,124 @@
+from selenium import webdriver
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.core.management import call_command
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+class EditClassTest(StaticLiveServerTestCase):
+    databases = {'default': 'test'}
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        call_command('loaddata', 'test.json')
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+
+    def setUp(self):
+        super().setUp()
+        self.driver = webdriver.Chrome()
+        self.driver.maximize_window()
+
+    def tearDown(self):
+        self.driver.quit()
+        super().tearDown()
+
+    def test_subject_detail(self):
+        # Open the login page
+        self.driver.get(self.live_server_url)
+        # Enter credentials and submit the form
+        username_input = self.driver.find_element("name", 'username')
+        password_input = self.driver.find_element("name", 'password')
+        username_input.send_keys('admin')
+        password_input.send_keys('admin')
+        submit_button = self.driver.find_element("id", 'access')
+        submit_button.click()
+        # Go to the class page
+        current_url = self.driver.current_url
+        base_url = current_url[:current_url.rfind('/')]
+        edit_class_url = base_url + '/edit_class/1/'
+        self.driver.get(edit_class_url)
+        # Verify the information of the class
+        class_name_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//h2[contains(text(), 'Clase - Test Subject')]"))
+        )
+        self.assertTrue(class_name_element.is_displayed(), "El nombre de la clase no se muestra correctamente")
+
+        class_code_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), '1')]"))
+        )
+        self.assertTrue(class_code_element.is_displayed(), "El código de la clase no se muestra correctamente")
+
+        class_nrc_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), '123456')]"))
+        )
+        self.assertTrue(class_nrc_element.is_displayed(), "El NRC de la clase no se muestra correctamente")
+
+        class_credits_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), '3')]"))
+        )
+        self.assertTrue(class_credits_element.is_displayed(), "Los créditos de la clase no se muestra correctamente")
+
+        class_type_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'CURRICULAR')]"))
+        )
+        self.assertTrue(class_type_element.is_displayed(), "El tipo de la clase no se muestra correctamente")
+
+        class_syllabus_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'syllabus_dNDyNLf.pdf')]"))
+        )
+        self.assertTrue(class_syllabus_element.is_displayed(), "El syllabus de la clase no se muestra correctamente")
+
+        # Modificar la fecha de inicio
+        start_date_button = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "start_date_class"))
+        )
+        start_date_button.click()
+        datetime_input = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "datetime1"))
+        )
+        datetime_input.clear()
+        datetime_input.send_keys('2024-05-01T13:00:00Z')
+        submit_button = self.driver.find_element(By.XPATH, "//button[text()='Aceptar']")
+        submit_button.click()
+
+        # Modificar la fecha de fin
+        end_date_button = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "end_date_class"))
+        )
+        end_date_button.click()
+        datetime_input = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "datetime2"))
+        )
+        datetime_input.clear()
+        datetime_input.send_keys('2024-05-01T14:00:00Z')
+        submit_button = self.driver.find_element(By.XPATH, "//button[text()='Aceptar']")
+        submit_button.click()
+
+        # Modificar la modalidad
+        modality_select = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "tipoClase"))
+        )
+        modality_select.click()
+        modality_option = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//option[text()='VIRTUAL']"))  # Nueva modalidad
+        )
+        modality_option.click()
+
+        # Verificar que los cambios se hayan realizado correctamente
+        class_start_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), concat('1 de mayo de 2024 a las 13:00', ''))]"))
+        )
+        self.assertTrue(class_start_element.is_displayed(), "La nueva fecha de inicio de la clase no se muestra correctamente")
+
+        class_ending_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), concat('1 de mayo de 2024 a las 14:00', ''))]"))
+        )  
+        self.assertTrue(class_ending_element.is_displayed(), "La nueva fecha de fin de la clase no se muestra correctamente")
+
+        class_modality_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'VIRTUAL')]"))
+        )
+        self.assertTrue(class_modality_element.is_displayed(), "La nueva modalidad de la clase no se muestra correctamente")
