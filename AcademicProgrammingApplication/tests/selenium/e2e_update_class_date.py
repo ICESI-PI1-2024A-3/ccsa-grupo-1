@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class EditClassTest(StaticLiveServerTestCase):
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -28,6 +29,7 @@ class EditClassTest(StaticLiveServerTestCase):
     def test_subject_detail(self):
         # Open the login page
         self.driver.get(self.live_server_url)
+        
         # Enter credentials and submit the form
         username_input = self.driver.find_element("name", 'username')
         password_input = self.driver.find_element("name", 'password')
@@ -35,11 +37,13 @@ class EditClassTest(StaticLiveServerTestCase):
         password_input.send_keys('admin')
         submit_button = self.driver.find_element("id", 'access')
         submit_button.click()
+        
         # Go to the class page
         current_url = self.driver.current_url
         base_url = current_url[:current_url.rfind('/')]
         edit_class_url = base_url + '/edit_class/1/'
         self.driver.get(edit_class_url)
+        
         # Verify the information of the class
         class_name_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//h2[contains(text(), 'Clase - Test Subject')]"))
@@ -81,7 +85,9 @@ class EditClassTest(StaticLiveServerTestCase):
         )
         datetime_input.clear()
         datetime_input.send_keys('2024-05-01T13:00:00Z')
-        submit_button = self.driver.find_element(By.XPATH, "//button[text()='Aceptar']")
+        submit_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceptar']"))
+        )
         submit_button.click()
 
         # Modificar la fecha de fin
@@ -90,20 +96,27 @@ class EditClassTest(StaticLiveServerTestCase):
         )
         end_date_button.click()
         datetime_input = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.ID, "datetime2"))
+            EC.presence_of_element_located((By.ID, "datetime1"))
         )
         datetime_input.clear()
         datetime_input.send_keys('2024-05-01T14:00:00Z')
-        submit_button = self.driver.find_element(By.XPATH, "//button[text()='Aceptar']")
+        submit_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceptar']"))
+        )
         submit_button.click()
+
+        # Esperar a que la ventana emergente desaparezca
+        WebDriverWait(self.driver, 10).until_not(
+            EC.presence_of_element_located((By.CLASS_NAME, "swal2-container"))
+        )
 
         # Modificar la modalidad
         modality_select = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.ID, "tipoClase"))
+            EC.element_to_be_clickable((By.ID, "tipoClase"))
         )
         modality_select.click()
         modality_option = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//option[text()='VIRTUAL']"))  # Nueva modalidad
+            EC.presence_of_element_located((By.XPATH, "//option[text()='Clase virtual']"))  # Nueva modalidad
         )
         modality_option.click()
 
