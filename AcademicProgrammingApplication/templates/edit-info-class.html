@@ -15,7 +15,7 @@
             <div class="col-2">
                 <div class="p-1">Código materia:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1" id="valor_clase">{{ class.id }}</div>
                 <script src="{% static '/js/request_classroom.js' %}"></script>
             </div>
@@ -24,7 +24,7 @@
             <div class="col-2">
                 <div class="p-1">Código clase:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1" id="valor">{{ class.subject.code }}</div>
                 <script src="{% static '/js/request_classroom.js' %}"></script>
             </div>
@@ -33,7 +33,7 @@
             <div class="col-2">
                 <div class="p-1">NRC:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.nrc }}</div>
             </div>
         </div>
@@ -41,7 +41,7 @@
             <div class="col-2">
                 <div class="p-1">Créditos:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.credits }}</div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="col-2">
                 <div class="p-1">Tipo:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.type }}</div>
             </div>
         </div>
@@ -57,7 +57,7 @@
             <div class="col-2">
                 <div class="p-1">Syllabus:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.syllabus.name|basename }}</div>
             </div>
             <div class="col">
@@ -74,7 +74,7 @@
             <div class="col-2">
                 <div class="p-1">Sesión:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.num_sessions }}</div>
             </div>
         </div>
@@ -82,7 +82,7 @@
             <div class="col-2">
                 <div class="p-1">Fecha de inicio:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.start_date|convert_to_database_timezone }}</div>
             </div>
             <!-- editar  -->
@@ -101,7 +101,7 @@
             <div class="col-2">
                 <div class="p-1">Fecha de fin:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.ending_date|convert_to_database_timezone }}</div>
             </div>
             <div class="col">
@@ -119,7 +119,7 @@
             <div class="col-2">
                 <div class="p-1">Profesor:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.teacher.name }}</div>
             </div>
             <div class="col">
@@ -137,7 +137,7 @@
             <div class="col-2">
                 <div class="p-1">Modalidad:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1" id="valor_modality">{{ class.modality }}</div>
             </div>
             <div class="col">
@@ -165,7 +165,7 @@
             <div class="col-2">
                 <div class="p-1">Salón:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.classroom }}</div>
             </div>
             <div class="col">
@@ -181,7 +181,7 @@
             <div class="col-2">
                 <div class="p-1">Link:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.link }}</div>
             </div>
             <div class="col">
