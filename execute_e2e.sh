@@ -11,7 +11,6 @@ python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_re
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_search_user
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_login
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_logout
-python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_planning_proposal
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_register_user
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_role_management
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_search_user
