@@ -1,11 +1,13 @@
+import json
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
-from datetime import datetime, timedelta
-from AcademicProgrammingApplication.models import User, Class, Student, Subject, Teacher
+from datetime import datetime
+
+from AcademicProgrammingApplication.models import User, Class, Subject, Teacher
 from django.test import TestCase
 from django.urls import reverse
-from AcademicProgrammingApplication.views.edit_info_class import process_data
+from AcademicProgrammingApplication.views.edit_info_class import process_data, update_class_schedule
 
 
 
@@ -26,9 +28,6 @@ class EditInfoClassViewTestCase(TestCase):
                                                     send_email=True, subject=self.subject, teacher=self.teacher)
 
     def test_edit_info_class_page(self):
-        """
-        Test that the edit-info-class page returns a 302 status code.
-        """
         # Login the user
         self.client.login(username='1002959774', password='catb')
         # Get the edit-info-class page
@@ -37,9 +36,6 @@ class EditInfoClassViewTestCase(TestCase):
         self.assertEqual(response.status_code,302)
 
     def test_edit_info_class_post(self):
-        """
-        Test that posting to the edit-info-class page redirects to the subject_detail page.
-        """
         # Login the user
         self.client.login(username='testuser', password='12345')
         # Post data to the edit-info-class page
@@ -47,13 +43,8 @@ class EditInfoClassViewTestCase(TestCase):
                                     {'action': 'save'})
         # Check that the response is a redirect
         self.assertEqual(response.status_code, 302)
-        # Check that it redirects to the subject_detail page
-        #self.assertRedirects(response, reverse('subject_detail', kwargs={'subject_id': self.subject.code}))
 
     def test_process_data_function(self):
-        """
-        Test the process_data function.
-        """
         data_json = {
             'code_materia': self.class_instance.subject.code,
             'code_clase': self.class_instance.id,
@@ -63,10 +54,41 @@ class EditInfoClassViewTestCase(TestCase):
             'modality': self.class_instance.modality
         }
         processed_data = process_data(data_json)
-        print("Processed Data:", processed_data)
-        print("Expected Data:", [str(self.subject.code), str(self.class_instance.id),
-                             data_json['datetime1'], data_json['datetime2'],
-                             self.class_instance.classroom, self.class_instance.modality])
-        #self.assertEqual(processed_data, [str(self.subject.code), str(self.class_instance.id),
-                                       #data_json['datetime1'], data_json['datetime2'],
-                                       #self.class_instance.classroom, self.class_instance.modality])
+        self.assertEqual(processed_data, [self.subject.code, str(self.class_instance.id),
+                                           data_json['datetime1'], data_json['datetime2'],
+                                           self.class_instance.classroom, self.class_instance.modality])
+
+    def test_update_class_schedule_missing_data(self):
+        # Definir un objeto JSON con datos faltantes para pasar a la función
+        data_json = {
+            'code_clase': self.class_instance.id,
+            'datetime1': '2024-05-05T12:00:00'
+            # Faltan 'datetime2' y 'modality'
+        }
+        # Verificar que la función levanta una excepción KeyError cuando faltan datos requeridos
+        with self.assertRaises(KeyError):
+            update_class_schedule(data_json)
+
+    def test_edit_class_date_information(self):
+        url = reverse('edit_class_date_information')
+        new_start_date = timezone.now() + timezone.timedelta(days=1)
+        data = {
+            'code_clase': self.class_instance.id,
+            'datetime1': new_start_date.isoformat(),
+        }
+        response = self.client.post(url, data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.class_instance.refresh_from_db()
+        self.assertEqual(self.class_instance.start_date, new_start_date)
+
+    def test_update_end_date_class(self):
+        url = reverse('update_end_date_class')
+        new_end_date = timezone.now() + timezone.timedelta(days=1)
+        data = {
+            'code_clase': self.class_instance.id,
+            'datetime1': new_end_date.isoformat(),
+        }
+        response = self.client.post(url, data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.class_instance.refresh_from_db()
+        self.assertEqual(self.class_instance.ending_date, new_end_date)

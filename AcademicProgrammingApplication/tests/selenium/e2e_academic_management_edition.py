@@ -42,7 +42,7 @@ class AcademicManagementEditionTest(StaticLiveServerTestCase):
         )
         search_input.send_keys("global")
         search_input.submit()
-        # Find the button for go to the assign teacher page
+        # Find the button for go to the edition page
         edition_link = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'btn-secondary'))
         )
