@@ -2,9 +2,10 @@
 
 {% load static %}
 {% load my_filters %}
+{% load date_filters %}
 
 {% block main-container-content %}
-<link rel="stylesheet" href="{% static 'styles/edit-info-class.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/edit-info-class.css' %}"/>
 <div class="container">
     <h2 class="text-lg-start">Clase - {{ class.subject.name }}</h2>
 
@@ -14,7 +15,7 @@
             <div class="col-2">
                 <div class="p-1">Código materia:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1" id="valor_clase">{{ class.id }}</div>
                 <script src="{% static '/js/request_classroom.js' %}"></script>
             </div>
@@ -23,7 +24,7 @@
             <div class="col-2">
                 <div class="p-1">Código clase:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1" id="valor">{{ class.subject.code }}</div>
                 <script src="{% static '/js/request_classroom.js' %}"></script>
             </div>
@@ -32,7 +33,7 @@
             <div class="col-2">
                 <div class="p-1">NRC:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.nrc }}</div>
             </div>
         </div>
@@ -40,7 +41,7 @@
             <div class="col-2">
                 <div class="p-1">Créditos:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.credits }}</div>
             </div>
         </div>
@@ -48,7 +49,7 @@
             <div class="col-2">
                 <div class="p-1">Tipo:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.type }}</div>
             </div>
         </div>
@@ -56,7 +57,7 @@
             <div class="col-2">
                 <div class="p-1">Syllabus:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.syllabus.name|basename }}</div>
             </div>
             <div class="col">
@@ -64,7 +65,7 @@
                 <a href="{{ class.subject.syllabus.url }}" download class="button-download">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
-                            d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z" />
+                                d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"/>
                     </svg>
                 </a>
             </div>
@@ -73,7 +74,7 @@
             <div class="col-2">
                 <div class="p-1">Sesión:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.subject.num_sessions }}</div>
             </div>
         </div>
@@ -81,8 +82,8 @@
             <div class="col-2">
                 <div class="p-1">Fecha de inicio:</div>
             </div>
-            <div class="col-3">
-                <div class="p-1">{{ class.start_date }}</div>
+            <div class="col-4">
+                <div class="p-1">{{ class.start_date|convert_to_database_timezone }}</div>
             </div>
             <!-- editar  -->
             <div class="col">
@@ -90,7 +91,7 @@
                 <button id="start_date_class" class="button-calendar-start">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
-                            d="M19 4h-1V3c0-.6-.4-1-1-1s-1 .4-1 1v1H8V3c0-.6-.4-1-1-1s-1 .4-1 1v1H5C3.3 4 2 5.3 2 7v1h20V7c0-1.7-1.3-3-3-3M2 19c0 1.7 1.3 3 3 3h14c1.7 0 3-1.3 3-3v-9H2zm15-7c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m-5-4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1" />
+                                d="M19 4h-1V3c0-.6-.4-1-1-1s-1 .4-1 1v1H8V3c0-.6-.4-1-1-1s-1 .4-1 1v1H5C3.3 4 2 5.3 2 7v1h20V7c0-1.7-1.3-3-3-3M2 19c0 1.7 1.3 3 3 3h14c1.7 0 3-1.3 3-3v-9H2zm15-7c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m-5-4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1"/>
                     </svg>
                 </button>
                 <script src="{% static '/js/edit_date_class.js' %}"></script>
@@ -100,25 +101,25 @@
             <div class="col-2">
                 <div class="p-1">Fecha de fin:</div>
             </div>
-            <div class="col-3">
-                <div class="p-1">{{ class.ending_date }}</div>
+            <div class="col-4">
+                <div class="p-1">{{ class.ending_date|convert_to_database_timezone }}</div>
             </div>
             <div class="col">
                 <!-- Button for end date calendar -->
                 <button id="end_date_class" class="button-calendar-end">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
-                            d="M19 4h-1V3c0-.6-.4-1-1-1s-1 .4-1 1v1H8V3c0-.6-.4-1-1-1s-1 .4-1 1v1H5C3.3 4 2 5.3 2 7v1h20V7c0-1.7-1.3-3-3-3M2 19c0 1.7 1.3 3 3 3h14c1.7 0 3-1.3 3-3v-9H2zm15-7c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1" />
+                                d="M19 4h-1V3c0-.6-.4-1-1-1s-1 .4-1 1v1H8V3c0-.6-.4-1-1-1s-1 .4-1 1v1H5C3.3 4 2 5.3 2 7v1h20V7c0-1.7-1.3-3-3-3M2 19c0 1.7 1.3 3 3 3h14c1.7 0 3-1.3 3-3v-9H2zm15-7c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1m0 4c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1"/>
                     </svg>
                 </button>
-                <script src="{% static '/js/edit_date_class.js' %}"></script>
+                <script src="{% static '/js/edit_date_end_class.js' %}"></script>
             </div>
         </div>
         <div class="row gx-5 align-items-center">
             <div class="col-2">
                 <div class="p-1">Profesor:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.teacher.name }}</div>
             </div>
             <div class="col">
@@ -127,7 +128,7 @@
                 <a href="{% url 'assign_teacher' class.id %}" class="button-professor">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
-                            d="M15.5 12c2.5 0 4.5 2 4.5 4.5c0 .88-.25 1.71-.69 2.4l3.08 3.1L21 23.39l-3.12-3.07c-.69.43-1.51.68-2.38.68c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5m0 2a2.5 2.5 0 0 0-2.5 2.5a2.5 2.5 0 0 0 2.5 2.5a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-2.5-2.5M10 4a4 4 0 0 1 4 4c0 .91-.31 1.75-.82 2.43c-.86.32-1.63.83-2.27 1.47L10 12a4 4 0 0 1-4-4a4 4 0 0 1 4-4M2 20v-2c0-2.12 3.31-3.86 7.5-4c-.32.78-.5 1.62-.5 2.5c0 1.29.38 2.5 1 3.5z" />
+                                d="M15.5 12c2.5 0 4.5 2 4.5 4.5c0 .88-.25 1.71-.69 2.4l3.08 3.1L21 23.39l-3.12-3.07c-.69.43-1.51.68-2.38.68c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5m0 2a2.5 2.5 0 0 0-2.5 2.5a2.5 2.5 0 0 0 2.5 2.5a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-2.5-2.5M10 4a4 4 0 0 1 4 4c0 .91-.31 1.75-.82 2.43c-.86.32-1.63.83-2.27 1.47L10 12a4 4 0 0 1-4-4a4 4 0 0 1 4-4M2 20v-2c0-2.12 3.31-3.86 7.5-4c-.32.78-.5 1.62-.5 2.5c0 1.29.38 2.5 1 3.5z"/>
                     </svg>
                 </a>
             </div>
@@ -136,16 +137,16 @@
             <div class="col-2">
                 <div class="p-1">Modalidad:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1" id="valor_modality">{{ class.modality }}</div>
             </div>
             <div class="col">
                 <!-- Button for modal selection lugar onde va el nuevo button  -->
 
                 <select id="tipoClase" class="button-select">
-
-                    <option><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 40 40">
-                            <path fill="currentColor" d="M4.659 11.833h30.682L20 32.167z" />
+                    <option>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 40 40">
+                            <path fill="currentColor" d="M4.659 11.833h30.682L20 32.167z"/>
                         </svg>
 
                     </option>
@@ -164,7 +165,7 @@
             <div class="col-2">
                 <div class="p-1">Salón:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.classroom }}</div>
             </div>
             <div class="col">
@@ -172,7 +173,7 @@
                 <button class="button-room" id="button-room">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
-                            d="M6 14.5H1.5v-13h21v13H18m-.5 9.5a10.6 10.6 0 0 1 1.572-5.555l.428-.695v-.25h-15v.25l.428.695A10.6 10.6 0 0 1 6.5 24m9.5-9v-3.5s-1.5-1-4-1s-4 1-4 1V15m3.85-6.5s-1.6-1-1.6-2.25a1.747 1.747 0 1 1 3.496 0c0 1.25-1.596 2.25-1.596 2.25z" />
+                                d="M6 14.5H1.5v-13h21v13H18m-.5 9.5a10.6 10.6 0 0 1 1.572-5.555l.428-.695v-.25h-15v.25l.428.695A10.6 10.6 0 0 1 6.5 24m9.5-9v-3.5s-1.5-1-4-1s-4 1-4 1V15m3.85-6.5s-1.6-1-1.6-2.25a1.747 1.747 0 1 1 3.496 0c0 1.25-1.596 2.25-1.596 2.25z"/>
                     </svg>
                 </button>
             </div>
@@ -180,7 +181,7 @@
             <div class="col-2">
                 <div class="p-1">Link:</div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="p-1">{{ class.link }}</div>
             </div>
             <div class="col">
@@ -188,7 +189,7 @@
                 <button class="button-room">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                         <path
-                            d="M6 14.5H1.5v-13h21v13H18m-.5 9.5a10.6 10.6 0 0 1 1.572-5.555l.428-.695v-.25h-15v.25l.428.695A10.6 10.6 0 0 1 6.5 24m9.5-9v-3.5s-1.5-1-4-1s-4 1-4 1V15m3.85-6.5s-1.6-1-1.6-2.25a1.747 1.747 0 1 1 3.496 0c0 1.25-1.596 2.25-1.596 2.25z" />
+                                d="M6 14.5H1.5v-13h21v13H18m-.5 9.5a10.6 10.6 0 0 1 1.572-5.555l.428-.695v-.25h-15v.25l.428.695A10.6 10.6 0 0 1 6.5 24m9.5-9v-3.5s-1.5-1-4-1s-4 1-4 1V15m3.85-6.5s-1.6-1-1.6-2.25a1.747 1.747 0 1 1 3.496 0c0 1.25-1.596 2.25-1.596 2.25z"/>
                     </svg>
                 </button>
             </div>

@@ -5,8 +5,6 @@ from . import views
 from .views.viatic_views import ViaticView
 
 urlpatterns = [
-    # Lines used to see how the base HTML looks like
-    path('base', views.base_screen, name='base'),
     # Application views
     path('', views.login, name='login'),
     path('accounts/sign_up/', login_required(views.sign_up), name='sign_up'),
@@ -28,13 +26,12 @@ urlpatterns = [
     path('home/edit_academic_program/<int:program_id>/', login_required(views.edit_academic_program),
          name='edit_academic_program'),
     path('edit_class/<str:class_id>/', login_required(views.edit_info_class), name='edit_info_class'),
-         path('dataProcessor_lounge/', views.data_processor_lounge, name='data_processor_lounge'),
-     path('dateCLass/',views.edit_class_date_information, name='edit_class_date_information'),
-     
+    path('dataProcessor_lounge/', views.data_processor_lounge, name='data_processor_lounge'),
+    path('dateCLass/', views.edit_class_date_information, name='edit_class_date_information'),
     path('teacher_management/', login_required(views.teacher_management), name='teacher_management'),
     path('teacher/<str:teacher_id>/', login_required(views.teacher_detail), name='teacher_detail'),
     path('save_viatic/', login_required(ViaticView.save_viatic), name='save_viatic'),
     path('planning_proposal/', views.planning_proposal, name='planning_proposal'),
     path('role_management/', views.role_management, name='role_management'),
+    path('dateCLass_date_end/', views.update_end_date_class, name='update_end_date_class'),
 ]
-    

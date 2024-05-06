@@ -151,11 +151,8 @@ directorio views de tests en la aplicación AcademicProgrammingApplication.
 
 ## Enlaces de Interés
 
--
-
-Jira: [Programación Académica - Grupo 1](https://proyecto-integrador1-grupo1.atlassian.net/jira/software/projects/PAG1/boards/2?atlOrigin=eyJpIjoiMmJlZWRiMDk1NmVmNDc1ZDkwNTY3Yjc3YjU5Y2I0NjciLCJwIjoiaiJ9)
--
-Figma: [Sistema de Gestión Académica Universitaria](https://www.figma.com/file/MPOI5adiUuFcOHoO57z14f/Untitled?type=design&node-id=0%3A1&mode=design&t=Woirb5n8iWCGw96L-1)
+- Jira: [Programación Académica - Grupo 1](https://proyecto-integrador1-grupo1.atlassian.net/jira/software/projects/PAG1/boards/2?atlOrigin=eyJpIjoiMmJlZWRiMDk1NmVmNDc1ZDkwNTY3Yjc3YjU5Y2I0NjciLCJwIjoiaiJ9)
+- Figma: [Sistema de Gestión Académica Universitaria](https://www.figma.com/file/MPOI5adiUuFcOHoO57z14f/Untitled?type=design&node-id=0%3A1&mode=design&t=Woirb5n8iWCGw96L-1)
 
 ## Versiones de Tecnologías Utilizadas
 

@@ -11,6 +11,7 @@ class ErrorAcademicManagementTest(StaticLiveServerTestCase):
     def setUpClass(cls): 
         super().setUpClass()
         call_command('loaddata', 'test.json')
+        call_command('loaddata', 'permissions.json')
 
     @classmethod
     def tearDownClass(cls):
