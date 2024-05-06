@@ -50,8 +50,7 @@ class EditInfoClassViewTestCase(TestCase):
                                     {'action': 'save'})
         # Check that the response is a redirect
         self.assertEqual(response.status_code, 302)
-        # Check that it redirects to the subject_detail page
-        #self.assertRedirects(response, reverse('subject_detail', kwargs={'subject_id': self.subject.code}))
+        
 
     def test_process_data_function(self):
         """
@@ -70,21 +69,16 @@ class EditInfoClassViewTestCase(TestCase):
         print("Expected Data:", [str(self.subject.code), str(self.class_instance.id),
                              data_json['datetime1'], data_json['datetime2'],
                              self.class_instance.classroom, self.class_instance.modality])
-        #self.assertEqual(processed_data, [str(self.subject.code), str(self.class_instance.id),
-                                       #data_json['datetime1'], data_json['datetime2'],
-                                       #self.class_instance.classroom, self.class_instance.modality])
+        
 
     def test_send_email_on_save(self):
         # Create a class instance to test
-        test_class = self.class_instance  # Create a valid instance for testing
+        test_class = self.class_instance  
 
         # Make a POST request to save changes
         self.client.post(reverse('edit_info_class', kwargs={'class_id': test_class.id}), {'action': 'save'})
 
-        # Verify that the email has been sent
-        #self.assertEqual(len(mail.outbox), 1)
-        #self.assertEqual(mail.outbox[0].subject, 'Class Information')
-        # Add more assertions if needed
+        
 
 
 
@@ -103,8 +97,7 @@ class EditInfoClassViewTestCase(TestCase):
         with self.assertRaises(KeyError):
             process_data(invalid_data_json)
 
-    # Add more similar tests as needed
-
+   
 class UpdateClassScheduleTestCase(TestCase):
     # Test setup methods, such as setUp(), can be defined here
     def setUp(self):
@@ -127,7 +120,7 @@ class UpdateClassScheduleTestCase(TestCase):
 
     def test_update_class_schedule_invalid_modality(self):
         # Create a class instance to test
-        test_class = self.class_instance  # Create a valid instance for testing
+        test_class = self.class_instance 
 
         # JSON data with invalid modality
         data_json = {
@@ -138,9 +131,6 @@ class UpdateClassScheduleTestCase(TestCase):
             'modality': 'INVALID',  # Provide an invalid modality
         }
 
-        # Verify that the function raises a ValueError for invalid modality
-        #with self.assertRaises(ValueError):
-            #update_class_schedule(data_json)
 #test_cancel_changes_redirect
 class EditClassDateInformationTestCase(TestCase):
     def setUp(self):
@@ -158,11 +148,11 @@ class EditClassDateInformationTestCase(TestCase):
                                                     modality='PRESENCIAL', classroom='Aula 101', link='',
                                                     send_email=True, subject=self.subject, teacher=self.teacher)
 
-    # Test setup methods, such as setUp(), can be defined here
+   
 
     def test_handle_valid_date(self):
         # Create a class instance to test
-        test_class = self.class_instance  # Create a valid instance for testing
+        test_class = self.class_instance  
 
         # JSON data with valid start date
         valid_data_json = {
@@ -173,11 +163,11 @@ class EditClassDateInformationTestCase(TestCase):
         # Verify that the function handles the valid start date properly
         response = self.client.post(reverse('edit_class_date_information'), data=json.dumps(valid_data_json), content_type='application/json')
         self.assertEqual(response.status_code, 200)  # Verify that an appropriate status code is returned
-        # Add more assertions if needed
+        
 
     def test_handle_invalid_date(self):
         # Create a class instance to test
-        test_class = self.class_instance  # Create a valid instance for testing
+        test_class = self.class_instance  
 
         # JSON data with invalid start date
         invalid_data_json = {
@@ -188,7 +178,7 @@ class EditClassDateInformationTestCase(TestCase):
         # Verify that the function handles the invalid start date properly
         response = self.client.post(reverse('edit_class_date_information'), data=json.dumps(invalid_data_json), content_type='application/json')
         self.assertEqual(response.status_code, 500)  # Verify that an appropriate status code is returned
-        # Add more assertions if needed
+       
 
     def test_handle_invalid_class_id(self):
         # JSON data with invalid class ID
@@ -200,7 +190,7 @@ class EditClassDateInformationTestCase(TestCase):
         # Verify that the function handles the invalid class ID properly
         response = self.client.post(reverse('edit_class_date_information'), data=json.dumps(invalid_data_json), content_type='application/json')
         self.assertEqual(response.status_code, 500)  # Verify that an appropriate status code is returned
-        # Add more assertions if needed
+       
 
 class UpdateEndDateClassTestCase(TestCase):
     def setUp(self):
@@ -222,33 +212,33 @@ class UpdateEndDateClassTestCase(TestCase):
 
     def test_update_end_date_class(self):
         # Create a class instance to test
-        test_class = self.class_instance  # Create a valid instance for testing
+        test_class = self.class_instance  
 
         # JSON data with valid end date
         valid_data_json = {
             'code_clase': test_class.id,
-            'datetime1': '2024-05-05T12:00:00',  # Provide a valid end date
+            'datetime1': '2024-05-05T12:00:00',  
         }
 
         # Verify that the function handles the valid end date properly
         response = self.client.post(reverse('update_end_date_class'), data=json.dumps(valid_data_json), content_type='application/json')
         self.assertEqual(response.status_code, 200)  # Verify that an appropriate status code is returned
-        # Add more assertions if needed
+        
 
     def test_update_end_date_class_invalid_date(self):
         # Create a class instance to test
-        test_class = self.class_instance  # Create a valid instance for testing
+        test_class = self.class_instance  
 
         # JSON data with invalid end date
         invalid_data_json = {
             'code_clase': test_class.id,
-            # Missing 'datetime1'
+            
         }
 
         # Verify that the function handles the invalid end date properly
         response = self.client.post(reverse('update_end_date_class'), data=json.dumps(invalid_data_json), content_type='application/json')
         self.assertEqual(response.status_code, 500)  # Verify that an appropriate status code is returned
-        # Add more assertions if needed
+        
 
     def test_update_end_date_class_invalid_class_id(self):
         # JSON data with invalid class ID
@@ -260,7 +250,7 @@ class UpdateEndDateClassTestCase(TestCase):
         # Verify that the function handles the invalid class ID properly
         response = self.client.post(reverse('update_end_date_class'), data=json.dumps(invalid_data_json), content_type='application/json')
         self.assertEqual(response.status_code, 500)  # Verify that an appropriate status code is returned
-        # Add more assertions if needed
+        
 
 
 class CancelChangesRedirectTestCase(TestCase):
@@ -280,7 +270,7 @@ class CancelChangesRedirectTestCase(TestCase):
     def test_cancel_changes_redirect(self):
         # Ensure that if syllabus is empty, the test still passes
         response = self.client.get(reverse('subject_detail', kwargs={'subject_id': self.subject.code}))
-        self.assertEqual(response.status_code, 302)  # Redirect status code
+        self.assertEqual(response.status_code, 302) 
 
     def tearDown(self):
         self.subject.delete()
