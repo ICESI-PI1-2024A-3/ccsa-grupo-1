@@ -8,6 +8,7 @@ python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_as
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_error_login
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_login
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_logout
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_planning_proposal
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_subject_detail
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_teacher_detail
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_teacher_management

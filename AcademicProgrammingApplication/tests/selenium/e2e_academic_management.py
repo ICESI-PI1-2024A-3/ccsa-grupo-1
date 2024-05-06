@@ -74,7 +74,7 @@ class AcademicManagementTest(StaticLiveServerTestCase):
         self.assertTrue(program_duration_element.is_displayed(), "La duración del programa no se muestra correctamente")
 
         program_cost_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), '25066618.00')]"))
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), '25066618,00')]"))
         )
         self.assertTrue(program_cost_element.is_displayed(), "El costo del programa no se muestra correctamente")
 
@@ -85,11 +85,11 @@ class AcademicManagementTest(StaticLiveServerTestCase):
 
         # Verify the information of the semester
         semester_start_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Feb. 1, 2024')]"))
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), '1 de febrero de 2024')]"))
         )
         self.assertTrue(semester_start_element.is_displayed(), "El inicio del semester no se muestra correctamente")
 
         semester_ending_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'June 30, 2024')]"))
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), '30 de junio de 2024')]"))
         )
         self.assertTrue(semester_ending_element.is_displayed(), "El final del semester no se muestra correctamente")
