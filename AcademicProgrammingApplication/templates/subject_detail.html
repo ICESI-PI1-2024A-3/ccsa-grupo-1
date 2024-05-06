@@ -85,8 +85,8 @@
                             <td><a href="{% url 'edit_info_class' class.id %}"
                                    class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                                 {{ class.id }}</a></td>
-                            <td>{{ class.start_date|convert_to_database_timezone }}</td>
-                            <td>{{ class.ending_date|convert_to_database_timezone }}</td>
+                            <td>{{ class.start_date }}</td>
+                            <td>{{ class.ending_date }}</td>
                             <td>{{ class.teacher.name }}</td>
                             <td>{{ class.modality }}</td>
                             <td>{{ class.classroom }}{{ class.link }}</td>
