@@ -11,6 +11,7 @@ class SubjectDetailTest(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         call_command('loaddata', 'test.json')
+        call_command('loaddata', 'permissions.json')
 
     @classmethod
     def tearDownClass(cls):
@@ -77,12 +78,12 @@ class SubjectDetailTest(StaticLiveServerTestCase):
         self.assertTrue(subject_syllabus_element.is_displayed(), "El syllabus de la materia no se muestra correctamente")
 
         subject_start_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), 'April 28, 2024')]"))
+            EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), '28 de abril de 2024')]"))
         )
         self.assertTrue(subject_start_element.is_displayed(), "La fecha de inicio de la materia no se muestra correctamente")
 
         subject_ending_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), 'July 27, 2024')]"))
+            EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), '27 de julio de 2024')]"))
         )
         self.assertTrue(subject_ending_element.is_displayed(), "La fecha de fin de la materia no se muestra correctamente")
 

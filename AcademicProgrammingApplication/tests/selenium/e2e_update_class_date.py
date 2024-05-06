@@ -7,11 +7,11 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class EditClassTest(StaticLiveServerTestCase):
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         call_command('loaddata', 'test.json')
-        call_command('loaddata', 'permissions.json')
 
     @classmethod
     def tearDownClass(cls):
@@ -26,9 +26,10 @@ class EditClassTest(StaticLiveServerTestCase):
         self.driver.quit()
         super().tearDown()
 
-    def test_edit_info_detail(self):
+    def test_subject_detail(self):
         # Open the login page
         self.driver.get(self.live_server_url)
+        
         # Enter credentials and submit the form
         username_input = self.driver.find_element("name", 'username')
         password_input = self.driver.find_element("name", 'password')
@@ -36,11 +37,13 @@ class EditClassTest(StaticLiveServerTestCase):
         password_input.send_keys('admin')
         submit_button = self.driver.find_element("id", 'access')
         submit_button.click()
+        
         # Go to the class page
         current_url = self.driver.current_url
         base_url = current_url[:current_url.rfind('/')]
         edit_class_url = base_url + '/edit_class/1/'
         self.driver.get(edit_class_url)
+        
         # Verify the information of the class
         class_name_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//h2[contains(text(), 'Clase - Test Subject')]"))
@@ -72,7 +75,63 @@ class EditClassTest(StaticLiveServerTestCase):
         )
         self.assertTrue(class_syllabus_element.is_displayed(), "El syllabus de la clase no se muestra correctamente")
 
-        class_teacher_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Miguel Campos')]"))
+        # Modificar la fecha de inicio
+        start_date_button = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "start_date_class"))
         )
-        self.assertTrue(class_teacher_element.is_displayed(), "El profesor de la clase no se muestra correctamente")
+        start_date_button.click()
+        datetime_input = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "datetime1"))
+        )
+        datetime_input.clear()
+        datetime_input.send_keys('2024-05-01T13:00:00Z')
+        submit_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceptar']"))
+        )
+        submit_button.click()
+
+        # Modificar la fecha de fin
+        end_date_button = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "end_date_class"))
+        )
+        end_date_button.click()
+        datetime_input = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "datetime1"))
+        )
+        datetime_input.clear()
+        datetime_input.send_keys('2024-05-01T14:00:00Z')
+        submit_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceptar']"))
+        )
+        submit_button.click()
+
+        # Esperar a que la ventana emergente desaparezca
+        WebDriverWait(self.driver, 10).until_not(
+            EC.presence_of_element_located((By.CLASS_NAME, "swal2-container"))
+        )
+
+        # Modificar la modalidad
+        modality_select = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "tipoClase"))
+        )
+        modality_select.click()
+        modality_option = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//option[text()='Clase virtual']"))  # Nueva modalidad
+        )
+        modality_option.click()
+
+        # Verificar que los cambios se hayan realizado correctamente
+        class_start_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), concat('1 de mayo de 2024 a las 13:00', ''))]"))
+        )
+        self.assertTrue(class_start_element.is_displayed(), "La nueva fecha de inicio de la clase no se muestra correctamente")
+
+        class_ending_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), concat('1 de mayo de 2024 a las 14:00', ''))]"))
+        )  
+        self.assertTrue(class_ending_element.is_displayed(), "La nueva fecha de fin de la clase no se muestra correctamente")
+
+        class_modality_element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'VIRTUAL')]"))
+        )
+        self.assertTrue(class_modality_element.is_displayed(), "La nueva modalidad de la clase no se muestra correctamente")
