@@ -94,4 +94,4 @@ class EditClassTest(StaticLiveServerTestCase):
         class_classroom_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Test Classroom')]"))
         )
-        
+        self.assertTrue(class_classroom_element.is_displayed(), "El salón de la clase no se muestra correctamente")
