@@ -18,4 +18,5 @@ python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_subject_
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_teacher_detail
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_teacher_management
 python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_viatic_request
-python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_viatic_request_edition
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_edit_info_class
+python manage.py test AcademicProgrammingApplication.tests.selenium.e2e_edit_info_class2
