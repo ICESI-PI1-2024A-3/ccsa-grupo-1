@@ -1,4 +1,3 @@
-
 import os
 import time
 from unittest import TestCase
@@ -16,7 +15,7 @@ from selenium.webdriver.common.by import By
 from AcademicProgrammingApplication.models import PlanningProposal
 
     
-class PlanningProposalE2ETest(StaticLiveServerTestCase):
+class PlanningProposalTest(StaticLiveServerTestCase):
     def setUp(self):
         super().setUp()
         self.driver = WebDriver()
@@ -48,8 +47,6 @@ class PlanningProposalE2ETest(StaticLiveServerTestCase):
         file_input = self.driver.find_element("name", 'file')
         file_input.send_keys(absolute_file_path)
 
-    
-
         # Check if the update button is displayed and enabled
         update_button = self.driver.find_element("name", 'action')
         self.assertTrue(update_button.is_displayed(), "El botón de actualización no está visible")
@@ -58,8 +55,3 @@ class PlanningProposalE2ETest(StaticLiveServerTestCase):
         # Click the update button
         update_button.click()
         time.sleep(2)
-
-    
-                
-
-                
