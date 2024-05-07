@@ -10,6 +10,7 @@ import json
 from django.core import mail  # Add this line
 from AcademicProgrammingApplication.models import Class, Student
 from AcademicProgrammingApplication.views.edit_info_class import update_class_schedule
+from django.urls import reverse
 
 
 class EditInfoClassViewTestCase(TestCase):
@@ -119,17 +120,17 @@ class UpdateClassScheduleTestCase(TestCase):
     
 
     def test_update_class_schedule_invalid_modality(self):
-        # Create a class instance to test
+    # Create a class instance to test
         test_class = self.class_instance 
 
-        # JSON data with invalid modality
+    # JSON data with invalid modality but with correct length (5)
         data_json = {
-            'code_clase': test_class.id,
-            'datetime1': '2024-05-05T12:00:00',
-            'datetime2': '2024-05-05T13:00:00',
-            'salon': 'Aula 101',
-            'modality': 'INVALID',  # Provide an invalid modality
-        }
+        'code_clase': test_class.id,
+        'datetime1': '2024-05-05T12:00:00',
+        'datetime2': '2024-05-05T13:00:00',
+        'salon': 'Aula 101',
+        'modality': 'INVALID',  # Provide an invalid modality
+    }
 
 #test_cancel_changes_redirect
 class EditClassDateInformationTestCase(TestCase):
