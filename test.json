@@ -310,5 +310,18 @@
             "accommodation": false,
             "viatic": true
         }
-    } 
+    },
+    {
+        "model": "AcademicProgrammingApplication.Class",
+        "pk": 1,
+        "fields": {
+            "start_date": "2024-05-01T13:00:00Z",
+            "ending_date": "2024-05-01T14:00:00Z",
+            "modality": "VIRTUAL",
+            "classroom": "Test Classroom",
+            "link": "",
+            "subject": 1,
+            "teacher": 1
+        }
+    }    
 ]

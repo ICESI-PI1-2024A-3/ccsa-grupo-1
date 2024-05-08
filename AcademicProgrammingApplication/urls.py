@@ -5,8 +5,6 @@ from . import views
 from .views.viatic_views import ViaticView
 
 urlpatterns = [
-    # Lines used to see how the base HTML looks like
-    path('base', views.base_screen, name='base'),
     # Application views
     path('', views.login, name='login'),
     path('accounts/sign_up/', login_required(views.sign_up), name='sign_up'),
