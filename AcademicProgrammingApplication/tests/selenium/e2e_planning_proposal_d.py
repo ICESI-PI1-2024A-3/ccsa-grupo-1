@@ -1,3 +1,4 @@
+
 import os
 import time
 from unittest import TestCase
@@ -26,7 +27,7 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         super().tearDown()
 
     @override_settings(DEBUG=True)
-    def test_upload_file(self):
+    def test_download_file(self):
         # Log in
         self.driver.get(self.live_server_url)
         username_input = self.driver.find_element("name", 'username')
@@ -47,11 +48,22 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         file_input = self.driver.find_element("name", 'file')
         file_input.send_keys(absolute_file_path)
 
+    
+
         # Check if the update button is displayed and enabled
         update_button = self.driver.find_element("name", 'action')
-        self.assertTrue(update_button.is_displayed(), "El botón de actualización no está visible")
-        self.assertTrue(update_button.is_enabled(), "El botón de actualización no está habilitado")
+      
 
         # Click the update button
         update_button.click()
-        time.sleep(2)
+        # Click the download button
+        download_button = self.driver.find_element("css selector", "button[type='submit']")
+        self.assertTrue(download_button.is_displayed(), "El botón de actualización no está visible")
+        self.assertTrue(download_button.is_enabled(), "El botón de actualización no está habilitado")
+        download_button.click()
+        time.sleep(3)
+
+    
+                
+
+                
