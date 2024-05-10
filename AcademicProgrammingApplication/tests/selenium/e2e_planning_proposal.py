@@ -41,7 +41,7 @@ class PlanningProposalE2ETest(StaticLiveServerTestCase):
 
         # Navigate to the page
         self.driver.get(self.live_server_url + '/planning_proposal')
-        file_path = '../ccsa-grupo-1/media/uploads/info_de_Banner.xlsx'
+        file_path = '../ccsa-grupo-1/test_file/info_de_Banner.xlsx'
         absolute_file_path = os.path.abspath(file_path)
         print(f'Ruta absoluta del archivo: {absolute_file_path}')
 
