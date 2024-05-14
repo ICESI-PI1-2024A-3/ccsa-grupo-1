@@ -1,8 +1,18 @@
 from django.shortcuts import render
-from AcademicProgrammingApplication.models import Teacher, Contract, Class
+from AcademicProgrammingApplication.models import Teacher, Class
 
 
 def teacher_detail(request, teacher_id):
+    """
+    Renders a page for displaying detailed information about a teacher.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+        teacher_id (int): The ID of the teacher to display details for.
+
+    Returns:
+        HttpResponse: Rendered HTML page displaying teacher details.
+    """
     # Retrieve the authenticated user
     user = request.user
     # Get the teacher based on the provided teacher_id

@@ -5,8 +5,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class AcademicManagementEditionTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The administrator user logs in, searches for an existing academic program, accesses the edit page, modifies the
+    program details, and saves the changes. Then, verify that the updated details are displayed correctly in search.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -108,7 +116,8 @@ class AcademicManagementEditionTest(StaticLiveServerTestCase):
         program_modality_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'PRESENCIAL')]"))
         )
-        self.assertTrue(program_modality_element.is_displayed(), "La modalidad del programa no se muestra correctamente")
+        self.assertTrue(program_modality_element.is_displayed(),
+                        "La modalidad del programa no se muestra correctamente")
 
         program_director_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Juan Esteban Arango')]"))
@@ -128,4 +137,5 @@ class AcademicManagementEditionTest(StaticLiveServerTestCase):
         program_curriculum_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div/a[contains(text(), 'curriculum_F8IwAuZ.pdf')]"))
         )
-        self.assertTrue(program_curriculum_element.is_displayed(), "La malla curricular del programa no se muestra correctamente")
+        self.assertTrue(program_curriculum_element.is_displayed(),
+                        "La malla curricular del programa no se muestra correctamente")

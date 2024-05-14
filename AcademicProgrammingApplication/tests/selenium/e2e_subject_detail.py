@@ -5,8 +5,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class SubjectDetailTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, searches for an existing program, accesses the details page for one of the program subjects,
+    and verifies that the detailed information is displayed correctly.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -65,7 +73,8 @@ class SubjectDetailTest(StaticLiveServerTestCase):
         subject_credits_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), '3')]"))
         )
-        self.assertTrue(subject_credits_element.is_displayed(), "Los créditos de la materia no se muestra correctamente")
+        self.assertTrue(subject_credits_element.is_displayed(),
+                        "Los créditos de la materia no se muestra correctamente")
 
         subject_type_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), 'CURRICULAR')]"))
@@ -75,24 +84,29 @@ class SubjectDetailTest(StaticLiveServerTestCase):
         subject_syllabus_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//dd/a[contains(text(), 'syllabus_dNDyNLf.pdf')]"))
         )
-        self.assertTrue(subject_syllabus_element.is_displayed(), "El syllabus de la materia no se muestra correctamente")
+        self.assertTrue(subject_syllabus_element.is_displayed(),
+                        "El syllabus de la materia no se muestra correctamente")
 
         subject_start_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), '28 de abril de 2024')]"))
         )
-        self.assertTrue(subject_start_element.is_displayed(), "La fecha de inicio de la materia no se muestra correctamente")
+        self.assertTrue(subject_start_element.is_displayed(),
+                        "La fecha de inicio de la materia no se muestra correctamente")
 
         subject_ending_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), '27 de julio de 2024')]"))
         )
-        self.assertTrue(subject_ending_element.is_displayed(), "La fecha de fin de la materia no se muestra correctamente")
+        self.assertTrue(subject_ending_element.is_displayed(),
+                        "La fecha de fin de la materia no se muestra correctamente")
 
         subject_modality_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), 'PRESENCIAL')]"))
         )
-        self.assertTrue(subject_modality_element.is_displayed(), "La modalidad de la materia no se muestra correctamente")
+        self.assertTrue(subject_modality_element.is_displayed(),
+                        "La modalidad de la materia no se muestra correctamente")
 
         subject_num_sessions_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//dd[contains(text(), '10')]"))
         )
-        self.assertTrue(subject_num_sessions_element.is_displayed(), "El número de sesiones de la materia no se muestra correctamente")
+        self.assertTrue(subject_num_sessions_element.is_displayed(),
+                        "El número de sesiones de la materia no se muestra correctamente")

@@ -5,8 +5,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class AcademicManagementTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, searches for an existing academic program, and
+    Verify that the program and semester details are displayed correctly.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -54,14 +62,16 @@ class AcademicManagementTest(StaticLiveServerTestCase):
         self.assertTrue(program_type_element.is_displayed(), "El tipo del programa no se muestra correctamente")
 
         program_faculty_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Facultad de Ciencias Administrativas y Económicas')]"))
+            EC.presence_of_element_located(
+                (By.XPATH, "//div[contains(text(), 'Facultad de Ciencias Administrativas y Económicas')]"))
         )
         self.assertTrue(program_faculty_element.is_displayed(), "La facultad del programa no se muestra correctamente")
 
         program_modality_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'VIRTUAL')]"))
         )
-        self.assertTrue(program_modality_element.is_displayed(), "La modalidad del programa no se muestra correctamente")
+        self.assertTrue(program_modality_element.is_displayed(),
+                        "La modalidad del programa no se muestra correctamente")
 
         program_director_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Nicholas Murray')]"))
@@ -81,7 +91,8 @@ class AcademicManagementTest(StaticLiveServerTestCase):
         program_curriculum_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div/a[contains(text(), 'curriculum_F8IwAuZ.pdf')]"))
         )
-        self.assertTrue(program_curriculum_element.is_displayed(), "La malla curricular del programa no se muestra correctamente")
+        self.assertTrue(program_curriculum_element.is_displayed(),
+                        "La malla curricular del programa no se muestra correctamente")
 
         # Verify the information of the semester
         semester_start_element = WebDriverWait(self.driver, 10).until(
