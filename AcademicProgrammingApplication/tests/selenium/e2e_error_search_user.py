@@ -8,8 +8,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from AcademicProgrammingApplication.models import Role, User
 
+
 class RolManagementErrorSearchUserTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The administrator user logs in, accesses the role management page, enters a non-existent user search text,
+    and verifies that a warning alert is displayed.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -24,9 +32,12 @@ class RolManagementErrorSearchUserTest(StaticLiveServerTestCase):
         super().setUp()
         self.role1 = Role.objects.get(name='Líder de procesos')
         self.role2 = Role.objects.get(name='Asistente de procesos')
-        self.user1 = User.objects.create_user(username='Juan', password='12345', role=self.role1, email='juan@gmail.com')
-        self.user2 = User.objects.create_user(username='Esteban', password='12345', role=self.role2, email='esteban@gmail.com')
-        self.user3 = User.objects.create_user(username='Carlos', password='12345', role=self.role1, email='carlos@gmail.com')
+        self.user1 = User.objects.create_user(username='Juan', password='12345', role=self.role1,
+                                              email='juan@gmail.com')
+        self.user2 = User.objects.create_user(username='Esteban', password='12345', role=self.role2,
+                                              email='esteban@gmail.com')
+        self.user3 = User.objects.create_user(username='Carlos', password='12345', role=self.role1,
+                                              email='carlos@gmail.com')
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
 

@@ -6,8 +6,16 @@ from selenium.webdriver.common.by import By
 
 from AcademicProgrammingApplication.models import Role, User
 
+
 class RolManagementTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The administrator user logs in, accesses the role management page, changes the role of an existing user,
+    and verifies that the change was successful.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -22,9 +30,12 @@ class RolManagementTest(StaticLiveServerTestCase):
         super().setUp()
         self.role1 = Role.objects.get(name='Líder de procesos')
         self.role2 = Role.objects.get(name='Asistente de procesos')
-        self.user1 = User.objects.create_user(username='Juan', password='12345', role=self.role1, email='juan@gmail.com')
-        self.user2 = User.objects.create_user(username='Esteban', password='12345', role=self.role2, email='esteban@gmail.com')
-        self.user3 = User.objects.create_user(username='Carlos', password='12345', role=self.role1, email='carlos@gmail.com')
+        self.user1 = User.objects.create_user(username='Juan', password='12345', role=self.role1,
+                                              email='juan@gmail.com')
+        self.user2 = User.objects.create_user(username='Esteban', password='12345', role=self.role2,
+                                              email='esteban@gmail.com')
+        self.user3 = User.objects.create_user(username='Carlos', password='12345', role=self.role1,
+                                              email='carlos@gmail.com')
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
 
@@ -56,7 +67,8 @@ class RolManagementTest(StaticLiveServerTestCase):
                 break
         if user_position is None:
             raise ValueError("User 'Esteban' not found")
-        lider_role_radio_button = self.driver.find_element(By.CSS_SELECTOR, f"input[name='role{user_position}'][value='Líder de procesos']")
+        lider_role_radio_button = self.driver.find_element(By.CSS_SELECTOR,
+                                                           f"input[name='role{user_position}'][value='Líder de procesos']")
         # Click the radio button to change Esteban's role to "Líder de procesos"
         self.driver.execute_script("arguments[0].click();", lider_role_radio_button)
         # Find the save button and click it

@@ -5,10 +5,18 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class ErrorAcademicManagementTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, performs a search for a non-existent academic program, and verifies that a warning alert is
+    displayed.
+    """
     databases = {'default': 'test'}
+
     @classmethod
-    def setUpClass(cls): 
+    def setUpClass(cls):
         super().setUpClass()
         call_command('loaddata', 'test.json')
         call_command('loaddata', 'permissions.json')

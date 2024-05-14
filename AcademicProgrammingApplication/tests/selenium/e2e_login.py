@@ -3,8 +3,16 @@ from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 
+
 class LoginTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user enters valid credentials on the login page and verifies that the login is successful and is redirected
+    to the home page.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

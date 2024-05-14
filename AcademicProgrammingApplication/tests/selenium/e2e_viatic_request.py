@@ -4,8 +4,16 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 from selenium.webdriver.common.by import By
 
+
 class ViaticRequestTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, accesses a teacher's details page, makes a per diem request for the teacher, and verifies that
+    the request was made correctly.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

@@ -7,8 +7,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class PlanningProposalTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, uploads a file, performs a search for a specific term, and verifies that the search results are
+    displayed correctly on the page.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -73,7 +81,8 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         self.assertTrue(editor1_element.is_displayed())
 
         comment1_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//td[contains(text(), 'La clase fue movida por cuestion de que el profesor no pudo llegar')]"))
+            EC.presence_of_element_located((By.XPATH,
+                                            "//td[contains(text(), 'La clase fue movida por cuestion de que el profesor no pudo llegar')]"))
         )
         self.assertTrue(comment1_element.is_displayed())
 
@@ -83,7 +92,8 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         self.assertTrue(teacher2_element.is_displayed())
 
         subject2_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//td[contains(text(), 'Creación de empresa: de la idea a la implementación')]"))
+            EC.presence_of_element_located(
+                (By.XPATH, "//td[contains(text(), 'Creación de empresa: de la idea a la implementación')]"))
         )
         self.assertTrue(subject2_element.is_displayed())
 
@@ -98,7 +108,8 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         self.assertTrue(editor2_element.is_displayed())
 
         comment2_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//td[contains(text(), 'El profesor no pudo dictar la clase y se dicto el dia siguiente')]"))
+            EC.presence_of_element_located(
+                (By.XPATH, "//td[contains(text(), 'El profesor no pudo dictar la clase y se dicto el dia siguiente')]"))
         )
         self.assertTrue(comment2_element.is_displayed())
 
@@ -108,7 +119,8 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         self.assertTrue(teacher3_element.is_displayed())
 
         subject3_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//td[contains(text(), 'Creación de empresa: de la idea a la implementación')]"))
+            EC.presence_of_element_located(
+                (By.XPATH, "//td[contains(text(), 'Creación de empresa: de la idea a la implementación')]"))
         )
         self.assertTrue(subject3_element.is_displayed())
 
@@ -123,6 +135,7 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         self.assertTrue(editor3_element.is_displayed())
 
         comment3_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//td[contains(text(), 'Cancelado por inundacion en la Universidad')]"))
+            EC.presence_of_element_located(
+                (By.XPATH, "//td[contains(text(), 'Cancelado por inundacion en la Universidad')]"))
         )
         self.assertTrue(comment3_element.is_displayed())
