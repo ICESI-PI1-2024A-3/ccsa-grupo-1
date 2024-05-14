@@ -3,6 +3,15 @@ from AcademicProgrammingApplication.models import Teacher, Contract
 
 
 def teacher_management(request):
+    """
+    Renders a page for managing teachers.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered HTML page displaying teacher management information.
+    """
     # Retrieve the authenticated user
     user = request.user
     # Get query parameters from the request

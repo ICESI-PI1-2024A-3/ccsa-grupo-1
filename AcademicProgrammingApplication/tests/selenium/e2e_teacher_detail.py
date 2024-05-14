@@ -5,8 +5,16 @@ from django.core.management import call_command
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+
 class TeacherDeatilTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, accesses the teacher management page, searches for a specific teacher, accesses the teacher
+    details page, and verifies that the teacher's information is displayed correctly.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -59,7 +67,8 @@ class TeacherDeatilTest(StaticLiveServerTestCase):
         self.assertTrue(teacher_email_element.is_displayed(), "El email del profesor no se muestra correctamente")
 
         teacher_cellphone_element = self.driver.find_element(By.XPATH, "//dd[contains(text(), '123456789')]")
-        self.assertTrue(teacher_cellphone_element.is_displayed(), "El número de celular del profesor no se muestra correctamente")
+        self.assertTrue(teacher_cellphone_element.is_displayed(),
+                        "El número de celular del profesor no se muestra correctamente")
 
         teacher_city_element = self.driver.find_element(By.XPATH, "//dd[contains(text(), 'Test City')]")
         self.assertTrue(teacher_city_element.is_displayed(), "La ciudad del profesor no se muestra correctamente")

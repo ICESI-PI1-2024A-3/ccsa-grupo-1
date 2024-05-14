@@ -5,8 +5,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class ErrorAssignTeacherTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, accesses the edit page for a specific class that already has a teacher assigned, navigates to
+    the teacher assignment section, searches for a teacher, and verifies that a warning alert is displayed.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

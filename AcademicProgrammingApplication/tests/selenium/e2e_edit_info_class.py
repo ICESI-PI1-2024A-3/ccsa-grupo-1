@@ -5,8 +5,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class EditClassTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, accesses the edit page for a specific class, and verifies that the class information is
+    displayed correctly.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
