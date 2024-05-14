@@ -79,6 +79,15 @@ def edit_info_class(request, class_id):
 
 @csrf_exempt
 def data_processor_lounge(request):
+    """
+    Processes data related to classroom.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        JsonResponse: JSON response indicating success or failure of data processing.
+    """
     if request.method == 'POST':
         try:
             data_json = json.loads(request.body)
@@ -94,6 +103,15 @@ def data_processor_lounge(request):
 
 
 def process_data(data_json):
+    """
+    Process the JSON data related to a class.
+
+    Parameters:
+        data_json (dict): JSON data containing class information.
+
+    Returns:
+        list: Processed data.
+    """
     code_materia = data_json['code_materia']
     code_clase = data_json['code_clase']
     datetime1 = data_json['datetime1']
@@ -106,6 +124,12 @@ def process_data(data_json):
 
 
 def update_class_schedule(data_json):
+    """
+    Updates the schedule of a class based on provided data.
+
+    Parameters:
+        data_json (dict): JSON data containing class information.
+    """
     code_clase = data_json['code_clase']
     clase = get_object_or_404(Class, id=code_clase)
 
@@ -136,6 +160,12 @@ def update_class_schedule(data_json):
 
 
 def send_email_after_update(data_json):
+    """
+    Sends email notification after updating class information.
+
+    Parameters:
+        data_json (dict): JSON data containing class information.
+    """
     if data_json is not None:
         if len(data_json) == 6:
             email_mensaje = f"la nueva fecha de la clase: inicio {data_json['datetime1']} y finaliza {data_json['datetime2']} y será en salón: {data_json['salon']}"
@@ -160,6 +190,14 @@ def send_email_after_update(data_json):
 
 @shared_task
 def send_scheduled_mail(subject, message, student_email):
+    """
+    Sends scheduled email.
+
+    Parameters:
+        subject (str): Email subject.
+        message (str): Email message.
+        student_email (str): Email address of the student.
+    """
     email = EmailMessage(
         subject,
         message,
@@ -171,6 +209,15 @@ def send_scheduled_mail(subject, message, student_email):
 
 @shared_task
 def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, start_time):
+    """
+    Sends email 12 hours before class starts.
+
+    Parameters:
+        subject (str): Email subject.
+        message (str): Email message.
+        student_email (str): Email address of the student.
+        start_time (datetime): Start time of the class.
+    """
     start_time_minus_12h = start_time - timedelta(hours=12)
     now = datetime.now()
     if now < start_time_minus_12h:
@@ -179,6 +226,15 @@ def enviar_correo_12h_antes_de_inicio_clase(subject, message, student_email, sta
 
 @csrf_exempt
 def edit_class_date_information(request):
+    """
+    Edits class date information.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        JsonResponse: JSON response indicating success or failure of data editing.
+    """
     if request.method == 'POST':
         try:
             data_json = json.loads(request.body)
@@ -187,12 +243,12 @@ def edit_class_date_information(request):
             clase = get_object_or_404(Class, id=code_clase)
             fecha_inicio = datetime.fromisoformat(datetime1)
             fecha_inicio = fecha_inicio.replace(tzinfo=pytz.UTC)
-            
+
             try:
-                clase.start_date = fecha_inicio 
+                clase.start_date = fecha_inicio
                 clase.send_email = True
                 clase.save()
-                
+
             except ValidationError as e:
                 return JsonResponse({'mensaje': 'Error al actualizar la clase: {}'.format(str(e))}, status=500)
 
@@ -205,6 +261,15 @@ def edit_class_date_information(request):
 
 @csrf_exempt
 def update_end_date_class(request):
+    """
+    Updates the end date of a class.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        JsonResponse: JSON response indicating success or failure of data updating.
+    """
     if request.method == 'POST':
         try:
             data_json = json.loads(request.body)
@@ -213,7 +278,7 @@ def update_end_date_class(request):
             clase = get_object_or_404(Class, id=code_clase)
             fecha_inicio = datetime.fromisoformat(datetime1)
             fecha_inicio = fecha_inicio.replace(tzinfo=pytz.UTC)
-            
+
             try:
                 clase.ending_date = fecha_inicio
                 clase.send_email = True
@@ -230,7 +295,13 @@ def update_end_date_class(request):
 
 def generate_class_email_content(class_instance):
     """
-    Generates the email content with class information.
+    Generates email content with class information.
+
+    Parameters:
+        class_instance (Class): Class instance.
+
+    Returns:
+        str: Email content.
     """
     email_content = ""
     email_content += f"Número de Sesión: {class_instance.id}\n"

@@ -1,15 +1,18 @@
 # Import necessary modules and functions
-from django.test import TestCase, RequestFactory
-from django.urls import reverse
-from datetime import datetime, timedelta
-from AcademicProgrammingApplication.models import User, Teacher, Class, Subject
-from AcademicProgrammingApplication.views import assign_teacher
+from django.test import TestCase, RequestFactory  # Importing necessary modules
+from django.urls import reverse  # Importing reverse function to generate URLs
+from datetime import datetime, timedelta  # Importing datetime module and timedelta class
+from AcademicProgrammingApplication.models import User, Teacher, Class, Subject  # Importing relevant models
+from AcademicProgrammingApplication.views import assign_teacher  # Importing assign_teacher view function
 
 
 # Define a test class inheriting from Django's TestCase class
 class AssignTeacherViewTest(TestCase):
     # Set up initial data for the tests
     def setUp(self):
+        """
+        Creates test users, teachers, subjects, classes, and a RequestFactory object for generating fake HTTP requests.
+        """
         # Create a test user
         self.user = User.objects.create(username='testuser')
         # Create a test teacher
@@ -47,6 +50,9 @@ class AssignTeacherViewTest(TestCase):
 
     # Define a test method for GET requests to the assign_teacher view
     def test_assign_teacher_get(self):
+        """
+        Tests the GET request to the assign_teacher view.
+        """
         # Create a fake GET request
         request = self.factory.get('/assign/1/')
         request.user = self.user
@@ -57,6 +63,9 @@ class AssignTeacherViewTest(TestCase):
 
     # Define a test method for POST requests to the assign_teacher view
     def test_assign_teacher_post(self):
+        """
+        Tests the POST request to the assign_teacher view.
+        """
         # Create a fake POST request
         request = self.factory.post('/assign/1/', {'teacher_id': '1'})
         request.user = self.user

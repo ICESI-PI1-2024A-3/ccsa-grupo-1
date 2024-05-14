@@ -4,8 +4,16 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 from selenium.webdriver.common.by import By
 
+
 class LogoutTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, then clicks the logout link and verifies that the logout is successful and is redirected to the
+    login page.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

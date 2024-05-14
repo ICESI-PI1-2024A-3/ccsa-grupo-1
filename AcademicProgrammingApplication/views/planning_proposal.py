@@ -9,6 +9,15 @@ from openpyxl import load_workbook
 
 
 def planning_proposal(request):
+    """
+    Renders a page for managing planning proposals.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered HTML page displaying planning proposal information.
+    """
     user = request.user
     file_selected = None
 
@@ -22,7 +31,7 @@ def planning_proposal(request):
         df = pd.read_excel(updated_file)
         df = df[df['Comentario'].notna()]
         df['Usuario'] = user.username
-        df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia','Usuario_que_notifica']]
+        df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia', 'Usuario_que_notifica']]
         df['id'] = range(1, len(df) + 1)
         file_selected = df.to_dict(orient='records')
 
@@ -41,23 +50,20 @@ def planning_proposal(request):
             df = pd.read_excel(full_file_path)
             df = df[df['Comentario'].notna()]
             df['Usuario'] = user.username
-            df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia','Usuario_que_notifica']]
+            df = df[['Nombre_Profesor', 'Fecha_Inicio', 'Comentario', 'Nombre_Materia', 'Usuario_que_notifica']]
             df['id'] = range(1, len(df) + 1)
             file_selected = df.to_dict(orient='records')
 
-
     search_query = request.GET.get('search_query')
-
 
     if search_query:
         files = PlanningProposal.objects.filter(username=search_query).order_by('-id')
         if file_selected:
             df = pd.DataFrame(file_selected)
-            df = df[df['Usuario_que_notifica'] == search_query] 
+            df = df[df['Usuario_que_notifica'] == search_query]
             file_selected = df.to_dict(orient='records')
     else:
         files = PlanningProposal.objects.all()
-
 
     if request.method == 'GET' and request.GET.get('action') == 'download':
         file_instance = PlanningProposal.objects.last()

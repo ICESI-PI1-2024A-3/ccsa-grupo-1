@@ -7,8 +7,16 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class TeacherManagementTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    The user logs in, accesses the teacher management page, performs a search for a specific teacher, and verifies
+    that the search result is displayed correctly.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

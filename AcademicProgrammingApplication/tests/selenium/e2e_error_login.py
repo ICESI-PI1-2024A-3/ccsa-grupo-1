@@ -3,8 +3,15 @@ from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 
+
 class ErrorLoginTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    User enters incorrect login credentials and verifies an error message is displayed.
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

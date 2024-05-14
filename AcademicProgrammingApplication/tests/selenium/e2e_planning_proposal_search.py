@@ -9,7 +9,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class PlanningProposalTest(StaticLiveServerTestCase):
+    """
+    Scenery:
+
+    • Make a GET request in view of planning proposals.
+    • Make a POST request to the same view with a file.
+    • Make a POST request to the same view without a file.
+    • Make a GET request with a search parameter
+    """
     databases = {'default': 'test'}
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -66,7 +75,8 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         self.assertTrue(teacher_element.is_displayed())
 
         subject_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//td[contains(text(), 'Creación de empresa: de la idea a la implementación')]"))
+            EC.presence_of_element_located(
+                (By.XPATH, "//td[contains(text(), 'Creación de empresa: de la idea a la implementación')]"))
         )
         self.assertTrue(subject_element.is_displayed())
 
@@ -81,7 +91,7 @@ class PlanningProposalTest(StaticLiveServerTestCase):
         self.assertTrue(editor_element.is_displayed())
 
         comment_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//td[contains(text(), 'Cancelado por inundacion en la Universidad')]"))
+            EC.presence_of_element_located(
+                (By.XPATH, "//td[contains(text(), 'Cancelado por inundacion en la Universidad')]"))
         )
         self.assertTrue(comment_element.is_displayed())
-        
