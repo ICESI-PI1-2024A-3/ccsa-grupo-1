@@ -6,9 +6,8 @@ from AcademicProgrammingApplication.models import User
 class SignUpViewTest(TestCase):  # Defining a test case class for sign-up view
     def setUp(self):  # Setting up initial conditions for each test
         self.client = Client()  # Creating a test client
-        self.user = User.objects.create_superuser(username='testuser', password='password')  # Crear un usuario de
-        # prueba
-        self.client.login(username='testuser', password='password')  # Autenticar al usuario
+        self.user = User.objects.create_superuser(username='testuser', password='password')  # Creating a test superuser
+        self.client.login(username='testuser', password='password')  # Authenticating the user
 
     def test_signup_view_get(self):  # Test for GET request to sign-up view
         response = self.client.get('/accounts/sign_up/')  # Sending a GET request to sign-up view

@@ -14,8 +14,7 @@ class SubjectDetailTest(TestCase):  # Defining a test case class for subject det
         start_date = timezone.now()  # Getting current time
         ending_date = start_date + timezone.timedelta(days=90)  # Creating an ending date 90 days after start
         self.semester = Semester.objects.create(period='2024-1', start_date=start_date,
-                                                # Creating a semester
-                                                ending_date=ending_date)
+                                                ending_date=ending_date)  # Creating a semester
 
         self.program = Program.objects.create(name='Programa de prueba', cost=1000, duration=4,  # Creating a program
                                               faculty='Facultad de prueba', modality='Modalidad de prueba',
