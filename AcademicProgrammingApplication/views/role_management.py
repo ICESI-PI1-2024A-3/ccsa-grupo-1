@@ -7,6 +7,15 @@ from django.contrib.auth.decorators import permission_required
 
 @permission_required('AcademicProgrammingApplication.change_role', raise_exception=True)
 def role_management(request):
+    """
+    Renders a page for managing user roles.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered HTML page for role management.
+    """
     user = request.user
     current_user_id = request.user.id
     admin_role = Role.objects.get(name='Administrador')
