@@ -48,10 +48,7 @@ class ViaticView:
             None
         """
         subject = 'Solicitud de viático'
-        message = (f"Se ha solicitado un viático para el profesor {teacher.name}. Esperamos pronta revisión y "
-                   f"procesamiento de esta solicitud.\n\nResumen:\n- Tiquetes: {'Sí' if viatico.transport else
-                   'No'}\n- Hotel: {'Sí' if viatico.accommodation else 'No'}\n- Viáticos: "
-                   f"{'Sí' if viatico.viatic else 'No'}")
+        message = f"Se ha solicitado un viático con el identificador '{viatico.id}' para el profesor {teacher.name}. Esperamos pronta revisión y procesamiento de esta solicitud.\n\nResumen:\n- Tiquetes: {'Sí' if viatico.transport else 'No'}\n- Hotel: {'Sí' if viatico.accommodation else 'No'}\n- Viáticos: {'Sí' if viatico.viatic else 'No'}"
         from_email = 'programacion_academica@example.com'
         to_emails = ['oficinaplaneacion573@gmail.com']
         send_mail(subject, message, from_email, to_emails)
