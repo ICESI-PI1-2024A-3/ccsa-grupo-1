@@ -13,20 +13,18 @@
         <!-- Display class information -->
         <div class="row gx-5 align-items-center">
             <div class="col-2">
-                <div class="p-1">Código materia:</div>
+                <div class="p-1">Asignatura a la que pertenece:</div>
             </div>
             <div class="col-4">
-                <div class="p-1" id="valor_clase">{{ class.id }}</div>
-                <script src="{% static '/js/request_classroom.js' %}"></script>
+                <div class="p-1" id="valor">{{ class.subject.name }}</div>
             </div>
         </div>
         <div class="row gx-5 align-items-center">
             <div class="col-2">
-                <div class="p-1">Código clase:</div>
+                <div class="p-1">Código de la clase:</div>
             </div>
             <div class="col-4">
-                <div class="p-1" id="valor">{{ class.subject.code }}</div>
-                <script src="{% static '/js/request_classroom.js' %}"></script>
+                <div class="p-1" id="valor_clase">{{ class.id }}</div>
             </div>
         </div>
         <div class="row gx-5 align-items-center">

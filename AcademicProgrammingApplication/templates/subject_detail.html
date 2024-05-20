@@ -70,7 +70,8 @@
                     <table class="table table-striped w-100">
                         <thead>
                         <tr>
-                            <th>SESIÓN</th>
+                            <th>#</th>
+                            <th>CÓDIGO</th>
                             <th>FECHA DE INICIO</th>
                             <th>FECHA DE FIN</th>
                             <th>PROFESOR</th>
@@ -80,16 +81,17 @@
                         </thead>
                         <tbody>
                         <!-- Loop through each class and display session details -->
-                        {% for class in classes %}
+                        {% for session in classes %}
                         <tr>
-                            <td><a href="{% url 'edit_info_class' class.id %}"
+                            <td class="text-center fw-bold">{{ forloop.counter }}</td>
+                            <td class="text-center"><a href="{% url 'edit_info_class' session.id %}"
                                    class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                                {{ class.id }}</a></td>
-                            <td>{{ class.start_date }}</td>
-                            <td>{{ class.ending_date }}</td>
-                            <td>{{ class.teacher.name }}</td>
-                            <td>{{ class.modality }}</td>
-                            <td>{{ class.classroom }}{{ class.link }}</td>
+                            {{ session.id }}</a></td>
+                            <td>{{ session.start_date }}</td>
+                            <td>{{ session.ending_date }}</td>
+                            <td>{{ session.teacher.name }}</td>
+                            <td>{{ session.modality }}</td>
+                            <td>{{ session.classroom }}{{ session.link }}</td>
                         </tr>
                         {% endfor %}
                         </tbody>
