@@ -44,6 +44,7 @@ class ViaticView:
             teacher (Teacher): The teacher associated with the viatic request.
             viatico (Viatic): The viatic request object.
 
+
         Returns:
             None
         """
